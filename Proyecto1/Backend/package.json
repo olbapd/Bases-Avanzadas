@@ -1,0 +1,11 @@
+{
+  "name": "activos-app",
+  "version": "1.0.0",
+  "description": "Proyecto 1 Bases Avanzadas ITCR ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pablo Garcia",
+  "license": "ISC"
+}
