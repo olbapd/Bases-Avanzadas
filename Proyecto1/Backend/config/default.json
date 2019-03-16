@@ -1,0 +1,25 @@
+{
+	"api" : {
+	  "port" : 3000,
+	  "persistent" : {
+	    "allowed" : [".jpg",".png",".jpeg",".bmp",".PNG"],
+	    "path" : "C:/APIUPLOADS/"
+	  }
+	},
+	"sqlserver" :{
+		"user"	  : "api",
+	    "password": "api123",
+	    "server"  : "localhost", 
+	    "database": "Proyecto1" 
+	},
+	"mail" : {
+	  "host" : "smtp.gmail.com",
+	  "secure" : false,
+	  "port" : 587,
+	  "auth" : {
+	    "user" : "ce.bases.avanzadas@gmail.com",
+	    "pass" : "ce1bases"
+	  },
+	  "from" : "CeBases <no-reply@ce.bases.avanzadas.com>"
+	}
+}
