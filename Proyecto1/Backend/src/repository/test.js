@@ -12,6 +12,7 @@
 
 //let sqlserver = require('../tools/sqlserver.js');
 let sql = require('mssql');
+let mail = require('../tools/mail.js');
 
 /**
  * Module Interface
@@ -28,8 +29,8 @@ expose.getDepartments = (data, cb) => {
   
   let  config={
       user    : "api",
-      password: "api123",
-      server  : "localhost\\PABLO-LAPTOP", 
+      password: "admin",
+      server  : "localhost", 
       database: "Proyecto1"
   }
 
@@ -46,8 +47,7 @@ expose.getDepartments = (data, cb) => {
       // Query
       
       return pool.request()
-      .input('input_parameter', sql.Int, value)
-      .query('select * from Departments where id = 1')
+      .query('select * from Provincia')
   }).then(result => {
       console.log(result)
   }).catch(err => {
@@ -59,6 +59,10 @@ expose.getDepartments = (data, cb) => {
   })
 }
 
+expose.emailTest = (data, cb) => {
+  mail.queue("pablod.garciab@gmail.com","Testing","<h1>Hola</h1>");
+  console.log("check email.");
+}
 
 // expose this file as a module based on the expose object
 module.exports = expose;

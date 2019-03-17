@@ -37,3 +37,21 @@ router.get("/departments", function(req,res){
 	 	});
 	 })
 });
+
+
+router.get("/email", function(req,res){
+	test.emailTest({
+	 	Id:1
+	 },(result)=>{
+	 	if(result.error){
+	 	    res.status(503).json({
+	 	    	error : 'Internal Server Error, it has been registered.'
+	 		})
+	 	    return;
+	 	}
+	 	res.json({
+	 	  success : true,
+	 	  data : result.data
+	 	});
+	 })
+});

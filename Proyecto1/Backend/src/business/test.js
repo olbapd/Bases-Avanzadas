@@ -17,9 +17,23 @@ let test = require('../repository/test');
  */
 let expose = {
   getDepartments  : undefined,
+  emailTest:undefined
 };
 
-
+expose.emailTest = (data,cb) => {
+   let to_return = {
+    success : null,
+    error : null,
+    data: null
+  }
+  test.emailTest(data, (result) => {
+    to_return.success = true;
+    to_return.data = result.data;
+    
+    cb(to_return); 
+  });
+   
+}
 /**
  * This method performs a exists operation in database
  * @param  {Function}

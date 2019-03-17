@@ -1,5 +1,5 @@
 'use strict'
-
+//Server=localhost\SQLEXPRESS;Database=master;Trusted_Connection=True;
 let express = require('express'),
     upload = require('express-fileupload'),
     cors = require('cors'),

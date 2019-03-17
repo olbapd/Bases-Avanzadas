@@ -7,8 +7,8 @@
 	  }
 	},
 	"sqlserver" :{
-		"user"	  : "PABLO-LAPTOP\pablo",
-	    "password": "kc3d7ugud",
+		"user"	  : "api",
+	    "password": "admin",
 	    "server"  : "localhost\\PABLO-LAPTOP", 
 	    "database": "Proyecto1" 
 	},
