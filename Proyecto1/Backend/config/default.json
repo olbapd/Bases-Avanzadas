@@ -7,9 +7,9 @@
 	  }
 	},
 	"sqlserver" :{
-		"user"	  : "api",
-	    "password": "api123",
-	    "server"  : "localhost", 
+		"user"	  : "PABLO-LAPTOP\pablo",
+	    "password": "kc3d7ugud",
+	    "server"  : "localhost\\PABLO-LAPTOP", 
 	    "database": "Proyecto1" 
 	},
 	"mail" : {

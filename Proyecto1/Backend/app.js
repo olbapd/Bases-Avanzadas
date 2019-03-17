@@ -1,6 +1,5 @@
 'use strict'
 
-
 let express = require('express'),
     upload = require('express-fileupload'),
     cors = require('cors'),
@@ -10,7 +9,7 @@ let express = require('express'),
 
 
 let mail = require('./src/tools/mail');
-let sql = require("mssql");
+let sql = require('./src/tools/sqlserver');
 
 global.log4us = require('./src/tools/log4us')();
 
@@ -51,38 +50,7 @@ global.log4us.print(`Project API App started running`);
 global.log4us.print(`Keeping persistent files on ${persistent.path}`);
 
 // Start connection to DB server by getting pool by the first time
-//mysql.getPool();
-var connection = new sql.ConnectionPool(config.get('sqlserver'));
+sql.getPool();
+//let connection = new sql.ConnectionPool(config.get('sqlserver'));
 
 mail.verifyConnection();
-
-
-/*
-{
-	"api" : {
-	  "port" : 3000,
-	  "persistent" : {
-	    "allowed" : [".jpg",".png",".jpeg",".bmp",".PNG"],
-	    "path" : "C:/APIUPLOADS/"
-	  }
-	},
-	"sqlserver" :{
-		"user"	  : "api",
-	    "password": "api123",
-	    "server"  : "localhost", 
-	    "database": "Proyecto1" 
-	},
-	"mail" : {
-	  "host" : "smtp.gmail.com",
-	  "secure" : false,
-	  "port" : 587,
-	  "auth" : {
-	    "user" : "ce.bases.avanzadas@gmail.com",
-	    "pass" : "ce1bases"
-	  },
-	  "from" : "CeBases <no-reply@ce.bases.avanzadas.com>"
-	},
-
-
-}
- */
