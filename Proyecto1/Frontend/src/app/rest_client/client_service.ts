@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import {JsonManagment} from 'src/app/json_managment/json_service';
+import {urls} from '../config/constants';
 
 
 @Injectable({
@@ -11,9 +13,9 @@ import { retry, catchError } from 'rxjs/operators';
 export class RestApiService {
   
   // Define API
-  apiURL = 'https://315d0d5d-7e7c-4632-834c-6e7270edb49f.mock.pstmn.io';
+  apiURL = urls.urlbase;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public json: JsonManagment) { }
 
   /*========================================
     CRUD Methods for consuming RESTful API
@@ -29,15 +31,35 @@ export class RestApiService {
   // HttpClient API get() method => auth login
   getSate(username,password) {
     let result: string;
-    this.http.get (this.apiURL+'/mundo')
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    ).subscribe((res)=>{
-      const myObjStr = JSON.stringify(res);
-      console.log('return is ' + myObjStr);
+    this.http.get (this.apiURL+'/mundo').pipe(retry(1),catchError(this.handleError)).subscribe((res)=>{
+      result = this.json.parseLogin(res);
   });
+  
     return result;
+    
+    
+  }
+
+
+  getProvincias(datos) {
+    console.log("entro1");
+
+    let bla;
+    let result = {
+      "typesIn":[],
+      "typesOut":[],
+      "parameters":[],
+      "values":[],
+      "ouputs":[],
+      "name":"getProvincias"
+    };
+
+    this.http.post (this.apiURL+urls.sp_url+'getProvincias',result).pipe(retry(1),catchError(this.handleError)).subscribe((res)=>{
+      console.log(res);
+      //bla = this.json.parseLogin(res);
+  });
+  
+    return bla;
     
     
   }

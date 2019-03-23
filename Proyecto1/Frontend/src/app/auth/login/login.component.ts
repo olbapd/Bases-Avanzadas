@@ -15,12 +15,6 @@ export class LoginComponent {
     }
 
     login(username,password){
-        //let contact = new Contact(name,phone);
-        //this.contacts.push(contact);
-        //console.log('username is ' + username);
-        //let a: string =
-         this.restApi.getSate(username,password);
-        //console.log('return is ' + a);
-        
+         this.restApi.getProvincias(username);  
     }
 }

@@ -1,0 +1,33 @@
+<div>
+    <nav class="navbar navbar-dark" style="background-color: #0b4980;">
+        <a class="navbar-brand" id="logo">X-TEC</a>
+        <button type="button" class="btn btn-outline-light" id="btnCerrarSesion">
+            CERRAR SESION
+        </button>
+    </nav>
+</div>
+
+<div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+
+        <li class="nav-item">
+            <a class="nav-link" href="#">Configuraciones de la Plataforma</a>
+        </li>
+
+        <li class="nav-item">
+            <select class="form-control" data-style="btn-primary" data-live-search="true" data-selectpicker
+                data-collection-name="items" ng-model="selected">
+                <option selected>Open this select menu</option>
+                <option *ngFor="let i of collection">{{ i }}</option>
+            </select>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="#" id="perfLink01">Configuraciones del Perfil</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" id="cuentLink01">Crear Nueva cuenta Administrador</a>
+        </li>
+    </ul>
+</div>
+

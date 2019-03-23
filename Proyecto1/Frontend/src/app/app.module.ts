@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 
+
 @NgModule({
   declarations: [
     AppComponent

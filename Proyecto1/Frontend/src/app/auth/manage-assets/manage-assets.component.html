@@ -1,0 +1,228 @@
+<!--Barra de Navegación Generica-->
+<div>
+  <nav class="navbar navbar-dark" style="background-color: #0b4980;">
+    <a class="navbar-brand" id="logo">X-TEC</a>
+    <button type="button" class="btn btn-outline-light" id="btnCerrarSesion">
+      CERRAR SESION
+    </button>
+  </nav>
+</div>
+
+<div class="card-header">
+  <ul class="nav nav-tabs card-header-tabs">
+
+    <li class="nav-item">
+      <a class="nav-link" href="#">Configuraciones de la Plataforma</a>
+    </li>
+
+    <li class="nav-item">
+      <select class="form-control" data-style="btn-primary" data-live-search="true" data-selectpicker
+        data-collection-name="items" ng-model="selected">
+        <option selected>Open this select menu</option>
+        <option *ngFor="let i of collection">{{ i }}</option>
+      </select>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="#" id="perfLink01">Configuraciones del Perfil</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#" id="cuentLink01">Crear Nueva cuenta Administrador</a>
+    </li>
+  </ul>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <!--Card para el Registro de Activos-->
+    <div class="col-md-4">
+      <div class="card border-info" style="max-width: 50rem; margin-bottom: 20px">
+        <div class="card-body text-center">
+          <h5 class="card-title"> Registro de Activos</h5>
+          <div class="row text-center">
+
+            <!--Columna de la Izquierda-->
+            <div class="col-md-6">
+
+              <h6 class="card-subtitle mb-2 text-muted">Nombre</h6>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Nombre" aria-label="Nombre"
+                  aria-describedby="basic-addon1">
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Descripcion" aria-label="Descripcion"
+                  aria-describedby="basic-addon1">
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted">Fecha de Compra</h6>
+              <div class="input-group mb-3">
+                <input type="date" id="dateOfBirth" [(ngModel)]="dateOfBirth" class="form-control" />
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted">Precio de Compra</h6>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="1000000" aria-label="Compra"
+                  aria-describedby="basic-addon1">
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted">Valor Residual</h6>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="1000000" aria-label="residual"
+                  aria-describedby="basic-addon1">
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted">Detalle Ubicacion</h6>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="1000000" aria-label="residual"
+                  aria-describedby="basic-addon1">
+              </div>
+            </div>
+
+            <!--Columna de la Izquierda-->
+            <div class="col-md-6">
+
+              <h6 class="card-subtitle mb-2 text-muted">Codigo</h6>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Codigo" aria-label="Codigo"
+                  aria-describedby="basic-addon1">
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
+              <div class="input-group mb-3">
+                <select class="form-control" data-style="btn-primary" data-live-search="true" data-selectpicker
+                  data-collection-name="items" ng-model="selected">
+                  <option selected>Open this select menu</option>
+                  <option *ngFor="let i of collection">{{ i }}</option>
+                </select>
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted">Fecha de Registro</h6>
+              <div class="input-group mb-3">
+                <input type="date" id="dateOfBirth" [(ngModel)]="dateOfBirth" class="form-control" />
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted">Tiempo de Garantía</h6>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Tiempo de Garantia" aria-label="Garantia"
+                  aria-describedby="basic-addon1">
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted">Vida Util</h6>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="1000000" aria-label="vidaUtil"
+                  aria-describedby="basic-addon1">
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted">Centro de Costo</h6>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="1000000" aria-label="centroCosto"
+                  aria-describedby="basic-addon1">
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted">Estado</h6>
+              <div class="input-group mb-3">
+                <select class="form-control" data-style="btn-primary" data-live-search="true" data-selectpicker
+                  data-collection-name="items" ng-model="selected">
+                  <option selected>Activo</option>
+                  <option *ngFor="let i of collection">{{ i }}</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+          <a href="#" class="btn btn-primary">Registrar</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!--Card para la Baja de Activos-->
+
+    <div class="col-md-4">
+      <div class="card border-info" style="max-width: 50rem; margin-bottom: 20px">
+        <div class="card-body text-center">
+          <h5 class="card-title"> Modificar Estado de Activos</h5>
+          <div class="row text-center">
+            <div class="col-md-6">
+              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Activo</h6>
+              <div class="input-group mb-3">
+                <select class="form-control" data-style="btn-primary" data-live-search="true" data-selectpicker
+                  data-collection-name="items" ng-model="selected">
+                  <option selected>Carro</option>
+                  <option *ngFor="let i of collection">{{ i }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+
+              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Estado</h6>
+              <div class="input-group mb-3">
+                <select class="form-control" data-style="btn-primary" data-live-search="true" data-selectpicker
+                  data-collection-name="items" ng-model="selected">
+                  <option selected>Inactivo</option>
+                  <option *ngFor="let i of collection">{{ i }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <a href="#" class="btn btn-primary">Modificar</a>
+        </div>
+      </div>
+    </div>
+
+    <!--Card para la Baja de Activos-->
+
+    <div class="col-md-4">
+      <div class="card border-info" style="max-width: 50rem; margin-bottom: 20px">
+        <div class="card-body text-center">
+          <h5 class="card-title"> Asignar Activos</h5>
+          <div class="row text-center">
+            <div class="col-md-6">
+
+              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Activo</h6>
+              <div class="input-group mb-3">
+                <select class="form-control" data-style="btn-primary" data-live-search="true" data-selectpicker
+                  data-collection-name="items" ng-model="selected">
+                  <option selected>Carro</option>
+                  <option *ngFor="let i of collection">{{ i }}</option>
+                </select>
+              </div>
+              <h6 class="card-subtitle mb-2 text-muted">Fecha de Asignación</h6>
+              <div class="input-group mb-3">
+                <input type="date" id="dateOfBirth" [(ngModel)]="dateOfBirth" class="form-control" />
+              </div>
+            </div>
+
+            <!--Parte Derecha-->
+            <div class="col-md-6">
+              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Codigo</h6>
+              <div class="input-group mb-3">
+                <select class="form-control" data-style="btn-primary" data-live-search="true" data-selectpicker
+                  data-collection-name="items" ng-model="selected">
+                  <option selected>90909</option>
+                  <option *ngFor="let i of collection">{{ i }}</option>
+                </select>
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted">Id Empleado</h6>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="2015095715" aria-label="idEmpleado"
+                  aria-describedby="basic-addon1">
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted">Detalle de Entrega</h6>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Cartago" aria-label="idEmpleado"
+                  aria-describedby="basic-addon1">
+              </div>
+
+            </div>
+          </div>
+          <a href="#" class="btn btn-primary">Modificar</a>
+        </div>
+      </div>
+    </div>
+  </div>
