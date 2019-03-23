@@ -15,25 +15,11 @@
 let express = require('express');
 
 let router = module.exports = express.Router();
-let test = require('./test');
-
-router.use('/test',test);
-
-/*
-let storage = require('./storage');
-let authentication = require('./authentication');
-let reports = require('./reports');
-let vehicle = require('./vehicle');
-let chauffeur = require('./chauffeur');
-let job = require('./job');
+let activo = require('./activo');
 let dynamic = require('./dynamic');
+let authentication = require('./authentication');
 
-
-
-router.use('/storage',storage);
+router.use('/activo',activo);
 router.use('/authentication',authentication);
-router.use('/reports',reports);
-router.use('/vehicle',vehicle);
-//router.use('/chauffeur',chauffeur);
-router.use('/job',job);
-router.use('/dynamic',dynamic);*/
+router.use('/dynamic',dynamic);
+

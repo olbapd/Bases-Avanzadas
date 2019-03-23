@@ -25,8 +25,8 @@ let instance = {
 
 let initializePool = () => {
   if(!pool){
-    global.log4us.print(`Creating connection to database server (${config.get('sqlserver.server')})`)
-    pool = new sqlserver.ConnectionPool(config.get('sqlserver'));
+    global.log4us.print(`Creating connection to database server (${config.get('sqlserver2.server')})`)
+    pool = new sqlserver.ConnectionPool(config.get('sqlserver2'));
   }
 }
 

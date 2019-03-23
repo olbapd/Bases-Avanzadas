@@ -7,10 +7,16 @@
 	  }
 	},
 	"sqlserver" :{
-		"user"	  : "api",
-	    "password": "admin",
-	    "server"  : "localhost\\PABLO-LAPTOP", 
-	    "database": "Proyecto1" 
+		"user"    : "api",
+      	"password": "admin",
+      	"server"  : "localhost", 
+      	"database": "Proyecto1" 
+	},
+	"sqlserver2" :{
+		"user"    : "api",
+      	"password": "admin",
+      	"server"  : "172.18.226.44", 
+      	"database": "Proyecto1BDA" 
 	},
 	"mail" : {
 	  "host" : "smtp.gmail.com",
@@ -21,5 +27,9 @@
 	    "pass" : "ce1bases"
 	  },
 	  "from" : "CeBases <no-reply@ce.bases.avanzadas.com>"
+	},
+	"mail-info" : {
+		"template" : "assign_active.html",
+	  	"subject":"Assignacion de Activo"
 	}
 }
