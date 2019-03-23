@@ -19,32 +19,6 @@ let config = require('config');
 
 let activo = require('../business/activo');
 
-
-router.get("/departments", function(req,res){
-	 const params = req.query;
-	 const data = {
-	 		typesIn: req.body.typesIn,
-			typesOut: req.body.typesOut,
-			inputs: req.body.inputs,
-			values: req.body.values,
-			ouputs: req.body.ouputs,
-			name: req.body.name
-	 }
-	 activo.getDepartments(data,(result)=>{
-	 	if(result.error){
-	 	    res.status(503).json({
-	 	    	error : 'Internal Server Error, it has been registered.'
-	 		})
-	 	    return;
-	 	}
-	 	res.json({
-	 	  success : true,
-	 	  data : result.data
-	 	});
-	 })
-});
-
-
 router.get("/assign", function(req,res){
 	activo.assignActive({
 	 	email:req.body.email,

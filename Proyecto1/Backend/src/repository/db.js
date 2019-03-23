@@ -42,7 +42,6 @@ expose.storedProcedure = (data, cb) => {
     }
 
     for(let i =0;i<outputs.length;i++){
-      console.log(" out");
       if(typesOut[i]=="int"){
         request.input(outputs[i],sql.Int);
       }
@@ -65,9 +64,7 @@ expose.storedProcedure = (data, cb) => {
         cb(to_return);
       }
       to_return.success = true;
-      to_return.data=result;
-      console.log(to_return.data);
-      
+      to_return.data=result;      
       cb(to_return);
     });
   });
