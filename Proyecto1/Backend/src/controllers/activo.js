@@ -4,7 +4,7 @@
  * v1.0 -- 2019
  * 
  * Developed by: Pablo Garcia
- * File: test.js
+ * File: activo.js
  * Description: Handles all the routes logic for this section
  */
 
@@ -17,14 +17,20 @@ let router = module.exports = express.Router();
 let path = require('path');
 let config = require('config');
 
-let test = require('../business/test');
+let activo = require('../business/activo');
 
 
 router.get("/departments", function(req,res){
 	 const params = req.query;
-	 test.getDepartments({
-	 	Id:1
-	 },(result)=>{
+	 const data = {
+	 		typesIn: req.body.typesIn,
+			typesOut: req.body.typesOut,
+			inputs: req.body.inputs,
+			values: req.body.values,
+			ouputs: req.body.ouputs,
+			name: req.body.name
+	 }
+	 activo.getDepartments(data,(result)=>{
 	 	if(result.error){
 	 	    res.status(503).json({
 	 	    	error : 'Internal Server Error, it has been registered.'
@@ -39,9 +45,10 @@ router.get("/departments", function(req,res){
 });
 
 
-router.get("/email", function(req,res){
-	test.emailTest({
-	 	Id:1
+router.get("/assign", function(req,res){
+	activo.assignActive({
+	 	email:req.body.email,
+	 	name: req.body.name
 	 },(result)=>{
 	 	if(result.error){
 	 	    res.status(503).json({

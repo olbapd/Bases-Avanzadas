@@ -4,12 +4,12 @@
  * v1.0 -- 2019
  * 
  * Developed by: Pablo Garcia
- * File: test.js
+ * File: activo.js
  * Description: Handles all the business logic for this protocol
  */
 
 'use strict';
-let test = require('../repository/test');
+let activo = require('../repository/activo');
 
 /**
  * Module Interface
@@ -17,22 +17,17 @@ let test = require('../repository/test');
  */
 let expose = {
   getDepartments  : undefined,
-  emailTest:undefined
+  assignActive:undefined
 };
 
-expose.emailTest = (data,cb) => {
+expose.assignActive = (data,cb) => {
    let to_return = {
     success : null,
     error : null,
     data: null
   }
-  test.emailTest(data, (result) => {
-    to_return.success = true;
-    to_return.data = result.data;
-    
-    cb(to_return); 
-  });
-   
+  activo.emailAssignActive(data.email,data.name);
+
 }
 /**
  * This method performs a exists operation in database
@@ -46,9 +41,9 @@ expose.getDepartments = (data,cb) => {
     data: null
   }
 
-  test.getDepartments(data, (result) => {
+  activo.getDepartments(data, (result) => {
     if (result.error) {
-      global.log4us.error(`Error getting test: ${result.detail}`);
+      global.log4us.error(`Error getting activo: ${result.detail}`);
       to_return.error = true;
       to_return.success = false;
       cb(to_return);
