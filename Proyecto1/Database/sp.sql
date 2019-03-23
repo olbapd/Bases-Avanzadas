@@ -381,22 +381,24 @@ CREATE OR ALTER PROCEDURE [dbo].[setEmpleado]
 	@Apellido1 varchar(25),
 	@Apellido2 varchar(25),
 	@Cedula varchar(10),
-	@FechaN date
-	--@FechaIngreso date,
-	--@Contraseña varchar(50),
-	--@Correo varchar (50),
-	--@IdSede int,
-	--@IdDepartamento int,,
-	--@IdPuesto int,
-	--@Foto varchar(50)
+	@FechaN date,
+	@FechaIngreso date,
+	@Correo varchar (50),
+	@Contrasena varchar(50),
+	@IdSede int,
+	@IdDepartamento int,
+	@IdPuesto int,
+	@Foto varchar(50)
 	 
 AS
 BEGIN
 
 	BEGIN TRAN
 	BEGIN TRY
-		INSERT INTO Empleado (Nombre, Apellido1, Apellido2, FechaNacimiento, Cedula)--FechaIngreso, IdDepartamento, IdSede, IdPuesto, Correo, Contrasena, Foto 
-		VALUES (@Nombre, @Apellido1, @Apellido2, @FechaN, @Cedula)--@FechaIngreso ,@IdDepartamento, @IdSede, @IdPuesto, @Correo, @Contrasena, @Foto
+		INSERT INTO Empleado (Nombre, Apellido1, Apellido2, Cedula,FechaNacimiento, FechaIngreso, 
+		IdDepartamento, IdSede, IdPuesto, Correo, Contrasena, Foto)
+		VALUES (@Nombre, @Apellido1, @Apellido2, @Cedula, @FechaN, @FechaIngreso ,
+		@IdDepartamento, @IdSede, @IdPuesto, @Correo, @Contrasena, @Foto)
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
