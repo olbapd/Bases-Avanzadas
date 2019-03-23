@@ -29,6 +29,34 @@ WHERE [IdActivo] = @IdActivo
 SET NOCOUNT OFF
 GO
 
+--Activos no asignados
+CREATE OR ALTER PROC [dbo].[getActivoLi]
+	@IdEstado int
+AS
+SET NOCOUNT ON
+
+SELECT [IdActivo],
+	[Codigo],
+	[Nombre],
+	[Descripcion],
+	[Foto],
+	[Precio],
+	[TiempoGarantia],
+	[VidaUtil],
+	[PorcentajeDepreciacion],
+	[FechaCompra],
+	[FechaRegistro],
+	[CentroCosto],
+	[ValorResidual],
+	[DetalleUbicacion],
+	[IdCategoria],
+	[IdSede],
+	[IdMoneda]
+FROM Activo
+WHERE [IdEstado] = @IdEstado
+SET NOCOUNT OFF
+GO
+
 --Insertar un nuevo activo
 CREATE OR ALTER PROC [dbo].[setActivo]
 	@Codigo varchar(50),
@@ -41,6 +69,7 @@ CREATE OR ALTER PROC [dbo].[setActivo]
 	@PorcentajeD int,
 	@FechaCompra date,
 	@FechaRegistro date,
+	@FechaAsig date,--PONER FECHA DEL SISTEMA POR DEFECTO
 	@CentroCosto int,
 	@ValorResidual int,
 	@DetalleUb varchar(50),
@@ -55,9 +84,9 @@ BEGIN
 	BEGIN TRAN
 	BEGIN TRY
 		INSERT INTO Activo (Codigo, Nombre, Descripcion, Foto, Precio, TiempoGarantia, VidaUtil, PorcentajeDepreciacion, FechaCompra,
-		FechaRegistro, CentroCosto, ValorResidual, DetalleUbicacion, IdCategoria, IdSede, IdMoneda, IdEstado) 
+		FechaRegistro, FechaAsignacion, CentroCosto, ValorResidual, DetalleUbicacion, IdCategoria, IdSede, IdMoneda, IdEstado) 
 		VALUES (@Codigo, @Nombre, @Descripcion, @Foto, @Precio, @TiempoGar, @VidaU, @PorcentajeD, @FechaCompra,
-		@FechaRegistro, @CentroCosto, @ValorResidual, @DetalleUb, @IdCategoria, @IdSede, @IdMoneda, @IdEstado) 
+		@FechaRegistro, @FechaAsig, @CentroCosto, @ValorResidual, @DetalleUb, @IdCategoria, @IdSede, @IdMoneda, @IdEstado) 
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -69,8 +98,7 @@ GO
 
 --Actualizar un Activo
 CREATE OR ALTER PROC [dbo].[updateActivo]
-	@IdActivo int,
-	@Codigo varchar(50),
+	@Codigo varchar(50),--PUEDE SER CON IDACTIVO
 	@Nombre varchar(50),
 	@Descripcion varchar(50),
 	@Foto varchar(50),
@@ -83,10 +111,8 @@ CREATE OR ALTER PROC [dbo].[updateActivo]
 	@CentroCosto int,
 	@ValorResidual int,
 	@DetalleUb varchar(50),
-	@IdCategoria int,
 	@IdSede int,
-	@IdMoneda int,
-	@IdEstado int
+	@IdMoneda int
 	
 AS
 BEGIN
@@ -94,7 +120,6 @@ BEGIN
 	BEGIN TRAN
 	BEGIN TRY
 		UPDATE Activo SET
-		[Codigo] = @Codigo,
 		[Nombre] = @Nombre, 
 		[Descripcion] = @Descripcion, 
 		[Foto] = @Foto, 
@@ -106,11 +131,35 @@ BEGIN
 		[FechaRegistro] = @FechaRegistro, 
 		[CentroCosto] = @CentroCosto, 
 		[ValorResidual] = @ValorResidual, 
-		[DetalleUbicacion] = @DetalleUb,
-		[IdCategoria] = @IdCategoria, 
+		[DetalleUbicacion] = @DetalleUb, 
 		[IdSede] = @IdSede, 
-		[IdMoneda] = @IdMoneda, 
-		[IdEstado] = @IdEstado 
+		[IdMoneda] = @IdMoneda 
+		WHERE @Codigo = [Activo].Codigo
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
+		ROLLBACK TRANSACTION
+	END CATCH
+END
+GO
+
+--Asignar un Activo a un empleado
+CREATE OR ALTER PROC [dbo].[asigActivo]
+	@IdActivo int,
+	@IdEmpleado int,
+	@FechaAsig date,
+	@IdEstado int
+	
+AS
+BEGIN
+
+	BEGIN TRAN
+	BEGIN TRY
+		UPDATE Activo SET 
+		[IdEstado] = @IdEstado,
+		[IdEmpleado] = @IdEmpleado
+		[FechaAsignacion] = @FechaAsig
 		WHERE @IdActivo = [Activo].IdActivo
 		COMMIT TRANSACTION
 	END TRY
@@ -121,7 +170,27 @@ BEGIN
 END
 GO
 
+--Quitar un activo
+CREATE OR ALTER PROC [dbo].[quitarActivo]
+	@IdActivo int,
+	@IdEstado int
+	
+AS
+BEGIN
 
+	BEGIN TRAN
+	BEGIN TRY
+		UPDATE Activo SET 
+		[IdEstado] = @IdEstado
+		WHERE @IdActivo = [Activo].IdActivo
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
+		ROLLBACK TRANSACTION
+	END CATCH
+END
+GO
 
 --Selecciona las Provincias
 CREATE OR ALTER PROC [dbo].[getProvincias]
@@ -252,6 +321,33 @@ BEGIN
 END
 GO
 
+-- Seleccionar Categoria
+CREATE OR ALTER PROC [dbo].[getCategoria]
+AS
+SET NOCOUNT ON
+
+SELECT [Categoria].Nombre, [Categoria].IdCategoria FROM Categoria
+
+SET NOCOUNT OFF
+GO
+
+--Agregar Categorias
+CREATE OR ALTER PROC [dbo].[setCategoria]
+	@NombreC varchar(50)
+
+AS
+BEGIN
+	BEGIN TRAN
+	BEGIN TRY
+		INSERT INTO Categoria(Nombre) VALUES (@NombreC)
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
+		ROLLBACK TRANSACTION
+	END CATCH
+END
+GO
 
 -- Seleccionar cont
 CREATE OR ALTER PROC [dbo].[Validacion]
@@ -272,10 +368,8 @@ CREATE OR ALTER PROC [dbo].[getEmpleado]
 AS
 SET NOCOUNT ON
 
-SELECT [Persona].Nombre, [Persona].Apellido1, [Persona].Apellido2, [Empleado].Foto
+SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2, [Empleado].Foto
 FROM Empleado
-INNER JOIN Persona ON [Empleado].IdPersona = [Persona].IdPersona
-INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
 WHERE @CorreoEmp = [Empleado].Correo
 
 SET NOCOUNT OFF
@@ -287,7 +381,7 @@ CREATE OR ALTER PROCEDURE [dbo].[setEmpleado]
 	@Apellido1 varchar(25),
 	@Apellido2 varchar(25),
 	@Cedula varchar(10),
-	@FechaN int
+	@FechaN date
 	--@FechaIngreso date,
 	--@Contraseña varchar(50),
 	--@Correo varchar (50),
@@ -301,7 +395,7 @@ BEGIN
 
 	BEGIN TRAN
 	BEGIN TRY
-		INSERT INTO Persona (Nombre, Apellido1, Apellido2, FechaNacimiento, Cedula)--FechaIngreso, IdDepartamento, IdSede, IdPuesto, Correo, Contrasena, Foto 
+		INSERT INTO Empleado (Nombre, Apellido1, Apellido2, FechaNacimiento, Cedula)--FechaIngreso, IdDepartamento, IdSede, IdPuesto, Correo, Contrasena, Foto 
 		VALUES (@Nombre, @Apellido1, @Apellido2, @FechaN, @Cedula)--@FechaIngreso ,@IdDepartamento, @IdSede, @IdPuesto, @Correo, @Contrasena, @Foto
 		COMMIT TRANSACTION
 	END TRY
@@ -312,29 +406,7 @@ BEGIN
 END
 GO
 
---Agregar Usuario
 
-
---Asignar un activo a un empleado QUEDA PENDIENTE DE DEFINIR
-CREATE OR ALTER PROC [dbo].[setActivoXEmpleado]
-	@IdEmpleado int,
-	@IdActivo int,
-	@FechaA date
-AS
-BEGIN
-
-	BEGIN TRAN
-	BEGIN TRY
-		INSERT INTO ActivoXEmpleado(FechaAsignacion, IdActivo, IdEmpleado) 
-		VALUES (@FechaA, @IdActivo, @IdEmpleado)
-		COMMIT TRANSACTION
-	END TRY
-	BEGIN CATCH
-		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
-		ROLLBACK TRANSACTION
-	END CATCH
-END
-GO
 
 
 --Seleccionar los activos que tiene un empleado se le puede agregar mas informacion
@@ -344,11 +416,9 @@ AS
 SET NOCOUNT ON
 
 SELECT [Activo].Codigo, [Activo].Nombre, [Activo].Descripcion,
-[Persona].Nombre, [Persona].Apellido1, [Persona].Apellido2
-FROM ActivoXEmpleado
-INNER JOIN Empleado ON [ActivoXEmpleado].IdEmpleado = [Empleado].IdEmpleado
-INNER JOIN Persona ON [Empleado].IdPersona = [Persona].IdPersona
-INNER JOIN Activo ON [ActivoXEmpleado].IdActivo = [Activo].IdActivo 
+[Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2
+FROM Activo
+INNER JOIN Empleado ON [Activo].IdEmpleado = [Empleado].IdEmpleado 
 WHERE @IdEmpleado = [Empleado].IdEmpleado
 
 SET NOCOUNT OFF
@@ -360,10 +430,9 @@ CREATE OR ALTER PROC [dbo].[getEmpleadoXDep]
 AS
 SET NOCOUNT ON
 
-SELECT [Persona].Nombre, [Persona].Apellido1, [Persona].Apellido2,
-[Persona].Cedula, [Empleado].Fechaingreso, [Puesto].Nombre
+SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
+[Empleado].Cedula, [Empleado].Fechaingreso, [Puesto].Nombre
 FROM Empleado
-INNER JOIN Persona ON [Empleado].IdPersona = [Persona].IdPersona
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
 WHERE @IdDepartamento = [Empleado].IdDempartamento
 
@@ -376,10 +445,9 @@ CREATE OR ALTER PROC [dbo].[getEmpleadoXPuest]
 AS
 SET NOCOUNT ON
 
-SELECT [Persona].Nombre, [Persona].Apellido1, [Persona].Apellido2,
-[Persona].Cedula, [Empleado].Fechaingreso, [Departamento].Nombre, [Sede].Nombre
+SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
+[Empleado].Cedula, [Empleado].Fechaingreso, [Departamento].Nombre, [Sede].Nombre
 FROM Empleado
-INNER JOIN Persona ON [Empleado].IdPersona = [Persona].IdPersona
 INNER JOIN Departamento ON [Empleado].IdDempartamento = [Departamento].IdDepartamento
 INNER JOIN Sede ON [Empleado].IdSede = [Sede].IdSede
 WHERE @IdPuesto = [Empleado].IdPuesto
@@ -393,10 +461,9 @@ CREATE OR ALTER PROC [dbo].[getEmpleadoXSede]
 AS
 SET NOCOUNT ON
 
-SELECT [Persona].Nombre, [Persona].Apellido1, [Persona].Apellido2,
-[Persona].Cedula, [Empleado].Fechaingreso, [Departamento].Nombre, [Puesto].Nombre
+SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
+[Empleado].Cedula, [Empleado].Fechaingreso, [Departamento].Nombre, [Puesto].Nombre
 FROM Empleado
-INNER JOIN Persona ON [Empleado].IdPersona = [Persona].IdPersona
 INNER JOIN Departamento ON [Empleado].IdDempartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
 WHERE @IdSede = [Empleado].IdSede
@@ -411,10 +478,9 @@ CREATE OR ALTER PROC [dbo].[getEmpleadoFechaI]
 AS
 SET NOCOUNT ON
 
-SELECT [Persona].Nombre, [Persona].Apellido1, [Persona].Apellido2,
-[Persona].Cedula, [Empleado].Fechaingreso, [Departamento].Nombre, [Puesto].Nombre
+SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
+[Empleado].Cedula, [Empleado].Fechaingreso, [Departamento].Nombre, [Puesto].Nombre
 FROM Empleado
-INNER JOIN Persona ON [Empleado].IdPersona = [Persona].IdPersona
 INNER JOIN Departamento ON [Empleado].IdDempartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
 WHERE [Empleado].Fechaingreso BETWEEN @FechaInicial AND @FechaFinal
@@ -424,19 +490,18 @@ GO
 
 -- Selecciona al empleado que tiene un activo 
 CREATE OR ALTER PROC [dbo].[getEmpleadoXActivo]
-	@IdActivo int
+	@CodigoActivo int
 AS
 SET NOCOUNT ON
 
-SELECT [Persona].Nombre, [Persona].Apellido1, [Persona].Apellido2,
+SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
 [Departamento].Nombre, [Puesto].Nombre, [Sede].Nombre
-FROM ActivoXEmpleado
-INNER JOIN Empleado ON [ActivoXEmpleado].IdEmpleado = [Empleado].IdEmpleado
-INNER JOIN Persona ON [Empleado].IdPersona = [Persona].IdPersona
+FROM Activo
+INNER JOIN Empleado ON [Activo].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDempartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
 INNER JOIN Sede ON [Empleado].IdSede = [Sede].Nombre
-WHERE @IdActivo = [ActivoXEmpleado].IdActivo
+WHERE @CodigoActivo = [Activo].Codigo
 
 SET NOCOUNT OFF
 GO
