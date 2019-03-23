@@ -1,9 +1,47 @@
-<div class="jumbotron">
-  <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-  </p>
+<div class="container-fluid" style="margin-top: 75px">
+  <!--Solo tendra una fila-->
+  <div class="row">
+
+    <!--Columna con la Informacion General de la Plataforma-->
+    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 text-center" style="margin: 100px">
+      <h1 style="color: #0b4980">¿Qué es TEColones?</h1>
+      <h2 style="margin-bottom: 50px">Dale valor al reciclaje con ésta ecomoneda virtual.</h2>
+      <h3>Obtén beneficios como:<br>
+        -Descuentos en el comedor<br>
+        -Descuentos en el departamento financiero</h3>
+    </div>
+
+    <!--Columna con la Informacion de Inicio de Sesion-->
+    <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4" style="margin: 25px">
+      <!-- El card enmarca una zona de informacion-->
+      <div class="card border-info" style="max-width: 50rem; margin-bottom: 20px">
+        <div class="card-body text-center">
+          <h5 class="card-title" style="margin:25px">Inicio de Sesion</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Usuario</h6>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">@</span>
+            </div>
+            <input type="text" #txt_username class="form-control"  placeholder="Username" aria-label="Username"
+              aria-describedby="basic-addon1"  style="max-width:30rem;">
+          </div>
+
+          <h6 class="card-subtitle mb-2 text-muted">Contraseña</h6>
+
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>
+            <input type="text" #txt_password class="form-control"  placeholder="Contraseña" aria-label="Contraseña"
+              aria-describedby="basic-addon1"  style="max-width:40rem;">
+          </div>
+
+          <button (click)="login(txt_username.value,txt_password.value)" type="button" id="button_login" class="btn btn-success">LogIn</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
