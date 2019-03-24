@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Estado} from '../manage-assets/Estado';
+import {Categoria} from '../manage-assets/Categoria';
+import {Activos} from '../manage-assets/Activos';
+import {Codigos} from '../manage-assets/Codigos';
 import {RestApiService} from 'src/app/rest_client/client_service';
 
 @Component({
@@ -9,13 +12,18 @@ import {RestApiService} from 'src/app/rest_client/client_service';
 })
 export class ManageAssetsComponent implements OnInit {
   estado:Estado[];
+  categoria:Categoria[];
+  activos:Activos[];
+  codigos:Codigos[];
   
 
   constructor(public restApi: RestApiService) {
    }
 
   ngOnInit() {
-    this.estado =  this.restApi.getEstado(); 
+    this.estado =  this.restApi.getEstados(); 
+    this.categoria = this.restApi.getCategorias();
+    this.activos = this.restApi.getActivos();
     
   }
 
@@ -26,5 +34,14 @@ export class ManageAssetsComponent implements OnInit {
   modificar_estado_activo(activo,estado_activo){
     console.log(activo);
   }
+  asignar_activo(activo,fecha_asignacion,codigo,id_empleado,detalle_entrega){
+    console.log(activo);
+
+  }
+  selected(activo){
+    this.codigos = this.restApi.getCodigos();
+
+  }
+   
 
 }

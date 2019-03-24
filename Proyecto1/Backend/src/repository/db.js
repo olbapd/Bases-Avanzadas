@@ -12,7 +12,6 @@ expose.storedProcedure = (data, cb) => {
   let to_return = {
     error : null,
     success : null,
-    exists : null,
     detail : null,
     data: null
   };
@@ -60,11 +59,17 @@ expose.storedProcedure = (data, cb) => {
       if (err) {
         global.log4us.error('Error on sp ('+spName+'):'+err);
         to_return.error = true;
+        to_return.success = false;
         to_return.detail = err;
         cb(to_return);
       }
       to_return.success = true;
-      to_return.data=result;      
+      try{
+        to_return.data=result.recordset;        
+      }catch{
+        to_return.data=result;        
+      }
+      
       cb(to_return);
     });
   });

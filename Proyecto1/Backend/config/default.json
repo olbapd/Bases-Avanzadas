@@ -10,12 +10,12 @@
 		"user"    : "api",
       	"password": "admin",
       	"server"  : "localhost", 
-      	"database": "Proyecto1" 
+      	"database": "Proyecto1BDA" 
 	},
 	"sqlserver2" :{
 		"user"    : "api",
       	"password": "admin",
-      	"server"  : "172.18.226.44", 
+      	"server"  : "172.18.241.14", 
       	"database": "Proyecto1BDA" 
 	},
 	"mail" : {
