@@ -42,26 +42,23 @@ export class RestApiService {
 
 
   getProvincias(datos) {
-    console.log("entro1");
 
-    let bla;
-    let result = {
-      "typesIn":[],
-      "typesOut":[],
-      "parameters":[],
-      "values":[],
-      "ouputs":[],
-      "name":"getProvincias"
-    };
-
+    let result;
     this.http.post (this.apiURL+urls.sp_url+'getProvincias',result).pipe(retry(1),catchError(this.handleError)).subscribe((res)=>{
       console.log(res);
       //bla = this.json.parseLogin(res);
   });
-  
-    return bla;
-    
-    
+    return result;
+  }
+
+
+  getEstado() {
+    let result;
+    this.http.post (this.apiURL+urls.sp_url+'getEstado',result).pipe(retry(1),catchError(this.handleError)).subscribe((res)=>{
+      console.log(res);
+      //bla = this.json.parseLogin(res);
+  });
+    return result;
   }
 
 
