@@ -47,36 +47,36 @@
 
               <h6 class="card-subtitle mb-2 text-muted">Nombre</h6>
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Nombre" aria-label="Nombre"
+                <input type="text" #txt_nombre_activo class="form-control" placeholder="Nombre" aria-label="Nombre"
                   aria-describedby="basic-addon1">
               </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Descripcion" aria-label="Descripcion"
+                <input type="text" #txt_descripcion class="form-control" placeholder="Descripcion" aria-label="Descripcion"
                   aria-describedby="basic-addon1">
               </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Fecha de Compra</h6>
               <div class="input-group mb-3">
-                <input type="date" id="dateOfBirth" [(ngModel)]="dateOfBirth" class="form-control" />
+                <input type="date" #txt_fecha_compra id="dateOfBirth" [(ngModel)]="dateOfBirth" class="form-control" />
               </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Precio de Compra</h6>
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="1000000" aria-label="Compra"
+                <input type="text" #txt_precio_compra class="form-control" placeholder="1000000" aria-label="Compra"
                   aria-describedby="basic-addon1">
               </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Valor Residual</h6>
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="1000000" aria-label="residual"
+                <input type="text" #txt_valor_residual class="form-control" placeholder="1000000" aria-label="residual"
                   aria-describedby="basic-addon1">
               </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Detalle Ubicacion</h6>
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="1000000" aria-label="residual"
+                <input type="text" #txt_detalle_ubicacion class="form-control" placeholder="1000000" aria-label="residual"
                   aria-describedby="basic-addon1">
               </div>
             </div>
@@ -86,54 +86,57 @@
 
               <h6 class="card-subtitle mb-2 text-muted">Codigo</h6>
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Codigo" aria-label="Codigo"
+                <input type="text" #txt_codigo class="form-control" placeholder="Codigo" aria-label="Codigo"
                   aria-describedby="basic-addon1">
               </div>
-
+                            <!--falta-->
               <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
               <div class="input-group mb-3">
-                <select class="form-control" data-style="btn-primary" data-live-search="true" data-selectpicker
+                <select class="form-control" #select_categoria data-style="btn-primary" data-live-search="true" data-selectpicker
                   data-collection-name="items" ng-model="selected">
                   <option selected>Open this select menu</option>
                   <option *ngFor="let i of collection">{{ i }}</option>
                 </select>
               </div>
-
+                    <!---->
               <h6 class="card-subtitle mb-2 text-muted">Fecha de Registro</h6>
               <div class="input-group mb-3">
-                <input type="date" id="dateOfBirth" [(ngModel)]="dateOfBirth" class="form-control" />
+                <input type="date" #txt_fecha_registro [(ngModel)]="dateOfBirth" class="form-control" />
               </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Tiempo de Garantía</h6>
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Tiempo de Garantia" aria-label="Garantia"
+                <input type="text" #txt_tiempo_garantia class="form-control" placeholder="Tiempo de Garantia" aria-label="Garantia"
                   aria-describedby="basic-addon1">
               </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Vida Util</h6>
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="1000000" aria-label="vidaUtil"
+                <input type="text" #txt_vida_util class="form-control" placeholder="1000000" aria-label="vidaUtil"
                   aria-describedby="basic-addon1">
               </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Centro de Costo</h6>
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="1000000" aria-label="centroCosto"
+                <input type="text" #txt_centro_costo class="form-control" placeholder="1000000" aria-label="centroCosto"
                   aria-describedby="basic-addon1">
               </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Estado</h6>
               <div class="input-group mb-3">
-                <select class="form-control" data-style="btn-primary" data-live-search="true" data-selectpicker
+                <select class="form-control" #select_estado data-style="btn-primary" data-live-search="true" data-selectpicker
                   data-collection-name="items" ng-model="selected">
                   <option selected>Activo</option>
-                  <option *ngFor="let i of collection">{{ i }}</option>
+                  <option selected>Inactivo</option>
+                  <option *ngFor="let state of estado" [value]="state.Id">{{state.Name}}</option>
                 </select>
               </div>
 
             </div>
           </div>
-          <a href="#" class="btn btn-primary">Registrar</a>
+          <button (click)=" registrar_activo(txt_nombre_activo.value,txt_descripcion.value,txt_fecha_compra.value,
+          txt_precio_compra.value,txt_valor_residual.value,txt_detalle_ubicacion.value,txt_codigo.value,select_categoria.value,txt_fecha_registro.value,
+          txt_tiempo_garantia.value,txt_vida_util.value,txt_centro_costo.value,select_estado.value)" type="button" class="btn btn-primary">Registrar</button>
         </div>
       </div>
 
@@ -149,7 +152,7 @@
             <div class="col-md-6">
               <h6 class="card-subtitle mb-2 text-muted">Seleccionar Activo</h6>
               <div class="input-group mb-3">
-                <select class="form-control" data-style="btn-primary" data-live-search="true" data-selectpicker
+                <select class="form-control" #select_activo data-style="btn-primary" data-live-search="true" data-selectpicker
                   data-collection-name="items" ng-model="selected">
                   <option selected>Carro</option>
                   <option *ngFor="let i of collection">{{ i }}</option>
@@ -160,7 +163,7 @@
 
               <h6 class="card-subtitle mb-2 text-muted">Seleccionar Estado</h6>
               <div class="input-group mb-3">
-                <select class="form-control" data-style="btn-primary" data-live-search="true" data-selectpicker
+                <select class="form-control" #select_estado_activo data-style="btn-primary" data-live-search="true" data-selectpicker
                   data-collection-name="items" ng-model="selected">
                   <option selected>Inactivo</option>
                   <option *ngFor="let i of collection">{{ i }}</option>
@@ -168,7 +171,7 @@
               </div>
             </div>
           </div>
-          <a href="#" class="btn btn-primary">Modificar</a>
+          <button (click) = "modificar_estado_activo(select_activo.value,select_estado_activo.value)" type="button" class="btn btn-primary">Modificar</button>
         </div>
       </div>
     </div>
