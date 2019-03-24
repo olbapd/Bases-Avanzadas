@@ -158,7 +158,7 @@ BEGIN
 	BEGIN TRY
 		UPDATE Activo SET 
 		[IdEstado] = @IdEstado,
-		[IdEmpleado] = @IdEmpleado
+		[IdEmpleado] = @IdEmpleado,
 		[FechaAsignacion] = @FechaAsig
 		WHERE @IdActivo = [Activo].IdActivo
 		COMMIT TRANSACTION
