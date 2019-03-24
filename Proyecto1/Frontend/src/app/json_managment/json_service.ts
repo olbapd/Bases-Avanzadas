@@ -10,17 +10,20 @@ import { Injectable } from '@angular/core';
     constructor(){
         
     }
-
     parseLogin(json){
-        //var myObjStr = JSON.stringify(json);
+        var myObjStr = JSON.stringify(json);
         var obj = JSON.parse(json);
         let result:string = obj.data;
         console.log('return is ' + result);
         return result
-
-
     }
 
-
+    parseGet(json){
+      var myObjStr = JSON.stringify(json);
+        var obj = JSON.parse(json);
+        let result:string = obj.data;
+        console.log('return is ' + result);
+        return result
+    }
 
 }
