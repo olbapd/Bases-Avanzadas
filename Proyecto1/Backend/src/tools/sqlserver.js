@@ -11,22 +11,38 @@
 'use strict';
 
 let config = require('config');
-let sqlserver = require('mssql');
+let currentConfig = config.get('sqlserver');
+const sqlserver = require('mssql');
 
+
+/*
+const poolPromise = new sqlserver.ConnectionPool(currentConfig)
+  .connect()
+  .then(pool =>{
+        global.log4us.print(`Creating connection to database server (${currentConfig})`);
+        return pool;
+  })
+  .catch(err => global.log4us.error('Database Connection Failed! Bad Config: ', err));
+
+let instance = {
+  sqlserver,
+  poolPromise
+}*/
 
 let pool = null;
-let multpool=null;
-
 
 let instance = {
   getPool : null,
-  getNewRequest : null
+//  getNewRequest : null
 }
 
 let initializePool = () => {
   if(!pool){
-    global.log4us.print(`Creating connection to database server (${config.get('sqlserver2.server')})`)
-    pool = new sqlserver.ConnectionPool(config.get('sqlserver2'));
+    global.log4us.print(`Creating connection to database server (${currentConfig.server})`);
+    pool = new sqlserver.ConnectionPool(currentConfig);
+    pool.connect(err =>{
+      global.log4us.error(`Error creating connection to database server (${currentConfig.server})`);  
+    })
   }
 }
 
@@ -35,9 +51,22 @@ instance.getPool = () => {
   return pool;  
 }
 
-instance.getNewRequest = () => {
-	let request = new sqlserver.Request(pool);
-	return  request
-}
-
+  
 module.exports = instance;
+
+/*
+const sql = require('mssql')
+const config = {...}
+
+const poolPromise = new sql.ConnectionPool(config)
+  .connect()
+  .then(pool => {
+    console.log('Connected to MSSQL')
+    return pool
+  })
+  .catch(err => console.log('Database Connection Failed! Bad Config: ', err))
+
+module.exports = {
+  sql, poolPromise
+}
+ */
