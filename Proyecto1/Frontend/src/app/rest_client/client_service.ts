@@ -31,8 +31,16 @@ export class RestApiService {
   // HttpClient API get() method => auth login
   getSate(username,password) {
     let result;
-    let body;
-    this.http.post (this.apiURL+'/mundo',body).pipe(retry(1),catchError(this.handleError)).subscribe((res)=>{
+    let body= {
+               typesIn:['varchar','varchar'],
+               typesOut:[],
+               parameters:['CorreoEmp','Contrasena'],
+               values:[username,password],
+               outputs:[], //falta  output
+               name:'Validacion'
+              };
+
+    this.http.post (this.apiURL+'getLogIn',body).pipe(retry(1),catchError(this.handleError)).subscribe((res)=>{
       result = this.json.parseLogin(res);
   });
     return result;
@@ -40,7 +48,15 @@ export class RestApiService {
 
   getProvincias(datos) {
     let result;
-    let body;
+    let body={
+                typesIn:[],
+                typesOut:[],
+                inputs:[],
+                values:[],
+                outputs:[],
+                name:'getProvincia'
+              }
+    ;
     this.http.post (this.apiURL+urls.sp_url+'getProvincias',body).pipe(retry(1),catchError(this.handleError)).subscribe((res)=>{
       console.log(res);
       //bla = this.json.parseLogin(res);
@@ -48,11 +64,16 @@ export class RestApiService {
     return result;
   }
 
-  
-
   getEstados() {
     let result;
-    let body;
+    let body = {
+                typesIn:[],
+                typesOut:[],
+                inputs:[],
+                values:[],
+                outputs:[],
+                name:'getEstado'
+              };
     this.http.post (this.apiURL+urls.sp_url+'getEstado',body).pipe(retry(1),catchError(this.handleError)).subscribe((res)=>{
       console.log('Estados:' + res);
       result = this.json.parseGet(res);
@@ -62,7 +83,14 @@ export class RestApiService {
 
   getCategorias() {
     let result;
-    let body;
+    let body = {
+                typesIn:[],
+                typesOut:[],
+                inputs:[],
+                values:[],
+                outputs:[],
+                name:'getCategoria'
+              };
     this.http.post (this.apiURL+urls.sp_url+'getCategoria',body).pipe(retry(1),catchError(this.handleError)).subscribe((res)=>{
       console.log('Categorias:' + res);
       result = this.json.parseGet(res);

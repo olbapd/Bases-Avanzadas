@@ -4,6 +4,7 @@ import {Categoria} from '../manage-assets/Categoria';
 import {Activos} from '../manage-assets/Activos';
 import {Codigos} from '../manage-assets/Codigos';
 import {RestApiService} from 'src/app/rest_client/client_service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-manage-assets',
@@ -17,7 +18,7 @@ export class ManageAssetsComponent implements OnInit {
   codigos:Codigos[];
   
 
-  constructor(public restApi: RestApiService) {
+  constructor(public restApi: RestApiService,private router: Router) {
    }
 
   ngOnInit() {
@@ -39,9 +40,16 @@ export class ManageAssetsComponent implements OnInit {
 
   }
   selected(activo){
+    //console.log(activo);
     this.codigos = this.restApi.getCodigos();
+
+  }
+  CerrarSesion(){
+    this.router.navigate(['/auth/login']); //ruta a manage_assets si el login es exitoso
 
   }
    
 
 }
+
+

@@ -1,8 +1,8 @@
 <!--Barra de Navegación Generica-->
 <div>
   <nav class="navbar navbar-dark" style="background-color: #0b4980;">
-    <a class="navbar-brand" id="logo">X-TEC</a>
-    <button type="button" class="btn btn-outline-light" id="btnCerrarSesion">
+    <a class="navbar-brand" id="logo">Administrador</a>
+    <button (click)= "CerrarSesion()" type="button" class="btn btn-outline-light" id="btnCerrarSesion">
       CERRAR SESION
     </button>
   </nav>
@@ -11,18 +11,18 @@
 <div class="card-header">
   <ul class="nav nav-tabs card-header-tabs">
 
-    <li class="nav-item">
-      <a class="nav-link" href="#">Configuraciones de la Plataforma</a>
-    </li>
+      <a class="navbar-brand" id="logo">Administrar Activos</a>
 
     <li class="nav-item">
-      <select class="form-control" data-style="btn-primary" data-live-search="true" data-selectpicker
+      <select class="form-control" #select_administrar_activo data-style="btn-primary" data-live-search="true" data-selectpicker
         data-collection-name="items" ng-model="selected">
-        <option selected>Open this select menu</option>
+        <option selected>Registrar Activo</option>
+        <option selected>Modificar Estado de Activo</option>
+        <option selected>Asignar Activo a Empleado</option>
         <option *ngFor="let i of collection">{{ i }}</option>
       </select>
     </li>
-
+ <!--
     <li class="nav-item">
       <a class="nav-link" href="#" id="perfLink01">Configuraciones del Perfil</a>
     </li>
@@ -31,6 +31,7 @@
     </li>
   </ul>
 </div>
+-->
 
 <div class="container-fluid">
   <div class="row">
@@ -94,6 +95,7 @@
               <div class="input-group mb-3">
                 <select class="form-control" #select_categoria data-style="btn-primary" data-live-search="true" data-selectpicker
                   data-collection-name="items" ng-model="selected">
+                  <option selected>Opción</option>
                   <option *ngFor="let cat of categoria" [value]="cat.Id">{{cat.Name}}</option> <!--LLenado de Select-->
                 </select>
               </div>
@@ -125,6 +127,7 @@
               <div class="input-group mb-3">
                 <select class="form-control" #select_estado data-style="btn-primary" data-live-search="true" data-selectpicker
                   data-collection-name="items" ng-model="selected">
+                  <option selected>Opción</option>
                   <option *ngFor="let state of estado" [value]="state.Id">{{state.Name}}</option> <!--LLenado de Select-->
                 </select>
               </div>
@@ -151,6 +154,7 @@
               <div class="input-group mb-3">
                 <select class="form-control" #select_activo data-style="btn-primary" data-live-search="true" data-selectpicker
                   data-collection-name="items" ng-model="selected">
+                  <option selected>Opción</option>
                   <option *ngFor="let act of activos" [value]="act.Id">{{act.Name}}</option> <!--LLenado de Select-->
                 </select>
               </div>
@@ -161,6 +165,7 @@
               <div class="input-group mb-3">
                 <select class="form-control" #select_estado_activo data-style="btn-primary" data-live-search="true" data-selectpicker
                   data-collection-name="items" ng-model="selected">
+                  <option selected>Seleccione Opción</option>
                   <option *ngFor="let state of estado" [value]="state.Id">{{state.Name}}</option> <!--LLenado de Select-->
                 </select>
               </div>
@@ -183,8 +188,7 @@
               <h6 class="card-subtitle mb-2 text-muted">Seleccionar Activo</h6>
               <div class="input-group mb-3">
                 <select class="form-control" #select_activo_asg data-style="btn-primary" data-live-search="true" data-selectpicker
-                  data-collection-name="items" ng-model="selected" (click)="selected(select_activo_asg.value)">
-                  <option selected>Carro</option>
+                  data-collection-name="items" ng-model="selected"(change)="selected($event.target.value)"> <!--leccion dinamica-->
                   <option *ngFor="let act of activos" [value]="act.Id">{{act.Name}}</option> <!--LLenado de Select-->
                 </select>
               </div>
@@ -198,7 +202,7 @@
             <div class="col-md-6">
               <h6 class="card-subtitle mb-2 text-muted">Seleccionar Codigo</h6>
               <div class="input-group mb-3">
-                <select class="form-control" #select_codigo data-style="btn-primary" data-live-search="true" data-selectpicker
+                <select class="form-control"  #select_codigo data-style="btn-primary" data-live-search="true" data-selectpicker
                   data-collection-name="items" ng-model="selected">
                   <option *ngFor="let code of codigos" [value]="code.Id">{{code.Codigo}}</option> <!--LLenado de Select-->
                 </select>
