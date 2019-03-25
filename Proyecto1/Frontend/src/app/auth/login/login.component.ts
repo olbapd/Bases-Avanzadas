@@ -16,7 +16,7 @@ export class LoginComponent {
 
     login(username,password){
          if (this.restApi.getSate(username,password)){
-            this.router.navigate(['/auth/admin']); //ruta a admin si el login es exitoso
+            this.router.navigate(['./admin_view/admin']); //ruta a admin si el login es exitoso
          }; 
          
     }
