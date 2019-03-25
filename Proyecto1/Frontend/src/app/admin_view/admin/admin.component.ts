@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { Router } from "@angular/router";
 
 
 
@@ -11,12 +12,16 @@ import { Label } from 'ng2-charts';
 
 })
 export class AdminComponent implements OnInit{
-    public collection = ["1","1","1"];
 
-    constructor(){
+    constructor(private router: Router){
 
     }
 
     ngOnInit() {
     }
+
+    CerrarSesion(){
+        this.router.navigate(['/auth/login']); //ruta a manage_assets si el login es exitoso
+    
+      }
 }
