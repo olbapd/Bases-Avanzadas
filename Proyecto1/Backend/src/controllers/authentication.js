@@ -13,3 +13,23 @@ let express = require('express'),
 
 let router = module.exports = express.Router();
 
+let auth = require('../business/authentication');
+
+
+router.get("/login", function(req,res){
+	auth.login({
+	 	email:req.body.email,
+	 	pass: req.body.pass
+	 },(result)=>{
+	 	if(result.error){
+	 	    res.status(503).json({
+	 	    	error : 'Internal Server Error, it has been registered.'
+	 		})
+	 	    return;
+	 	}
+	 	res.json({
+	 	  success : true,
+	 	  data : result.data
+	 	});
+	 })
+});

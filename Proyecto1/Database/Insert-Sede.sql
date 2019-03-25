@@ -1,0 +1,1 @@
+INSERT INTO Sede (Nombre,FechaAdministracion,DetalleUbicacion,IdDistrito,IdEstado,IdEmpleado) VALUES ('Central','2019-02-21T18:10:00','Cartago',1,1,1);

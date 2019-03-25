@@ -1,0 +1,1 @@
+INSERT INTO Puesto (Nombre) VALUES ('Ingeniero');

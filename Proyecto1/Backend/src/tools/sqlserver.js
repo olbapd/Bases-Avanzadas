@@ -41,7 +41,7 @@ let initializePool = () => {
     global.log4us.print(`Creating connection to database server (${currentConfig.server})`);
     pool = new sqlserver.ConnectionPool(currentConfig);
     pool.connect(err =>{
-      global.log4us.error(`Error creating connection to database server (${currentConfig.server})`);  
+      global.log4us.error(`Error creating connection to database server (${currentConfig.server}), retrying conection...`);  
     })
   }
 }
