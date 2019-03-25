@@ -2,7 +2,7 @@
 --UNIR PERSONA EMPLEADO Y TABLAX CON ACTIVO
 --Selecciona la infotmacion de un activo
 CREATE OR ALTER PROC [dbo].[getActivo]
-	@IdActivo int
+	@Codigo int
 AS
 SET NOCOUNT ON
 
@@ -25,7 +25,7 @@ SELECT [IdActivo],
 	[IdMoneda],
 	[IdEstado]
 FROM Activo
-WHERE [IdActivo] = @IdActivo
+WHERE [Codigo] = Codigo
 SET NOCOUNT OFF
 GO
 
@@ -144,6 +144,20 @@ BEGIN
 END
 GO
 
+--Seleccionar activos de una categoria
+CREATE OR ALTER PROC [dbo].[getActivoLi]
+	@IdCategoria int
+AS
+SET NOCOUNT ON
+
+SELECT [Activo].IdActivo, [Activo].Codigo, [Activo].Nombre,
+	[Activo].Descripcion
+
+FROM Activo
+WHERE [IdCategoria] = @IdCategoria
+SET NOCOUNT OFF
+GO
+
 --Asignar un Activo a un empleado
 CREATE OR ALTER PROC [dbo].[asigActivo]
 	@IdActivo int,
@@ -193,7 +207,7 @@ END
 GO
 
 --Selecciona las Provincias
-CREATE OR ALTER PROC [dbo].[getProvincias]
+CREATE OR ALTER PROC [dbo].[getProvincia]
 	--@IdProvincia int
 AS
 SET NOCOUNT ON
@@ -234,6 +248,37 @@ BEGIN
 	END CATCH
 END
 GO
+
+--Selecciona los tipos de estado
+CREATE OR ALTER PROC [dbo].[getEstado]
+AS
+SET NOCOUNT ON
+
+SELECT [Estado].Nombre, [Estado].IdEstado
+FROM Estado
+
+
+SET NOCOUNT OFF
+GO
+
+-- Agregar tipos de estado
+CREATE OR ALTER PROC [dbo].[setEstado]
+	@NombreE varchar(50)
+
+AS
+BEGIN
+	BEGIN TRAN
+	BEGIN TRY
+		INSERT INTO Estado(Nombre) VALUES (@NombreE)
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
+		ROLLBACK TRANSACTION
+	END CATCH
+END
+GO
+
 
 --Selecciona los departamentos
 CREATE OR ALTER PROC [dbo].[getDepartamento]
@@ -436,7 +481,7 @@ SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
 [Empleado].Cedula, [Empleado].Fechaingreso, [Puesto].Nombre
 FROM Empleado
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
-WHERE @IdDepartamento = [Empleado].IdDempartamento
+WHERE @IdDepartamento = [Empleado].IdDepartamento
 
 SET NOCOUNT OFF
 GO
@@ -450,7 +495,7 @@ SET NOCOUNT ON
 SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
 [Empleado].Cedula, [Empleado].Fechaingreso, [Departamento].Nombre, [Sede].Nombre
 FROM Empleado
-INNER JOIN Departamento ON [Empleado].IdDempartamento = [Departamento].IdDepartamento
+INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Sede ON [Empleado].IdSede = [Sede].IdSede
 WHERE @IdPuesto = [Empleado].IdPuesto
 
@@ -466,7 +511,7 @@ SET NOCOUNT ON
 SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
 [Empleado].Cedula, [Empleado].Fechaingreso, [Departamento].Nombre, [Puesto].Nombre
 FROM Empleado
-INNER JOIN Departamento ON [Empleado].IdDempartamento = [Departamento].IdDepartamento
+INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
 WHERE @IdSede = [Empleado].IdSede
 
@@ -483,7 +528,7 @@ SET NOCOUNT ON
 SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
 [Empleado].Cedula, [Empleado].Fechaingreso, [Departamento].Nombre, [Puesto].Nombre
 FROM Empleado
-INNER JOIN Departamento ON [Empleado].IdDempartamento = [Departamento].IdDepartamento
+INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
 WHERE [Empleado].Fechaingreso BETWEEN @FechaInicial AND @FechaFinal
 
@@ -500,7 +545,7 @@ SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
 [Departamento].Nombre, [Puesto].Nombre, [Sede].Nombre
 FROM Activo
 INNER JOIN Empleado ON [Activo].IdEmpleado = [Empleado].IdEmpleado
-INNER JOIN Departamento ON [Empleado].IdDempartamento = [Departamento].IdDepartamento
+INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
 INNER JOIN Sede ON [Empleado].IdSede = [Sede].Nombre
 WHERE @CodigoActivo = [Activo].Codigo

@@ -10,13 +10,14 @@ import { Router } from "@angular/router";
 
 export class LoginComponent {
   
-    constructor(public restApi: RestApiService, private router: Router){
+    constructor(public restApi: RestApiService, private router: Router){ //Router: para poder pasar de ventanas
         
-     
     }
 
     login(username,password){
-         //this.restApi.getProvincias(username);  
-         this.router.navigate(['/auth/manage-assets']);
+         if (this.restApi.getSate(username,password)){
+            this.router.navigate(['./admin_view/admin']); //ruta a admin si el login es exitoso
+         }; 
+         
     }
 }
