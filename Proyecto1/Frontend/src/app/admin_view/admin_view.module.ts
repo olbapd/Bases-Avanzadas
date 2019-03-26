@@ -12,6 +12,7 @@ import { Admin_ViewRoutes } from './admin_view.routing';
 import { EmployeeComponent } from './crud_employee/crud_employee.component';
 import {HttpClientModule} from '@angular/common/http';
 import { HttpClient } from 'selenium-webdriver/http';
+import { SedeComponent } from './crud_sede/crud_sede.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { HttpClient } from 'selenium-webdriver/http';
     AdminComponent,
     ManageAssetsComponent,
     DepreciationComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    SedeComponent
 
   ],
   providers: []
