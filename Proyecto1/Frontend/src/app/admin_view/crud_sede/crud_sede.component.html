@@ -64,6 +64,14 @@
                             </select>
                         </div>
 
+                        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Asignar Administrador</h6>
+                        <div class="input-group mb-3">
+                            <select class="form-control" #select_employee data-style="btn-primary" data-live-search="true"
+                                data-selectpicker data-collection-name="items" ng-model="selected">
+                                <option selected>Jeanpol</option>
+                                <option *ngFor="let employee of empleado" [value]="employee.Id">{{employee.Name}}</option>
+                            </select>
+                        </div>
 
                         <h6 class="card-subtitle mb-2 text-muted">Fecha de Ingreso Admin</h6>
                         <div class="input-group mb-3">
@@ -86,18 +94,23 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Activo</th>
-                        <th scope="col">Codigo</th>
-                        <th scope="col">Depreciacion</th>
+                        <th scope="col">#Codigo</th>
+                        <th scope="col">Sede</th>
+                        <th scope="col">Provincia</th>
+                        <th scope="col">Canton</th>
+                        <th scope="col">Distrito</th>
+                        <th scope="col">Administrador</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let asset of assets">
-                        <th scope="row">{{ asset.id }}</th>
-                        <td>{{ asset.name }}</td>
-                        <td>{{ asset.code}}</td>
-                        <td>{{ asset.depreciation}}</td>
+                    <tr *ngFor="let sede of sedes">
+                        <th scope="row">{{ sede.id }}</th>
+                        <td>{{ sede.name }}</td>
+                        <td>{{ sede.provincia}}</td>
+                        <td>{{ sede.canton}}</td>
+                        <td>{{ sede.distrito}}</td>
+                        <td>{{ sede.admin}}</td>
                         <td> <button class='btn btn-danger' ng-click="deleteRow($index)">Update</button> </td>
                         <td> <button class='btn btn-danger' ng-click="deleteRow($index)">Delete</button> </td>
 
