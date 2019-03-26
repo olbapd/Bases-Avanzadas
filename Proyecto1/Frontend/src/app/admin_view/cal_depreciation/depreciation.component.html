@@ -1,0 +1,70 @@
+<app-admin></app-admin>
+
+
+<div class="row">
+  <div class="col-md-4">
+
+    <!--Card para el Registro de Activos-->
+    <div class="col-md-12">
+      <div class="card border-info" style="max-width: 50rem; margin-bottom: 20px">
+        <div class="card-body text-center">
+          <h5 class="card-title"> Calculo Depreciacion</h5>
+          <div class="row text-center">
+
+            <h6 class="card-subtitle mb-2 text-muted">Metodo</h6>
+            <div class="input-group mb-3">
+              <select class="form-control" #select_metodo data-style="btn-primary" data-live-search="true"
+                data-selectpicker data-collection-name="items" ng-model="selected">
+                <option *ngFor="let caltype of calType">{{caltype}}</option>
+              </select>
+            </div>
+
+            <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
+            <div class="input-group mb-3">
+              <select class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
+                data-selectpicker data-collection-name="items" ng-model="selected">
+                <option *ngFor="let caltype of calType">{{caltype}}</option>
+              </select>
+            </div>
+
+            <h6 class="card-subtitle mb-2 text-muted">Codigo Activo</h6>
+            <div class="input-group mb-3">
+              <input type="text" #txt_cod_activo class="form-control" placeholder="1000000" aria-label="Codigo_Activo"
+                aria-describedby="basic-addon1">
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary">Calcular</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-8">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Activo</th>
+          <th scope="col">Codigo</th>
+          <th scope="col">Depreciacion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let asset of assets">
+          <th scope="row">{{ asset.id }}</th>
+          <td>{{ asset.name }}</td>
+          <td>{{ asset.code}}</td>
+          <td>{{ asset.depreciation}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+      </ngb-pagination>
+    </div>
+  </div>
+
+
+
+</div>

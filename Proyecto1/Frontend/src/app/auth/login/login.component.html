@@ -11,8 +11,8 @@
         -Consultar activos<br>
         -Asignar activos<br>
         -Generar Reportes</h3>
-        <h4>Entre otras...</h4>
-        
+      <h4>Entre otras...</h4>
+
     </div>
 
     <!--Columna con la Informacion de Inicio de Sesion-->
@@ -27,8 +27,8 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">@</span>
             </div>
-            <input type="text" #txt_username class="form-control"  placeholder="Username" aria-label="Username"
-              aria-describedby="basic-addon1"  style="max-width:30rem;">
+            <input type="text" #txt_username class="form-control" placeholder="Username" aria-label="Username"
+              aria-describedby="basic-addon1" style="max-width:30rem;">
           </div>
 
           <h6 class="card-subtitle mb-2 text-muted">Contraseña</h6>
@@ -37,15 +37,29 @@
           <div class="input-group mb-3">
             <div class="input-group-prepend">
             </div>
-            <input type="text" #txt_password class="form-control"  placeholder="Contraseña" aria-label="Contraseña"
-              aria-describedby="basic-addon1"  style="max-width:40rem;">
+            <input type="text" #txt_password class="form-control" placeholder="Contraseña" aria-label="Contraseña"
+              aria-describedby="basic-addon1" style="max-width:40rem;">
           </div>
 
-          <button (click)="login(txt_username.value,txt_password.value)" type="button" id="button_login" class="btn btn-success">LogIn</button>
-          
+          <button (click)="login(txt_username.value,txt_password.value,prueba)" type="button" id="button_login"
+            class="btn btn-success">LogIn</button>
+
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<ng-template #prueba>
+
+  <div class="modal-header">
+    <h4>Hola Mundo</h4>
+  </div>
+
+  <div class="modal-body">
+    <h4>Hola Mundo</h4>
+  </div>
+  <div class="modal-footer">
+    <h4>Hola Mundo</h4>
+  </div>
+</ng-template>
