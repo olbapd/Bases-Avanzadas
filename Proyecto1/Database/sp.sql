@@ -64,7 +64,7 @@ CREATE OR ALTER PROC [dbo].[setActivo]
 	@Descripcion varchar(50),
 	@Foto varchar(50),
 	@Precio int,
-	@TiempoGar date,
+	@TiempoGar int,
 	@VidaU int,
 	@PorcentajeD int,
 	@FechaCompra date,
@@ -84,9 +84,9 @@ BEGIN
 	BEGIN TRAN
 	BEGIN TRY
 		INSERT INTO Activo (Codigo, Nombre, Descripcion, Foto, Precio, TiempoGarantia, VidaUtil, PorcentajeDepreciacion, FechaCompra,
-		FechaRegistro, FechaAsignacion, CentroCosto, ValorResidual, DetalleUbicacion, IdCategoria, IdSede, IdMoneda, IdEstado) 
+		FechaRegistro, FechaAsignacion, CentroCosto, ValorResidual, DetalleUbicacion, IdEmpleado,IdCategoria, IdSede, IdMoneda, IdEstado) 
 		VALUES (@Codigo, @Nombre, @Descripcion, @Foto, @Precio, @TiempoGar, @VidaU, @PorcentajeD, @FechaCompra,
-		@FechaRegistro, @FechaAsig, @CentroCosto, @ValorResidual, @DetalleUb, @IdCategoria, @IdSede, @IdMoneda, @IdEstado) 
+		@FechaRegistro, @FechaAsig, @CentroCosto, @ValorResidual, @DetalleUb, NULL,@IdCategoria, @IdSede, @IdMoneda, @IdEstado) 
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -103,7 +103,7 @@ CREATE OR ALTER PROC [dbo].[updateActivo]
 	@Descripcion varchar(50),
 	@Foto varchar(50),
 	@Precio int,
-	@TiempoGar date,
+	@TiempoGar int,
 	@VidaU int,
 	@PorcentajeD int,
 	@FechaCompra date,
