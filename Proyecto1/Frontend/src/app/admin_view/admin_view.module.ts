@@ -12,7 +12,7 @@ import { EmployeeComponent } from './crud_employee/crud_employee.component';
 import {HttpClientModule} from '@angular/common/http';
 import { HttpClient } from 'selenium-webdriver/http';
 import { SedeComponent } from './crud_sede/crud_sede.component';
-import {MatDialogModule, MatIconModule} from '@angular/material';
+import {MatDialogModule, MatIconModule, MatCardModule, MatToolbarModule} from '@angular/material';
 import { updateComponent } from './dialogs/update_employee/update-employee.component';
 
 @NgModule({
@@ -25,6 +25,8 @@ import { updateComponent } from './dialogs/update_employee/update-employee.compo
     HttpClientModule,
     MatDialogModule,
     MatIconModule,
+    MatCardModule,
+    MatToolbarModule,
     ReactiveFormsModule
   ],
   declarations: [

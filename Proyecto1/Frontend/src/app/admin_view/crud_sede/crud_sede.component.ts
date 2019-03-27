@@ -20,6 +20,7 @@ import { updateComponent } from '../dialogs/update_employee/update-employee.comp
     styleUrls: ['./crud_sede.component.css']
 })
 export class SedeComponent implements OnInit {
+    isPopupOpened=false;
     provincia: Provincia[];
     canton: Canton[];
     distrito: Distrito[];
@@ -53,10 +54,15 @@ export class SedeComponent implements OnInit {
     ngOnInit() { }
 
     prueba(){
+        this.isPopupOpened=true;
+        const dialogRef = this.dialog.open(updateComponent,{
+            data:{}
+        });
+       /* 
         const dialogConfig=new MatDialogConfig();
         dialogConfig.disableClose=true;
         dialogConfig.width="60%";
-        this.dialog.open(updateComponent,dialogConfig);
+        this.dialog.open(updateComponent,dialogConfig);*/
     
 
     }
