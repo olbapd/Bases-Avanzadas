@@ -56,8 +56,9 @@
 
                         <div class="form-group">
                             <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                                (change)="onFileSelected($event)">
+                            <span class="btn btn-rose btn-round btn-file">
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                                    (change)="onFileSelected($event)"> </span>
                         </div>
 
                         <button type="button" class="btn btn-primary">Ingresar</button>
@@ -82,9 +83,15 @@
                         <td>{{ asset.name }}</td>
                         <td>{{ asset.code}}</td>
                         <td>{{ asset.depreciation}}</td>
-                        <td> <button class='btn btn-danger' ng-click="deleteRow($index)">Update</button> </td>
-                        <td> <button class='btn btn-danger' ng-click="deleteRow($index)">Delete</button> </td>
-                    
+                        <td>
+                            <button mat-icon-button color="accent" class='btn btn-danger' ng-click="deleteRow($index)">
+                                <mat-icon aria-label="Edit">edit</mat-icon>
+                            </button> </td>
+                        <td>
+                            <button class='btn btn-danger' ng-click="deleteRow($index)">
+                                <mat-icon aria-label="Edit">delete</mat-icon>
+                            </button> </td>
+
                     </tr>
                 </tbody>
             </table>

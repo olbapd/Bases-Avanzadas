@@ -9,6 +9,9 @@ import { department } from '../../interfaces/department';
 import { jobs } from '../../interfaces/jobs';
 import { Categoria } from '../manage-assets/Categoria';
 import { asset } from 'src/app/interfaces/assets_Structure';
+import { Empleado } from 'src/app/interfaces/employee';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+
 
 
 @Component({
@@ -24,6 +27,13 @@ export class EmployeeComponent implements OnInit {
     puestos: jobs[];
     departamento: department[];
     selectedFile: File = null;
+    empleados:Empleado[]=[{
+        name:"asd",
+        estado:"asd",
+        sede:"asd",
+        departamente:"asd",
+        puesto:"asd",
+    }]
 
 
     categoria: Categoria[];
@@ -37,9 +47,16 @@ export class EmployeeComponent implements OnInit {
     ];
     collectionSize = this.activos.length;
     activo: asset;
+    empleado:Empleado;
 
     get assets(): asset[] {
         return this.activos
+            .map((country, i) => ({ id: i + 1, ...country }))
+            .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+    }
+
+    get employees(): Empleado[] {
+        return this.empleados
             .map((country, i) => ({ id: i + 1, ...country }))
             .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
     }
@@ -61,8 +78,13 @@ export class EmployeeComponent implements OnInit {
     }
 
     constructor(private modalService: NgbModal, public restApi: RestApiService,
-        private router: Router, private http: HttpClient) {
+        private router: Router, private http: HttpClient, private dialog:MatDialog) {
 
     }
     ngOnInit() { }
+
+    updateEmployee(){
+        this.dialog
+
+    }
 }

@@ -66,10 +66,12 @@
 
                         <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Asignar Administrador</h6>
                         <div class="input-group mb-3">
-                            <select class="form-control" #select_employee data-style="btn-primary" data-live-search="true"
-                                data-selectpicker data-collection-name="items" ng-model="selected">
+                            <select class="form-control" #select_employee data-style="btn-primary"
+                                data-live-search="true" data-selectpicker data-collection-name="items"
+                                ng-model="selected">
                                 <option selected>Jeanpol</option>
-                                <option *ngFor="let employee of empleado" [value]="employee.Id">{{employee.Name}}</option>
+                                <option *ngFor="let employee of empleado" [value]="employee.Id">{{employee.Name}}
+                                </option>
                             </select>
                         </div>
 
@@ -84,7 +86,7 @@
                                 (change)="onFileSelected($event)">
                         </div>
 
-                        <button type="button" class="btn btn-primary">Ingresar</button>
+                        <button type="button" class="btn btn-primary" (click)="prueba()"> Ingresar</button>
 
                     </form>
                 </div>
@@ -111,8 +113,14 @@
                         <td>{{ sede.canton}}</td>
                         <td>{{ sede.distrito}}</td>
                         <td>{{ sede.admin}}</td>
-                        <td> <button class='btn btn-danger' ng-click="deleteRow($index)">Update</button> </td>
-                        <td> <button class='btn btn-danger' ng-click="deleteRow($index)">Delete</button> </td>
+                        <td>
+                            <button mat-icon-button color="accent" class='btn btn-danger' ng-click="deleteRow($index)">
+                                <mat-icon aria-label="Edit">edit</mat-icon>
+                            </button> </td>
+                        <td>
+                            <button class='btn btn-danger' ng-click="deleteRow($index)">
+                                <mat-icon aria-label="Edit">delete</mat-icon>
+                            </button> </td>
 
                     </tr>
                 </tbody>
@@ -125,4 +133,5 @@
         </div>
 
     </div>
+
 </div>
