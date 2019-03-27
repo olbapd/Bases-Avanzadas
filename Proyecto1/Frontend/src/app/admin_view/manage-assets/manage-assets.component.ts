@@ -5,7 +5,8 @@ import {Activos} from '../manage-assets/Activos';
 import {Codigos} from '../manage-assets/Codigos';
 import {RestApiService} from 'src/app/rest_client/client_service';
 import { Router } from "@angular/router";
-import {AdminComponent} from 'src/app/admin_view/admin/admin.component';
+
+
 @Component({
   selector: 'app-manage-assets',
   templateUrl: './manage-assets.component.html',
@@ -44,10 +45,7 @@ export class ManageAssetsComponent implements OnInit {
     this.codigos = this.restApi.getCodigos();
 
   }
-  CerrarSesion(){
-    this.router.navigate(['/auth/login']); //ruta a manage_assets si el login es exitoso
-
-  }
+  
    
 
 }

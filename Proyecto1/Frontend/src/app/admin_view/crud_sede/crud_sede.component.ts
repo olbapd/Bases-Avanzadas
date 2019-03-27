@@ -63,7 +63,8 @@ export class SedeComponent implements OnInit {
         dialogConfig.disableClose=true;
         dialogConfig.width="60%";
         this.dialog.open(updateComponent,dialogConfig);*/
-    
+    }
+    add_sede(name,code,description,provincia,canton,distrito,estado,employee,fecha_ingreso){
 
     }
 }

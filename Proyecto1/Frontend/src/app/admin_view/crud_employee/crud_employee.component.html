@@ -61,7 +61,7 @@
                                     (change)="onFileSelected($event)"> </span>
                         </div>
 
-                        <button type="button" class="btn btn-primary">Ingresar</button>
+                        <button (click) ="add_employee(txt_name.value,select_estado.value,select_sede.value,select_dep.value,select_puesto.value,txt_fecha_ingreso.value)" type="button" class="btn btn-primary">Ingresar</button>
 
                     </form>
                 </div>

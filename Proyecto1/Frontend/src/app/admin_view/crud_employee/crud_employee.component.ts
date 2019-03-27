@@ -87,4 +87,7 @@ export class EmployeeComponent implements OnInit {
         this.dialog
 
     }
+    add_employee(name,estado,sede,dep,puesto,fecha_ingreso){
+
+    }
 }

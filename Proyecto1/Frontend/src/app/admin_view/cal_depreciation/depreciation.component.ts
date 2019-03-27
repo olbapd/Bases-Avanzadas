@@ -18,12 +18,7 @@ export class DepreciationComponent implements OnInit {
     categoria:Categoria[];
     page = 1;
     pageSize = 4;
-    activos: asset[] = [{
-        name: "as",
-        code: 123,
-        depreciation: 123
-    }
-    ];
+    activos: asset[];
     collectionSize = this.activos.length;
     activo: asset;
 
@@ -38,8 +33,15 @@ export class DepreciationComponent implements OnInit {
     public addAsset(asset: asset) {
         this.activos.push(asset);
     }
+
+    calculate(metodo,categoria){
+
+    }
+
+    
     ngOnInit() {
         this.addAsset({ name: 'asda', code: 1212, depreciation: 22 });
+
 
         console.log(this.activos[0].name); //=> 0:{id: "222", category: "testcat", event_name: "name"}
 
