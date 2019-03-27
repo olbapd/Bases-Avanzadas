@@ -1,45 +1,29 @@
+<form>
 
-<mat-card-header>
+  <div class="form-group">
+
     <mat-toolbar class="toolbar">
       <mat-card-title>Contact Information</mat-card-title>
       <span class="toolbar-spacer"></span>
-      <mat-icon >cancel</mat-icon>
+      <div>
+        <button mat-icon-button color="accent" (click)="onNoClick()">
+          <mat-icon (click)="onNoClick()">cancel</mat-icon>
+        </button>
+      </div>
+
     </mat-toolbar>
-  </mat-card-header>
-  <mat-card-content>
-    <div class="container">
-      <form [formGroup]="_contactForm" (submit)="onSubmit()">
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-6">
-              <label>First Name</label>
-              <input type="text" formControlName="FirstName" class="form-control">
-            </div>
-            <div class="col-md-6">
-              <label>Last Name</label>
-              <input type="text" formControlName="LastName" class="form-control">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label>Contact Number</label>
-              <input type="text" formControlName="Contact" class="form-control">
-            </div>
-            <div class="col-md-6">
-              <label>Email</label>
-              <input type="text" formControlName="Email" class="form-control">
-            </div>
-          </div>
-  
-          <div class="row">
-            <div class="col-md-6">
-            <button type="submit" class="btn btn-success">
-              <mat-icon>save</mat-icon>
-            </button>
-            </div>
-          </div>
-        </div>
-  
-      </form>
-    </div>
-  </mat-card-content>
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+      placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

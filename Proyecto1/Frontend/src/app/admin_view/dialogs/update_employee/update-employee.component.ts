@@ -11,6 +11,11 @@ import { Router } from '@angular/router';
 })
 
 export class updateComponent implements OnInit {
-    constructor(private modalService: NgbModal, public restApi: RestApiService, private router: Router){}
+    constructor(private modalService: NgbModal, public restApi: RestApiService, 
+        private router: Router,private dialogRef: MatDialogRef<updateComponent>){}
     ngOnInit(){}
+
+    onNoClick(): void {
+        this.dialogRef.close();
+       }
 }
