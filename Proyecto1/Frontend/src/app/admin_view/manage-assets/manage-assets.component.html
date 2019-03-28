@@ -21,8 +21,8 @@
 
               <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
               <div class="input-group mb-3">
-                <input type="text" #txt_descripcion class="form-control" placeholder="Descripcion" aria-label="Descripcion"
-                  aria-describedby="basic-addon1">
+                <input type="text" #txt_descripcion class="form-control" placeholder="Descripcion"
+                  aria-label="Descripcion" aria-describedby="basic-addon1">
               </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Fecha de Compra</h6>
@@ -44,8 +44,8 @@
 
               <h6 class="card-subtitle mb-2 text-muted">Detalle Ubicacion</h6>
               <div class="input-group mb-3">
-                <input type="text" #txt_detalle_ubicacion class="form-control" placeholder="1000000" aria-label="residual"
-                  aria-describedby="basic-addon1">
+                <input type="text" #txt_detalle_ubicacion class="form-control" placeholder="1000000"
+                  aria-label="residual" aria-describedby="basic-addon1">
               </div>
             </div>
 
@@ -57,16 +57,15 @@
                 <input type="text" #txt_codigo class="form-control" placeholder="Codigo" aria-label="Codigo"
                   aria-describedby="basic-addon1">
               </div>
-                            
+
               <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
               <div class="input-group mb-3">
-                <select class="form-control" #select_categoria data-style="btn-primary" data-live-search="true" data-selectpicker
-                  data-collection-name="items" ng-model="selected">
-                  <option selected>Opción</option>
-                  <option *ngFor="let cat of categoria" [value]="cat.Id">{{cat.Name}}</option> <!--LLenado de Select-->
+                <select id="categoria-Dropdown" name="categoria" class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
+                  data-selectpicker data-collection-name="items" ng-model="selected">
+                  <!--LLenado de Select-->
                 </select>
               </div>
-                   
+
               <h6 class="card-subtitle mb-2 text-muted">Fecha de Registro</h6>
               <div class="input-group mb-3">
                 <input type="date" #txt_fecha_registro [(ngModel)]="dateOfBirth" class="form-control" />
@@ -74,8 +73,8 @@
 
               <h6 class="card-subtitle mb-2 text-muted">Tiempo de Garantía</h6>
               <div class="input-group mb-3">
-                <input type="text" #txt_tiempo_garantia class="form-control" placeholder="Tiempo de Garantia" aria-label="Garantia"
-                  aria-describedby="basic-addon1">
+                <input type="text" #txt_tiempo_garantia class="form-control" placeholder="Tiempo de Garantia"
+                  aria-label="Garantia" aria-describedby="basic-addon1">
               </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Vida Util</h6>
@@ -92,10 +91,10 @@
 
               <h6 class="card-subtitle mb-2 text-muted">Estado</h6>
               <div class="input-group mb-3">
-                <select class="form-control" #select_estado data-style="btn-primary" data-live-search="true" data-selectpicker
-                  data-collection-name="items" ng-model="selected">
-                  <option selected>Opción</option>
-                  <option *ngFor="let state of estado" [value]="state.Id">{{state.Name}}</option> <!--LLenado de Select-->
+                <select id="estado1-Dropdown" name="estado1" class="form-control" #select_estado data-style="btn-primary" data-live-search="true"
+                  data-selectpicker data-collection-name="items" ng-model="selected">
+                 
+                  <!--LLenado de Select-->
                 </select>
               </div>
 
@@ -103,7 +102,8 @@
           </div>
           <button (click)=" registrar_activo(txt_nombre_activo.value,txt_descripcion.value,txt_fecha_compra.value,
           txt_precio_compra.value,txt_valor_residual.value,txt_detalle_ubicacion.value,txt_codigo.value,select_categoria.value,txt_fecha_registro.value,
-          txt_tiempo_garantia.value,txt_vida_util.value,txt_centro_costo.value,select_estado.value)" type="button" class="btn btn-primary">Registrar</button>
+          txt_tiempo_garantia.value,txt_vida_util.value,txt_centro_costo.value,select_estado.value)" type="button"
+            class="btn btn-primary">Registrar</button>
         </div>
       </div>
 
@@ -117,28 +117,44 @@
           <h5 class="card-title"> Modificar Estado de Activos</h5>
           <div class="row text-center">
             <div class="col-md-6">
+
+
               <h6 class="card-subtitle mb-2 text-muted">Seleccionar Activo</h6>
               <div class="input-group mb-3">
-                <select class="form-control" #select_activo data-style="btn-primary" data-live-search="true" data-selectpicker
-                  data-collection-name="items" ng-model="selected">
+                <select class="form-control" #select_activo data-style="btn-primary" data-live-search="true"
+                  data-selectpicker data-collection-name="items" ng-model="selected">
                   <option selected>Opción</option>
-                  <option *ngFor="let act of activos" [value]="act.Id">{{act.Name}}</option> <!--LLenado de Select-->
+                  <option *ngFor="let act of activos">{{act}}</option>
+                  <!--LLenado de Select-->
                 </select>
               </div>
+              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Categoria</h6>
+              <div class="input-group mb-3">
+                <select class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
+                  data-selectpicker data-collection-name="items" ng-model="selected">
+                  <option selected>Opción</option>
+                  <option *ngFor="let act of activos">{{act}}</option>
+                  <!--LLenado de Select-->
+                </select>
+              </div>
+
+
             </div>
+
             <div class="col-md-6">
 
               <h6 class="card-subtitle mb-2 text-muted">Seleccionar Estado</h6>
               <div class="input-group mb-3">
-                <select class="form-control" #select_estado_activo data-style="btn-primary" data-live-search="true" data-selectpicker
-                  data-collection-name="items" ng-model="selected">
-                  <option selected>Seleccione Opción</option>
-                  <option *ngFor="let state of estado" [value]="state.Id">{{state.Name}}</option> <!--LLenado de Select-->
+                <select id="estado2-Dropdown" name="estado2" class="form-control" #select_estado_activo data-style="btn-primary" data-live-search="true"
+                  data-selectpicker data-collection-name="items" ng-model="selected">
+                  <!--LLenado de Select-->
                 </select>
               </div>
             </div>
           </div>
-          <button (click) = "modificar_estado_activo(select_activo.value,select_estado_activo.value)" type="button" class="btn btn-primary">Modificar</button>
+
+          <button (click)="modificar_estado_activo(select_activo.value,select_estado_activo.value)" type="button"
+            class="btn btn-primary">Modificar</button>
         </div>
       </div>
     </div>
@@ -152,33 +168,10 @@
           <div class="row text-center">
             <div class="col-md-6">
 
-              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Activo</h6>
-              <div class="input-group mb-3">
-                <select class="form-control" #select_activo_asg data-style="btn-primary" data-live-search="true" data-selectpicker
-                  data-collection-name="items" ng-model="selected"(change)="selected($event.target.value)"> <!--leccion dinamica-->e
-                  <option *ngFor="let act of activos" [value]="act.Id">{{act.Name}}</option> <!--LLenado de Select-->
-                </select>
-              </div>
-              <h6 class="card-subtitle mb-2 text-muted">Fecha de Asignación</h6>
-              <div class="input-group mb-3">
-                <input type="date" #txt_fecha_asignacion id="dateOfBirth" [(ngModel)]="dateOfBirth" class="form-control" />
-              </div>
-            </div>
-
-            <!--Parte Derecha-->
-            <div class="col-md-6">
-              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Codigo</h6>
-              <div class="input-group mb-3">
-                <select class="form-control"  #select_codigo data-style="btn-primary" data-live-search="true" data-selectpicker
-                  data-collection-name="items" ng-model="selected">
-                  <option *ngFor="let code of codigos" [value]="code.Id">{{code.Codigo}}</option> <!--LLenado de Select-->
-                </select>
-              </div>
-
               <h6 class="card-subtitle mb-2 text-muted">Id Empleado</h6>
               <div class="input-group mb-3">
-                <input type="text" #txt_id_empleado class="form-control" placeholder="2015095715" aria-label="idEmpleado"
-                  aria-describedby="basic-addon1">
+                <input type="text" #txt_id_empleado class="form-control" placeholder="2015095715"
+                  aria-label="idEmpleado" aria-describedby="basic-addon1">
               </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Detalle de Entrega</h6>
@@ -186,11 +179,50 @@
                 <input type="text" #txt_detalle_entrega class="form-control" placeholder="..." aria-label="idEmpleado"
                   aria-describedby="basic-addon1">
               </div>
-              <button (click) = "asignar_activo(select_activo_asg.value,txt_fecha_asignacion.value,select_codigo.value,txt_id_empleado.value,
-              txt_detalle_entrega.value)" type="button" class="btn btn-primary">Modificar</button>
+
+
+
+              <h6 class="card-subtitle mb-2 text-muted">Fecha de Asignación</h6>
+              <div class="input-group mb-3">
+                <input type="date" #txt_fecha_asignacion id="dateOfBirth" [(ngModel)]="dateOfBirth"
+                  class="form-control" />
+              </div>
+            </div>
+
+            <!--Parte Derecha-->
+            <div class="col-md-6">
+              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Categoria</h6>
+              <div class="input-group mb-3">
+                <select id="categoria2-Dropdown" name="categoria2"class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
+                  data-selectpicker data-collection-name="items" ng-model="selected"
+                  (change)="selected($event.target.value)">
+                  <option *ngFor="let cat of categoria">{{cat}}</option>
+                  <!--LLenado de Select-->
+                </select>
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Activo</h6>
+              <div class="input-group mb-3">
+                <select class="form-control" #select_activo_asg data-style="btn-primary" data-live-search="true"
+                  data-selectpicker data-collection-name="items" ng-model="selected"
+                  (change)="selected($event.target.value)">
+                  <option *ngFor="let act of activos">{{act}}</option>
+                  <!--LLenado de Select-->
+                </select>
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Codigo</h6>
+              <div class="input-group mb-3">
+                <select class="form-control" #select_codigo data-style="btn-primary" data-live-search="true"
+                  data-selectpicker data-collection-name="items" ng-model="selected">
+                  <option *ngFor="let code of codigos" [value]="code.Id">{{code.Codigo}}</option>
+                  <!--LLenado de Select-->
+                </select>
+              </div>
             </div>
           </div>
-          
+          <button (click)="asignar_activo(select_activo_asg.value,txt_fecha_asignacion.value,select_codigo.value,txt_id_empleado.value,
+          txt_detalle_entrega.value)" type="button" class="btn btn-primary">Modificar</button>
         </div>
       </div>
     </div>

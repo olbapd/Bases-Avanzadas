@@ -5,7 +5,6 @@ import { AdminComponent } from 'src/app/admin_view/admin/admin.component';
 import { RestApiService } from 'src/app/rest_client/client_service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { asset } from './../../interfaces/assets_Structure';
-import { Categoria } from '../manage-assets/Categoria';
 
 @Component({
     selector: 'cal-depreciation',
@@ -15,15 +14,10 @@ import { Categoria } from '../manage-assets/Categoria';
 })
 export class DepreciationComponent implements OnInit {
     calType=["Lineal","Suma de Digitos"];
-    categoria:Categoria[];
+    categoria;
     page = 1;
     pageSize = 4;
-    activos: asset[] = [{
-        name: "as",
-        code: 123,
-        depreciation: 123
-    }
-    ];
+    activos: asset[];
     collectionSize = this.activos.length;
     activo: asset;
 
@@ -38,8 +32,15 @@ export class DepreciationComponent implements OnInit {
     public addAsset(asset: asset) {
         this.activos.push(asset);
     }
+
+    calculate(metodo,categoria){
+
+    }
+
+    
     ngOnInit() {
         this.addAsset({ name: 'asda', code: 1212, depreciation: 22 });
+
 
         console.log(this.activos[0].name); //=> 0:{id: "222", category: "testcat", event_name: "name"}
 

@@ -25,6 +25,10 @@ let router = module.exports = express.Router();
 
 let getSp = (req,res) => {
 
+    console.log(sqltool.getPool());
+    sqltool.getPool().connect(err=>{
+      console.log(err);
+    }) 
     let request =  new sqlserver.Request(sqltool.getPool());
     let typesIn = req.body.typesIn;
     let typesOut = req.body.typesOut;
@@ -63,7 +67,7 @@ let getSp = (req,res) => {
     }
     request.execute(spName, (err, recordset) => {
       if (err) {
-        global.log4us.error(`Error getting ${spName}: ${result.detail}`);
+        global.log4us.error(`Error getting ${spName}: ${err}`);
         res.status(500).json({
             success : false,
             error: err
@@ -71,7 +75,6 @@ let getSp = (req,res) => {
         console.error(err);
         return;
       }
-     
       res.status(200).json({
         success : true,
         data: recordset.recordset

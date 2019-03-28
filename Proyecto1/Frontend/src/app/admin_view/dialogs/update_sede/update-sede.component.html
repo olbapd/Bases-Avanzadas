@@ -1,0 +1,72 @@
+<form>
+  <div class="form-group">
+    <mat-toolbar class="toolbar">
+      <mat-card-title>Editar Sede</mat-card-title>
+      <span class="toolbar-spacer"></span>
+      <div style="margin-left: 50%">
+        <button mat-icon-button color="accent" (click)="onNoClick()">
+          <mat-icon (click)="onNoClick()">cancel</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+    <div style="margin-top: 20px">
+
+      <img src="assets/images/avatar.png" alt="Avatar" class="avatar">
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+
+        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Provincia</h6>
+        <div class="input-group mb-3">
+          <select class="form-control" #select_provincia data-style="btn-primary" data-live-search="true"
+            data-selectpicker data-collection-name="items" ng-model="selected">
+            <option selected>Cartago</option>
+            <option *ngFor="let provin of provincia" [value]="provin.Id">{{provin.Name}}</option>
+          </select>
+        </div>
+
+        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Canton</h6>
+        <div class="input-group mb-3">
+          <select class="form-control" #select_canton data-style="btn-primary" data-live-search="true" data-selectpicker
+            data-collection-name="items" ng-model="selected">
+            <option selected>Cartago?</option>
+            <option *ngFor="let cant of canton" [value]="cant.Id">{{cant.Name}}</option>
+          </select>
+        </div>
+
+        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Distrito</h6>
+        <div class="input-group mb-3">
+          <select class="form-control" #select_distrito data-style="btn-primary" data-live-search="true"
+            data-selectpicker data-collection-name="items" ng-model="selected">
+            <option selected>CE?</option>
+            <option *ngFor="let dist of distrito" [value]="dist.Id">{{dist.Name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+
+        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Asignar Administrador</h6>
+        <div class="input-group mb-3">
+          <select class="form-control" #select_employee data-style="btn-primary" data-live-search="true"
+            data-selectpicker data-collection-name="items" ng-model="selected">
+            <option selected>Jeanpol</option>
+            <option *ngFor="let employee of empleado" [value]="employee.Id">{{employee.Name}}
+            </option>
+          </select>
+        </div>
+
+        <h6 class="card-subtitle mb-2 text-muted">Fecha de Ingreso Admin</h6>
+        <div class="input-group mb-3">
+          <input type="date" #txt_fecha_ingreso [(ngModel)]="dateOfBirth" class="form-control" />
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+  <button mat-icon-button color="accent" class="btn btn-success" (click)="onNoClick()">
+    <mat-icon (click)="onNoClick()">save</mat-icon>
+  </button>
+
+</form>

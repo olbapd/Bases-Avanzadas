@@ -22,15 +22,18 @@
                             </select>
                         </div>
 
-
-                        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Sede</h6>
-                        <div class="input-group mb-3">
-                            <select class="form-control" #select_sede data-style="btn-primary" data-live-search="true"
-                                data-selectpicker data-collection-name="items" ng-model="selected">
-                                <option selected>Cartago?</option>
-                                <option *ngFor="let sed of sede" [value]="sed.Id">{{sed.Name}}</option>
-                            </select>
+                        <div *ngIf="type>0">
+                            <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Sede</h6>
+                            <div class="input-group mb-3">
+                                <select class="form-control" #select_sede data-style="btn-primary"
+                                    data-live-search="true" data-selectpicker data-collection-name="items"
+                                    ng-model="selected">
+                                    <option selected>Cartago?</option>
+                                    <option *ngFor="let sed of sede" [value]="sed.Id">{{sed.Name}}</option>
+                                </select>
+                            </div>
                         </div>
+
 
                         <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Departamento</h6>
                         <div class="input-group mb-3">
@@ -56,11 +59,14 @@
 
                         <div class="form-group">
                             <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                                (change)="onFileSelected($event)">
+                            <span class="btn btn-rose btn-round btn-file">
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                                    (change)="onFileSelected($event)"> </span>
                         </div>
 
-                        <button type="button" class="btn btn-primary">Ingresar</button>
+                        <button
+                            (click)="add_employee(txt_name.value,select_estado.value,select_sede.value,select_dep.value,select_puesto.value,txt_fecha_ingreso.value)"
+                            type="button" class="btn btn-primary">Ingresar</button>
 
                     </form>
                 </div>
@@ -82,9 +88,15 @@
                         <td>{{ asset.name }}</td>
                         <td>{{ asset.code}}</td>
                         <td>{{ asset.depreciation}}</td>
-                        <td> <button class='btn btn-danger' ng-click="deleteRow($index)">Update</button> </td>
-                        <td> <button class='btn btn-danger' ng-click="deleteRow($index)">Delete</button> </td>
-                    
+                        <td>
+                            <button mat-icon-button color="accent" class='btn btn-danger' (click)="updatesEmployee()">
+                                <mat-icon aria-label="Edit">edit</mat-icon>
+                            </button> </td>
+                        <td>
+                            <button class='btn btn-danger' (click)="deleteEmployee()")>
+                                <mat-icon aria-label="Edit">delete</mat-icon>
+                            </button> </td>
+
                     </tr>
                 </tbody>
             </table>

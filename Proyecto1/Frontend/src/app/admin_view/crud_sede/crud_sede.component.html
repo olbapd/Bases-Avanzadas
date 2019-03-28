@@ -31,7 +31,7 @@
                                 data-live-search="true" data-selectpicker data-collection-name="items"
                                 ng-model="selected">
                                 <option selected>Cartago</option>
-                                <option *ngFor="let provin of provincia" [value]="provin.Id">{{provin.Name}}</option>
+                                <option *ngFor="let provin of provincia">{{provin}}</option>
                             </select>
                         </div>
 
@@ -66,25 +66,40 @@
 
                         <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Asignar Administrador</h6>
                         <div class="input-group mb-3">
-                            <select class="form-control" #select_employee data-style="btn-primary" data-live-search="true"
-                                data-selectpicker data-collection-name="items" ng-model="selected">
+                            <select class="form-control" #select_employee data-style="btn-primary"
+                                data-live-search="true" data-selectpicker data-collection-name="items"
+                                ng-model="selected">
                                 <option selected>Jeanpol</option>
-                                <option *ngFor="let employee of empleado" [value]="employee.Id">{{employee.Name}}</option>
+                                <option *ngFor="let employee of empleado" [value]="employee.Id">{{employee.Name}}
+                                </option>
                             </select>
                         </div>
+
+
+                        <div *ngIf="type>0">
+                            <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">NGIF</h6>
+                            <div class="input-group mb-3">
+                                <select class="form-control" #select_employee data-style="btn-primary"
+                                    data-live-search="true" data-selectpicker data-collection-name="items"
+                                    ng-model="selected">
+                                    <option selected>Jeanpol</option>
+                                    <option *ngFor="let employee of empleado" [value]="employee.Id">{{employee.Name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+
 
                         <h6 class="card-subtitle mb-2 text-muted">Fecha de Ingreso Admin</h6>
                         <div class="input-group mb-3">
                             <input type="date" #txt_fecha_ingreso [(ngModel)]="dateOfBirth" class="form-control" />
                         </div>
 
-                        <div class="form-group">
-                            <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                                (change)="onFileSelected($event)">
-                        </div>
 
-                        <button type="button" class="btn btn-primary">Ingresar</button>
+                        <button type="button" class="btn btn-primary" (click)="add_sede(txt_name.value,txt_code.value,txt_description.value,select_provincia.value,select_canton.value,
+                        select_distrito.value,select_estado.value,select_employee.value,txt_fecha_ingreso.value)">
+                            Ingresar</button>
 
                     </form>
                 </div>
@@ -111,8 +126,14 @@
                         <td>{{ sede.canton}}</td>
                         <td>{{ sede.distrito}}</td>
                         <td>{{ sede.admin}}</td>
-                        <td> <button class='btn btn-danger' ng-click="deleteRow($index)">Update</button> </td>
-                        <td> <button class='btn btn-danger' ng-click="deleteRow($index)">Delete</button> </td>
+                        <td>
+                            <button mat-icon-button color="accent" class='btn btn-danger' (click)="updateSede()">
+                                <mat-icon aria-label="Edit">edit</mat-icon>
+                            </button> </td>
+                        <td>
+                            <button class='btn btn-danger' (click)="deleteSede()">
+                                <mat-icon aria-label="Edit">delete</mat-icon>
+                            </button> </td>
 
                     </tr>
                 </tbody>
@@ -125,4 +146,5 @@
         </div>
 
     </div>
+
 </div>
