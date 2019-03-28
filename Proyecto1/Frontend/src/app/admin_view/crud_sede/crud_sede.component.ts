@@ -9,7 +9,6 @@ import { EmployeeComponent } from '../crud_employee/crud_employee.component';
 import { updateComponent } from '../dialogs/update_employee/update-employee.component';
 import { DeleteComponent } from '../dialogs/delete_confirm/delete_confirm.component';
 import { UpdateSedeComponent } from '../dialogs/update_sede/udpate-sede.component';
-import {JsonManagment} from 'src/app/json_managment/json_service';
 
 @Component({
     selector: 'crud-sede',
@@ -41,11 +40,11 @@ export class SedeComponent implements OnInit {
     activo: asset;
     sede: sede;
 
-    constructor(private modalService: NgbModal, public restApi: RestApiService,public json: JsonManagment,
+    constructor(private modalService: NgbModal, public restApi: RestApiService,
         private router: Router, private dialog: MatDialog) { }
     ngOnInit() { 
         this.restApi.getProvincia().subscribe((res)=>{
-            this.provincia = this.json.parseGetProvincia(res);
+            
         });; 
     }
 

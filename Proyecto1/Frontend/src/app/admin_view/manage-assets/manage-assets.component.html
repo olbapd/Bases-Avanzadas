@@ -60,10 +60,8 @@
 
               <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
               <div class="input-group mb-3">
-                <select class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
+                <select id="categoria-Dropdown" name="categoria" class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
                   data-selectpicker data-collection-name="items" ng-model="selected">
-                  <option selected>Opción</option>
-                  <option *ngFor="let cat of categoria">{{cat}}</option>
                   <!--LLenado de Select-->
                 </select>
               </div>
@@ -93,10 +91,9 @@
 
               <h6 class="card-subtitle mb-2 text-muted">Estado</h6>
               <div class="input-group mb-3">
-                <select class="form-control" #select_estado data-style="btn-primary" data-live-search="true"
+                <select id="estado1-Dropdown" name="estado1" class="form-control" #select_estado data-style="btn-primary" data-live-search="true"
                   data-selectpicker data-collection-name="items" ng-model="selected">
-                  <option selected>Opción</option>
-                  <option *ngFor="let state of estado">{{state}}</option>
+                 
                   <!--LLenado de Select-->
                 </select>
               </div>
@@ -134,10 +131,8 @@
 
               <h6 class="card-subtitle mb-2 text-muted">Seleccionar Estado</h6>
               <div class="input-group mb-3">
-                <select class="form-control" #select_estado_activo data-style="btn-primary" data-live-search="true"
+                <select id="estado2-Dropdown" name="estado2" class="form-control" #select_estado_activo data-style="btn-primary" data-live-search="true"
                   data-selectpicker data-collection-name="items" ng-model="selected">
-                  <option selected>Seleccione Opción</option>
-                  <option *ngFor="let state of estado">{{state}}</option>
                   <!--LLenado de Select-->
                 </select>
               </div>
@@ -183,7 +178,7 @@
             <div class="col-md-6">
               <h6 class="card-subtitle mb-2 text-muted">Seleccionar Categoria</h6>
               <div class="input-group mb-3">
-                <select class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
+                <select id="categoria2-Dropdown" name="categoria2"class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
                   data-selectpicker data-collection-name="items" ng-model="selected"
                   (change)="selected($event.target.value)">
                   <option *ngFor="let cat of categoria">{{cat}}</option>
