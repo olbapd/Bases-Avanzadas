@@ -13,6 +13,7 @@ import { sede } from 'src/app/interfaces/sede';
 import {MatDialog, MatPaginator, MatSort, MatDialogConfig} from '@angular/material';
 import { EmployeeComponent } from '../crud_employee/crud_employee.component';
 import { updateComponent } from '../dialogs/update_employee/update-employee.component';
+import { DeleteComponent } from '../dialogs/delete_confirm/delete_confirm.component';
 
 @Component({
     selector: 'crud-sede',
@@ -53,17 +54,27 @@ export class SedeComponent implements OnInit {
         private router: Router, private dialog:MatDialog) { }
     ngOnInit() { }
 
-    prueba(){
+    updateSede(){
         this.isPopupOpened=true;
         const dialogRef = this.dialog.open(updateComponent,{
             data:{}
         });
+
+        
+
        /* 
         const dialogConfig=new MatDialogConfig();
         dialogConfig.disableClose=true;
         dialogConfig.width="60%";
         this.dialog.open(updateComponent,dialogConfig);*/
     }
+    deleteSede(){
+        this.isPopupOpened=true;
+        const dialogRef = this.dialog.open(DeleteComponent,{
+            data:{}
+        });
+    }
+    
     add_sede(name,code,description,provincia,canton,distrito,estado,employee,fecha_ingreso){
 
     }

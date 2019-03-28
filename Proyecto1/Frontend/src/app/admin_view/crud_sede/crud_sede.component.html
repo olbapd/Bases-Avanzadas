@@ -87,7 +87,8 @@
                         </div>
 
                         <button type="button" class="btn btn-primary" (click)="add_sede(txt_name.value,txt_code.value,txt_description.value,select_provincia.value,select_canton.value,
-                        select_distrito.value,select_estado.value,select_employee.value,txt_fecha_ingreso.value)"> Ingresar</button>
+                        select_distrito.value,select_estado.value,select_employee.value,txt_fecha_ingreso.value)">
+                            Ingresar</button>
 
                     </form>
                 </div>
@@ -115,11 +116,11 @@
                         <td>{{ sede.distrito}}</td>
                         <td>{{ sede.admin}}</td>
                         <td>
-                            <button mat-icon-button color="accent" class='btn btn-danger' ng-click="deleteRow($index)">
+                            <button mat-icon-button color="accent" class='btn btn-danger' (click)="updateSede()">
                                 <mat-icon aria-label="Edit">edit</mat-icon>
                             </button> </td>
                         <td>
-                            <button class='btn btn-danger' ng-click="deleteRow($index)">
+                            <button class='btn btn-danger' (click)="deleteSede()">
                                 <mat-icon aria-label="Edit">delete</mat-icon>
                             </button> </td>
 
