@@ -19,23 +19,23 @@ expose.login = (data, cb) => {
     data: null
   };
   let request =  new sqlserver.Request(sqltool.getPool());
-  request.input('CorreoEmp',sqlserver.NCarChar,data.email);
-  request.execute('Validacion',(err,result)=>{
+
+  request.input('CorreoEmp',sqlserver.NVarChar,data.email);
+  request.execute('sp_Login',(err,result)=>{
   	if (err) {
-  	  global.log4us.error(`Error logging in: ${result.detail}`);
-  	  res.status(500).json({
-  	      success : false,
-  	      error: err
-  	  });
+  	  global.log4us.error(`Error logging in: ${err}`);
+      to_return.error=err;
+      to_return.success=false;
+      cb(to_return);
   	  console.error(err);
   	  return;
   	}
   	console.log(result);
-  	if(data.pass == result.recordset){
-		to_return.success = true;
-		to_return.data=true;
-		console.log(to_return.data);		
-		cb(to_return);  		
+  	if(data.pass == result.recordset[0].Contrasena){
+  		to_return.success = true;
+  		to_return.data=true;
+  		console.log(to_return.data);		
+  		cb(to_return);  		
   	}
   	else{
 	  	to_return.success = true;
@@ -43,18 +43,6 @@ expose.login = (data, cb) => {
 	  	console.log(to_return.data);		
 	  	cb(to_return);  			
   	}
-   /*if(error){
-      to_return.error = true;
-      to_return.detail = error
-      cb(to_return);
-    }
-
-    to_return.success = true;
-    to_return.data=results;
-    console.log(to_return.data);
-    
-    cb(to_return);    */
-
   })
 }
 
