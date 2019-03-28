@@ -10,6 +10,9 @@ import { Empleado } from 'src/app/interfaces/employee';
 import { Categoria } from '../manage-assets/Categoria';
 import { asset } from 'src/app/interfaces/assets_Structure';
 import { sede } from 'src/app/interfaces/sede';
+import {MatDialog, MatPaginator, MatSort, MatDialogConfig} from '@angular/material';
+import { EmployeeComponent } from '../crud_employee/crud_employee.component';
+import { updateComponent } from '../dialogs/update_employee/update-employee.component';
 
 @Component({
     selector: 'crud-sede',
@@ -17,6 +20,7 @@ import { sede } from 'src/app/interfaces/sede';
     styleUrls: ['./crud_sede.component.css']
 })
 export class SedeComponent implements OnInit {
+    isPopupOpened=false;
     provincia: Provincia[];
     canton: Canton[];
     distrito: Distrito[];
@@ -25,12 +29,6 @@ export class SedeComponent implements OnInit {
     categoria: Categoria[];
     page = 1;
     pageSize = 4;
-    activos: asset[] = [{
-        name: "as",
-        code: 123,
-        depreciation: 123
-    }
-    ];
 
     sedess: sede[] = [{
         name: "as",
@@ -41,15 +39,9 @@ export class SedeComponent implements OnInit {
     }
     ];
 
-    collectionSize = this.activos.length;
+    collectionSize = this.sedess.length;
     activo: asset;
     sede: sede;
-
-    get assets(): asset[] {
-        return this.activos
-            .map((country, i) => ({ id: i + 1, ...country }))
-            .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-    }
 
     get sedes(): sede[] {
         return this.sedess
@@ -57,11 +49,22 @@ export class SedeComponent implements OnInit {
             .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
     }
 
-
-
-
-
     constructor(private modalService: NgbModal, public restApi: RestApiService,
-        private router: Router) { }
+        private router: Router, private dialog:MatDialog) { }
     ngOnInit() { }
+
+    prueba(){
+        this.isPopupOpened=true;
+        const dialogRef = this.dialog.open(updateComponent,{
+            data:{}
+        });
+       /* 
+        const dialogConfig=new MatDialogConfig();
+        dialogConfig.disableClose=true;
+        dialogConfig.width="60%";
+        this.dialog.open(updateComponent,dialogConfig);*/
+    }
+    add_sede(name,code,description,provincia,canton,distrito,estado,employee,fecha_ingreso){
+
+    }
 }

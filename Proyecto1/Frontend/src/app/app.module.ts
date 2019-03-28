@@ -8,13 +8,15 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    
+    BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     RouterModule.forRoot(AppRoutes),

@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import {ManageAssetsComponent} from './manage-assets/manage-assets.component';
 import { DepreciationComponent } from './cal_depreciation/depreciation.component';

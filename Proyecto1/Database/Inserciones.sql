@@ -699,7 +699,19 @@ EXEC setEmpleado 'Pedro','Villalta','Lemus','2015000012','1993-05-04','2018-07-1
 EXEC setEmpleado 'Ana','Castellanos','Ortiz','2015000013','1995-04-08','2018-07-10','AnaCO@gmail.com','95000530',6,1,2,'C'
 
 --INSERTAR CATEGORIAS
+EXEC setCategoria 'Terreno y bienes naturales';
+EXEC setCategoria 'Construcciones';
+EXEC setCategoria 'Maquinaria';
+EXEC setCategoria 'Mobiliario';
+EXEC setCategoria 'Equipo Informatico';
+EXEC setCategoria 'Transporte';
+EXEC setCategoria 'Marcas';
+EXEC setCategoria 'Patentes';
+EXEC setCategoria 'Derechos de autor';
+EXEC setCategoria 'Licencias y permiso';
 
 --INSERTAR MONEDAS
+EXEC setMoneda 'Dolares'
+EXEC setMoneda 'Colones'
 
 --INSERTAR ACTIVO
