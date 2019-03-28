@@ -96,10 +96,11 @@
                             <input type="date" #txt_fecha_ingreso [(ngModel)]="dateOfBirth" class="form-control" />
                         </div>
 
-                        <div class="form-group">
-                            <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                                (change)="onFileSelected($event)">
+                        <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
+
+                        <div class="input-group mb-3">
+                            <input type="text" #txt_code class="form-control" placeholder="090909"
+                                aria-label="Descripcion" aria-describedby="basic-addon1">
                         </div>
 
                         <button type="button" class="btn btn-primary" (click)="add_sede(txt_name.value,txt_code.value,txt_description.value,select_provincia.value,select_canton.value,

@@ -12,9 +12,12 @@ export class Depreciation {
         let valorNeto=[B];
         let fraccion=0;
         for (var i=0; i<t;i++){
-            fraccion=t/vidaUtil;
-            valorNeto[i]=fraccion*(B-VS);
+            fraccion=t-i/vidaUtil;
+            acumulada[i+1]=fraccion*(B-VS);
+            valorNeto[i+1]=valorNeto[B]-fraccion*(B-VS);           
+            valorNeto[i+1]=valorNeto[B]+fraccion*(B-VS);
         }
+        return [anual,acumulada,valorNeto];
 
     }
 
