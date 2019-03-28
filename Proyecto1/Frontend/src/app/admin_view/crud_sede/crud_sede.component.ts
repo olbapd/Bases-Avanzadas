@@ -7,7 +7,6 @@ import { Provincia } from 'src/app/interfaces/provincia';
 import { Canton } from 'src/app/interfaces/canton';
 import { Distrito } from 'src/app/interfaces/distrito';
 import { Empleado } from 'src/app/interfaces/employee';
-import { Categoria } from '../manage-assets/Categoria';
 import { asset } from 'src/app/interfaces/assets_Structure';
 import { sede } from 'src/app/interfaces/sede';
 import { MatDialog, MatPaginator, MatSort, MatDialogConfig } from '@angular/material';
@@ -23,13 +22,13 @@ import { UpdateSedeComponent } from '../dialogs/update_sede/udpate-sede.componen
 })
 export class SedeComponent implements OnInit {
     isPopupOpened = false;
-    provincia: Provincia[];
-    canton: Canton[];
-    distrito: Distrito[];
-    empleado: Empleado[];
+    provincia;
+    canton;
+    distrito;
+    empleado;
 
     type = 1;
-    categoria: Categoria[];
+    categoria;
     page = 1;
     pageSize = 4;
 
