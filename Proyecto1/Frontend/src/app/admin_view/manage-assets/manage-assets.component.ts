@@ -31,20 +31,20 @@ export class ManageAssetsComponent implements OnInit {
   }
 
   registrar_activo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado){
-    console.log(estado);
+    //console.log(estado);
     
   }
 
   modificar_estado_activo(activo,estado_activo){
-    console.log(activo);
+    //console.log(activo);
   }
   asignar_activo(activo,fecha_asignacion,codigo,id_empleado,detalle_entrega){
-    console.log(activo);
+   // console.log(activo);
 
   }
   selected(activo){
     //console.log(activo);
-    this.codigos = this.restApi.getCodigos();
+    //this.codigos = this.restApi.getCodigos();
 
   }
   

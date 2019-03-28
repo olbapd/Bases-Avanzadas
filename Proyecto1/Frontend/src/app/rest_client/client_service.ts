@@ -79,14 +79,32 @@ export class RestApiService {
    return this.http.post (this.apiURL+urls.sp_url+'getCategoria',body).pipe(retry(1),catchError(this.handleError));
   }
 
+  getProvincia() {
+    let body = {
+                "typesIn":[],
+                "typesOut":[],
+                "parameters":[],
+                "values":[],
+                "ouputs":[],
+                "name":"getProvincia"
+              }
+   return this.http.post (this.apiURL+urls.sp_url+'getProvincia',body).pipe(retry(1),catchError(this.handleError));
+  }
+
   getActivos() {
-    let body;
-    return this.http.post (this.apiURL+urls.sp_url+'getActivos',body).pipe(retry(1),catchError(this.handleError));
+    //let body;
+    //return this.http.post (this.apiURL+urls.sp_url+'getActivos',body).pipe(retry(1),catchError(this.handleError));
   }
 
   getCodigos() {
+    //let body;
+    //return this.http.post (this.apiURL+urls.sp_url+'getCodigos',body).pipe(retry(1),catchError(this.handleError));
+  }
+
+  putSede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso){
     let body;
-    return this.http.post (this.apiURL+urls.sp_url+'getCodigos',body).pipe(retry(1),catchError(this.handleError));
+    return this.http.post (this.apiURL+urls.sp_url+'putSede',body).pipe(retry(1),catchError(this.handleError));
+
   }
 
   // Error handling 

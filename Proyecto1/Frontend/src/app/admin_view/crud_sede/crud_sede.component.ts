@@ -2,11 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RestApiService } from 'src/app/rest_client/client_service';
 import { Router } from '@angular/router';
-import { HttpClient } from 'selenium-webdriver/http';
-import { Provincia } from 'src/app/interfaces/provincia';
-import { Canton } from 'src/app/interfaces/canton';
-import { Distrito } from 'src/app/interfaces/distrito';
-import { Empleado } from 'src/app/interfaces/employee';
 import { asset } from 'src/app/interfaces/assets_Structure';
 import { sede } from 'src/app/interfaces/sede';
 import { MatDialog, MatPaginator, MatSort, MatDialogConfig } from '@angular/material';
@@ -14,6 +9,7 @@ import { EmployeeComponent } from '../crud_employee/crud_employee.component';
 import { updateComponent } from '../dialogs/update_employee/update-employee.component';
 import { DeleteComponent } from '../dialogs/delete_confirm/delete_confirm.component';
 import { UpdateSedeComponent } from '../dialogs/update_sede/udpate-sede.component';
+import {JsonManagment} from 'src/app/json_managment/json_service';
 
 @Component({
     selector: 'crud-sede',
@@ -45,9 +41,13 @@ export class SedeComponent implements OnInit {
     activo: asset;
     sede: sede;
 
-    constructor(private modalService: NgbModal, public restApi: RestApiService,
+    constructor(private modalService: NgbModal, public restApi: RestApiService,public json: JsonManagment,
         private router: Router, private dialog: MatDialog) { }
-    ngOnInit() { }
+    ngOnInit() { 
+        this.restApi.getProvincia().subscribe((res)=>{
+            this.provincia = this.json.parseGetProvincia(res);
+        });; 
+    }
 
     get sedes(): sede[] {
         return this.sedess
@@ -71,6 +71,7 @@ export class SedeComponent implements OnInit {
     }
 
     add_sede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso) {
+        this.restApi.putSede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso);
 
     }
 }
