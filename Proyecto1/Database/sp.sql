@@ -395,6 +395,28 @@ BEGIN
 END
 GO
 
+-- Selecciona todos los cantones
+CREATE OR ALTER PROC [dbo].[setCanton]
+AS
+SET NOCOUNT ON
+
+SELECT [Canton].Nombre, [Canton].IdCanton FROM Canton
+
+SET NOCOUNT OFF
+GO
+-- los distritos
+CREATE OR ALTER PROC [dbo].[setDistrito]
+	@IdCanton int
+
+AS
+SET NOCOUNT ON
+
+SELECT [Distrito].Nombre, [Distrito].IdDistrito FROM Distrito
+WHERE [IdCanton] = @IdCanton
+
+SET NOCOUNT OFF
+GO
+
 -- Seleccionar cont
 CREATE OR ALTER PROC [dbo].[Validacion]
 	@CorreoEmp varchar
