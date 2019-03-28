@@ -31,7 +31,8 @@ GO
 
 --Activos no asignados
 CREATE OR ALTER PROC [dbo].[getActivoLi]
-	@IdEstado int
+	@IdEstado int,
+	@IdCategoria int
 AS
 SET NOCOUNT ON
 
@@ -53,7 +54,7 @@ SELECT [IdActivo],
 	[IdSede],
 	[IdMoneda]
 FROM Activo
-WHERE [IdEstado] = @IdEstado
+WHERE [IdEstado] = @IdEstado AND [IdCategoria] =@IdCategoria
 SET NOCOUNT OFF
 GO
 
@@ -145,7 +146,7 @@ END
 GO
 
 --Seleccionar activos de una categoria
-CREATE OR ALTER PROC [dbo].[getActivoLi]
+CREATE OR ALTER PROC [dbo].[getActivoCat]
 	@IdCategoria int
 AS
 SET NOCOUNT ON
