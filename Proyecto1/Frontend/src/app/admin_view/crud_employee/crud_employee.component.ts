@@ -11,22 +11,23 @@ import { Categoria } from '../manage-assets/Categoria';
 import { asset } from 'src/app/interfaces/assets_Structure';
 import { Empleado } from 'src/app/interfaces/employee';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-
-
+import { updateComponent } from '../dialogs/update_employee/update-employee.component';
+import { DeleteComponent } from '../dialogs/delete_confirm/delete_confirm.component';
 
 @Component({
     selector: 'crud-employee',
     templateUrl: './crud_employee.component.html',
     styleUrls: ['./crud_employee.component.css']
-
 })
 
 export class EmployeeComponent implements OnInit {
+    isPopupOpened=false;
     sede: sede[];
     estado: Estado[];
     puestos: jobs[];
     departamento: department[];
     selectedFile: File = null;
+    type=0;
     empleados:Empleado[]=[{
         name:"asd",
         estado:"asd",
@@ -34,7 +35,6 @@ export class EmployeeComponent implements OnInit {
         departamente:"asd",
         puesto:"asd",
     }]
-
 
     categoria: Categoria[];
     page = 1;
@@ -83,9 +83,18 @@ export class EmployeeComponent implements OnInit {
     }
     ngOnInit() { }
 
-    updateEmployee(){
-        this.dialog
+    deleteEmployee(){
+        this.isPopupOpened=true;
+        const dialogRef = this.dialog.open(DeleteComponent,{
+            data:{}
+        });
+    }
 
+    updateEmployee(){
+        this.isPopupOpened=true;
+        const dialogRef = this.dialog.open(updateComponent,{
+            data:{}
+        });
     }
     add_employee(name,estado,sede,dep,puesto,fecha_ingreso){
 

@@ -75,6 +75,22 @@
                             </select>
                         </div>
 
+
+                        <div *ngIf="type>0">
+                            <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">NGIF</h6>
+                            <div class="input-group mb-3">
+                                <select class="form-control" #select_employee data-style="btn-primary"
+                                    data-live-search="true" data-selectpicker data-collection-name="items"
+                                    ng-model="selected">
+                                    <option selected>Jeanpol</option>
+                                    <option *ngFor="let employee of empleado" [value]="employee.Id">{{employee.Name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
                         <h6 class="card-subtitle mb-2 text-muted">Fecha de Ingreso Admin</h6>
                         <div class="input-group mb-3">
                             <input type="date" #txt_fecha_ingreso [(ngModel)]="dateOfBirth" class="form-control" />

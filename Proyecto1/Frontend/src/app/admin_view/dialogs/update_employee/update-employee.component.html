@@ -29,6 +29,7 @@
             <option *ngFor="let cant of canton" [value]="cant.Id">{{cant.Name}}</option>
           </select>
         </div>
+        
         <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Distrito</h6>
         <div class="input-group mb-3">
           <select class="form-control" #select_distrito data-style="btn-primary" data-live-search="true"
@@ -56,15 +57,12 @@
         <div class="input-group mb-3">
           <input type="date" #txt_fecha_ingreso [(ngModel)]="dateOfBirth" class="form-control" />
         </div>
+
       </div>
-
     </div>
-
-
   </div>
   <button mat-icon-button color="accent" class="btn btn-success" (click)="onNoClick()">
     <mat-icon (click)="onNoClick()">save</mat-icon>
   </button>
-
 
 </form>

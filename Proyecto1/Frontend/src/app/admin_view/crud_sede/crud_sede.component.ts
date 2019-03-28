@@ -10,10 +10,11 @@ import { Empleado } from 'src/app/interfaces/employee';
 import { Categoria } from '../manage-assets/Categoria';
 import { asset } from 'src/app/interfaces/assets_Structure';
 import { sede } from 'src/app/interfaces/sede';
-import {MatDialog, MatPaginator, MatSort, MatDialogConfig} from '@angular/material';
+import { MatDialog, MatPaginator, MatSort, MatDialogConfig } from '@angular/material';
 import { EmployeeComponent } from '../crud_employee/crud_employee.component';
 import { updateComponent } from '../dialogs/update_employee/update-employee.component';
 import { DeleteComponent } from '../dialogs/delete_confirm/delete_confirm.component';
+import { UpdateSedeComponent } from '../dialogs/update_sede/udpate-sede.component';
 
 @Component({
     selector: 'crud-sede',
@@ -21,22 +22,23 @@ import { DeleteComponent } from '../dialogs/delete_confirm/delete_confirm.compon
     styleUrls: ['./crud_sede.component.css']
 })
 export class SedeComponent implements OnInit {
-    isPopupOpened=false;
+    isPopupOpened = false;
     provincia: Provincia[];
     canton: Canton[];
     distrito: Distrito[];
     empleado: Empleado[];
 
+    type = 1;
     categoria: Categoria[];
     page = 1;
     pageSize = 4;
 
     sedess: sede[] = [{
         name: "as",
-        provincia:"cartago",
-        distrito:"paraiso",
-        canton:"paraiso",
-        admin:"Pablo"
+        provincia: "cartago",
+        distrito: "paraiso",
+        canton: "paraiso",
+        admin: "Pablo"
     }
     ];
 
@@ -44,38 +46,32 @@ export class SedeComponent implements OnInit {
     activo: asset;
     sede: sede;
 
+    constructor(private modalService: NgbModal, public restApi: RestApiService,
+        private router: Router, private dialog: MatDialog) { }
+    ngOnInit() { }
+
     get sedes(): sede[] {
         return this.sedess
             .map((sede, i) => ({ id: i + 1, ...sede }))
             .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
     }
 
-    constructor(private modalService: NgbModal, public restApi: RestApiService,
-        private router: Router, private dialog:MatDialog) { }
-    ngOnInit() { }
 
-    updateSede(){
-        this.isPopupOpened=true;
-        const dialogRef = this.dialog.open(updateComponent,{
-            data:{}
-        });
 
-        
-
-       /* 
-        const dialogConfig=new MatDialogConfig();
-        dialogConfig.disableClose=true;
-        dialogConfig.width="60%";
-        this.dialog.open(updateComponent,dialogConfig);*/
-    }
-    deleteSede(){
-        this.isPopupOpened=true;
-        const dialogRef = this.dialog.open(DeleteComponent,{
-            data:{}
+    updateSede() {
+        this.isPopupOpened = true;
+        const dialogRef = this.dialog.open(UpdateSedeComponent, {
+            data: {}
         });
     }
-    
-    add_sede(name,code,description,provincia,canton,distrito,estado,employee,fecha_ingreso){
+    deleteSede() {
+        this.isPopupOpened = true;
+        const dialogRef = this.dialog.open(DeleteComponent, {
+            data: {}
+        });
+    }
+
+    add_sede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso) {
 
     }
 }

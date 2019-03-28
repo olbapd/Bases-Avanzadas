@@ -15,6 +15,7 @@ import { SedeComponent } from './crud_sede/crud_sede.component';
 import {MatDialogModule, MatIconModule, MatCardModule, MatToolbarModule} from '@angular/material';
 import { updateComponent } from './dialogs/update_employee/update-employee.component';
 import { DeleteComponent } from './dialogs/delete_confirm/delete_confirm.component';
+import { UpdateSedeComponent } from './dialogs/update_sede/udpate-sede.component';
 
 @NgModule({
   imports: [
@@ -37,11 +38,12 @@ import { DeleteComponent } from './dialogs/delete_confirm/delete_confirm.compone
     EmployeeComponent,
     SedeComponent,
     updateComponent,
-    DeleteComponent
+    DeleteComponent,
+    UpdateSedeComponent
 
   ],
   providers: [],
-  entryComponents:[updateComponent, DeleteComponent]
+  entryComponents:[updateComponent, DeleteComponent, UpdateSedeComponent]
 })
 
 export class Admin_ViewModule { }
