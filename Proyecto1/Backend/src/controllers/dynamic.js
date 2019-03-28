@@ -63,7 +63,7 @@ let getSp = (req,res) => {
     }
     request.execute(spName, (err, recordset) => {
       if (err) {
-        global.log4us.error(`Error getting ${spName}: ${result.detail}`);
+        global.log4us.error(`Error getting ${spName}: ${err}`);
         res.status(500).json({
             success : false,
             error: err
