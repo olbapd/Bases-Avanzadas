@@ -36,4 +36,13 @@ import { Injectable } from '@angular/core';
         return result;
    }
 
+   parseGetProvincia(json){
+    var count = Object.keys(json.data).length;
+    let result:string[] = new Array(count);
+    for (var _i = 0; _i < count; _i++) {
+     result[_i]=json.data[_i].Nombre; 
+  } 
+      return result;
+ }
+
 }
