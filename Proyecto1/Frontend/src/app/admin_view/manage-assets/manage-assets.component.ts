@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Estado} from '../manage-assets/Estado';
-import {Categoria} from '../manage-assets/Categoria';
-import {Activos} from '../manage-assets/Activos';
-import {Codigos} from '../manage-assets/Codigos';
 import {RestApiService} from 'src/app/rest_client/client_service';
 import { Router } from "@angular/router";
 import {JsonManagment} from 'src/app/json_managment/json_service';
