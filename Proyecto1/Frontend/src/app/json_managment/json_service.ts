@@ -12,18 +12,28 @@ import { Injectable } from '@angular/core';
     }
     parseLogin(json){
         var myObjStr = JSON.stringify(json);
-        var obj = JSON.parse(json);
+        var obj = JSON.parse(myObjStr);
         let result:string = obj.data;
         console.log('return is ' + result);
         return result
     }
 
-    parseGet(json){
-      var myObjStr = JSON.stringify(json);
-        var obj = JSON.parse(json);
-        let result:string = obj.data;
-        console.log('return is ' + result);
-        return result
+    parseGetEstado(json){
+      var count = Object.keys(json.data).length;
+      let result:string[] = new Array(count);
+      for (var _i = 0; _i < count; _i++) {
+       result[_i]=json.data[_i].Nombre; 
+    } 
+        return result;
     }
+
+    parseGetCategoria(json){
+      var count = Object.keys(json.data).length;
+      let result:string[] = new Array(count);
+      for (var _i = 0; _i < count; _i++) {
+       result[_i]=json.data[_i].Nombre; 
+    } 
+        return result;
+   }
 
 }

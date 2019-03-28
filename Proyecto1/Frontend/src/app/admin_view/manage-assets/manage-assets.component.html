@@ -63,7 +63,7 @@
                 <select class="form-control" #select_categoria data-style="btn-primary" data-live-search="true" data-selectpicker
                   data-collection-name="items" ng-model="selected">
                   <option selected>Opción</option>
-                  <option *ngFor="let cat of categoria" [value]="cat.Id">{{cat.Name}}</option> <!--LLenado de Select-->
+                  <option *ngFor="let cat of categoria">{{cat}}</option> <!--LLenado de Select-->
                 </select>
               </div>
                    
@@ -95,7 +95,7 @@
                 <select class="form-control" #select_estado data-style="btn-primary" data-live-search="true" data-selectpicker
                   data-collection-name="items" ng-model="selected">
                   <option selected>Opción</option>
-                  <option *ngFor="let state of estado" [value]="state.Id">{{state.Name}}</option> <!--LLenado de Select-->
+                  <option *ngFor="let state of estado">{{state}}</option> <!--LLenado de Select-->
                 </select>
               </div>
 
@@ -122,7 +122,7 @@
                 <select class="form-control" #select_activo data-style="btn-primary" data-live-search="true" data-selectpicker
                   data-collection-name="items" ng-model="selected">
                   <option selected>Opción</option>
-                  <option *ngFor="let act of activos" [value]="act.Id">{{act.Name}}</option> <!--LLenado de Select-->
+                  <option *ngFor="let act of activos">{{act}}</option> <!--LLenado de Select-->
                 </select>
               </div>
             </div>
@@ -133,7 +133,7 @@
                 <select class="form-control" #select_estado_activo data-style="btn-primary" data-live-search="true" data-selectpicker
                   data-collection-name="items" ng-model="selected">
                   <option selected>Seleccione Opción</option>
-                  <option *ngFor="let state of estado" [value]="state.Id">{{state.Name}}</option> <!--LLenado de Select-->
+                  <option *ngFor="let state of estado">{{state}}</option> <!--LLenado de Select-->
                 </select>
               </div>
             </div>

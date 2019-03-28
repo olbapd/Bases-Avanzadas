@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import {JsonManagment} from 'src/app/json_managment/json_service';
 import {urls} from '../config/constants';
 
 
@@ -15,7 +14,7 @@ export class RestApiService {
   // Define API
   apiURL = urls.urlbase;
 
-  constructor(private http: HttpClient, public json: JsonManagment) { }
+  constructor(private http: HttpClient) { }
 
   /*========================================
     CRUD Methods for consuming RESTful API
@@ -30,7 +29,6 @@ export class RestApiService {
 
   // HttpClient API get() method => auth login
   getSate(username,password) {
-    let result;
     let body= {
                typesIn:['varchar','varchar'],
                typesOut:[],
@@ -40,82 +38,55 @@ export class RestApiService {
                name:'Validacion'
               };
 
-    this.http.post (this.apiURL+'getLogIn',body).pipe(retry(1),catchError(this.handleError)).subscribe((res)=>{
-      result = this.json.parseLogin(res);
-  });
-    return result;
+   return  this.http.post (this.apiURL+'getLogIn',body).pipe(retry(1),catchError(this.handleError));
   }
 
   getProvincias(datos) {
-    let result;
     let body={
-                typesIn:[],
-                typesOut:[],
-                inputs:[],
-                values:[],
-                outputs:[],
-                name:'getProvincia'
+                "typesIn":[],
+                "typesOut":[],
+                "parameters":[],
+                "values":[],
+                "ouputs":[],
+                "name":"getProvincia"
               }
     ;
-    this.http.post (this.apiURL+urls.sp_url+'getProvincias',body).pipe(retry(1),catchError(this.handleError)).subscribe((res)=>{
-      console.log(res);
-      //bla = this.json.parseLogin(res);
-  });
-    return result;
+    return this.http.post (this.apiURL+urls.sp_url+'getProvincias',body).pipe(retry(1),catchError(this.handleError));
   }
 
   getEstados() {
-    let result;
+
     let body = {
-                typesIn:[],
-                typesOut:[],
-                inputs:[],
-                values:[],
-                outputs:[],
-                name:'getEstado'
-              };
-    this.http.post (this.apiURL+urls.sp_url+'getEstado',body).pipe(retry(1),catchError(this.handleError)).subscribe((res)=>{
-      console.log('Estados:' + res);
-      result = this.json.parseGet(res);
-  });
-    return result;
+      "typesIn":[],
+      "typesOut":[],
+      "parameters":[],
+      "values":[],
+      "ouputs":[],
+      "name":"getEstado"
+    }
+    return this.http.post (this.apiURL+urls.sp_url+'getEstado',body).pipe(retry(1),catchError(this.handleError));
   }
 
   getCategorias() {
-    let result;
     let body = {
-                typesIn:[],
-                typesOut:[],
-                inputs:[],
-                values:[],
-                outputs:[],
-                name:'getCategoria'
+                "typesIn":[],
+                "typesOut":[],
+                "parameters":[],
+                "values":[],
+                "ouputs":[],
+                "name":"getCategoria"
               };
-    this.http.post (this.apiURL+urls.sp_url+'getCategoria',body).pipe(retry(1),catchError(this.handleError)).subscribe((res)=>{
-      console.log('Categorias:' + res);
-      result = this.json.parseGet(res);
-  });
-    return result;
+   return this.http.post (this.apiURL+urls.sp_url+'getCategoria',body).pipe(retry(1),catchError(this.handleError));
   }
 
   getActivos() {
-    let result;
     let body;
-    this.http.post (this.apiURL+urls.sp_url+'getActivos',body).pipe(retry(1),catchError(this.handleError)).subscribe((res)=>{
-      console.log('Activos:' + res);
-      result = this.json.parseGet(res);
-  });
-    return result;
+    return this.http.post (this.apiURL+urls.sp_url+'getActivos',body).pipe(retry(1),catchError(this.handleError));
   }
 
   getCodigos() {
-    let result;
     let body;
-    this.http.post (this.apiURL+urls.sp_url+'getCodigos',body).pipe(retry(1),catchError(this.handleError)).subscribe((res)=>{
-      console.log('Codigos:' + res);
-      result = this.json.parseGet(res);
-  });
-    return result;
+    return this.http.post (this.apiURL+urls.sp_url+'getCodigos',body).pipe(retry(1),catchError(this.handleError));
   }
 
   // Error handling 

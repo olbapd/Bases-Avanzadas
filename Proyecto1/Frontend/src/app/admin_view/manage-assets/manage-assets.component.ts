@@ -5,6 +5,7 @@ import {Activos} from '../manage-assets/Activos';
 import {Codigos} from '../manage-assets/Codigos';
 import {RestApiService} from 'src/app/rest_client/client_service';
 import { Router } from "@angular/router";
+import {JsonManagment} from 'src/app/json_managment/json_service';
 
 
 @Component({
@@ -13,24 +14,29 @@ import { Router } from "@angular/router";
   styleUrls: ['./manage-assets.component.css']
 })
 export class ManageAssetsComponent implements OnInit {
-  estado:Estado[];
-  categoria:Categoria[];
-  activos:Activos[];
-  codigos:Codigos[];
+  estado;
+  categoria;
+  activos;
+  codigos;
   
 
-  constructor(public restApi: RestApiService,private router: Router) {
+  constructor(public restApi: RestApiService,private router: Router,public json: JsonManagment) {
    }
 
   ngOnInit() {
-    this.estado =  this.restApi.getEstados(); 
-    this.categoria = this.restApi.getCategorias();
-    this.activos = this.restApi.getActivos();
+     this.restApi.getEstados().subscribe((res)=>{
+      this.estado = this.json.parseGetEstado(res);
+  });; 
+   this.restApi.getCategorias().subscribe((res)=>{
+    this.categoria = this.json.parseGetCategoria(res);
+});; 
+    //this.activos = this.restApi.getActivos();
     
   }
 
   registrar_activo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado){
     console.log(estado);
+    
   }
 
   modificar_estado_activo(activo,estado_activo){
