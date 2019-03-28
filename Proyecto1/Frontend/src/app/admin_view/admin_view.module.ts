@@ -14,6 +14,8 @@ import { HttpClient } from 'selenium-webdriver/http';
 import { SedeComponent } from './crud_sede/crud_sede.component';
 import {MatDialogModule, MatIconModule, MatCardModule, MatToolbarModule} from '@angular/material';
 import { updateComponent } from './dialogs/update_employee/update-employee.component';
+import { DeleteComponent } from './dialogs/delete_confirm/delete_confirm.component';
+import { UpdateSedeComponent } from './dialogs/update_sede/udpate-sede.component';
 
 @NgModule({
   imports: [
@@ -35,11 +37,13 @@ import { updateComponent } from './dialogs/update_employee/update-employee.compo
     DepreciationComponent,
     EmployeeComponent,
     SedeComponent,
-    updateComponent
+    updateComponent,
+    DeleteComponent,
+    UpdateSedeComponent
 
   ],
   providers: [],
-  entryComponents:[updateComponent]
+  entryComponents:[updateComponent, DeleteComponent, UpdateSedeComponent]
 })
 
 export class Admin_ViewModule { }
