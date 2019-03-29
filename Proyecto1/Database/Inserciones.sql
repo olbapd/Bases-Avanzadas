@@ -734,8 +734,8 @@ EXEC setSede 'Sede Central','Cartago Barrio Oriental',1,1
 EXEC setSede 'Sede San Jose','San Jose Centro',5,1
 EXEC setSede 'Sede Alajuela','Alajuela Centro',122,1
 
-INSERT  Empleado (Nombre, Apellido1, Apellido2, Cedula,FechaNacimiento, FechaIngreso, Correo,
-		IdDepartamento, IdSede, IdPuesto,Contrasena, Foto) VALUES
+INSERT  Empleado (Nombre, Apellido1, Apellido2, Cedula,FechaNacimiento, FechaIngreso, Correo,Contrasena,
+		 IdSede,IdDepartamento,IdPuesto,Foto) VALUES
 ( 'Erick', 'Carballo', 'Porras','2015000001',GETDATE(),GETDATE(),'erick@gmail.com','123123',1,6,1,'a'),
 ( 'Allan Eduardo','Chacon','Sandoval','2015000002',GETDATE(),GETDATE(),'allan@gmail.com','741741',1,1,3,'L'),
 ( 'Jose Pablo','Vindas','Campos','2015000003',GETDATE(),GETDATE(),'Vindas@gmail.com','789789',1,6,2,'J'),
