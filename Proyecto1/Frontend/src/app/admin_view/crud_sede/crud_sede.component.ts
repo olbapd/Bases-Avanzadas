@@ -22,7 +22,7 @@ export class SedeComponent implements OnInit {
     distrito;
     empleado;
 
-    type = 1;
+    type = 0;
     categoria;
     page = 1;
     pageSize = 4;
@@ -42,35 +42,82 @@ export class SedeComponent implements OnInit {
 
     constructor(private modalService: NgbModal, public restApi: RestApiService,
         private router: Router, private dialog: MatDialog) { }
-    ngOnInit() { 
-        this.restApi.getProvincia().subscribe((res)=>{
-            
-        });; 
+        ngOnInit() { 
+            this.EstadoDropdown();
+            this.ProvinciaDropdown();
+        }
+    
+        get sedes(): sede[] {
+            return this.sedess
+                .map((sede, i) => ({ id: i + 1, ...sede }))
+                .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+        }
+    
+    
+    
+        updateSede() {
+            this.isPopupOpened = true;
+            const dialogRef = this.dialog.open(UpdateSedeComponent, {
+                data: {}
+            });
+        }
+        deleteSede() {
+            this.isPopupOpened = true;
+            const dialogRef = this.dialog.open(DeleteComponent, {
+                data: {}
+            });
+        }
+    
+        add_sede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso) {
+            this.restApi.putSede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso);
+    
+        }
+    
+        EstadoDropdown(){
+            let optionestado;
+            let dropdown = document.getElementById('estadoSede-Dropdown');
+             this.restApi.getEstados().subscribe((res)=>{
+               const myObjStr = JSON.stringify(res)
+               const json = JSON.parse(myObjStr);
+              var count = Object.keys(json.data).length;
+              for (var _i = 0; _i < count; _i++) {
+                optionestado = document.createElement('option');
+                optionestado.text = json.data[_i].Nombre;
+                optionestado.value = json.data[_i].IdEstado;
+                dropdown.append(optionestado);
+             } 
+          });;
+          }
+    
+          DistritoDropdown(){
+            let optionestado;
+            let dropdown = document.getElementById('distrito-Dropdown');
+             this.restApi.getDistritos().subscribe((res)=>{
+               const myObjStr = JSON.stringify(res)
+               const json = JSON.parse(myObjStr);
+              var count = Object.keys(json.data).length;
+              for (var _i = 0; _i < count; _i++) {
+                optionestado = document.createElement('option');
+                optionestado.text = json.data[_i].Nombre;
+                optionestado.value = json.data[_i].IdEstado;
+                dropdown.append(optionestado);
+             } 
+          });;
+          }
+    
+          ProvinciaDropdown(){
+            let optionestado;
+            let dropdown = document.getElementById('provincia-Dropdown');
+             this.restApi.getProvincia().subscribe((res)=>{
+               const myObjStr = JSON.stringify(res)
+               const json = JSON.parse(myObjStr);
+              var count = Object.keys(json.data).length;
+              for (var _i = 0; _i < count; _i++) {
+                optionestado = document.createElement('option');
+                optionestado.text = json.data[_i].Nombre;
+                optionestado.value = json.data[_i].IdProvincia;
+                dropdown.append(optionestado);
+             } 
+          });;
+          }
     }
-
-    get sedes(): sede[] {
-        return this.sedess
-            .map((sede, i) => ({ id: i + 1, ...sede }))
-            .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-    }
-
-
-
-    updateSede() {
-        this.isPopupOpened = true;
-        const dialogRef = this.dialog.open(UpdateSedeComponent, {
-            data: {}
-        });
-    }
-    deleteSede() {
-        this.isPopupOpened = true;
-        const dialogRef = this.dialog.open(DeleteComponent, {
-            data: {}
-        });
-    }
-
-    add_sede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso) {
-        this.restApi.putSede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso);
-
-    }
-}

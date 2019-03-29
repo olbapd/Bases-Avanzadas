@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import {urls} from '../config/constants';
+import {HttpParams} from "@angular/common/http";
 
 
 @Injectable({
@@ -29,16 +30,12 @@ export class RestApiService {
 
   // HttpClient API get() method => auth login
   getSate(username,password) {
-    let body= {
-               typesIn:['varchar','varchar'],
-               typesOut:[],
-               parameters:['CorreoEmp','Contrasena'],
-               values:[username,password],
-               outputs:[], //falta  output
-               name:'Validacion'
-              };
 
-   return  this.http.post (this.apiURL+'getLogIn',body).pipe(retry(1),catchError(this.handleError));
+    const params = new HttpParams()
+    .set('email', username)
+    .set('pass', password);
+
+   return  this.http.get(this.apiURL+urls.auth_url,{params}).pipe(retry(1),catchError(this.handleError));
   }
 
   getProvincias(datos) {
@@ -80,6 +77,18 @@ export class RestApiService {
   }
 
   getProvincia() {
+    let body = {
+                "typesIn":[],
+                "typesOut":[],
+                "parameters":[],
+                "values":[],
+                "ouputs":[],
+                "name":"getProvincia"
+              }
+   return this.http.post (this.apiURL+urls.sp_url+'getProvincia',body).pipe(retry(1),catchError(this.handleError));
+  }
+
+  getDistritos() {
     let body = {
                 "typesIn":[],
                 "typesOut":[],
