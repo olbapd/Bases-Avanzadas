@@ -27,9 +27,23 @@ expose.login = (data, cb) => {
       cb(to_return);
   	  return;
   	}
+    console.log(result.recordset[0]);
   	if(data.pass == result.recordset[0].Contrasena){
   		to_return.success = true;
-  		to_return.data=true;
+  		to_return.data={
+        IdEmpleado: result.recordset[0].IdEmpleado,
+        Nombre: result.recordset[0].Nombre,
+        Apellido1: result.recordset[0].Apellido1,
+        Apellido2: result.recordset[0].Apellido2,
+        Cedula: result.recordset[0].Cedula,
+        FechaNacimiento: result.recordset[0].FechaNacimiento,
+        Fechaingreso: result.recordset[0].Fechaingreso,
+        IdDepartamento: result.recordset[0].IdDepartamento,
+        IdSede: result.recordset[0].IdSede,
+        IdPuesto: result.recordset[0].IdPuesto,
+        Correo: result.recordset[0].Correo,
+        Foto: result.recordset[0].Foto,
+      };
   		cb(to_return);  		
   	}
   	else{
