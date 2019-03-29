@@ -554,10 +554,8 @@ CREATE OR ALTER PROCEDURE [dbo].[setEmpleado]
 	@Apellido2 varchar(25),
 	@Cedula varchar(10),
 	@FechaN date,
-	@FechaIngreso date,
 	@Correo varchar (50),
 	@Contrasena varchar(50),
-	@IdSede int,
 	@IdDepartamento int,
 	@IdPuesto int,
 	@Foto varchar(50)
@@ -610,9 +608,11 @@ AS
 SET NOCOUNT ON
 
 SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
-[Empleado].Cedula, [Empleado].Fechaingreso, [Puesto].Nombre
-FROM Empleado
+[Empleado].Cedula, [Puesto].Nombre, [Sede].Nombre
+FROM SedeXEmpleado
+INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
+INNER JOIN Sede ON [SedeXEmpleado].IdSede = [Sede].IdSede
 WHERE @IdDepartamento = [Empleado].IdDepartamento
 
 SET NOCOUNT OFF
@@ -629,10 +629,11 @@ AS
 SET NOCOUNT ON
 
 SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
-[Empleado].Cedula, [Empleado].Fechaingreso, [Departamento].Nombre, [Sede].Nombre
-FROM Empleado
+[Empleado].Cedula, [Departamento].Nombre, [Sede].Nombre
+FROM SedeXEmpleado
+INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
-INNER JOIN Sede ON [Empleado].IdSede = [Sede].IdSede
+INNER JOIN Sede ON [SedeXEmpleado].IdSede = [Sede].IdSede
 WHERE @IdPuesto = [Empleado].IdPuesto
 
 SET NOCOUNT OFF
@@ -649,11 +650,12 @@ AS
 SET NOCOUNT ON
 
 SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
-[Empleado].Cedula, [Empleado].Fechaingreso, [Departamento].Nombre, [Puesto].Nombre
-FROM Empleado
+[Empleado].Cedula, [SedeXEmpleado].FechaIngreso, [Departamento].Nombre, [Puesto].Nombre
+FROM SedeXEmpleado
+INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
-WHERE @IdSede = [Empleado].IdSede
+WHERE @IdSede = [SedeXEmpleado].IdSede
 
 SET NOCOUNT OFF
 GO
@@ -670,11 +672,12 @@ AS
 SET NOCOUNT ON
 
 SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
-[Empleado].Cedula, [Empleado].Fechaingreso, [Departamento].Nombre, [Puesto].Nombre
-FROM Empleado
+[Empleado].Cedula, [SedeXEmpleado].Fechaingreso, [Departamento].Nombre, [Puesto].Nombre
+FROM SedeXEmpleado
+INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
-WHERE [Empleado].Fechaingreso BETWEEN @FechaInicial AND @FechaFinal
+WHERE [SedeXEmpleado].Fechaingreso = @FechaInicial
 
 SET NOCOUNT OFF
 GO
@@ -695,7 +698,8 @@ FROM Activo
 INNER JOIN Empleado ON [Activo].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
-INNER JOIN Sede ON [Empleado].IdSede = [Sede].Nombre
+INNER JOIN SedeXEmpleado ON [Empleado].IdEmpleado = [SedeXEmpleado].IdEmpleado
+INNER JOIN Sede ON [SedeXEmpleado].IdSede = [Sede].Nombre
 WHERE @CodigoActivo = [Activo].Codigo
 
 SET NOCOUNT OFF
