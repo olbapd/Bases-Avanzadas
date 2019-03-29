@@ -25,8 +25,13 @@ expose.login = (data, cb) => {
       cb(to_return);
   	  return;
   	}
-    console.log(result.recordset[0]);
-  	if(data.pass == result.recordset[0].Contrasena){
+    console.log(result);
+    if(result.recordset.length ==0){
+      to_return.error="User does not exist";
+      to_return.success=false;
+      cb(to_return);
+    }
+  	else if(data.pass == result.recordset[0].Contrasena){
   		to_return.success = true;
   		to_return.data={
         IdEmpleado: result.recordset[0].IdEmpleado,

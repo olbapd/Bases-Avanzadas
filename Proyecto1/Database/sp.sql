@@ -464,13 +464,12 @@ GO
 -- =============================================
 CREATE OR ALTER PROC [dbo].[setCategoria]
 	@NombreC varchar(50),
-	@Tangible bit
 
 AS
 BEGIN
 	BEGIN TRAN
 	BEGIN TRY
-		INSERT INTO Categoria(Nombre, Tangible) VALUES (@NombreC, @Tangible)
+		INSERT INTO Categoria(Nombre) VALUES (@NombreC)
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -520,9 +519,9 @@ CREATE OR ALTER PROCEDURE sp_Login
     @CorreoEmp nvarchar(50)   
 AS   
 
-    SELECT Contrasena
+    SELECT *
 	FROM Empleado
-    WHERE Correo= @CorreoEmp;  
+    WHERE Correo= @CorreoEmp; 
 GO 
 
 -- =============================================
@@ -731,3 +730,15 @@ WHERE @CodigoActivo = [Activo].Codigo
 SET NOCOUNT OFF
 GO
 
+
+
+GO  
+CREATE PROCEDURE sp_assignActive   
+    @IdEmpleado int,   
+    @IdActivo int   
+AS   
+
+    UPDATE Proyecto1BDA.dbo.Activo 
+	SET IdEmpleado= @IdEmpleado, FechaAsignacion = GETDATE()
+	WHERE IdActivo = @IdActivo;
+GO 
