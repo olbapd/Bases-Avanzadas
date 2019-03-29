@@ -734,20 +734,21 @@ EXEC setSede 'Sede Central','Cartago Barrio Oriental',1,1
 EXEC setSede 'Sede San Jose','San Jose Centro',5,1
 EXEC setSede 'Sede Alajuela','Alajuela Centro',122,1
 
--- INSERTAR EMPLEADO
-EXEC setEmpleado 'Erick', 'Carballo', 'Porras','2015000001','1995-05-25',GETDATE,'erick@gmail.com','123123',1,6,1,'a'
-EXEC setEmpleado 'Allan Eduardo','Chacon','Sandoval','2015000002','1991-03-01',GETDATE,'allan@gmail.com','741741',1,1,3,'L'
-EXEC setEmpleado 'Jose Pablo','Vindas','Campos','2015000003','1992-02-02',GETDATE,'Vindas@gmail.com','789789',1,6,2,'J'
-EXEC setEmpleado 'Jose','Rivera','Tencio','2015000004','1993-08-07',GETDATE,'ak7@gmail.com','159159',1,2,4,'F'
-EXEC setEmpleado 'Stephanny','Jimenez','Navarro','2015000005','1995-01-31',GETDATE,'loli@gmail.com','357357',1,6,2,'J'
-EXEC setEmpleado 'Diana','Villalobos','Castro','2015000006','1996-12-12',GETDATE,'Diana@gmail.com','741852',1,3,5,'B'
-EXEC setEmpleado 'Monica','Delgado','Piedra','2015000007','1995-09-09',GETDATE,'monik@gmail.com','254125',1,4,6,'L'
-EXEC setEmpleado 'Gabriela','Solana','Mora','2015000008','1990-08-07',GETDATE,'gabsol@gmail.com','7854785',1,5,13,'C'
-EXEC setEmpleado 'Daniela','Ulate','Alfaro','2015000009','1998-06-20',GETDATE,'dani@gmail.com','7963741',1,1,3,'N'
-EXEC setEmpleado 'Roberto','Santos','Pereira','2015000010','1995-07-20',GETDATE,'betolan@gmail.com','7897894',1,7,21,'P'
-EXEC setEmpleado 'Miguel','Chacon','Barboza','2015000011','1994-02-09',GETDATE,'bar@gmail.com','852341',1,8,19,'V'
-EXEC setEmpleado 'Pedro','Villalta','Lemus','2015000012','1993-05-04',GETDATE,'Pvillanta@gmail.com','9517530',1,9,9,'C'
-EXEC setEmpleado 'Ana','Castellanos','Ortiz','2015000013','1995-04-08',GETDATE,'AnaCO@gmail.com','95000530',1,10,23,'C'
+INSERT  Empleado (Nombre, Apellido1, Apellido2, Cedula,FechaNacimiento, FechaIngreso, Correo,
+		IdDepartamento, IdSede, IdPuesto,Contrasena, Foto) VALUES
+( 'Erick', 'Carballo', 'Porras','2015000001',GETDATE(),GETDATE(),'erick@gmail.com','123123',1,6,1,'a'),
+( 'Allan Eduardo','Chacon','Sandoval','2015000002',GETDATE(),GETDATE(),'allan@gmail.com','741741',1,1,3,'L'),
+( 'Jose Pablo','Vindas','Campos','2015000003',GETDATE(),GETDATE(),'Vindas@gmail.com','789789',1,6,2,'J'),
+( 'Jose','Rivera','Tencio','2015000004',GETDATE(),GETDATE(),'ak7@gmail.com','159159',1,2,4,'F'),
+( 'Stephanny','Jimenez','Navarro','2015000005',GETDATE(),GETDATE(),'loli@gmail.com','357357',1,6,2,'J'),
+( 'Diana','Villalobos','Castro','2015000006',GETDATE(),GETDATE(),'Diana@gmail.com','741852',1,3,5,'B'),
+( 'Monica','Delgado','Piedra','2015000007',GETDATE(),GETDATE(),'monik@gmail.com','254125',1,4,6,'L'),
+( 'Gabriela','Solana','Mora','2015000008',GETDATE(),GETDATE(),'gabsol@gmail.com','7854785',1,5,13,'C'),
+( 'Daniela','Ulate','Alfaro','2015000009',GETDATE(),GETDATE(),'dani@gmail.com','7963741',1,1,3,'N'),
+( 'Roberto','Santos','Pereira','2015000010',GETDATE(),GETDATE(),'betolan@gmail.com','7897894',1,7,21,'P'),
+( 'Miguel','Chacon','Barboza','2015000011',GETDATE(),GETDATE(),'bar@gmail.com','852341',1,8,19,'V'),
+( 'Pedro','Villalta','Lemus','2015000012',GETDATE(),GETDATE(),'Pvillanta@gmail.com','9517530',1,9,9,'C'),
+( 'Ana','Castellanos','Ortiz','2015000013',GETDATE(),GETDATE(),'AnaCO@gmail.com','95000530',1,10,23,'C')
 
 --INSERTAR SEDEXEMPLEADO
 EXEC Contrato 1,1,'2007-01-30'
