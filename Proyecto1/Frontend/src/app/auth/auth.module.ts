@@ -21,6 +21,8 @@ import { AuthRoutes } from './auth.routing';
     MatDialogModule,
     MatIconModule,
     MatCardModule,
+    MatToolbarModule,
+    ReactiveFormsModule,
     NgbModule.forRoot()
   ],
   declarations: [   

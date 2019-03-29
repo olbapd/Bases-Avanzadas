@@ -463,7 +463,7 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[setCategoria]
-	@NombreC varchar(50),
+	@NombreC varchar(50)
 
 AS
 BEGIN
@@ -515,14 +515,6 @@ GO
 -- Parametro de Entrada: <CorreoEmpleado>
 -- Parametro de Salida: <Ninguno>
 -- =============================================
-CREATE OR ALTER PROCEDURE sp_Login
-    @CorreoEmp nvarchar(50)   
-AS   
-
-    SELECT *
-	FROM Empleado
-    WHERE Correo= @CorreoEmp; 
-GO 
 
 -- =============================================
 -- Descripcion:	<Sleccionar informacion del empleado a partir del login>
@@ -732,13 +724,4 @@ GO
 
 
 
-GO  
-CREATE PROCEDURE sp_assignActive   
-    @IdEmpleado int,   
-    @IdActivo int   
-AS   
-
-    UPDATE Proyecto1BDA.dbo.Activo 
-	SET IdEmpleado= @IdEmpleado, FechaAsignacion = GETDATE()
-	WHERE IdActivo = @IdActivo;
-GO 
+ 

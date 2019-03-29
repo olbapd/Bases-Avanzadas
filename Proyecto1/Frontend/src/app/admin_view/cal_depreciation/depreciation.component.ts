@@ -27,6 +27,7 @@ export class DepreciationComponent implements OnInit {
             .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
     }
     constructor(private modalService: NgbModal, public restApi: RestApiService, private router: Router) {
+    
 
     }
     public addAsset(asset: asset) {

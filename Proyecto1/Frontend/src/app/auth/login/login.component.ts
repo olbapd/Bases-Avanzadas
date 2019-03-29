@@ -21,22 +21,22 @@ export class LoginComponent implements OnInit {
     }
 
     login(username,password,modal){
-        this.modalService.open(modal, { centered: true });
         this.restApi.getSate(username,password).subscribe((res)=>{
-         if (res=="true"){
-            this.router.navigate(['./admin_view/admin']); //ruta a admin si el login es exitoso
-         }
-         else{
-            this.isPopupOpened = true;
-            const dialogRef = this.dialog.open(LoginFailedComponent, {
-                data: {}
-            
-            });
-
-
-         }
-
-        });;
+            if (res=="true"){
+               this.router.navigate(['./admin_view/admin']); //ruta a admin si el login es exitoso
+            }
+            else{
+               this.isPopupOpened = true;
+               const dialogRef = this.dialog.open(LoginFailedComponent, {
+                   data: {}
+               
+               });
+   
+   
+            }
+   
+           });;
+        
          
     }
 }
