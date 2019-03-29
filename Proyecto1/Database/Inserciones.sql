@@ -707,16 +707,16 @@ EXEC setDepartamento 'Departamento de Informatica'
 EXEC setDepartamento 'Departamento de Ventas'
 EXEC setDepartamento 'Departamento de Control'
 
-EXEC setCategoria 'Terreno y bienes naturales', 1
-EXEC setCategoria 'Construcciones', 1;
-EXEC setCategoria 'Maquinaria', 1;
-EXEC setCategoria 'Mobiliario', 1;
-EXEC setCategoria 'Equipo Informatico', 1;
-EXEC setCategoria 'Transporte', 1;
-EXEC setCategoria 'Marcas', 0;
-EXEC setCategoria 'Patentes', 0;
-EXEC setCategoria 'Derechos de autor', 0;
-EXEC setCategoria 'Licencias y permiso', 0;
+EXEC setCategoria 'Terreno y bienes naturales'
+EXEC setCategoria 'Construcciones'
+EXEC setCategoria 'Maquinaria'
+EXEC setCategoria 'Mobiliario'
+EXEC setCategoria 'Equipo Informatico'
+EXEC setCategoria 'Transporte'
+EXEC setCategoria 'Marcas'
+EXEC setCategoria 'Patentes'
+EXEC setCategoria 'Derechos de autor'
+EXEC setCategoria 'Licencias y permiso'
 
 --INSERTAR MONEDAS
 EXEC setMoneda 'Dolares'
