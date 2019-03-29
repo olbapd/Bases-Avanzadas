@@ -8,9 +8,10 @@ import { department } from '../../interfaces/department';
 import { jobs } from '../../interfaces/jobs';
 import { asset } from 'src/app/interfaces/assets_Structure';
 import { Empleado } from 'src/app/interfaces/employee';
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { updateComponent } from '../dialogs/update_employee/update-employee.component';
 import { DeleteComponent } from '../dialogs/delete_confirm/delete_confirm.component';
+import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'crud-employee',
@@ -19,19 +20,19 @@ import { DeleteComponent } from '../dialogs/delete_confirm/delete_confirm.compon
 })
 
 export class EmployeeComponent implements OnInit {
-    isPopupOpened=false;
+    isPopupOpened = false;
     sede;
     estado;
     puestos: jobs[];
     departamento: department[];
     selectedFile: File = null;
-    type=0;
-    empleados:Empleado[]=[{
-        name:"asd",
-        estado:"asd",
-        sede:"asd",
-        departamente:"asd",
-        puesto:"asd",
+    type = 0;
+    empleados: Empleado[] = [{
+        name: "asd",
+        estado: "asd",
+        sede: "asd",
+        departamente: "asd",
+        puesto: "asd",
     }]
 
     categoria;
@@ -45,7 +46,10 @@ export class EmployeeComponent implements OnInit {
     ];
     collectionSize = this.activos.length;
     activo: asset;
-    empleado:Empleado;
+    empleado: Empleado;
+    form: FormGroup;
+
+
 
     get assets(): asset[] {
         return this.activos
@@ -75,26 +79,32 @@ export class EmployeeComponent implements OnInit {
 
     }
 
-    constructor(private modalService: NgbModal, public restApi: RestApiService,
-        private router: Router, private http: HttpClient, private dialog:MatDialog) {
+    constructor(private fb: FormBuilder, private modalService: NgbModal, public restApi: RestApiService,
+        private router: Router, private http: HttpClient, private dialog: MatDialog) {
 
     }
-    ngOnInit() { }
+    ngOnInit() {
+        this.form = new FormGroup({
+            lastName: new FormControl('', Validators.required)
 
-    deleteEmployee(){
-        this.isPopupOpened=true;
-        const dialogRef = this.dialog.open(DeleteComponent,{
-            data:{}
         });
     }
 
-    updateEmployee(){
-        this.isPopupOpened=true;
-        const dialogRef = this.dialog.open(updateComponent,{
-            data:{}
+    deleteEmployee() {
+        this.isPopupOpened = true;
+        const dialogRef = this.dialog.open(DeleteComponent, {
+            data: {}
         });
     }
-    add_employee(name,estado,sede,dep,puesto,fecha_ingreso){
+
+    
+    updateEmployee() {
+        this.isPopupOpened = true;
+        const dialogRef = this.dialog.open(updateComponent, {
+            data: {}
+        });
+    }
+    add_employee(name, estado, sede, dep, puesto, fecha_ingreso) {
 
     }
 }

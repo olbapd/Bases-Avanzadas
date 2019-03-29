@@ -6,6 +6,8 @@ import { RegisterComponent } from "./register/register.component";
 import { LoginComponent } from "./login/login.component";
 import {ManagerComponent} from "./manager/manager.component";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {LoginFailedComponent} from './dialogs/login_Failed/login_Failed.component';
+import {MatDialogModule, MatIconModule, MatCardModule, MatToolbarModule} from '@angular/material';
 //import { AuthService } from '../services/auth/auth.service'
 
 import { AuthRoutes } from './auth.routing';
@@ -16,14 +18,19 @@ import { AuthRoutes } from './auth.routing';
     RouterModule.forChild(AuthRoutes),
     FormsModule,
     ReactiveFormsModule,
+    MatDialogModule,
+    MatIconModule,
+    MatCardModule,
     NgbModule.forRoot()
   ],
   declarations: [   
       RegisterComponent,
       LoginComponent,
-      ManagerComponent
+      ManagerComponent,
+      LoginFailedComponent
   ],
-  providers: [/*AuthService*/]
+  providers: [/*AuthService*/],
+  entryComponents:[LoginFailedComponent]
 })
 
 export class AuthModule {}

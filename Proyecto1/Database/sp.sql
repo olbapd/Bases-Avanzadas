@@ -1,6 +1,9 @@
 
---UNIR PERSONA EMPLEADO Y TABLAX CON ACTIVO
---Selecciona la infotmacion de un activo
+-- =============================================
+-- Descripcion:	<Seleccionar la información de un Activo>
+-- Parametro de Entrada: <CodigoActivo>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getActivo]
 	@Codigo int
 AS
@@ -29,9 +32,14 @@ WHERE [Codigo] = Codigo
 SET NOCOUNT OFF
 GO
 
---Activos no asignados
+-- =============================================
+-- Descripcion:	<Seleccionar la información de un Activo con Estado no Asignado>
+-- Parametro de Entrada: <CodigoActivo, IdEstado>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getActivoLi]
-	@IdEstado int
+	@IdEstado int,
+	@IdCategoria int
 AS
 SET NOCOUNT ON
 
@@ -53,11 +61,17 @@ SELECT [IdActivo],
 	[IdSede],
 	[IdMoneda]
 FROM Activo
-WHERE [IdEstado] = @IdEstado
+WHERE [IdEstado] = @IdEstado AND [IdCategoria] =@IdCategoria
 SET NOCOUNT OFF
 GO
 
---Insertar un nuevo activo
+-- =============================================
+-- Descripcion:	<Insertar la información de un nuevo Activo>
+-- Parametro de Entrada: <CodigoActivo, Nombre, Descripcion, Foto (enlace), Precio, TiempoGarantia
+--VidaUtil, PorcentajeDepreciacion, FechaCompra, FechaRegistro, FechaAsignacion, CentroCosto, ValorResidual
+--DetalleUbicacion, IdCategoria, IdSede, IdMoneda, IdEstado>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[setActivo]
 	@Codigo varchar(50),
 	@Nombre varchar(50),
@@ -96,7 +110,13 @@ BEGIN
 END
 GO
 
---Actualizar un Activo
+-- =============================================
+-- Descripcion:	<Actualizar la informacion de un activo>
+-- Parametro de Entrada: <CodigoActivo, Nombre, Descripcion, Foto (enlace), Precio, TiempoGarantia
+--VidaUtil, PorcentajeDepreciacion, FechaCompra, FechaRegistro, CentroCosto, ValorResidual,DetalleUbicacion
+--IdSede, IdMoneda>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[updateActivo]
 	@Codigo varchar(50),--PUEDE SER CON IDACTIVO
 	@Nombre varchar(50),
@@ -144,8 +164,12 @@ BEGIN
 END
 GO
 
---Seleccionar activos de una categoria
-CREATE OR ALTER PROC [dbo].[getActivoLi]
+-- =============================================
+-- Descripcion:	<Seleccionar Activos de una categoria especifica>
+-- Parametro de Entrada: <IdCategoria>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[getActivoCat]
 	@IdCategoria int
 AS
 SET NOCOUNT ON
@@ -158,7 +182,11 @@ WHERE [IdCategoria] = @IdCategoria
 SET NOCOUNT OFF
 GO
 
---Asignar un Activo a un empleado
+-- =============================================
+-- Descripcion:	<Asignar un activo a un empleado>
+-- Parametro de Entrada: <IdActivo, IdEmpleado, FechaAsignacion, IdEstado>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[asigActivo]
 	@IdActivo int,
 	@IdEmpleado int,
@@ -184,7 +212,11 @@ BEGIN
 END
 GO
 
---Quitar un activo
+-- =============================================
+-- Descripcion:	<Desasignar un activo a un empleado>
+-- Parametro de Entrada: <IdActivo, IdEstado>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[quitarActivo]
 	@IdActivo int,
 	@IdEstado int
@@ -206,9 +238,12 @@ BEGIN
 END
 GO
 
---Selecciona las Provincias
+-- =============================================
+-- Descripcion:	<Seleccionar Provincias>
+-- Parametro de Entrada: <Ninguno>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getProvincia]
-	--@IdProvincia int
 AS
 SET NOCOUNT ON
 
@@ -219,7 +254,11 @@ FROM Provincia
 SET NOCOUNT OFF
 GO
 
---Selecciona los tipos de puesto
+-- =============================================
+-- Descripcion:	<Seleccionar los tipos de puesto>
+-- Parametro de Entrada: <Ninguno>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getPuesto]
 AS
 SET NOCOUNT ON
@@ -231,7 +270,11 @@ FROM Puesto
 SET NOCOUNT OFF
 GO
 
--- Agregar Puestos
+-- =============================================
+-- Descripcion:	<Insertar un nuevo puesto>
+-- Parametro de Entrada: <NombrePuesto>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[setPuesto]
 	@NombreP varchar(50)
 
@@ -249,7 +292,11 @@ BEGIN
 END
 GO
 
---Selecciona los tipos de estado
+-- =============================================
+-- Descripcion:	<Seleccionar los tipos de estado>
+-- Parametro de Entrada: <Ninguno>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getEstado]
 AS
 SET NOCOUNT ON
@@ -261,7 +308,11 @@ FROM Estado
 SET NOCOUNT OFF
 GO
 
--- Agregar tipos de estado
+-- =============================================
+-- Descripcion:	<Insertar un nuevo estado>
+-- Parametro de Entrada: <NombreEstado>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[setEstado]
 	@NombreE varchar(50)
 
@@ -279,8 +330,11 @@ BEGIN
 END
 GO
 
-
---Selecciona los departamentos
+-- =============================================
+-- Descripcion:	<Seleccionar los Departamentos de la sede>
+-- Parametro de Entrada: <Ninguno>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getDepartamento]
 
 AS
@@ -292,7 +346,11 @@ FROM Departamento
 SET NOCOUNT OFF
 GO
 
---Agregar Departamentos
+-- =============================================
+-- Descripcion:	<Inserta un nuevo departamento>
+-- Parametro de Entrada: <NombreDepartamento>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[setDepartamento]
 	@NombreD varchar(50)
 
@@ -310,7 +368,11 @@ BEGIN
 END
 GO
 
--- Selecciona las sedes
+-- =============================================
+-- Descripcion:	<Seleccionar las sedes>
+-- Parametro de Entrada: <Ninguno>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getSede]
 AS
 SET NOCOUNT ON
@@ -320,15 +382,22 @@ SELECT [Sede].Nombre, [Sede].IdSede FROM Sede
 SET NOCOUNT OFF
 GO
 
---Agregar Sedes
+-- =============================================
+-- Descripcion:	<Agregar una nueva sede>
+-- Parametro de Entrada: <NombreSede>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[setSede]
-	@NombreS varchar(50)
+	@NombreS varchar(50),
+	@Ubicacion varchar(100),
+	@IdDistrito int,
+	@IdEstado int
 
 AS
 BEGIN
 	BEGIN TRAN
 	BEGIN TRY
-		INSERT INTO Sede(Nombre) VALUES (@NombreS)
+		INSERT INTO Sede(Nombre, DetalleUbicacion, IdDistrito, IdEstado) VALUES (@NombreS, @Ubicacion, @IdDistrito, @IdEstado)
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -338,7 +407,11 @@ BEGIN
 END
 GO
 
---Selecciona tipos de monedas
+-- =============================================
+-- Descripcion:	<Seleccionar los tipos de moneda>
+-- Parametro de Entrada: <Ninguno>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getMonedas]
 AS
 SET NOCOUNT ON
@@ -348,7 +421,11 @@ SELECT [Moneda].Nombre, [Moneda].IdMoneda FROM Moneda
 SET NOCOUNT OFF
 GO
 
---Agregar monedas
+-- =============================================
+-- Descripcion:	<Agregar un nuevo tipo de moneda>
+-- Parametro de Entrada: <NombreMoneda>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[setMoneda]
 	@NombreM varchar(50)
 
@@ -366,7 +443,11 @@ BEGIN
 END
 GO
 
--- Seleccionar Categoria
+-- =============================================
+-- Descripcion:	<Seleccionar los tipos de categoria>
+-- Parametro de Entrada: <Ninguno>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getCategoria]
 AS
 SET NOCOUNT ON
@@ -376,15 +457,20 @@ SELECT [Categoria].Nombre, [Categoria].IdCategoria FROM Categoria
 SET NOCOUNT OFF
 GO
 
---Agregar Categorias
+-- =============================================
+-- Descripcion:	<Insertar una Nueva Categoria>
+-- Parametro de Entrada: <NombreCategoria, Tangible(booleano)>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[setCategoria]
-	@NombreC varchar(50)
+	@NombreC varchar(50),
+	@Tangible bit
 
 AS
 BEGIN
 	BEGIN TRAN
 	BEGIN TRY
-		INSERT INTO Categoria(Nombre) VALUES (@NombreC)
+		INSERT INTO Categoria(Nombre, Tangible) VALUES (@NombreC, @Tangible)
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -394,20 +480,56 @@ BEGIN
 END
 GO
 
--- Seleccionar cont
-CREATE OR ALTER PROC [dbo].[Validacion]
-	@CorreoEmp varchar
+-- =============================================
+-- Descripcion:	<Seleccionar los cantones>
+-- Parametro de Entrada: <Ninguno>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[getCanton]
+AS
+SET NOCOUNT ON
+
+SELECT [Canton].Nombre, [Canton].IdCanton FROM Canton
+
+SET NOCOUNT OFF
+GO
+
+-- =============================================
+-- Descripcion:	<Seleccionar los distritos>
+-- Parametro de Entrada: <Ninguno>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[getDistrito]
+	@IdCanton int
 
 AS
 SET NOCOUNT ON
 
-SELECT [Empleado].Contrasena FROM Empleado WHERE @CorreoEmp = [Empleado].Correo
+SELECT [Distrito].Nombre, [Distrito].IdDistrito FROM Distrito
+WHERE [IdCanton] = @IdCanton
 
 SET NOCOUNT OFF
-
 GO
 
--- Selecciona informacion del empleado a partir del login
+-- =============================================
+-- Descripcion:	<Validacion para el inicio de sesion de un usuario>
+-- Parametro de Entrada: <CorreoEmpleado>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROCEDURE sp_Login
+    @CorreoEmp nvarchar(50)   
+AS   
+
+    SELECT Contrasena
+	FROM Empleado
+    WHERE Correo= @CorreoEmp;  
+GO 
+
+-- =============================================
+-- Descripcion:	<Sleccionar informacion del empleado a partir del login>
+-- Parametro de Entrada: <CorreoEmpleado>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getEmpleado]
 	@CorreoEmp varchar
 AS
@@ -420,17 +542,20 @@ WHERE @CorreoEmp = [Empleado].Correo
 SET NOCOUNT OFF
 GO
 
---Insertar un Nuevo Empleado
+-- =============================================
+-- Descripcion:	<Insertar un Nuevo empleado>
+-- Parametro de Entrada: <NombreEmpleado, Apellido1, Apellido2, Cedula, FechaNacimiento, FechaIngreso, Correo
+--Contrasena, IdSede, IdDepartamento, IdPuesto, Foto>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROCEDURE [dbo].[setEmpleado]
 	@Nombre varchar(50),
 	@Apellido1 varchar(25),
 	@Apellido2 varchar(25),
 	@Cedula varchar(10),
 	@FechaN date,
-	@FechaIngreso date,
 	@Correo varchar (50),
 	@Contrasena varchar(50),
-	@IdSede int,
 	@IdDepartamento int,
 	@IdPuesto int,
 	@Foto varchar(50)
@@ -440,10 +565,10 @@ BEGIN
 
 	BEGIN TRAN
 	BEGIN TRY
-		INSERT INTO Empleado (Nombre, Apellido1, Apellido2, Cedula,FechaNacimiento, FechaIngreso, 
-		IdDepartamento, IdSede, IdPuesto, Correo, Contrasena, Foto)
-		VALUES (@Nombre, @Apellido1, @Apellido2, @Cedula, @FechaN, @FechaIngreso ,
-		@IdDepartamento, @IdSede, @IdPuesto, @Correo, @Contrasena, @Foto)
+		INSERT INTO Empleado (Nombre, Apellido1, Apellido2, Cedula,FechaNacimiento, Correo,
+		Contrasena, IdDepartamento, IdPuesto, Foto)
+		VALUES (@Nombre, @Apellido1, @Apellido2, @Cedula, @FechaN ,
+		 @Correo, @Contrasena,@IdDepartamento, @IdPuesto, @Foto)
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -453,10 +578,37 @@ BEGIN
 END
 GO
 
+-- =============================================
+-- Descripcion:	<Realiza la asignacion de un empleado a una sede>
+-- Parametro de Entrada: <IdSede, IdEmpleado, FechaIngreso>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROCEDURE [dbo].[Contrato]
+	@IdSede int,
+	@IdEmpleado int,
+	@FechaIngreso date
+	 
+AS
+BEGIN
 
+	BEGIN TRAN
+	BEGIN TRY
+		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso)
+		VALUES (@IdSede, @IdEmpleado, @FechaIngreso)
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
+		ROLLBACK TRANSACTION
+	END CATCH
+END
+GO
 
-
---Seleccionar los activos que tiene un empleado se le puede agregar mas informacion
+-- =============================================
+-- Descripcion:	<Seleccionar los activos que tiene un empleado>
+-- Parametro de Entrada: <IdEmpleado>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getActivoXEmpleado]
 	@IdEmpleado int
 AS
@@ -471,54 +623,74 @@ WHERE @IdEmpleado = [Empleado].IdEmpleado
 SET NOCOUNT OFF
 GO
 
---Selecciona los empleados de un departamento en especifico
+-- =============================================
+-- Descripcion:	<Seleccionar los empleados de un departamento en especifico>
+-- Parametro de Entrada: <IdDepartamento>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getEmpleadoXDep]
 	@IdDepartamento int
 AS
 SET NOCOUNT ON
 
 SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
-[Empleado].Cedula, [Empleado].Fechaingreso, [Puesto].Nombre
-FROM Empleado
+[Empleado].Cedula, [Puesto].Nombre, [Sede].Nombre
+FROM SedeXEmpleado
+INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
+INNER JOIN Sede ON [SedeXEmpleado].IdSede = [Sede].IdSede
 WHERE @IdDepartamento = [Empleado].IdDepartamento
 
 SET NOCOUNT OFF
 GO
 
---Seleccionar los empleados que trabajan en un mismo puesto
+-- =============================================
+-- Descripcion:	<Seleccionar los empleados que trabajan en un mismo puesto>
+-- Parametro de Entrada: <IdPuesto>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getEmpleadoXPuest]
 	@IdPuesto int
 AS
 SET NOCOUNT ON
 
 SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
-[Empleado].Cedula, [Empleado].Fechaingreso, [Departamento].Nombre, [Sede].Nombre
-FROM Empleado
+[Empleado].Cedula, [Departamento].Nombre, [Sede].Nombre
+FROM SedeXEmpleado
+INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
-INNER JOIN Sede ON [Empleado].IdSede = [Sede].IdSede
+INNER JOIN Sede ON [SedeXEmpleado].IdSede = [Sede].IdSede
 WHERE @IdPuesto = [Empleado].IdPuesto
 
 SET NOCOUNT OFF
 GO
 
--- Selecciona a los empleados por sede
+-- =============================================
+-- Descripcion:	<Seleccionar a los empleado de una sede>
+-- Parametro de Entrada: <IdSede>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getEmpleadoXSede]
 	@IdSede int
 AS
 SET NOCOUNT ON
 
 SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
-[Empleado].Cedula, [Empleado].Fechaingreso, [Departamento].Nombre, [Puesto].Nombre
-FROM Empleado
+[Empleado].Cedula, [SedeXEmpleado].FechaIngreso, [Departamento].Nombre, [Puesto].Nombre
+FROM SedeXEmpleado
+INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
-WHERE @IdSede = [Empleado].IdSede
+WHERE @IdSede = [SedeXEmpleado].IdSede
 
 SET NOCOUNT OFF
 GO
 
---Selecciona a empleados en un rango de fecha de ingreso
+-- =============================================
+-- Descripcion:	<Seleccionar a los empleados que entraron en un rango de fechas>
+-- Parametro de Entrada: <FechaInicial, FechaFinal>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getEmpleadoFechaI]
 	@FechaInicial date,
 	@FechaFinal date
@@ -526,16 +698,21 @@ AS
 SET NOCOUNT ON
 
 SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
-[Empleado].Cedula, [Empleado].Fechaingreso, [Departamento].Nombre, [Puesto].Nombre
-FROM Empleado
+[Empleado].Cedula, [SedeXEmpleado].Fechaingreso, [Departamento].Nombre, [Puesto].Nombre
+FROM SedeXEmpleado
+INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
-WHERE [Empleado].Fechaingreso BETWEEN @FechaInicial AND @FechaFinal
+WHERE [SedeXEmpleado].Fechaingreso = @FechaInicial
 
 SET NOCOUNT OFF
 GO
 
--- Selecciona al empleado que tiene un activo 
+-- =============================================
+-- Descripcion:	<Seleccionar a un empleado que tiene un activo en especifico>
+-- Parametro de Entrada: <CodigoActivo>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getEmpleadoXActivo]
 	@CodigoActivo int
 AS
@@ -547,11 +724,10 @@ FROM Activo
 INNER JOIN Empleado ON [Activo].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
-INNER JOIN Sede ON [Empleado].IdSede = [Sede].Nombre
+INNER JOIN SedeXEmpleado ON [Empleado].IdEmpleado = [SedeXEmpleado].IdEmpleado
+INNER JOIN Sede ON [SedeXEmpleado].IdSede = [Sede].Nombre
 WHERE @CodigoActivo = [Activo].Codigo
 
 SET NOCOUNT OFF
 GO
-
-
 

@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import {RestApiService} from 'src/app/rest_client/client_service';
 import { Router } from "@angular/router";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
+import { MatDialog } from '@angular/material';
+import  {LoginFailedComponent} from '../dialogs/login_Failed/login_Failed.component';
 
 @Component({
     selector: 'app-login',
@@ -10,18 +11,32 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
     styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+    isPopupOpened = false;
   
-    constructor(private modalService:NgbModal, public restApi: RestApiService, private router: Router){ //Router: para poder pasar de ventanas
+    constructor(private modalService:NgbModal, public restApi: RestApiService, private router: Router, private dialog: MatDialog){ //Router: para poder pasar de ventanas
         
+    }
+    ngOnInit() { 
     }
 
     login(username,password,modal){
         this.modalService.open(modal, { centered: true });
-         if (this.restApi.getSate(username,password)){
+        this.restApi.getSate(username,password).subscribe((res)=>{
+         if (res=="true"){
             this.router.navigate(['./admin_view/admin']); //ruta a admin si el login es exitoso
-         }; 
+         }
+         else{
+            this.isPopupOpened = true;
+            const dialogRef = this.dialog.open(LoginFailedComponent, {
+                data: {}
+            
+            });
+
+
+         }
+
+        });;
          
     }
-
 }

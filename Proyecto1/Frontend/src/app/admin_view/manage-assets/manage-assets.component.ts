@@ -12,81 +12,62 @@ import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ManageAssetsComponent implements OnInit {
   constructor(public restApi: RestApiService,private router: Router) {
-    let optionestado;
-    let optioncategoria;
    }
 
   ngOnInit() {
-    this.EstadoDropdown1();
-    this.CategoriaDropdown1();
-    this.EstadoDropdown2();
-    this.CategoriaDropdown2();
+    this.EstadoDropdown();
+    this.CategoriaDropdown();
     //this.activos = this.restApi.getActivos(); 
   }
 
-  EstadoDropdown1(){
+  EstadoDropdown(){
     let optionestado;
-     
     let dropdown = document.getElementById('estado1-Dropdown');
-
+    let dropdown2 = document.getElementById('estado2-Dropdown');
      this.restApi.getEstados().subscribe((res)=>{
-      var count = Object.keys(res.data).length;
+       const myObjStr = JSON.stringify(res)
+       const json = JSON.parse(myObjStr);
+      var count = Object.keys(json.data).length;
       for (var _i = 0; _i < count; _i++) {
         optionestado = document.createElement('option');
-        optionestado.text = res.data[_i].Nombre;
-        optionestado.value = res.data[_i].IdEstado;
+        optionestado.text = json.data[_i].Nombre;
+        optionestado.value = json.data[_i].IdEstado;
         dropdown.append(optionestado);
-       // dropdown_estado2.append(option);
-     }    
+     } 
+     for (var _i = 0; _i < count; _i++) {
+      optionestado = document.createElement('option');
+      optionestado.text = json.data[_i].Nombre;
+      optionestado.value = json.data[_i].IdEstado;
+      dropdown2.append(optionestado);
+   }   
   });;
   }
 
-  CategoriaDropdown1(){
+  CategoriaDropdown(){
     let optioncategoria;
     let dropdown = document.getElementById('categoria-Dropdown');
+    let dropdown2 = document.getElementById('categoria2-Dropdown');
 
     this.restApi.getCategorias().subscribe((res)=>{
-      var count = Object.keys(res.data).length;
+      const myObjStr = JSON.stringify(res)
+       const json = JSON.parse(myObjStr);
+      var count = Object.keys(json.data).length;
       for (var _i = 0; _i < count; _i++) {
         optioncategoria = document.createElement('option');
-        optioncategoria.text = res.data[_i].Nombre;
-        optioncategoria.value = res.data[_i].IdCategoria;
+        optioncategoria.text = json.data[_i].Nombre;
+        optioncategoria.value = json.data[_i].IdCategoria;
         dropdown.append(optioncategoria);
-     }    
+     } 
+     for (var _i = 0; _i < count; _i++) {
+      optioncategoria = document.createElement('option');
+      optioncategoria.text = json.data[_i].Nombre;
+      optioncategoria.value = json.data[_i].IdCategoria;
+      dropdown2.append(optioncategoria);
+   }    
   });;
   }
 
-  EstadoDropdown2(){
-    let optionestado;
-     
-    let dropdown = document.getElementById('estado2-Dropdown');
-
-     this.restApi.getEstados().subscribe((res)=>{
-      var count = Object.keys(res.data).length;
-      for (var _i = 0; _i < count; _i++) {
-        optionestado = document.createElement('option');
-        optionestado.text = res.data[_i].Nombre;
-        optionestado.value = res.data[_i].IdEstado;
-        dropdown.append(optionestado);
-       // dropdown_estado2.append(option);
-     }    
-  });;
-  }
-
-  CategoriaDropdown2(){
-    let optioncategoria;
-    let dropdown = document.getElementById('categoria2-Dropdown');
-
-    this.restApi.getCategorias().subscribe((res)=>{
-      var count = Object.keys(res.data).length;
-      for (var _i = 0; _i < count; _i++) {
-        optioncategoria = document.createElement('option');
-        optioncategoria.text = res.data[_i].Nombre;
-        optioncategoria.value = res.data[_i].IdCategoria;
-        dropdown.append(optioncategoria);
-     }    
-  });;
-  }
+ 
 
 
   registrar_activo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado){

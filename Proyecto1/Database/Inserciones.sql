@@ -664,54 +664,131 @@ INSERT INTO Distrito (Nombre,IdCanton) VALUES('Rio Jiménez',82);
 INSERT INTO Distrito (Nombre,IdCanton) VALUES('Duacari',82);
 
 --INSERTAR PUESTOS
-INSERT INTO Puesto (Nombre) VALUES ('Ingeniero');
-INSERT INTO Puesto (Nombre) VALUES ('Administrador');
-INSERT INTO Puesto (Nombre) VALUES ('Gerente');
-INSERT INTO Puesto (Nombre) VALUES ('Asistente Ejecutivo');
+EXEC setPuesto 'Director Ejecutivo'
+EXEC setPuesto 'Administrador de Sede'
+EXEC setPuesto 'Director de Comunicacion'
+EXEC setPuesto 'Director de Informacion'
+EXEC setPuesto 'Director Financiero'
+EXEC setPuesto 'Director de Operaciones'
+EXEC setPuesto 'Gerente Departamental'
+EXEC setPuesto 'Contador General'
+EXEC setPuesto 'Auxiliar Contable'
+EXEC setPuesto 'Encargado de Cuentas'
+EXEC setPuesto 'Cajero'
+EXEC setPuesto 'Auxiliar de Tesoreria'
+EXEC setPuesto 'Auditor'
+EXEC setPuesto 'Asistente Informatico'
+EXEC setPuesto 'Analista de Sistemas'
+EXEC setPuesto 'Programador'
+EXEC setPuesto 'Administrador de Redes'
+EXEC setPuesto 'Administrador de Bases de Datos'
+EXEC setPuesto 'Desarrollador Web'
+EXEC setPuesto 'Tecnico'
+EXEC setPuesto 'Asistente de Servicios G'
+EXEC setPuesto 'Asistente Ejecutivo'
+EXEC setPuesto 'Chofer'
+EXEC setPuesto 'Operario de Limpieza'
 
 --INSERTAR ESTADOS
-INSERT INTO Estado (Nombre) VALUES 
-('Activo'),
-('Inactivo');
+EXEC setEstado 'Activo'
+EXEC setEstado 'Inactivo'
+EXEC setEstado 'Asignado'
+EXEC setEstado 'No Asignado'
 
 --INSERTAR DEPARTAMENTOS
-INSERT INTO Departamento (Nombre) VALUES 
-('Transporte'),
-('Contabilidad'),
-('Comunicaciones');
+EXEC setDepartamento 'Departamento de Comunicacion'
+EXEC setDepartamento 'Departamento de Informacion'
+EXEC setDepartamento 'Departamento Financiero'
+EXEC setDepartamento 'Departamento de Operaciones'
+EXEC setDepartamento 'Recursos Humanos'
+EXEC setDepartamento 'Departamento Administrativo'
+EXEC setDepartamento 'Direccion General'
+EXEC setDepartamento 'Departamento de Informatica'
+EXEC setDepartamento 'Departamento de Ventas'
+EXEC setDepartamento 'Departamento de Control'
 
---INSERTAR SEDE
-INSERT INTO Sede (Nombre,FechaAdministracion,DetalleUbicacion,IdDistrito,IdEstado) VALUES ('Central','2019-02-21T18:10:00','Cartago',1,1);
-
--- INSERTAR EMPLEADO
-EXEC setEmpleado 'Erick', 'Carballo', 'Porras','2015000001','1995-05-25','2018-11-10','erick@gmail.com','123123',6,1,2,'a'
-EXEC setEmpleado 'Allan Eduardo','Chacon','Sandoval','2015000002','1991-03-01','2018-11-10','allan@gmail.com','741741',6,2,2,'L'
-EXEC setEmpleado 'Jose Pablo','Vindas','Campos','2015000003','1992-02-02','2018-11-10','Vindas@gmail.com','789789',6,3,2,'J'
-EXEC setEmpleado 'Jose','Rivera','Tencio','2015000004','1993-08-07','2018-09-10','ak7@gmail.com','159159',6,1,2,'F'
-EXEC setEmpleado 'Stephanny','Jimenez','Navarro','2015000005','1995-01-31','2018-05-10','loli@gmail.com','357357',6,2,2,'J'
-EXEC setEmpleado 'Diana','Villalobos','Castro','2015000006','1996-12-12','2018-11-09','Diana@gmail.com','741852',6,3,2,'B'
-EXEC setEmpleado 'Monica','Delgado','Piedra','2015000007','1995-09-09','2018-11-10','monik@gmail.com','254125',6,1,2,'L'
-EXEC setEmpleado 'Gabriela','Solana','Mora','2015000008','1990-08-07','2018-11-09','gabsol@gmail.com','7854785',6,2,2,'C'
-EXEC setEmpleado 'Daniela','Ulate','Alfaro','2015000009','1998-06-20','2018-11-13','dani@gmail.com','7963741',6,3,2,'N'
-EXEC setEmpleado 'Roberto','Santos','Pereira','2015000010','1995-07-20','2018-09-10','betolan@gmail.com','7897894',6,1,2,'P'
-EXEC setEmpleado 'Miguel','Chacon','Barboza','2015000011','1994-02-09','2018-08-10','bar@gmail.com','852341',6,2,2,'V'
-EXEC setEmpleado 'Pedro','Villalta','Lemus','2015000012','1993-05-04','2018-07-10','Pvillanta@gmail.com','9517530',6,3,2,'C'
-EXEC setEmpleado 'Ana','Castellanos','Ortiz','2015000013','1995-04-08','2018-07-10','AnaCO@gmail.com','95000530',6,1,2,'C'
-
---INSERTAR CATEGORIAS
-EXEC setCategoria 'Terreno y bienes naturales';
-EXEC setCategoria 'Construcciones';
-EXEC setCategoria 'Maquinaria';
-EXEC setCategoria 'Mobiliario';
-EXEC setCategoria 'Equipo Informatico';
-EXEC setCategoria 'Transporte';
-EXEC setCategoria 'Marcas';
-EXEC setCategoria 'Patentes';
-EXEC setCategoria 'Derechos de autor';
-EXEC setCategoria 'Licencias y permiso';
+EXEC setCategoria 'Terreno y bienes naturales', 1
+EXEC setCategoria 'Construcciones', 1;
+EXEC setCategoria 'Maquinaria', 1;
+EXEC setCategoria 'Mobiliario', 1;
+EXEC setCategoria 'Equipo Informatico', 1;
+EXEC setCategoria 'Transporte', 1;
+EXEC setCategoria 'Marcas', 0;
+EXEC setCategoria 'Patentes', 0;
+EXEC setCategoria 'Derechos de autor', 0;
+EXEC setCategoria 'Licencias y permiso', 0;
 
 --INSERTAR MONEDAS
 EXEC setMoneda 'Dolares'
 EXEC setMoneda 'Colones'
+EXEC setMoneda 'Euros'
+EXEC setMoneda 'Rupies'
+EXEC setMoneda 'Yenes'
+EXEC setMoneda 'Dolar Canadiense'
+EXEC setMoneda 'Lempiras'
+EXEC setMoneda 'Libra Esterlina'
+
+
+--INSERTAR SEDE
+EXEC setSede 'Sede Central','Cartago Barrio Oriental',1,1
+EXEC setSede 'Sede San Jose','San Jose Centro',5,1
+EXEC setSede 'Sede Alajuela','Alajuela Centro',122,1
+
+-- INSERTAR EMPLEADO
+EXEC setEmpleado 'Erick', 'Carballo', 'Porras','2015000001','1995-05-25','erick@gmail.com','123123',6,1,'a'
+EXEC setEmpleado 'Allan Eduardo','Chacon','Sandoval','2015000002','1991-03-01','allan@gmail.com','741741',1,3,'L'
+EXEC setEmpleado 'Jose Pablo','Vindas','Campos','2015000003','1992-02-02','Vindas@gmail.com','789789',6,2,'J'
+EXEC setEmpleado 'Jose','Rivera','Tencio','2015000004','1993-08-07','ak7@gmail.com','159159',2,4,'F'
+EXEC setEmpleado 'Stephanny','Jimenez','Navarro','2015000005','1995-01-31','loli@gmail.com','357357',6,2,'J'
+EXEC setEmpleado 'Diana','Villalobos','Castro','2015000006','1996-12-12','Diana@gmail.com','741852',3,5,'B'
+EXEC setEmpleado 'Monica','Delgado','Piedra','2015000007','1995-09-09','monik@gmail.com','254125',4,6,'L'
+EXEC setEmpleado 'Gabriela','Solana','Mora','2015000008','1990-08-07','gabsol@gmail.com','7854785',5,13,'C'
+EXEC setEmpleado 'Daniela','Ulate','Alfaro','2015000009','1998-06-20','dani@gmail.com','7963741',1,3,'N'
+EXEC setEmpleado 'Roberto','Santos','Pereira','2015000010','1995-07-20','betolan@gmail.com','7897894',7,21,'P'
+EXEC setEmpleado 'Miguel','Chacon','Barboza','2015000011','1994-02-09','bar@gmail.com','852341',8,19,'V'
+EXEC setEmpleado 'Pedro','Villalta','Lemus','2015000012','1993-05-04','Pvillanta@gmail.com','9517530',9,9,'C'
+EXEC setEmpleado 'Ana','Castellanos','Ortiz','2015000013','1995-04-08','AnaCO@gmail.com','95000530',10,23,'C'
+
+--INSERTAR SEDEXEMPLEADO
+EXEC Contrato 1,1,'2007-01-30'
+EXEC Contrato 2,3,'2009-01-30'
+EXEC Contrato 3,5,'2007-01-30'
+EXEC Contrato 1,9,'2017-01-30'
+EXEC Contrato 2,2,'2017-01-30'
+EXEC Contrato 1,4,'2017-01-30'
+EXEC Contrato 1,6,'2017-01-30'
+EXEC Contrato 1,7,'2017-01-30'
+EXEC Contrato 2,8,'2017-01-30'
+EXEC Contrato 2,10,'2017-01-30'
+EXEC Contrato 3,11,'2017-01-30'
+EXEC Contrato 3,12,'2017-01-30'
+EXEC Contrato 3,13,'2017-01-30'
 
 --INSERTAR ACTIVO
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+--FALTA ARREGLAR
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1300,5,7,0.15,'2019-01-30','2019-02-08',NULL,8,600,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
