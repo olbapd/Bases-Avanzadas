@@ -6,6 +6,6 @@ CREATE PROCEDURE sp_assignActive
 AS   
 
     UPDATE Proyecto1BDA.dbo.Activo 
-	SET IdEmpleado= @IdEmpleado 
+	SET IdEmpleado= @IdEmpleado, FechaAsignacion = GETDATE()
 	WHERE IdActivo = @IdActivo;
 GO 

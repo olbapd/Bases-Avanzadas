@@ -26,7 +26,18 @@ expose.assignActive = (data,cb) => {
     error : null,
     data: null
   }
-  activo.emailAssignActive(data.email,data.name);
+  activo.assignActive(data, (result) => {
+    if (result.error) {
+      global.log4us.error(`Error assigning active: ${result.error}`);
+      to_return.error = true;
+      to_return.success = false;
+      cb(to_return);
+    }
+    to_return.success = true;
+    to_return.data = result.data;
+    cb(to_return);
+
+  });
 
 }
 /**

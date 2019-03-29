@@ -764,31 +764,36 @@ EXEC Contrato 3,11,'2017-01-30'
 EXEC Contrato 3,12,'2017-01-30'
 EXEC Contrato 3,13,'2017-01-30'
 
+
 --INSERTAR ACTIVO
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
 --FALTA ARREGLAR
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1300,5,7,0.15,'2019-01-30','2019-02-08',NULL,8,600,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00002','Laptop','Computadora DELL','Enlace',1300,5,7,0.15,'2019-01-30','2019-02-08',NULL,8,600,"a",5,1,1,3
+EXEC setActivo 'AC00003','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC00004','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC00005','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC00006','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC00007','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC00008','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC00009','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000010','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000011','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000012','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000013','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000014','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000015','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000016','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000017','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000018','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000019','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000020','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000021','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000022','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000023','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000024','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000025','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+EXEC setActivo 'AC000026','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,"a",5,1,1,3
+
+
+
+

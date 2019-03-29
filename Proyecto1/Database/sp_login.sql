@@ -1,6 +1,6 @@
 
 GO  
-CREATE PROCEDURE sp_Login
+CREATE PROCEDURE sp_login
     @CorreoEmp nvarchar(50)   
 AS   
 	SELECT *

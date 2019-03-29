@@ -8,8 +8,6 @@ let expose = {
   login  : undefined,
 };
 
-
-
 expose.login = (data, cb) => {
   let to_return = {
     error : null,
@@ -19,7 +17,7 @@ expose.login = (data, cb) => {
   let request =  new sqlserver.Request(sqltool.getPool());
 
   request.input('CorreoEmp',sqlserver.NVarChar,data.email);
-  request.execute('sp_Login',(err,result)=>{
+  request.execute('sp_login',(err,result)=>{
   	if (err) {
   	  global.log4us.error(`Error logging in: ${err}`);
       to_return.error=err;

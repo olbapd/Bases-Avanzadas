@@ -22,7 +22,9 @@ let activo = require('../business/activo');
 router.get("/assign", function(req,res){
 	activo.assignActive({
 	 	email:req.body.email,
-	 	name: req.body.name
+	 	name: req.body.name,
+	 	idEmployee: req.body.employee,
+	 	idActivo: req.body.activo
 	 },(result)=>{
 	 	if(result.error){
 	 	    res.status(503).json({
