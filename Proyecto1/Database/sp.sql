@@ -388,13 +388,16 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[setSede]
-	@NombreS varchar(50)
+	@NombreS varchar(50),
+	@Ubicacion varchar(100),
+	@IdDistrito int,
+	@IdEstado int
 
 AS
 BEGIN
 	BEGIN TRAN
 	BEGIN TRY
-		INSERT INTO Sede(Nombre) VALUES (@NombreS)
+		INSERT INTO Sede(Nombre, DetalleUbicacion, IdDistrito, IdEstado) VALUES (@NombreS, @Ubicacion, @IdDistrito, @IdEstado)
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -460,13 +463,14 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[setCategoria]
-	@NombreC varchar(50)
+	@NombreC varchar(50),
+	@Tangible bit
 
 AS
 BEGIN
 	BEGIN TRAN
 	BEGIN TRY
-		INSERT INTO Categoria(Nombre) VALUES (@NombreC)
+		INSERT INTO Categoria(Nombre, Tangible) VALUES (@NombreC, @Tangible)
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -563,10 +567,10 @@ BEGIN
 
 	BEGIN TRAN
 	BEGIN TRY
-		INSERT INTO Empleado (Nombre, Apellido1, Apellido2, Cedula,FechaNacimiento, FechaIngreso, 
-		IdDepartamento, IdSede, IdPuesto, Correo, Contrasena, Foto)
-		VALUES (@Nombre, @Apellido1, @Apellido2, @Cedula, @FechaN, @FechaIngreso ,
-		@IdDepartamento, @IdSede, @IdPuesto, @Correo, @Contrasena, @Foto)
+		INSERT INTO Empleado (Nombre, Apellido1, Apellido2, Cedula,FechaNacimiento, Correo,
+		Contrasena, IdDepartamento, IdPuesto, Foto)
+		VALUES (@Nombre, @Apellido1, @Apellido2, @Cedula, @FechaN ,
+		 @Correo, @Contrasena,@IdDepartamento, @IdPuesto, @Foto)
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
