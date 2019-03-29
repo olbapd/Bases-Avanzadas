@@ -579,6 +579,32 @@ END
 GO
 
 -- =============================================
+-- Descripcion:	<Realiza la asignacion de un empleado a una sede>
+-- Parametro de Entrada: <IdSede, IdEmpleado, FechaIngreso>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROCEDURE [dbo].[Contrato]
+	@IdSede int,
+	@IdEmpleado int,
+	@FechaIngreso date
+	 
+AS
+BEGIN
+
+	BEGIN TRAN
+	BEGIN TRY
+		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso)
+		VALUES (@IdSede, @IdEmpleado, @FechaIngreso)
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
+		ROLLBACK TRANSACTION
+	END CATCH
+END
+GO
+
+-- =============================================
 -- Descripcion:	<Seleccionar los activos que tiene un empleado>
 -- Parametro de Entrada: <IdEmpleado>
 -- Parametro de Salida: <Ninguno>
