@@ -11,8 +11,6 @@ let expose = {
 
 
 expose.login = (data, cb) => {
-  //let pool = mysql.getPool();
-
   let to_return = {
     error : null,
     success : null,
@@ -27,20 +25,16 @@ expose.login = (data, cb) => {
       to_return.error=err;
       to_return.success=false;
       cb(to_return);
-  	  console.error(err);
   	  return;
   	}
-  	console.log(result);
   	if(data.pass == result.recordset[0].Contrasena){
   		to_return.success = true;
   		to_return.data=true;
-  		console.log(to_return.data);		
   		cb(to_return);  		
   	}
   	else{
 	  	to_return.success = true;
 	  	to_return.data=false;
-	  	console.log(to_return.data);		
 	  	cb(to_return);  			
   	}
   })

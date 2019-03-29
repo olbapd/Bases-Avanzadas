@@ -36,7 +36,6 @@ let applyParameter = (template,parameter, value) => {
 
 
 expose.emailAssignActive = (email,name) => {
-  console.log("Here");
   const template_path = config.get('mail-info.template');
   const subject = config.get('mail-info.subject');
   const date = new Date().toLocaleString();

@@ -16,7 +16,7 @@ let router = module.exports = express.Router();
 let auth = require('../business/authentication');
 
 
-router.get("/login", function(req,res){
+router.post("/login", function(req,res){
 	auth.login({
 	 	email:req.body.email,
 	 	pass: req.body.pass
