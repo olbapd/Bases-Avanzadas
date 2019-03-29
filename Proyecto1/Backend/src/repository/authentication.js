@@ -18,8 +18,8 @@ expose.login = (data, cb) => {
 
   request.input('CorreoEmp',sqlserver.NVarChar,data.email);
   request.execute('sp_login',(err,result)=>{
-  	if (err) {
-  	  global.log4us.error(`Error logging in: ${err}`);
+  	if (err) 
+{  	  global.log4us.error(`Error logging in: ${err}`);
       to_return.error=err;
       to_return.success=false;
       cb(to_return);
@@ -50,7 +50,7 @@ expose.login = (data, cb) => {
   		cb(to_return);  		
   	}
   	else{
-	  	to_return.success = true;
+	  	to_return.success = false;
 	  	to_return.data=false;
 	  	cb(to_return);  			
   	}
