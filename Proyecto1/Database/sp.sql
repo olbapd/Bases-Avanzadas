@@ -539,7 +539,7 @@ GO
 --Contrasena, IdSede, IdDepartamento, IdPuesto, Foto>
 -- Parametro de Salida: <Ninguno>
 -- =============================================
-ALTER   PROCEDURE [dbo].[setEmpleado]
+CREATE OR ALTER   PROCEDURE [dbo].[setEmpleado]
 	@Nombre varchar(50),
 	@Apellido1 varchar(25),
 	@Apellido2 varchar(25),
