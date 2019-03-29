@@ -18,8 +18,10 @@ let router = module.exports = express.Router();
 let activo = require('./activo');
 let dynamic = require('./dynamic');
 let authentication = require('./authentication');
+let storage = require('./storage');
 
 router.use('/activo',activo);
+router.use('/storage',storage);
 router.use('/authentication',authentication);
 router.use('/dynamic',dynamic);
 
