@@ -83,12 +83,9 @@ CREATE OR ALTER PROC [dbo].[setActivo]
 	@PorcentajeD int,
 	@FechaCompra date,
 	@FechaRegistro date,
-	@FechaAsig date,--PONER FECHA DEL SISTEMA POR DEFECTO
 	@CentroCosto int,
 	@ValorResidual int,
-	@DetalleUb varchar(50),
 	@IdCategoria int,
-	@IdSede int,
 	@IdMoneda int,
 	@IdEstado int
 	
@@ -100,7 +97,7 @@ BEGIN
 		INSERT INTO Activo (Codigo, Nombre, Descripcion, Foto, Precio, TiempoGarantia, VidaUtil, PorcentajeDepreciacion, FechaCompra,
 		FechaRegistro, FechaAsignacion, CentroCosto, ValorResidual, DetalleUbicacion, IdEmpleado,IdCategoria, IdSede, IdMoneda, IdEstado) 
 		VALUES (@Codigo, @Nombre, @Descripcion, @Foto, @Precio, @TiempoGar, @VidaU, @PorcentajeD, @FechaCompra,
-		@FechaRegistro, @FechaAsig, @CentroCosto, @ValorResidual, @DetalleUb, NULL,@IdCategoria, @IdSede, @IdMoneda, @IdEstado) 
+		@FechaRegistro, NULL, @CentroCosto, @ValorResidual, NULL, NULL,@IdCategoria, NULL, @IdMoneda, @IdEstado) 
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -174,11 +171,29 @@ CREATE OR ALTER PROC [dbo].[getActivoCat]
 AS
 SET NOCOUNT ON
 
-SELECT [Activo].IdActivo, [Activo].Codigo, [Activo].Nombre,
+SELECT [Activo].Codigo, [Activo].Nombre,
 	[Activo].Descripcion
 
 FROM Activo
 WHERE [IdCategoria] = @IdCategoria
+SET NOCOUNT OFF
+GO
+
+-- =============================================
+-- Descripcion:	<Seleccionar el estado de un activo>
+-- Parametro de Entrada: <Codigo>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[getActivoEst]
+	@Codigo varchar(50)
+AS
+SET NOCOUNT ON
+
+SELECT [Activo].IdEstado, [Estado].Nombre
+
+FROM Activo
+INNER JOIN Estado ON [Activo].IdEstado = [Estado].IdEstado
+WHERE [Codigo] = @Codigo
 SET NOCOUNT OFF
 GO
 
@@ -188,21 +203,28 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[asigActivo]
-	@IdActivo int,
+	@Codigo varchar(50),
 	@IdEmpleado int,
 	@FechaAsig date,
-	@IdEstado int
+	@IdEstado int,
+	@DetalleUbi varchar(100)
 	
 AS
 BEGIN
+	DECLARE
+	@IdSede int
+
+	SELECT @IdSede = SedeXEmpleado.IdSede FROM SedeXEmpleado
+	WHERE @IdEmpleado = [SedeXEmpleado].IdEmpleado;
 
 	BEGIN TRAN
 	BEGIN TRY
 		UPDATE Activo SET 
 		[IdEstado] = @IdEstado,
 		[IdEmpleado] = @IdEmpleado,
-		[FechaAsignacion] = @FechaAsig
-		WHERE @IdActivo = [Activo].IdActivo
+		[FechaAsignacion] = @FechaAsig,
+		[IdSede] = @IdSede
+		WHERE @Codigo = [Activo].IdActivo
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
