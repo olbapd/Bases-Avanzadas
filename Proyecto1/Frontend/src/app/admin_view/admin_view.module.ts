@@ -17,6 +17,7 @@ import { updateComponent } from './dialogs/update_employee/update-employee.compo
 import { DeleteComponent } from './dialogs/delete_confirm/delete_confirm.component';
 import { UpdateSedeComponent } from './dialogs/update_sede/udpate-sede.component';
 import {CodeErrorComponent} from './dialogs/code_error/code_error.component';
+import { FotoService } from '../services/foto.service';
 
 @NgModule({
   imports: [
@@ -45,7 +46,9 @@ import {CodeErrorComponent} from './dialogs/code_error/code_error.component';
 
 
   ],
-  providers: [],
+  providers: [
+    FotoService
+  ],
   entryComponents:[updateComponent, DeleteComponent, UpdateSedeComponent,CodeErrorComponent]
 })
 
