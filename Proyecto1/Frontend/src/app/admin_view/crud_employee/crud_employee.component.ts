@@ -12,6 +12,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { updateComponent } from '../dialogs/update_employee/update-employee.component';
 import { DeleteComponent } from '../dialogs/delete_confirm/delete_confirm.component';
 import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from '@angular/forms';
+import { FotoService } from '../../services/foto.service';
 
 @Component({
     selector: 'crud-employee',
@@ -20,6 +21,7 @@ import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from
 })
 
 export class EmployeeComponent implements OnInit {
+    photo: any;
     isPopupOpened = false;
     sede;
     estado;
@@ -79,8 +81,14 @@ export class EmployeeComponent implements OnInit {
 
     }
 
-    constructor(private fb: FormBuilder, private modalService: NgbModal, public restApi: RestApiService,
-        private router: Router, private http: HttpClient, private dialog: MatDialog) {
+    constructor(private fb: FormBuilder,
+                private modalService: NgbModal,
+                public restApi: RestApiService,
+                private router: Router,
+                private http: HttpClient,
+                private dialog: MatDialog,
+                private fotoService: FotoService) {
+        this.photo="";
 
     }
     ngOnInit() {
@@ -105,6 +113,25 @@ export class EmployeeComponent implements OnInit {
         });
     }
     add_employee(name, estado, sede, dep, puesto, fecha_ingreso) {
+        //Se debe almacenar la imagen primero
+        this.fotoService.uploadFile(this.photo)
+            .subscribe((data)=>{
+                let photoHash = (data && data.hash)? data.hash : null;
+                console.log(photoHash);
+                //POner el resto de su codigo aqui adentro
+                //Cuando se va usar el sp de agregar cliente, en el espacio de 
+                //Foto utilizar la cariable photoHas.
 
+
+                //
+            });
+
+        
+    }
+
+    onPhotoChange(event){
+        this.photo = event.target.files[0];
+
+        //this.pictures[idNumber-1].name = photoName;
     }
 }

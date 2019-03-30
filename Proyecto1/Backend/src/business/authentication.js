@@ -20,10 +20,11 @@ expose.login = (data,cb) => {
 
   auth.login(data, (result) => {
     if (result.error) {
-      global.log4us.error(`Error getting authentication: ${result.detail}`);
-      to_return.error = true;
+      global.log4us.error(`Error getting authentication: ${result.error}`);
+      to_return.error = result.error;
       to_return.success = false;
       cb(to_return);
+      return;
     }
     to_return.success = true;
     to_return.data = result.data;

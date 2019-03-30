@@ -67,14 +67,15 @@
                         <div class="form-group">
                             <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
                             <span class="btn btn-rose btn-round btn-file">
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1"
-                                    (change)="onFileSelected($event)"> </span>
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1" accept="image/png, image/jpeg, image/jpg, image/PNG, image/bmp"
+                                   (change)="onPhotoChange($event)" name="photo"> 
+                                
+                            </span>
                         </div>
-
                         <div class="form-group">
                             <button
                                 (click)="add_employee(txt_name.value,select_estado.value,select_sede.value,select_dep.value,select_puesto.value,txt_fecha_ingreso.value)"
-                                class="btn btn-primary" [disabled]='!form.valid'>Ingresar</button>
+                                class="btn btn-primary" >Ingresar</button>
                         </div>
                     </form>
                 </div>
