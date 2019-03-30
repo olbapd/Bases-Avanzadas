@@ -5,7 +5,7 @@
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[getActivo]
-	@Codigo int
+	@Codigo varchar(50)
 AS
 SET NOCOUNT ON
 

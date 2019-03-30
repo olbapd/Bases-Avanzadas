@@ -39,7 +39,8 @@ import { UpdateSedeComponent } from './dialogs/update_sede/udpate-sede.component
     SedeComponent,
     updateComponent,
     DeleteComponent,
-    UpdateSedeComponent
+    UpdateSedeComponent,
+
 
   ],
   providers: [],

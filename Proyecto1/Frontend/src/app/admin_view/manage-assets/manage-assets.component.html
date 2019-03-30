@@ -46,7 +46,6 @@
               <div class="input-group mb-3">
                 <select id="sede-Dropdown" name="sede" class="form-control" #select_sede data-style="btn-primary" data-live-search="true"
                   data-selectpicker data-collection-name="items" ng-model="selected">
-                  <!--LLenado de Select-->
                 </select>
               </div>
 
@@ -111,7 +110,7 @@
             </div>
           </div>
           <button (click)=" registrar_activo(txt_nombre_activo.value,txt_descripcion.value,txt_fecha_compra.value,
-          txt_precio_compra.value,txt_valor_residual.value,txt_detalle_ubicacion.value,txt_codigo.value,select_categoria.value,txt_fecha_registro.value,
+          txt_precio_compra.value,txt_valor_residual.value,select_sede.value,txt_detalle_ubicacion.value,txt_codigo.value,select_categoria.value,txt_fecha_registro.value,
           txt_tiempo_garantia.value,txt_vida_util.value,txt_centro_costo.value,select_estado.value)" type="button"
             class="btn btn-primary">Registrar</button>
         </div>
