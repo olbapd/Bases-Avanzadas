@@ -124,16 +124,38 @@ export class RestApiService {
       "parameters":["Codigo"],
       "values":[],
       "ouputs":[],
-      "name":"getActivo"
+      "name":"getActivoLi"
     }
     
     return this.http.post (this.apiURL+urls.sp_url+'getActivoXCodigo',body).pipe(retry(1),catchError(this.handleError));
   }
 
-  getCodigos() {
-    //let body;
-    //return this.http.post (this.apiURL+urls.sp_url+'getCodigos',body).pipe(retry(1),catchError(this.handleError));
+  getCodigoXCategoria(idCategoria) {
+    let body={
+      "typesIn":["int"],
+      "typesOut":[],
+      "parameters":["idCategoria"],
+      "values":[idCategoria],
+      "ouputs":[],
+      "name":"getActivoCat"
+    }
+    
+    return this.http.post (this.apiURL+urls.sp_url+'getActivoXCat',body).pipe(retry(1),catchError(this.handleError));
   }
+
+  getEstadoXCodigo(Codigo) {
+    let body={
+      "typesIn":["varchar"],
+      "typesOut":[],
+      "parameters":["Codigo"],
+      "values":[Codigo],
+      "ouputs":[],
+      "name":"getActivoEst"
+    }
+    
+    return this.http.post (this.apiURL+urls.sp_url+'getEstadoXCodigo',body).pipe(retry(1),catchError(this.handleError));
+  }
+
 
   putSede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso){
     let body;
@@ -146,7 +168,7 @@ export class RestApiService {
       "typesIn":["varchar","varchar","varchar","varchar","int","date","int","int","date","date","date","int","int","varchar","int" ,"int" ,"int" ,"int"],
       "typesOut":[],
       "parameters":["Codigo","Nombre","Descripcion","Foto","Precio","TiempoGar","VidaU","PorcentajeD","FechaCompra","FechaRegistro","FechaAsig","CentroCosto","ValorResidual","DetalleUb","IdCategoria","IdSede","IdMoneda","IdEstado"],
-      "values":[nombre,descripcion,fecha_compra,precio_compre,valor_residual,sede,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado],
+      "values":[codigo,nombre,descripcion,fecha_compra,precio_compre,valor_residual,sede,detalle_ubicacion,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado],
       "ouputs":[],
       "name":"setActivo"
     }  

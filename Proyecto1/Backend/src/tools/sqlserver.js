@@ -11,7 +11,7 @@
 'use strict';
 
 let config = require('config');
-let currentConfig = config.get('sqlserver');
+let currentConfig = config.get('sqlserver2');
 const sqlserver = require('mssql');
 
 
