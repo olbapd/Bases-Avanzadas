@@ -539,16 +539,14 @@ GO
 --Contrasena, IdSede, IdDepartamento, IdPuesto, Foto>
 -- Parametro de Salida: <Ninguno>
 -- =============================================
-CREATE OR ALTER   PROCEDURE [dbo].[setEmpleado]
+CREATE OR ALTER PROCEDURE [dbo].[setEmpleado]
 	@Nombre varchar(50),
 	@Apellido1 varchar(25),
 	@Apellido2 varchar(25),
 	@Cedula varchar(10),
 	@FechaN date,
-	@FechaIngreso date,
 	@Correo varchar (50),
 	@Contrasena varchar(50),
-	@IdSede int,
 	@IdDepartamento int,
 	@IdPuesto int,
 	@Foto varchar(50)
@@ -558,10 +556,10 @@ BEGIN
 
 	BEGIN TRAN
 	BEGIN TRY
-		INSERT INTO Empleado (Nombre, Apellido1, Apellido2, Cedula,FechaNacimiento, FechaIngreso, 
-		IdDepartamento, IdSede, IdPuesto, Correo, Contrasena, Foto)
-		VALUES (@Nombre, @Apellido1, @Apellido2, @Cedula, @FechaN, @FechaIngreso ,
-		@IdDepartamento, @IdSede, @IdPuesto, @Correo, @Contrasena, @Foto)
+		INSERT INTO Empleado (Nombre, Apellido1, Apellido2, Cedula,FechaNacimiento, Correo,
+		Contrasena, IdDepartamento, IdPuesto, Foto)
+		VALUES (@Nombre, @Apellido1, @Apellido2, @Cedula, @FechaN ,
+		 @Correo, @Contrasena,@IdDepartamento, @IdPuesto, @Foto)
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -569,7 +567,6 @@ BEGIN
 		ROLLBACK TRANSACTION
 	END CATCH
 END
-GO
 
 -- =============================================
 -- Descripcion:	<Realiza la asignacion de un empleado a una sede>

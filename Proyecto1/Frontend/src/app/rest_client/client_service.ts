@@ -34,11 +34,12 @@ export class RestApiService {
   // HttpClient API get() method => auth login
   getSate(username,password) {
 
-    const params = new HttpParams()
-    .set('email', username)
-    .set('pass', password);
+    let body ={
+      "email":username,
+      "pass":password
+    }
 
-   return  this.http.get(this.apiURL+urls.auth_url,{params}).pipe(retry(1),catchError(this.handleError));
+   return  this.http.post(this.apiURL+urls.auth_url,body).pipe(retry(1),catchError(this.handleError));
   }
 
   getProvincias(datos) {
