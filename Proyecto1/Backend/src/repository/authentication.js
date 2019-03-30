@@ -18,18 +18,18 @@ expose.login = (data, cb) => {
 
   request.input('CorreoEmp',sqlserver.NVarChar,data.email);
   request.execute('sp_login',(err,result)=>{
-  	if (err) 
-{  	  global.log4us.error(`Error logging in: ${err}`);
+  	if (err) {
+      global.log4us.error(`Error logging in: ${err}`);
       to_return.error=err;
       to_return.success=false;
       cb(to_return);
   	  return;
   	}
-    console.log(result);
-    if(result.recordset.length ==0){
+    else if(result.recordset.length ==0){
       to_return.error="User does not exist";
       to_return.success=false;
       cb(to_return);
+      return;
     }
   	else if(data.pass == result.recordset[0].Contrasena){
   		to_return.success = true;
@@ -48,11 +48,14 @@ expose.login = (data, cb) => {
         Foto: result.recordset[0].Foto,
       };
   		cb(to_return);  		
+      return;
   	}
   	else{
+      to_return.error="Incorrect username or password.";
 	  	to_return.success = false;
 	  	to_return.data=false;
 	  	cb(to_return);  			
+      return;
   	}
   })
 }
