@@ -42,12 +42,22 @@
                   aria-describedby="basic-addon1">
               </div>
 
+              <h6 class="card-subtitle mb-2 text-muted">Sede</h6>
+              <div class="input-group mb-3">
+                <select id="sede-Dropdown" name="sede" class="form-control" #select_sede data-style="btn-primary" data-live-search="true"
+                  data-selectpicker data-collection-name="items" ng-model="selected">
+                  <!--LLenado de Select-->
+                </select>
+              </div>
+
               <h6 class="card-subtitle mb-2 text-muted">Detalle Ubicacion</h6>
               <div class="input-group mb-3">
                 <input type="text" #txt_detalle_ubicacion class="form-control" placeholder="1000000"
                   aria-label="residual" aria-describedby="basic-addon1">
               </div>
             </div>
+
+            
 
             <!--Columna de la Derecha-->
             <div class="col-md-6">

@@ -17,11 +17,12 @@ export class ManageAssetsComponent implements OnInit {
   ngOnInit() {
     this.EstadoDropdown();
     this.CategoriaDropdown();
+    this.SedeDropdown();
     //this.activos = this.restApi.getActivos(); 
   }
 
   EstadoDropdown(){
-    let optionestado;
+    let option;
     let dropdown = document.getElementById('estado1-Dropdown');
     let dropdown2 = document.getElementById('estado2-Dropdown');
      this.restApi.getEstados().subscribe((res)=>{
@@ -29,22 +30,43 @@ export class ManageAssetsComponent implements OnInit {
        const json = JSON.parse(myObjStr);
       var count = Object.keys(json.data).length;
       for (var _i = 0; _i < count; _i++) {
-        optionestado = document.createElement('option');
-        optionestado.text = json.data[_i].Nombre;
-        optionestado.value = json.data[_i].IdEstado;
-        dropdown.append(optionestado);
+        option = document.createElement('option');
+        option.text = json.data[_i].Nombre;
+        option.value = json.data[_i].IdEstado;
+        dropdown.append(option);
      } 
      for (var _i = 0; _i < count; _i++) {
-      optionestado = document.createElement('option');
-      optionestado.text = json.data[_i].Nombre;
-      optionestado.value = json.data[_i].IdEstado;
-      dropdown2.append(optionestado);
+      option = document.createElement('option');
+      option.text = json.data[_i].Nombre;
+      option.value = json.data[_i].IdEstado;
+      dropdown2.append(option);
    }   
   });;
   }
 
+  SedeDropdown(){
+
+    let option;
+    let dropdown = document.getElementById('sede-Dropdown');
+
+
+    this.restApi.getSedes().subscribe((res)=>{
+      const myObjStr = JSON.stringify(res)
+       const json = JSON.parse(myObjStr);
+      var count = Object.keys(json.data).length;
+      for (var _i = 0; _i < count; _i++) {
+        option= document.createElement('option');
+        option.text = json.data[_i].Nombre;
+        option.value = json.data[_i].IdSede;
+        dropdown.append(option);
+     } 
+        
+  });;
+
+  }
+
   CategoriaDropdown(){
-    let optioncategoria;
+    let option;
     let dropdown = document.getElementById('categoria-Dropdown');
     let dropdown2 = document.getElementById('categoria2-Dropdown');
 
@@ -53,16 +75,16 @@ export class ManageAssetsComponent implements OnInit {
        const json = JSON.parse(myObjStr);
       var count = Object.keys(json.data).length;
       for (var _i = 0; _i < count; _i++) {
-        optioncategoria = document.createElement('option');
-        optioncategoria.text = json.data[_i].Nombre;
-        optioncategoria.value = json.data[_i].IdCategoria;
-        dropdown.append(optioncategoria);
+        option = document.createElement('option');
+        option.text = json.data[_i].Nombre;
+        option.value = json.data[_i].IdCategoria;
+        dropdown.append(option);
      } 
      for (var _i = 0; _i < count; _i++) {
-      optioncategoria = document.createElement('option');
-      optioncategoria.text = json.data[_i].Nombre;
-      optioncategoria.value = json.data[_i].IdCategoria;
-      dropdown2.append(optioncategoria);
+      option = document.createElement('option');
+      option.text = json.data[_i].Nombre;
+      option.value = json.data[_i].IdCategoria;
+      dropdown2.append(option);
    }    
   });;
   }
