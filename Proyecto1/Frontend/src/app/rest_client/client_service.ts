@@ -117,9 +117,17 @@ export class RestApiService {
    return this.http.post (this.apiURL+urls.sp_url+'getProvincia',body).pipe(retry(1),catchError(this.handleError));
   }
 
-  getActivos() {
-    //let body;
-    //return this.http.post (this.apiURL+urls.sp_url+'getActivos',body).pipe(retry(1),catchError(this.handleError));
+  getActivoXCodigo() {
+    let body={
+      "typesIn":["varchar"],
+      "typesOut":[],
+      "parameters":["Codigo"],
+      "values":[],
+      "ouputs":[],
+      "name":"getActivo"
+    }
+    
+    return this.http.post (this.apiURL+urls.sp_url+'getActivoXCodigo',body).pipe(retry(1),catchError(this.handleError));
   }
 
   getCodigos() {
@@ -141,10 +149,7 @@ export class RestApiService {
       "values":[nombre,descripcion,fecha_compra,precio_compre,valor_residual,sede,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado],
       "ouputs":[],
       "name":"setActivo"
-    }
-    
-    
-    
+    }  
     return this.http.post (this.apiURL+urls.sp_url+'getSedes',body).pipe(retry(1),catchError(this.handleError));
   }
 

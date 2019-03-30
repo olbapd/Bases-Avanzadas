@@ -28,7 +28,7 @@ SELECT [IdActivo],
 	[IdMoneda],
 	[IdEstado]
 FROM Activo
-WHERE [Codigo] = Codigo
+WHERE [Codigo] = @Codigo
 SET NOCOUNT OFF
 GO
 

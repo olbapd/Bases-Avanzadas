@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {RestApiService} from 'src/app/rest_client/client_service';
 import { Router } from "@angular/router";
-import{Estado} from 'src/app/interfaces/Estado'
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog } from '@angular/material';
+import  {CodeErrorComponent} from '../dialogs/code_error/code_error.component';
 
 
 @Component({
@@ -11,7 +11,8 @@ import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./manage-assets.component.css']
 })
 export class ManageAssetsComponent implements OnInit {
-  constructor(public restApi: RestApiService,private router: Router) {
+  isPopupOpened = false;
+  constructor(public restApi: RestApiService,private router: Router,private dialog: MatDialog) {
    }
 
   ngOnInit() {
@@ -89,11 +90,24 @@ export class ManageAssetsComponent implements OnInit {
   });;
   }
 
- 
+  registrar_activo(nombre,descripcion,fecha_compra,precio_compre,
+    valor_residual,sede,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado)
+    {
+    this.restApi.getActivoXCodigo().subscribe((res)=>{
+      const myObjStr = JSON.stringify(res)
+      const json = JSON.parse(myObjStr);
+      if (json.data[0]==null){
+        console.log("Codigo de Activo en existencia")
+        this.isPopupOpened = true;
+               const dialogRef = this.dialog.open(CodeErrorComponent);
+      }
+      else{
 
-
-  registrar_activo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado){
-    console.log(estado);
+        this.restApi.setActivo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,sede,detalle_ubicacion,codigo,
+          categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado);
+         
+      }
+  });;
     
   }
 

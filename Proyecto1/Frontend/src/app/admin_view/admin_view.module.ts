@@ -16,6 +16,7 @@ import {MatDialogModule, MatIconModule, MatCardModule, MatToolbarModule} from '@
 import { updateComponent } from './dialogs/update_employee/update-employee.component';
 import { DeleteComponent } from './dialogs/delete_confirm/delete_confirm.component';
 import { UpdateSedeComponent } from './dialogs/update_sede/udpate-sede.component';
+import {CodeErrorComponent} from './dialogs/code_error/code_error.component';
 
 @NgModule({
   imports: [
@@ -40,11 +41,12 @@ import { UpdateSedeComponent } from './dialogs/update_sede/udpate-sede.component
     updateComponent,
     DeleteComponent,
     UpdateSedeComponent,
+    CodeErrorComponent
 
 
   ],
   providers: [],
-  entryComponents:[updateComponent, DeleteComponent, UpdateSedeComponent]
+  entryComponents:[updateComponent, DeleteComponent, UpdateSedeComponent,CodeErrorComponent]
 })
 
 export class Admin_ViewModule { }
