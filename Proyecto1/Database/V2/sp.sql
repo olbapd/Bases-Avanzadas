@@ -692,8 +692,7 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[getEmpleadoFechaI]
-	@FechaInicial date,
-	@FechaFinal date
+	@FechaInicial date
 AS
 SET NOCOUNT ON
 
