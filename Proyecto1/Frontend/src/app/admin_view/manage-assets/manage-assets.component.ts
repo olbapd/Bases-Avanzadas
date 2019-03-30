@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {RestApiService} from 'src/app/rest_client/client_service';
 import { Router } from "@angular/router";
-import{Estado} from 'src/app/interfaces/Estado'
-import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog } from '@angular/material';
+import  {CodeErrorComponent} from '../dialogs/code_error/code_error.component';
 
 
 @Component({
@@ -11,17 +11,19 @@ import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./manage-assets.component.css']
 })
 export class ManageAssetsComponent implements OnInit {
-  constructor(public restApi: RestApiService,private router: Router) {
+  isPopupOpened = false;
+  constructor(public restApi: RestApiService,private router: Router,private dialog: MatDialog) {
    }
 
   ngOnInit() {
     this.EstadoDropdown();
     this.CategoriaDropdown();
+    this.SedeDropdown();
     //this.activos = this.restApi.getActivos(); 
   }
 
   EstadoDropdown(){
-    let optionestado;
+    let option;
     let dropdown = document.getElementById('estado1-Dropdown');
     let dropdown2 = document.getElementById('estado2-Dropdown');
      this.restApi.getEstados().subscribe((res)=>{
@@ -29,22 +31,43 @@ export class ManageAssetsComponent implements OnInit {
        const json = JSON.parse(myObjStr);
       var count = Object.keys(json.data).length;
       for (var _i = 0; _i < count; _i++) {
-        optionestado = document.createElement('option');
-        optionestado.text = json.data[_i].Nombre;
-        optionestado.value = json.data[_i].IdEstado;
-        dropdown.append(optionestado);
+        option = document.createElement('option');
+        option.text = json.data[_i].Nombre;
+        option.value = json.data[_i].IdEstado;
+        dropdown.append(option);
      } 
      for (var _i = 0; _i < count; _i++) {
-      optionestado = document.createElement('option');
-      optionestado.text = json.data[_i].Nombre;
-      optionestado.value = json.data[_i].IdEstado;
-      dropdown2.append(optionestado);
+      option = document.createElement('option');
+      option.text = json.data[_i].Nombre;
+      option.value = json.data[_i].IdEstado;
+      dropdown2.append(option);
    }   
   });;
   }
 
+  SedeDropdown(){
+
+    let option;
+    let dropdown = document.getElementById('sede-Dropdown');
+
+
+    this.restApi.getSedes().subscribe((res)=>{
+      const myObjStr = JSON.stringify(res)
+       const json = JSON.parse(myObjStr);
+      var count = Object.keys(json.data).length;
+      for (var _i = 0; _i < count; _i++) {
+        option= document.createElement('option');
+        option.text = json.data[_i].Nombre;
+        option.value = json.data[_i].IdSede;
+        dropdown.append(option);
+     } 
+        
+  });;
+
+  }
+
   CategoriaDropdown(){
-    let optioncategoria;
+    let option;
     let dropdown = document.getElementById('categoria-Dropdown');
     let dropdown2 = document.getElementById('categoria2-Dropdown');
 
@@ -53,25 +76,38 @@ export class ManageAssetsComponent implements OnInit {
        const json = JSON.parse(myObjStr);
       var count = Object.keys(json.data).length;
       for (var _i = 0; _i < count; _i++) {
-        optioncategoria = document.createElement('option');
-        optioncategoria.text = json.data[_i].Nombre;
-        optioncategoria.value = json.data[_i].IdCategoria;
-        dropdown.append(optioncategoria);
+        option = document.createElement('option');
+        option.text = json.data[_i].Nombre;
+        option.value = json.data[_i].IdCategoria;
+        dropdown.append(option);
      } 
      for (var _i = 0; _i < count; _i++) {
-      optioncategoria = document.createElement('option');
-      optioncategoria.text = json.data[_i].Nombre;
-      optioncategoria.value = json.data[_i].IdCategoria;
-      dropdown2.append(optioncategoria);
+      option = document.createElement('option');
+      option.text = json.data[_i].Nombre;
+      option.value = json.data[_i].IdCategoria;
+      dropdown2.append(option);
    }    
   });;
   }
 
- 
+  registrar_activo(nombre,descripcion,fecha_compra,precio_compre,
+    valor_residual,sede,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado)
+    {
+    this.restApi.getActivoXCodigo().subscribe((res)=>{
+      const myObjStr = JSON.stringify(res)
+      const json = JSON.parse(myObjStr);
+      if (json.data[0]==null){
+        console.log("Codigo de Activo en existencia")
+        this.isPopupOpened = true;
+               const dialogRef = this.dialog.open(CodeErrorComponent);
+      }
+      else{
 
-
-  registrar_activo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado){
-    console.log(estado);
+        this.restApi.setActivo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,sede,detalle_ubicacion,codigo,
+          categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado);
+         
+      }
+  });;
     
   }
 

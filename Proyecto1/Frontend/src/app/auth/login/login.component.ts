@@ -20,9 +20,12 @@ export class LoginComponent implements OnInit {
     ngOnInit() { 
     }
 
-    login(username,password,modal){
+    login(username,password){
+        
         this.restApi.getSate(username,password).subscribe((res)=>{
-            if (res=="true"){
+            const myObjStr = JSON.stringify(res)
+            const json = JSON.parse(myObjStr);
+            if (json.success==true){
                this.router.navigate(['./admin_view/admin']); //ruta a admin si el login es exitoso
             }
             else{

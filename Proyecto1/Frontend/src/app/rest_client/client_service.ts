@@ -34,14 +34,28 @@ export class RestApiService {
   // HttpClient API get() method => auth login
   getSate(username,password) {
 
-    const params = new HttpParams()
-    .set('email', username)
-    .set('pass', password);
+    let body ={
+      "email":username,
+      "pass":password
+    }
 
-   return  this.http.get(this.apiURL+urls.auth_url,{params}).pipe(retry(1),catchError(this.handleError));
+   return  this.http.post(this.apiURL+urls.auth_url,body).pipe(retry(1),catchError(this.handleError));
   }
+  getSedes() {
+    let body= {
+                "typesIn":[],
+                "typesOut":[],
+                "parameters":[],
+                "values":[],
+                "ouputs":[],
+                "name":"getSede"
+              }
+    ;
+    return this.http.post (this.apiURL+urls.sp_url+'getSedes',body).pipe(retry(1),catchError(this.handleError));
+  }
+  
 
-  getProvincias(datos) {
+  getProvincias() {
     let body={
                 "typesIn":[],
                 "typesOut":[],
@@ -103,9 +117,17 @@ export class RestApiService {
    return this.http.post (this.apiURL+urls.sp_url+'getProvincia',body).pipe(retry(1),catchError(this.handleError));
   }
 
-  getActivos() {
-    //let body;
-    //return this.http.post (this.apiURL+urls.sp_url+'getActivos',body).pipe(retry(1),catchError(this.handleError));
+  getActivoXCodigo() {
+    let body={
+      "typesIn":["varchar"],
+      "typesOut":[],
+      "parameters":["Codigo"],
+      "values":[],
+      "ouputs":[],
+      "name":"getActivo"
+    }
+    
+    return this.http.post (this.apiURL+urls.sp_url+'getActivoXCodigo',body).pipe(retry(1),catchError(this.handleError));
   }
 
   getCodigos() {
@@ -117,6 +139,18 @@ export class RestApiService {
     let body;
     return this.http.post (this.apiURL+urls.sp_url+'putSede',body).pipe(retry(1),catchError(this.handleError));
 
+  }
+
+  setActivo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,sede,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado) {
+    let body= {
+      "typesIn":["varchar","varchar","varchar","varchar","int","date","int","int","date","date","date","int","int","varchar","int" ,"int" ,"int" ,"int"],
+      "typesOut":[],
+      "parameters":["Codigo","Nombre","Descripcion","Foto","Precio","TiempoGar","VidaU","PorcentajeD","FechaCompra","FechaRegistro","FechaAsig","CentroCosto","ValorResidual","DetalleUb","IdCategoria","IdSede","IdMoneda","IdEstado"],
+      "values":[nombre,descripcion,fecha_compra,precio_compre,valor_residual,sede,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado],
+      "ouputs":[],
+      "name":"setActivo"
+    }  
+    return this.http.post (this.apiURL+urls.sp_url+'getSedes',body).pipe(retry(1),catchError(this.handleError));
   }
 
   // Error handling 

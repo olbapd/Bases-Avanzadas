@@ -5,7 +5,7 @@
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[getActivo]
-	@Codigo int
+	@Codigo varchar(50)
 AS
 SET NOCOUNT ON
 
@@ -28,7 +28,7 @@ SELECT [IdActivo],
 	[IdMoneda],
 	[IdEstado]
 FROM Activo
-WHERE [Codigo] = Codigo
+WHERE [Codigo] = @Codigo
 SET NOCOUNT OFF
 GO
 
@@ -463,13 +463,14 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[setCategoria]
-	@NombreC varchar(50)
+	@NombreC varchar(50),
+	@Tangible bit
 
 AS
 BEGIN
 	BEGIN TRAN
 	BEGIN TRY
-		INSERT INTO Categoria(Nombre) VALUES (@NombreC)
+		INSERT INTO Categoria(Nombre, Tangible) VALUES (@NombreC, @Tangible)
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -515,6 +516,14 @@ GO
 -- Parametro de Entrada: <CorreoEmpleado>
 -- Parametro de Salida: <Ninguno>
 -- =============================================
+CREATE OR ALTER PROC sp_login
+    @CorreoEmp nvarchar(50)   
+AS   
+	SELECT *
+	FROM Empleado
+    WHERE Correo= @CorreoEmp;
+GO  
+
 
 -- =============================================
 -- Descripcion:	<Sleccionar informacion del empleado a partir del login>
@@ -567,6 +576,7 @@ BEGIN
 		ROLLBACK TRANSACTION
 	END CATCH
 END
+GO
 
 -- =============================================
 -- Descripcion:	<Realiza la asignacion de un empleado a una sede>
@@ -682,8 +692,7 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[getEmpleadoFechaI]
-	@FechaInicial date,
-	@FechaFinal date
+	@FechaInicial date
 AS
 SET NOCOUNT ON
 
@@ -721,6 +730,12 @@ WHERE @CodigoActivo = [Activo].Codigo
 SET NOCOUNT OFF
 GO
 
+CREATE OR ALTER PROC sp_assignActive   
+    @IdEmpleado int,   
+    @IdActivo int   
+AS   
 
-
- 
+    UPDATE Proyecto1BDA.dbo.Activo 
+	SET IdEmpleado= @IdEmpleado, FechaAsignacion = GETDATE()
+	WHERE IdActivo = @IdActivo;
+GO 
