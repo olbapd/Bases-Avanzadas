@@ -694,6 +694,9 @@ EXEC setEstado 'Activo'
 EXEC setEstado 'Inactivo'
 EXEC setEstado 'Asignado'
 EXEC setEstado 'No Asignado'
+EXEC setEstado 'Dar de Baja'
+EXEC setEstado 'Reparacion'
+EXEC setEstado 'Garantia'
 
 --INSERTAR DEPARTAMENTOS
 EXEC setDepartamento 'Departamento de Comunicacion'
@@ -707,16 +710,19 @@ EXEC setDepartamento 'Departamento de Informatica'
 EXEC setDepartamento 'Departamento de Ventas'
 EXEC setDepartamento 'Departamento de Control'
 
-EXEC setCategoria 'Terreno y bienes naturales', 1
-EXEC setCategoria 'Construcciones', 1;
-EXEC setCategoria 'Maquinaria', 1;
-EXEC setCategoria 'Mobiliario', 1;
-EXEC setCategoria 'Equipo Informatico', 1;
+EXEC setCategoria 'Laptop', 1
+EXEC setCategoria 'PC Escritorio', 1;
+EXEC setCategoria 'Proyector', 1
+EXEC setCategoria 'Impresora', 1;
+EXEC setCategoria 'Fotocopiadora', 1;
+EXEC setCategoria 'Escritorio', 1;
+EXEC setCategoria 'Silla', 1;
+EXEC setCategoria 'USB', 1;
 EXEC setCategoria 'Transporte', 1;
-EXEC setCategoria 'Marcas', 0;
-EXEC setCategoria 'Patentes', 0;
-EXEC setCategoria 'Derechos de autor', 0;
-EXEC setCategoria 'Licencias y permiso', 0;
+EXEC setCategoria 'Archivaderos', 0;
+EXEC setCategoria 'Mueble', 0;
+EXEC setCategoria 'Limpieza', 0;
+EXEC setCategoria 'Licencias de Programas', 0;
 
 --INSERTAR MONEDAS
 EXEC setMoneda 'Dolares'
@@ -765,42 +771,93 @@ EXEC Contrato 3,12,'2017-01-30'
 EXEC Contrato 3,13,'2017-01-30'
 
 --INSERTAR ACTIVO
-EXEC setActivo 'AC00001','Laptop','Computadora DELL','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AC00001','Laptop1','Computadora DELL T1','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,1,NULL,1,3
+EXEC setActivo 'AC00002','Laptop2','Computadora DELL T2','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,1,NULL,1,3
+EXEC setActivo 'AC00003','Laptop3','Computadora DELL T3','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,1,NULL,1,3
+EXEC setActivo 'AC00004','Laptop4','Computadora DELL T4','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,1,NULL,1,3
+EXEC setActivo 'AC00005','Laptop5','Computadora DELL T5','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,1,NULL,1,3
+EXEC setActivo 'AC00006','Laptop6','Computadora DELL T6','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,1,NULL,1,3
 
---EXEC setActivo 'AF00002','Proyector','Proyector CANON','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',NULL,8,600,NULL,5,1,1,3
+EXEC setActivo 'AC00007','PC Escritorio1','Computadora de escritorio DELL T1','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,2,NULL,1,3
+EXEC setActivo 'AC00008','PC Escritorio2','Computadora de escritorio DELL T2','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,2,NULL,1,3
+EXEC setActivo 'AC00009','PC Escritorio3','Computadora de escritorio DELL T3','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,2,NULL,1,3
+EXEC setActivo 'AC00010','PC Escritorio4','Computadora de escritorio DELL T4','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,2,NULL,1,3
+EXEC setActivo 'AC00011','PC Escritorio5','Computadora de escritorio DELL T5','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,2,NULL,1,3
+EXEC setActivo 'AC00012','PC Escritorio6','Computadora de escritorio DELL T6','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,2,NULL,1,3
 
---EXEC setActivo 'AF00003','Escritorio','Escritorio de madera','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',NULL,8,100,NULL,5,1,1,3
---EXEC setActivo 'AF00004','Computadora','Computadora de escritorio DELL','Enlace',900,1,10,0.2,'2017-05-30','2017-06-01',NULL,8,100,NULL,5,1,1,3
+EXEC setActivo 'AF00013','Proyector1','Proyector CANON T1','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',NULL,8,600,NULL,3,NULL,1,3
+EXEC setActivo 'AF00014','Proyector2','Proyector CANON T2','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',NULL,8,600,NULL,3,NULL,1,3
+EXEC setActivo 'AF00015','Proyector3','Proyector CANON T3','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',NULL,8,600,NULL,3,NULL,1,3
+EXEC setActivo 'AF00016','Proyector4','Proyector CANON T4','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',NULL,8,600,NULL,3,NULL,1,3
+EXEC setActivo 'AF00017','Proyector5','Proyector CANON T5','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',NULL,8,600,NULL,3,NULL,1,3
+EXEC setActivo 'AF00018','Proyector6','Proyector CANON T6','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',NULL,8,600,NULL,3,NULL,1,3
 
---EXEC setActivo 'AF00005','Archivero','Archivero Metalico','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',NULL,8,1000,NULL,5,1,1,3
---EXEC setActivo 'AF00006','Escritorio','Escritorio Metalico','Enlace',500,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AF00019','Impresora1','Impresora HP T1','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',NULL,8,100,NULL,4,NULL,1,3
+EXEC setActivo 'AF00020','Impresora2','Impresora HP T2','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',NULL,8,100,NULL,4,NULL,1,3
+EXEC setActivo 'AF00021','Impresora3','Impresora HP T3','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',NULL,8,100,NULL,4,NULL,1,3
+EXEC setActivo 'AF00022','Impresora4','Impresora HP T4','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',NULL,8,100,NULL,4,NULL,1,3
+EXEC setActivo 'AF00023','Impresora5','Impresora HP T5','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',NULL,8,100,NULL,4,NULL,1,3
+EXEC setActivo 'AF00024','Impresora6','Impresora HP T6','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',NULL,8,100,NULL,4,NULL,1,3
 
---EXEC setActivo 'AF00007','Carro','Carro Mazda 6','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',NULL,8,500,NULL,5,1,1,3
---EXEC setActivo 'AF00008','Silla','Silla Plastica','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AF00025','Fotocopiadora1','Fotocopiadora DELL T1','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,NULL,1,3
+EXEC setActivo 'AF00026','Fotocopiadora2','Fotocopiadora DELL T2','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,NULL,1,3
+EXEC setActivo 'AF00027','Fotocopiadora3','Fotocopiadora DELL T3','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,NULL,1,3
+EXEC setActivo 'AF00028','Fotocopiadora4','Fotocopiadora DELL T4','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,NULL,1,3
+EXEC setActivo 'AF00029','Fotocopiadora5','Fotocopiadora DELL T5','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,NULL,1,3
+EXEC setActivo 'AF00030','Fotocopiadora6','Fotocopiadora DELL T6','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,NULL,1,3
 
---EXEC setActivo 'AF00009','Laptop','Computadora HP','Enlace',1200,1,3,0.35,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
---EXEC setActivo 'AF00010','Escritorio','Escritorio de madera','Enlace',500,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
---EXEC setActivo 'AF00011','Silla','Silla metalica/plastica','Enlace',60,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AF00031','Escritorio1','Escritorio T1','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,6,NULL,1,3
+EXEC setActivo 'AF00032','Escritorio2','Escritorio T2','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,6,NULL,1,3
+EXEC setActivo 'AF00033','Escritorio3','Escritorio T3','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,6,NULL,1,3
+EXEC setActivo 'AF00034','Escritorio4','Escritorio T4','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,6,NULL,1,3
+EXEC setActivo 'AF00035','Escritorio5','Escritorio T5','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,6,NULL,1,3
+EXEC setActivo 'AF00036','Escritorio6','Escritorio T6','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,6,NULL,1,3
 
---EXEC setActivo 'AF00012','Computadora','Computadora de escritorio HP','Enlace',1200,1,5,0.25,'2016-12-10','2016-12-14',NULL,8,500,NULL,5,1,1,3
---EXEC setActivo 'AF00013','Escritorio','Escritorio metalico DELL','Enlace',150000,1,7,0.9,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AF00037','Silla1','Silla T1','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',NULL,8,500,NULL,7,NULL,1,3
+EXEC setActivo 'AF00038','Silla2','Silla T2','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',NULL,8,500,NULL,7,NULL,1,3
+EXEC setActivo 'AF00039','Silla3','Silla T3','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',NULL,8,500,NULL,7,NULL,1,3
+EXEC setActivo 'AF00040','Silla4','Silla T4','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',NULL,8,500,NULL,7,NULL,1,3
+EXEC setActivo 'AF00041','Silla5','Silla T5','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',NULL,8,500,NULL,7,NULL,1,3
+EXEC setActivo 'AF00042','Silla6','Silla T6','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',NULL,8,500,NULL,7,NULL,1,3
 
---EXEC setActivo 'AF00014','Licencias de Programas','Instaladores de programas varios','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',NULL,8,500,NULL,5,1,1,3
---EXEC setActivo 'AF00015','USB','USB Kingston','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AF00043','USB1','USB Kingston T1','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',NULL,8,500,NULL,8,NULL,1,3
+EXEC setActivo 'AF00044','USB2','USB Kingston T2','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',NULL,8,500,NULL,8,NULL,1,3
+EXEC setActivo 'AF00045','USB3','USB Kingston T3','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',NULL,8,500,NULL,8,NULL,1,3
+EXEC setActivo 'AF00046','USB4','USB Kingston T4','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',NULL,8,500,NULL,8,NULL,1,3
+EXEC setActivo 'AF00047','USB5','USB Kingston T5','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',NULL,8,500,NULL,8,NULL,1,3
+EXEC setActivo 'AF00048','USB6','USB Kingston T6','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',NULL,8,500,NULL,8,NULL,1,3
 
---EXEC setActivo 'AF00016','Carro','Carro Toyota','Enlace',35000,1,5,3.5,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
---EXEC setActivo 'AF00017','Laptop','Computadora DELL','Enlace',1500,1,3,0.2,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AF00049','Carro1','Carro MARCA1','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',NULL,8,500,NULL,9,NULL,1,3
+EXEC setActivo 'AF00050','Carro2','Carro MARCA2','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',NULL,8,500,NULL,9,NULL,1,3
+EXEC setActivo 'AF00051','Carro3','Carro MARCA3','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',NULL,8,500,NULL,9,NULL,1,3
+EXEC setActivo 'AF00052','Carro4','Carro MARCA4','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',NULL,8,500,NULL,9,NULL,1,3
+EXEC setActivo 'AF00053','Carro5','Carro MARCA5','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',NULL,8,500,NULL,9,NULL,1,3
+EXEC setActivo 'AF00054','Carro6','Carro MARCA6','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',NULL,8,500,NULL,9,NULL,1,3
 
---EXEC setActivo 'AF00018','Mueble','Mueble de madera','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
---EXEC setActivo 'AF00019','Archivadero','Archivadero metalico','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AF00055','Archivero1','Archivero Metalico T1','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',NULL,8,1000,NULL,10,NULL,1,3
+EXEC setActivo 'AF00056','Archivero2','Archivero Metalico T2','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',NULL,8,1000,NULL,10,NULL,1,3
+EXEC setActivo 'AF00057','Archivero3','Archivero Metalico T3','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',NULL,8,1000,NULL,10,NULL,1,3
+EXEC setActivo 'AF00058','Archivero4','Archivero Metalico T4','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',NULL,8,1000,NULL,10,NULL,1,3
+EXEC setActivo 'AF00059','Archivero5','Archivero Metalico T5','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',NULL,8,1000,NULL,10,NULL,1,3
+EXEC setActivo 'AF00060','Archivero6','Archivero Metalico T6','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',NULL,8,1000,NULL,10,NULL,1,3
 
---EXEC setActivo 'AF00020','Carrito limpieza','Articulos varios de limpieza','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
---EXEC setActivo 'AF00021','Bodega','Bodega para el almacenamiento de productos','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AF00061','Mueble1','Mueble de madera T1','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,11,NULL,1,3
+EXEC setActivo 'AF00062','Mueble2','Mueble de madera T2','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,11,NULL,1,3
+EXEC setActivo 'AF00063','Mueble3','Mueble de madera T3','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,11,NULL,1,3
+EXEC setActivo 'AF00064','Mueble4','Mueble de madera T4','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,11,NULL,1,3
+EXEC setActivo 'AF00065','Mueble5','Mueble de madera T5','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,11,NULL,1,3
+EXEC setActivo 'AF00066','Mueble6','Mueble de madera T6','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,11,NULL,1,3
 
---EXEC setActivo 'AF00022','Fotocopiadora','Fotocopiadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
---EXEC setActivo 'AF00023','Laptop','Computadora DELL','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AF00067','Limpieza1','Articulos varios de limpieza T1','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,12,NULL,1,3
+EXEC setActivo 'AF00068','Limpieza2','Articulos varios de limpieza T2','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,12,NULL,1,3
+EXEC setActivo 'AF00069','Limpieza3','Articulos varios de limpieza T3','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,12,NULL,1,3
+EXEC setActivo 'AF00070','Limpieza4','Articulos varios de limpieza T4','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,12,NULL,1,3
+EXEC setActivo 'AF00071','Limpieza5','Articulos varios de limpieza T5','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,12,NULL,1,3
+EXEC setActivo 'AF00072','Limpieza6','Articulos varios de limpieza T6','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,12,NULL,1,3
 
---EXEC setActivo 'AF00024','Impresora','Impresora HP','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
---EXEC setActivo 'AF00025','Laptop','Computadora HP','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
-
---EXEC setActivo 'AF00026','Laptop','Computadora ACER','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,1,1,3
+EXEC setActivo 'AF00073','Licencias de Programas1','Instaladores de programas varios T1','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',NULL,8,500,NULL,13,NULL,1,3
+EXEC setActivo 'AF00074','Licencias de Programas2','Instaladores de programas varios T2','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',NULL,8,500,NULL,13,NULL,1,3
+EXEC setActivo 'AF00075','Licencias de Programas3','Instaladores de programas varios T3','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',NULL,8,500,NULL,13,NULL,1,3
+EXEC setActivo 'AF00076','Licencias de Programas4','Instaladores de programas varios T4','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',NULL,8,500,NULL,13,NULL,1,3
+EXEC setActivo 'AF00077','Licencias de Programas5','Instaladores de programas varios T5','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',NULL,8,500,NULL,13,NULL,1,3
+EXEC setActivo 'AF00078','Licencias de Programas6','Instaladores de programas varios T6','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',NULL,8,500,NULL,13,NULL,1,3
