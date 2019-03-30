@@ -24,19 +24,12 @@ export class ManageAssetsComponent implements OnInit {
 
   EstadoDropdown(){
     let option;
-    let dropdown = document.getElementById('estado1-Dropdown');
     let dropdown2 = document.getElementById('estado2-Dropdown');
      this.restApi.getEstados().subscribe((res)=>{
        const myObjStr = JSON.stringify(res)
        const json = JSON.parse(myObjStr);
       var count = Object.keys(json.data).length;
-      for (var _i = 0; _i < count; _i++) {
-        option = document.createElement('option');
-        option.text = json.data[_i].Nombre;
-        option.value = json.data[_i].IdEstado;
-        dropdown.append(option);
-     } 
-     for (var _i = 0; _i < count; _i++) {
+     for (var _i = 2; _i < count; _i++) {
       option = document.createElement('option');
       option.text = json.data[_i].Nombre;
       option.value = json.data[_i].IdEstado;
@@ -70,6 +63,7 @@ export class ManageAssetsComponent implements OnInit {
     let option;
     let dropdown = document.getElementById('categoria-Dropdown');
     let dropdown2 = document.getElementById('categoria2-Dropdown');
+    let dropdown3 = document.getElementById('categoria3-Dropdown');
 
     this.restApi.getCategorias().subscribe((res)=>{
       const myObjStr = JSON.stringify(res)
@@ -81,12 +75,19 @@ export class ManageAssetsComponent implements OnInit {
         option.value = json.data[_i].IdCategoria;
         dropdown.append(option);
      } 
-     for (var _i = 0; _i < count; _i++) {
-      option = document.createElement('option');
-      option.text = json.data[_i].Nombre;
-      option.value = json.data[_i].IdCategoria;
-      dropdown2.append(option);
-   }    
+      for (var _i = 0; _i < count; _i++) {
+        option = document.createElement('option');
+        option.text = json.data[_i].Nombre;
+        option.value = json.data[_i].IdCategoria;
+        dropdown2.append(option);
+    }   
+   
+      for (var _i = 0; _i < count; _i++) {
+        option = document.createElement('option');
+        option.text = json.data[_i].Nombre;
+        option.value = json.data[_i].IdCategoria;
+        dropdown3.append(option);
+    }  
   });;
   }
 
@@ -109,6 +110,37 @@ export class ManageAssetsComponent implements OnInit {
       }
   });;
     
+  }
+  CodigoDropDown_Modif_State(idCategoria){
+    let option;
+    let dropdown = document.getElementById('codigo_modif_state-Dropdown');
+    this.restApi.getCodigoXCategoria(idCategoria).subscribe((res)=>{
+      const myObjStr = JSON.stringify(res)
+       const json = JSON.parse(myObjStr);
+      var count = Object.keys(json.data).length;
+      for (var _i = 0; _i < count; _i++) {
+        option= document.createElement('option');
+        option.text = json.data[_i].Codigo;
+        dropdown.append(option);
+     } 
+  });;
+  }
+
+  EstadoDropDown_Modif_State(Codigo){
+    let option;
+    let dropdown = document.getElementById('codigo_modif_state-Dropdown');
+    this.restApi.getCodigoXCategoria(Codigo).subscribe((res)=>{
+      const myObjStr = JSON.stringify(res)
+       const json = JSON.parse(myObjStr);
+      var count = Object.keys(json.data).length;
+      for (var _i = 0; _i < count; _i++) {
+        option= document.createElement('option');
+        option.text = json.data[_i].Estado;
+        dropdown.append(option);
+     } 
+  });;
+
+
   }
 
   modificar_estado_activo(activo,estado_activo){

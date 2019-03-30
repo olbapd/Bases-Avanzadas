@@ -42,17 +42,16 @@
                   aria-describedby="basic-addon1">
               </div>
 
-              <h6 class="card-subtitle mb-2 text-muted">Sede</h6>
+              <h6 class="card-subtitle mb-2 text-muted">Codigo</h6>
               <div class="input-group mb-3">
-                <select id="sede-Dropdown" name="sede" class="form-control" #select_sede data-style="btn-primary" data-live-search="true"
-                  data-selectpicker data-collection-name="items" ng-model="selected">
-                </select>
+                <input type="text" #txt_codigo class="form-control" placeholder="Codigo" aria-label="Codigo"
+                  aria-describedby="basic-addon1">
               </div>
 
-              <h6 class="card-subtitle mb-2 text-muted">Detalle Ubicacion</h6>
+              <h6 class="card-subtitle mb-2 text-muted">% Depreciación</h6>
               <div class="input-group mb-3">
-                <input type="text" #txt_detalle_ubicacion class="form-control" placeholder="1000000"
-                  aria-label="residual" aria-describedby="basic-addon1">
+                <input type="text" #txt_depreciacion class="form-control" placeholder="Codigo" aria-label="Codigo"
+                  aria-describedby="basic-addon1">
               </div>
             </div>
 
@@ -60,13 +59,6 @@
 
             <!--Columna de la Derecha-->
             <div class="col-md-6">
-
-              <h6 class="card-subtitle mb-2 text-muted">Codigo</h6>
-              <div class="input-group mb-3">
-                <input type="text" #txt_codigo class="form-control" placeholder="Codigo" aria-label="Codigo"
-                  aria-describedby="basic-addon1">
-              </div>
-
               <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
               <div class="input-group mb-3">
                 <select id="categoria-Dropdown" name="categoria" class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
@@ -99,13 +91,8 @@
               </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Estado</h6>
-              <div class="input-group mb-3">
-                <select id="estado1-Dropdown" name="estado1" class="form-control" #select_estado data-style="btn-primary" data-live-search="true"
-                  data-selectpicker data-collection-name="items" ng-model="selected">
-                 
-                  <!--LLenado de Select-->
-                </select>
-              </div>
+              <h6 class="card-subtitle mb-2 text-muted">No Asignado</h6>
+              
 
             </div>
           </div>
@@ -120,54 +107,43 @@
 
     <!--Card para la Baja de Activos-->
 
-    <div class="col-md-4">
-      <div class="card border-info" style="max-width: 50rem; margin-bottom: 20px">
+    
+      <div class="card border-info" style="max-width: 18rem; max-height: 23rem; margin-bottom: 20px">
         <div class="card-body text-center">
-          <h5 class="card-title"> Modificar Estado de Activos</h5>
+          <h5 class="card-title"> Modificar Estado del Activo</h5>
           <div class="row text-center">
-            <div class="col-md-6">
-
-
-              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Activo</h6>
-              <div class="input-group mb-3">
-                <select class="form-control" #select_activo data-style="btn-primary" data-live-search="true"
-                  data-selectpicker data-collection-name="items" ng-model="selected">
-                  <option selected>Opción</option>
-                  <option *ngFor="let act of activos">{{act}}</option>
-                  <!--LLenado de Select-->
-                </select>
-              </div>
               <h6 class="card-subtitle mb-2 text-muted">Seleccionar Categoria</h6>
               <div class="input-group mb-3">
-                <select class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
-                  data-selectpicker data-collection-name="items" ng-model="selected">
-                  <option selected>Opción</option>
-                  <option *ngFor="let act of activos">{{act}}</option>
+                <select id="categoria3-Dropdown" name="categoria3" class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
+                  data-selectpicker data-collection-name="items" ng-model="selected"
+                  (change)="CodigoDropDown_Modif_State($event.target.value)">
                   <!--LLenado de Select-->
                 </select>
               </div>
 
-
-            </div>
-
-            <div class="col-md-6">
+              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Codigo</h6>
+              <div class="input-group mb-3">
+                <select id="codigo_modif_state-Dropdown" name="codigo_modif_state" class="form-control" #select_codigo_baja data-style="btn-primary" data-live-search="true"
+                  data-selectpicker data-collection-name="items" ng-model="selected">
+                  <!--LLenado de Select-->
+                </select>
+              </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Seleccionar Estado</h6>
               <div class="input-group mb-3">
-                <select id="estado2-Dropdown" name="estado2" class="form-control" #select_estado_activo data-style="btn-primary" data-live-search="true"
-                  data-selectpicker data-collection-name="items" ng-model="selected">
+                <select id="estado3-Dropdown" name="estado3" class="form-control" #select_estado_activo data-style="btn-primary" data-live-search="true"
+                  data-selectpicker data-collection-name="items" ng-model="selected"
+                  (change)="EstadoDropDown_Modif_State($event.target.value)">
                   <!--LLenado de Select-->
                 </select>
               </div>
-            </div>
+            
           </div>
-
           <button (click)="modificar_estado_activo(select_activo.value,select_estado_activo.value)" type="button"
-            class="btn btn-primary">Modificar</button>
+            class="btn btn-primary">Modificar Estado</button>
         </div>
       </div>
-    </div>
-
+ 
     <!--Card para la Asignacion de Activos-->
 
     <div class="col-md-4">
@@ -183,9 +159,9 @@
                   aria-label="idEmpleado" aria-describedby="basic-addon1">
               </div>
 
-              <h6 class="card-subtitle mb-2 text-muted">Detalle de Entrega</h6>
+              <h6 class="card-subtitle mb-2 text-muted">Detalle de Ubicacion</h6>
               <div class="input-group mb-3">
-                <input type="text" #txt_detalle_entrega class="form-control" placeholder="..." aria-label="idEmpleado"
+                <input type="text" #txt_detalle_ubicacion class="form-control" placeholder="..." aria-label="idEmpleado"
                   aria-describedby="basic-addon1">
               </div>
 
