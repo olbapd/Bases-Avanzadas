@@ -28,7 +28,8 @@ router.post("/assign", function(req,res){
 	 },(result)=>{
 	 	if(result.error){
 	 	    res.status(503).json({
-	 	    	error : 'Internal Server Error, it has been registered.'
+	 	    	error : 'Internal Server Error, it has been registered.',
+	 	    	success: false
 	 		})
 	 	    return;
 	 	}
