@@ -45,7 +45,7 @@ expose.assignActive = (data,cb) =>{
   let request =  new sqlserver.Request(sqltool.getPool());
   request.input('IdEmpleado',sqlserver.Int,data.idEmployee);
   request.input('IdActivo',sqlserver.Int,data.idActivo);
-  request.execute('sp_assignActive',(err,result)=>{
+  request.execute('asigActivo',(err,result)=>{
       if (err) {
         global.log4us.error(`Error assiging active: ${err}`);
         to_return.error=err;
