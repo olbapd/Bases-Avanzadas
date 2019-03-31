@@ -91,14 +91,16 @@
               </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Estado</h6>
-              <h6 class="card-subtitle mb-2 text-muted">No Asignado</h6>
+              <div class="input-group mb-3">
+                  <input type="text" readonly="readonly" #txt_estado class="form-control" placeholder="No Asignado" aria-label="Estado"
+                    aria-describedby="basic-addon1">
+                </div>
+              
 
               <h6 class="card-subtitle mb-2 text-muted">Moneda</h6>
               <div class="input-group mb-3">
                 <select id="moneda-Dropdown" name="moneda" class="form-control" #select_estado data-style="btn-primary" data-live-search="true"
                   data-selectpicker data-collection-name="items" ng-model="selected">
-                 
-                  <!--LLenado de Select-->
                 </select>
               </div>
 
@@ -122,7 +124,7 @@
           <div class="row text-center">
               <h6 class="card-subtitle mb-2 text-muted">Seleccionar Categoria</h6>
               <div class="input-group mb-3">
-                <select id="categoria3-Dropdown" name="categoria3" class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
+                <select id="categoria3-Dropdown"  name="categoria3" class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
                   data-selectpicker data-collection-name="items" ng-model="selected"
                   (change)="CodigoDropDown_Modif_State($event.target.value)">
                   <!--LLenado de Select-->
@@ -132,16 +134,18 @@
               <h6 class="card-subtitle mb-2 text-muted">Seleccionar Codigo</h6>
               <div class="input-group mb-3">
                 <select id="codigo_modif_state-Dropdown" name="codigo_modif_state" class="form-control" #select_codigo_baja data-style="btn-primary" data-live-search="true"
-                  data-selectpicker data-collection-name="items" ng-model="selected">
+                  data-selectpicker data-collection-name="items" ng-model="selected"
+                  (change)="EstadoDropDown_Modif_State($event.target.value)">
                   <!--LLenado de Select-->
                 </select>
+
               </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Seleccionar Estado</h6>
               <div class="input-group mb-3">
                 <select id="estado3-Dropdown" name="estado3" class="form-control" #select_estado_activo data-style="btn-primary" data-live-search="true"
                   data-selectpicker data-collection-name="items" ng-model="selected"
-                  (change)="EstadoDropDown_Modif_State($event.target.value)">
+                  >
                   <!--LLenado de Select-->
                 </select>
               </div>
@@ -173,18 +177,11 @@
                   aria-describedby="basic-addon1">
               </div>
 
-
-
-              <h6 class="card-subtitle mb-2 text-muted">Fecha de Asignación</h6>
-              <div class="input-group mb-3">
-                <input type="date" #txt_fecha_asignacion id="dateOfBirth" [(ngModel)]="dateOfBirth"
-                  class="form-control" />
-              </div>
             </div>
 
             <!--Parte Derecha-->
             <div class="col-md-6">
-              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Categoria</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Seleccionar Categoria</h6>
               <div class="input-group mb-3">
                 <select id="categoria2-Dropdown" name="categoria2"class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
                   data-selectpicker data-collection-name="items" ng-model="selected"
@@ -193,17 +190,9 @@
                   <!--LLenado de Select-->
                 </select>
               </div>
+              
 
-              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Activo</h6>
-              <div class="input-group mb-3">
-                <select class="form-control" #select_activo_asg data-style="btn-primary" data-live-search="true"
-                  data-selectpicker data-collection-name="items" ng-model="selected"
-                  (change)="selected($event.target.value)">
-                  <option *ngFor="let act of activos">{{act}}</option>
-                  <!--LLenado de Select-->
-                </select>
-              </div>
-
+      
               <h6 class="card-subtitle mb-2 text-muted">Seleccionar Codigo</h6>
               <div class="input-group mb-3">
                 <select class="form-control" #select_codigo data-style="btn-primary" data-live-search="true"

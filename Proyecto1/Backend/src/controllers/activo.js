@@ -19,7 +19,7 @@ let config = require('config');
 
 let activo = require('../business/activo');
 
-router.get("/assign", function(req,res){
+router.post("/assign", function(req,res){
 	activo.assignActive({
 	 	email:req.body.email,
 	 	name: req.body.name,
