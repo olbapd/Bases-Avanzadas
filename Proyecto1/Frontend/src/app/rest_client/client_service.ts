@@ -114,7 +114,33 @@ export class RestApiService {
                 "ouputs":[],
                 "name":"getProvincia"
               }
-   return this.http.post (this.apiURL+urls.sp_url+'getProvincia',body).pipe(retry(1),catchError(this.handleError));
+   return this.http.post (this.apiURL+urls.sp_url+'getDistrito',body).pipe(retry(1),catchError(this.handleError));
+  }
+
+  getCodigoDynamic(idEstado,idCategoria){
+    let body ={
+                "typesIn":["int","int"],
+                "typesOut":[],
+                "parameters":["IdEstado","idCategoria"],
+                "values":[idEstado,idCategoria],
+                "ouputs":[],
+                "name":"getActivoLi"
+              }
+    return this.http.post (this.apiURL+urls.sp_url+'getCodigoDynamic',body).pipe(retry(1),catchError(this.handleError));
+  }
+
+  setAssignActivo(Codigo,Cedula,DetalleUbi){
+
+    let body={
+              "typesIn":["varchar","varchar", "int","varchar"],
+              "typesOut":["Codigo","Cedula","IdEstado","DetalleUbi"],
+              "parameters":[],
+              "values":[Codigo,Cedula,3,DetalleUbi],
+              "ouputs":[],
+              "name":"asigActivo"
+            }
+return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(retry(1),catchError(this.handleError));
+
   }
 
   getActivoXCodigo() {
