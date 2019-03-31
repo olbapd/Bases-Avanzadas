@@ -30,7 +30,7 @@ export class ManageAssetsComponent implements OnInit {
        const myObjStr = JSON.stringify(res)
        const json = JSON.parse(myObjStr);
       var count = Object.keys(json.data).length;
-     for (var _i = 2; _i < count; _i++) {
+     for (var _i = 3; _i < count; _i++) {
       option = document.createElement('option');
       option.text = json.data[_i].Nombre;
       option.value = json.data[_i].IdEstado;
@@ -85,13 +85,14 @@ export class ManageAssetsComponent implements OnInit {
   registrar_activo(nombre,descripcion,fecha_compra,precio_compre,
     valor_residual,sede,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado)
     {
+    let btn = document.getElementById('registrar_btn');
     this.restApi.getActivoXCodigo().subscribe((res)=>{
       const myObjStr = JSON.stringify(res)
       const json = JSON.parse(myObjStr);
       if (json.data[0]==null){
-        console.log("Codigo de Activo en existencia")
+        btn.setAttribute('class','btn bnt-danger');
         this.isPopupOpened = true;
-               const dialogRef = this.dialog.open(CodeErrorComponent);
+        const dialogRef = this.dialog.open(CodeErrorComponent);
       }
       else{
         this.restApi.setActivo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,sede,detalle_ubicacion,codigo,
@@ -137,9 +138,22 @@ export class ManageAssetsComponent implements OnInit {
   });;
   this.EstadoDropdown();
   }
-  modificar_estado_activo(activo,estado_activo){
-    $("#estado3-Dropdown").load;
-    //console.log(activo);
+  modificar_estado_activo(Codigo,IdEstado){
+    let btn = document.getElementById('modifstate_btn');
+    if (Codigo=="" || IdEstado==""){
+      btn.setAttribute('class','btn btn-danger');
+     }
+     else{
+      this.restApi.getQuitarActivo(Codigo,IdEstado).subscribe((res)=>{
+        const myObjStr = JSON.stringify(res)
+        const json = JSON.parse(myObjStr);
+        
+         if(json.success==true){
+           btn.setAttribute('class','btn btn-success');
+  
+         }
+      });;
+     }
   }
   asignar_activo(Codigo,Cedula,DetalleUbi){
     //this.restApi.setAssignActivo(Codigo,Cedula,DetalleUbi);

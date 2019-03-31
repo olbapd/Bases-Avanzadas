@@ -207,6 +207,19 @@ return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(
     return this.http.post (this.apiURL+urls.sp_url+'getEstadoXCodigo',body).pipe(retry(1),catchError(this.handleError));
   }
 
+  getQuitarActivo(Codigo,IdEstado) {
+    let body={
+              "typesIn":["varchar","int"],
+              "typesOut":[],
+              "parameters":["Codigo","IdEstado"],
+              "values":[Codigo,IdEstado],
+              "ouputs":[],
+              "name":"quitarActivo"
+            }
+    
+    return this.http.post (this.apiURL+urls.sp_url+'quitarActivo',body).pipe(retry(1),catchError(this.handleError));
+  }
+
 
   putSede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso){
     let body;

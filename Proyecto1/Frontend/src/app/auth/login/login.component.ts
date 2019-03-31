@@ -22,6 +22,8 @@ export class LoginComponent implements OnInit {
     }
 
     login(username,password){
+        console.log("pass:"+password);
+        console.log("name:"+username);
         
         this.restApi.getSate(username,password).subscribe((res)=>{
             const myObjStr = JSON.stringify(res)
@@ -46,7 +48,7 @@ export class LoginComponent implements OnInit {
         
     }
 
-    showPassword(){
+   /*  showPassword(){
         let input = document.getElementById('passwordtype');
         input.toggleAttribute('type');
     }
@@ -54,6 +56,6 @@ export class LoginComponent implements OnInit {
     hidePassword(){
         let input = document.getElementById('passwordtype');
         input.setAttribute('type','password');
-    }
+    } */
     
 }
