@@ -23,8 +23,10 @@ router.post("/assign", function(req,res){
 	activo.assignActive({
 	 	email:req.body.email,
 	 	name: req.body.name,
-	 	idEmployee: req.body.employee,
-	 	idActivo: req.body.activo
+	 	codigo : req.body.codigo,
+	 	cedula : req.body.cedula,
+	 	idEstado : req.body.idEstado,
+	 	detalleUbi : req.body.detalleUbi
 	 },(result)=>{
 	 	if(result.error){
 	 	    res.json({

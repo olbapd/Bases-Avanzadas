@@ -430,7 +430,7 @@ AS
 SET NOCOUNT ON
 
 SELECT [SedeXEmpleado].IdSede, [Sede].Nombre, [Distrito].Nombre, [Canton].Nombre,
-[Provincia].Nombre, [Empleado].Nombre
+[Provincia].Nombre, [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2
 FROM SedeXEmpleado
 INNER JOIN Sede ON [SedeXEmpleado].IdSede = [Sede].IdSede
 INNER JOIN Distrito  ON [Sede].IdDistrito = [Distrito].IdDistrito
