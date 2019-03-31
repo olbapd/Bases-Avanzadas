@@ -1,5 +1,5 @@
 export interface sede{
-    id?:number;
+    id:number;
     name:string;
     provincia:string;
     canton:string;

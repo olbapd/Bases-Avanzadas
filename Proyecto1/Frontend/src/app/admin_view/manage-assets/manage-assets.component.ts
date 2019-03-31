@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import {RestApiService} from 'src/app/rest_client/client_service';
 import { Router } from "@angular/router";
 import { MatDialog } from '@angular/material';
 import  {CodeErrorComponent} from '../dialogs/code_error/code_error.component';
 import { Options } from 'selenium-webdriver/edge';
 import { all } from 'q';
+
 
 
 @Component({
@@ -141,7 +142,12 @@ export class ManageAssetsComponent implements OnInit {
     //console.log(activo);
   }
   asignar_activo(Codigo,Cedula,DetalleUbi){
-    this.restApi.setAssignActivo(Codigo,Cedula,DetalleUbi);
+    //this.restApi.setAssignActivo(Codigo,Cedula,DetalleUbi);
+    console.log("Si:"+localStorage.getItem('IdEmpleado'));
+    
+  
+    
+    
   }
   AccionDropDown(){
     $("#accion-Dropdown").empty(); //jquery clear dropdown

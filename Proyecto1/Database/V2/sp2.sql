@@ -424,8 +424,8 @@ GO
 -- Parametro de Entrada: <IdEmpleado>
 -- Parametro de Salida: <Ninguno>
 -- =============================================
-CREATE OR ALTER PROC [dbo].[infoSedeXEmpledo]
-	@IdEmpelado int
+CREATE OR ALTER PROC [dbo].[infoSedeXEmpleado]
+	@IdEmpleado int
 AS
 SET NOCOUNT ON
 
@@ -437,7 +437,7 @@ INNER JOIN Distrito  ON [Sede].IdDistrito = [Distrito].IdDistrito
 INNER JOIN Canton ON [Distrito].IdCanton = [Canton].IdCanton
 INNER JOIN Provincia ON [Canton].IdProvincia = [Provincia].IdProvincia
 INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
-WHERE @IdEmpelado = [SedeXEmpleado].IdEmpleado 
+WHERE @IdEmpleado = [SedeXEmpleado].IdEmpleado 
 SET NOCOUNT OFF
 GO
 

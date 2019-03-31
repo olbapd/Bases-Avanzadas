@@ -54,6 +54,19 @@ export class RestApiService {
     return this.http.post (this.apiURL+urls.sp_url+'getSedes',body).pipe(retry(1),catchError(this.handleError));
   }
 
+  getSedeXEmpleado(idEmpleado) {
+    let body= {
+                "typesIn":["int"],
+                "typesOut":[],
+                "parameters":["idEmpleado"],
+                "values":[idEmpleado],
+                "ouputs":[],
+                "name":"infoSedeXEmpleado"
+              }
+    ;
+    return this.http.post (this.apiURL+urls.sp_url+'infoSedeXEmpleado',body).pipe(retry(1),catchError(this.handleError));
+  }
+
   getMonedas() {
     let body= {
                 "typesIn":[],

@@ -1,15 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Injectable } from '@angular/core';
 import {RestApiService} from 'src/app/rest_client/client_service';
 import { Router } from "@angular/router";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material';
 import  {LoginFailedComponent} from '../dialogs/login_Failed/login_Failed.component';
-
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
+
+
 
 export class LoginComponent implements OnInit {
     isPopupOpened = false;
@@ -25,7 +26,10 @@ export class LoginComponent implements OnInit {
         this.restApi.getSate(username,password).subscribe((res)=>{
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
+            
+            
             if (json.success==true){
+                localStorage.setItem('IdEmpleado', json.data.IdEmpleado);
                this.router.navigate(['./admin_view/admin']); //ruta a admin si el login es exitoso
             }
             else{

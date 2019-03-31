@@ -16,6 +16,7 @@ import { UpdateSedeComponent } from '../dialogs/update_sede/udpate-sede.componen
     styleUrls: ['./crud_sede.component.css']
 })
 export class SedeComponent implements OnInit {
+  
     isPopupOpened = false;
     provincia;
     canton;
@@ -26,34 +27,51 @@ export class SedeComponent implements OnInit {
     categoria;
     page = 1;
     pageSize = 4;
-
-    sedess: sede[] = [{
-        name: "as",
+    sedess: sede[]; /* =data= [{
+        idSede:1
+        NombreSede: "as",
         provincia: "cartago",
         distrito: "paraiso",
         canton: "paraiso",
         admin: "Pablo"
     }
-    ];
+    ]; */
 
-    collectionSize = this.sedess.length;
+   /*  collectionSize = this.sedess.length;
     activo: asset;
-    sede: sede;
+    sede: sede; */
 
+    
     constructor(private modalService: NgbModal, public restApi: RestApiService,
         private router: Router, private dialog: MatDialog) { }
         ngOnInit() { 
             this.EstadoDropdown();
             this.ProvinciaDropdown();
+           this.Rsede();
         }
     
-        get sedes(): sede[] {
+        get sedes(): sede[] { //BIND TABLE
             return this.sedess
-                .map((sede, i) => ({ id: i + 1, ...sede }))
+                .map((sedess, i) => ({ id: i + 1, ...sedess }))
                 .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
         }
-    
-    
+
+        Rsede(){
+          let idEmpleado:number=parseInt(localStorage.getItem('IdEmpleado'));
+          this.restApi.getSedeXEmpleado(1).subscribe((res)=>{
+            const myObjStr = JSON.stringify(res)
+               const json = JSON.parse(myObjStr);
+               this.sedess = [{
+                                "id":json.data[0].IdSede,
+                                "name":json.data[0].Nombre[0],
+                                "provincia":json.data[0].Nombre[3],
+                                "canton":json.data[0].Nombre[2],
+                                "distrito":json.data[0].Nombre[1],
+                                "admin":json.data[0].Nombre[4],
+                              }];
+            
+          });
+          }
     
         updateSede() {
             this.isPopupOpened = true;
