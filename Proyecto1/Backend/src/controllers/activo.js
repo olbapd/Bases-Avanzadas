@@ -27,8 +27,9 @@ router.post("/assign", function(req,res){
 	 	idActivo: req.body.activo
 	 },(result)=>{
 	 	if(result.error){
-	 	    res.status(503).json({
-	 	    	error : 'Internal Server Error, it has been registered.'
+	 	    res.json({
+	 	    	error : 'Internal Server Error, it has been registered.',
+	 	    	success: false
 	 		})
 	 	    return;
 	 	}

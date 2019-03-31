@@ -22,8 +22,9 @@ router.post("/login", function(req,res){
 	 	pass: req.body.pass
 	 },(result)=>{
 	 	if(result.error){
-	 	    res.status(503).json({
-	 	    	error : 'Internal Server Error, it has been registered.'
+	 	    res.json({
+	 	    	error : 'Internal Server Error, it has been registered.',
+	 	    	success : false
 	 		})
 	 	    return;
 	 	}
