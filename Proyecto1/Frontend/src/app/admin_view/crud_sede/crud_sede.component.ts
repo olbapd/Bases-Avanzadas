@@ -58,7 +58,8 @@ export class SedeComponent implements OnInit {
 
         Rsede(){
           let idEmpleado:number=parseInt(localStorage.getItem('IdEmpleado'));
-          this.restApi.getSedeXEmpleado(1).subscribe((res)=>{
+          localStorage.clear();
+          this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res)=>{
             const myObjStr = JSON.stringify(res)
                const json = JSON.parse(myObjStr);
                this.sedess = [{
@@ -67,12 +68,11 @@ export class SedeComponent implements OnInit {
                                 "provincia":json.data[0].Nombre[3],
                                 "canton":json.data[0].Nombre[2],
                                 "distrito":json.data[0].Nombre[1],
-                                "admin":json.data[0].Nombre[4],
+                                "admin":json.data[0].Nombre[4]+" "+json.data[0].Apellido1+" "+json.data[0].Apellido2,
                               }];
             
           });
           }
-    
         updateSede() {
             this.isPopupOpened = true;
             const dialogRef = this.dialog.open(UpdateSedeComponent, {

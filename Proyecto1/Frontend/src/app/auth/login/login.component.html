@@ -32,13 +32,15 @@
           </div>
 
           <h6 class="card-subtitle mb-2 text-muted">Contraseña</h6>
-
-
           <div class="input-group mb-3">
             <div class="input-group-prepend">
             </div>
-            <input type="text" #txt_password class="form-control" placeholder="Contraseña" aria-label="Contraseña"
+            <input type="{{ typePassword ? 'text' : 'password' }}" id="passwordtype" name="password" #txt_password class="form-control" placeholder="Contraseña" aria-label="Contraseña"
               aria-describedby="basic-addon1" style="max-width:40rem;">
+              <button (click)="showPassword()" type="button" id="button_showpsw"
+            class="btn btn-success">Show</button>
+            <button (click)="hidePassword()" type="button" id="button_showpsw"
+            class="btn btn-success">hide</button>
           </div>
 
           <button (click)="login(txt_username.value,txt_password.value,prueba)" type="button" id="button_login"
