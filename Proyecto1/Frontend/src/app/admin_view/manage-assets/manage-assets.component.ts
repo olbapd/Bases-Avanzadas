@@ -19,6 +19,7 @@ export class ManageAssetsComponent implements OnInit {
   ngOnInit() {
     this.CategoriaDropdown();
     this.AccionDropDown();
+    this.MonedasDropdown();
     //this.activos = this.restApi.getActivos(); 
   }
   EstadoDropdown(){
@@ -36,17 +37,17 @@ export class ManageAssetsComponent implements OnInit {
    }   
   });;
   }
-  SedeDropdown(){
+  MonedasDropdown(){
     let option;
-    let dropdown = document.getElementById('sede-Dropdown');
-    this.restApi.getSedes().subscribe((res)=>{
+    let dropdown = document.getElementById('moneda-Dropdown');
+    this.restApi.getMonedas().subscribe((res)=>{
       const myObjStr = JSON.stringify(res)
        const json = JSON.parse(myObjStr);
       var count = Object.keys(json.data).length;
       for (var _i = 0; _i < count; _i++) {
         option= document.createElement('option');
         option.text = json.data[_i].Nombre;
-        option.value = json.data[_i].IdSede;
+        option.value = json.data[_i].IdMoneda;
         dropdown.append(option);
      }   
   });;

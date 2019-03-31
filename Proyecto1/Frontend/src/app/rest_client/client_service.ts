@@ -53,6 +53,18 @@ export class RestApiService {
     ;
     return this.http.post (this.apiURL+urls.sp_url+'getSedes',body).pipe(retry(1),catchError(this.handleError));
   }
+
+  getMonedas() {
+    let body= {
+                "typesIn":[],
+                "typesOut":[],
+                "parameters":[],
+                "values":[],
+                "ouputs":[],
+                "name":"getMonedas"
+              }
+    return this.http.post (this.apiURL+urls.sp_url+'getMonedas',body).pipe(retry(1),catchError(this.handleError));
+  }
   
 
   getProvincias() {
