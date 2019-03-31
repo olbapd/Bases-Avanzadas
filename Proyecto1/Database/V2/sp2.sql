@@ -420,6 +420,46 @@ END
 GO
 
 -- =============================================
+-- Descripcion:	<Seleccionar la informacion de la sede en donde trabaja el empelado>
+-- Parametro de Entrada: <IdEmpleado>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[infoSedeXEmpledo]
+	@IdEmpelado int
+AS
+SET NOCOUNT ON
+
+SELECT [SedeXEmpleado].IdSede, [Sede].Nombre, [Distrito].Nombre, [Canton].Nombre,
+[Provincia].Nombre, [Empleado].Nombre
+FROM SedeXEmpleado
+INNER JOIN Sede ON [SedeXEmpleado].IdSede = [Sede].IdSede
+INNER JOIN Distrito  ON [Sede].IdDistrito = [Distrito].IdDistrito
+INNER JOIN Canton ON [Distrito].IdCanton = [Canton].IdCanton
+INNER JOIN Provincia ON [Canton].IdProvincia = [Provincia].IdProvincia
+INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
+WHERE @IdEmpelado = [SedeXEmpleado].IdEmpleado 
+SET NOCOUNT OFF
+GO
+
+-- =============================================
+-- Descripcion:	<Seleccionar los administradores de las sedes>
+-- Parametro de Entrada: <Ninguno>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[getAdmi]
+AS
+SET NOCOUNT ON
+
+SELECT [SedeXEmpleado].IdSede, [Sede].Nombre, [Empleado].Nombre, [Empleado].Apellido1,
+[Empleado].Apellido2
+FROM SedeXEmpleado
+INNER JOIN Sede ON [SedeXEmpleado].IdSede = [Sede].IdSede
+INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
+WHERE [Empleado].IdPuesto = 1 OR [Empleado].IdPuesto = 2
+SET NOCOUNT OFF
+GO
+
+-- =============================================
 -- Descripcion:	<Seleccionar los tipos de moneda>
 -- Parametro de Entrada: <Ninguno>
 -- Parametro de Salida: <Ninguno>
