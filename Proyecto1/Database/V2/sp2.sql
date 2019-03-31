@@ -22,9 +22,7 @@ SELECT [IdActivo],
 	[FechaRegistro],
 	[CentroCosto],
 	[ValorResidual],
-	[DetalleUbicacion],
 	[IdCategoria],
-	[IdSede],
 	[IdMoneda],
 	[IdEstado]
 FROM Activo
@@ -43,23 +41,7 @@ CREATE OR ALTER PROC [dbo].[getActivoLi]
 AS
 SET NOCOUNT ON
 
-SELECT [IdActivo],
-	[Codigo],
-	[Nombre],
-	[Descripcion],
-	[Foto],
-	[Precio],
-	[TiempoGarantia],
-	[VidaUtil],
-	[PorcentajeDepreciacion],
-	[FechaCompra],
-	[FechaRegistro],
-	[CentroCosto],
-	[ValorResidual],
-	[DetalleUbicacion],
-	[IdCategoria],
-	[IdSede],
-	[IdMoneda]
+SELECT [Activo].Codigo, [Activo].IdEmpleado, [Activo].FechaAsignacion, [Activo].DetalleUbicacion
 FROM Activo
 WHERE [IdEstado] = @IdEstado AND [IdCategoria] =@IdCategoria
 SET NOCOUNT OFF
@@ -83,12 +65,9 @@ CREATE OR ALTER PROC [dbo].[setActivo]
 	@PorcentajeD int,
 	@FechaCompra date,
 	@FechaRegistro date,
-	@FechaAsig date,--PONER FECHA DEL SISTEMA POR DEFECTO
 	@CentroCosto int,
 	@ValorResidual int,
-	@DetalleUb varchar(50),
 	@IdCategoria int,
-	@IdSede int,
 	@IdMoneda int,
 	@IdEstado int
 	
@@ -100,7 +79,7 @@ BEGIN
 		INSERT INTO Activo (Codigo, Nombre, Descripcion, Foto, Precio, TiempoGarantia, VidaUtil, PorcentajeDepreciacion, FechaCompra,
 		FechaRegistro, FechaAsignacion, CentroCosto, ValorResidual, DetalleUbicacion, IdEmpleado,IdCategoria, IdSede, IdMoneda, IdEstado) 
 		VALUES (@Codigo, @Nombre, @Descripcion, @Foto, @Precio, @TiempoGar, @VidaU, @PorcentajeD, @FechaCompra,
-		@FechaRegistro, @FechaAsig, @CentroCosto, @ValorResidual, @DetalleUb, NULL,@IdCategoria, @IdSede, @IdMoneda, @IdEstado) 
+		@FechaRegistro, NULL, @CentroCosto, @ValorResidual, NULL, NULL,@IdCategoria, NULL, @IdMoneda, @IdEstado) 
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -174,11 +153,29 @@ CREATE OR ALTER PROC [dbo].[getActivoCat]
 AS
 SET NOCOUNT ON
 
-SELECT [Activo].IdActivo, [Activo].Codigo, [Activo].Nombre,
+SELECT [Activo].Codigo, [Activo].Nombre,
 	[Activo].Descripcion
 
 FROM Activo
 WHERE [IdCategoria] = @IdCategoria
+SET NOCOUNT OFF
+GO
+
+-- =============================================
+-- Descripcion:	<Seleccionar el estado de un activo>
+-- Parametro de Entrada: <Codigo>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[getActivoEst]
+	@Codigo varchar(50)
+AS
+SET NOCOUNT ON
+
+SELECT [Activo].IdEstado, [Estado].Nombre
+
+FROM Activo
+INNER JOIN Estado ON [Activo].IdEstado = [Estado].IdEstado
+WHERE [Codigo] = @Codigo
 SET NOCOUNT OFF
 GO
 
@@ -188,21 +185,32 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[asigActivo]
-	@IdActivo int,
-	@IdEmpleado int,
-	@FechaAsig date,
-	@IdEstado int
+	@Codigo varchar(50),
+	@Cedula varchar(50),
+	@IdEstado int,
+	@DetalleUbi varchar(100)
 	
 AS
 BEGIN
+	DECLARE
+	@IdSede int,
+	@IdEmpleado int
+
+	SELECT @IdEmpleado = Empleado.IdEmpleado FROM Empleado
+	WHERE @Cedula = [Empleado].Cedula;
+
+	SELECT @IdSede = SedeXEmpleado.IdSede FROM SedeXEmpleado
+	WHERE @IdEmpleado = [SedeXEmpleado].IdEmpleado;
 
 	BEGIN TRAN
 	BEGIN TRY
 		UPDATE Activo SET 
 		[IdEstado] = @IdEstado,
 		[IdEmpleado] = @IdEmpleado,
-		[FechaAsignacion] = @FechaAsig
-		WHERE @IdActivo = [Activo].IdActivo
+		[IdSede] = @IdSede,
+		[DetalleUbicacion]= @DetalleUbi,
+		[FechaAsignacion] = GETDATE()
+		WHERE @Codigo = [Activo].Codigo
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -218,7 +226,7 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[quitarActivo]
-	@IdActivo int,
+	@Codigo varchar(50),
 	@IdEstado int
 	
 AS
@@ -227,8 +235,12 @@ BEGIN
 	BEGIN TRAN
 	BEGIN TRY
 		UPDATE Activo SET 
-		[IdEstado] = @IdEstado
-		WHERE @IdActivo = [Activo].IdActivo
+		[IdEstado] = @IdEstado,
+		[IdEmpleado] = NULL,
+		[IdSede] = NULL,
+		[DetalleUbicacion]= NULL,
+		[FechaAsignacion] = NULL
+		WHERE @Codigo = [Activo].Codigo
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
