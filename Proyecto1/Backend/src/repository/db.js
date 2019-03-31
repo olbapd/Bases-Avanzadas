@@ -66,7 +66,8 @@ expose.storedProcedure = (data, cb) => {
       to_return.success = true;
       try{
         to_return.data=result.recordset;        
-      }catch{
+      }
+      catch(err){
         to_return.data=result;        
       }
       

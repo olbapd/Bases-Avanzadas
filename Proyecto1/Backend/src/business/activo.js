@@ -32,6 +32,7 @@ expose.assignActive = (data,cb) => {
       to_return.error = true;
       to_return.success = false;
       cb(to_return);
+      return;
     }
     to_return.success = true;
     to_return.data = result.data;
