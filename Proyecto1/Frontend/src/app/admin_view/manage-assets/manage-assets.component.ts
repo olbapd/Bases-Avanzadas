@@ -3,6 +3,8 @@ import {RestApiService} from 'src/app/rest_client/client_service';
 import { Router } from "@angular/router";
 import { MatDialog } from '@angular/material';
 import  {CodeErrorComponent} from '../dialogs/code_error/code_error.component';
+import { Options } from 'selenium-webdriver/edge';
+import { all } from 'q';
 
 
 @Component({
@@ -112,30 +114,35 @@ export class ManageAssetsComponent implements OnInit {
     
   }
   CodigoDropDown_Modif_State(idCategoria){
-    let option;
     let dropdown = document.getElementById('codigo_modif_state-Dropdown');
+    dropdown.normalize;
     this.restApi.getCodigoXCategoria(idCategoria).subscribe((res)=>{
       const myObjStr = JSON.stringify(res)
        const json = JSON.parse(myObjStr);
       var count = Object.keys(json.data).length;
+      let option;
       for (var _i = 0; _i < count; _i++) {
+        let option;
         option= document.createElement('option');
+        option
         option.text = json.data[_i].Codigo;
         dropdown.append(option);
      } 
   });;
+
   }
 
   EstadoDropDown_Modif_State(Codigo){
     let option;
-    let dropdown = document.getElementById('codigo_modif_state-Dropdown');
-    this.restApi.getCodigoXCategoria(Codigo).subscribe((res)=>{
+    let dropdown = document.getElementById('estado3-Dropdown');
+    this.restApi.getEstadoXCodigo(Codigo).subscribe((res)=>{
       const myObjStr = JSON.stringify(res)
        const json = JSON.parse(myObjStr);
       var count = Object.keys(json.data).length;
       for (var _i = 0; _i < count; _i++) {
         option= document.createElement('option');
-        option.text = json.data[_i].Estado;
+        option.text = json.data[_i].Nombre;
+        option.value = json.data[_i].idEstado;
         dropdown.append(option);
      } 
   });;
@@ -146,7 +153,7 @@ export class ManageAssetsComponent implements OnInit {
   modificar_estado_activo(activo,estado_activo){
     //console.log(activo);
   }
-  asignar_activo(activo,fecha_asignacion,codigo,id_empleado,detalle_entrega){
+  asignar_activo(fecha_asignacion,codigo,id_empleado,detalle_ubicacion){
    // console.log(activo);
 
   }
