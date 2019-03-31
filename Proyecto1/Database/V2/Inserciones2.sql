@@ -771,93 +771,94 @@ EXEC Contrato 3,12,'2017-01-30'
 EXEC Contrato 3,13,'2017-01-30'
 
 --INSERTAR ACTIVO
-EXEC setActivo 'AC00001','Laptop1','Computadora DELL T1','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,1,NULL,1,4
-EXEC setActivo 'AC00002','Laptop2','Computadora DELL T2','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,1,NULL,1,4
-EXEC setActivo 'AC00003','Laptop3','Computadora DELL T3','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,1,NULL,1,4
-EXEC setActivo 'AC00004','Laptop4','Computadora DELL T4','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,1,NULL,1,4
-EXEC setActivo 'AC00005','Laptop5','Computadora DELL T5','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,1,NULL,1,4
-EXEC setActivo 'AC00006','Laptop6','Computadora DELL T6','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,1,NULL,1,4
+EXEC setActivo 'AC00001','Laptop1','Computadora DELL T1','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',8,500,1,1,4
+EXEC setActivo 'AC00002','Laptop2','Computadora DELL T2','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',8,500,1,1,4
+EXEC setActivo 'AC00003','Laptop3','Computadora DELL T3','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',8,500,1,1,4
+EXEC setActivo 'AC00004','Laptop4','Computadora DELL T4','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',8,500,1,1,4
+EXEC setActivo 'AC00005','Laptop5','Computadora DELL T5','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',8,500,1,1,4
+EXEC setActivo 'AC00006','Laptop6','Computadora DELL T6','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',8,500,1,1,4
 
-EXEC setActivo 'AC00007','PC Escritorio1','Computadora de escritorio DELL T1','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,2,NULL,1,4
-EXEC setActivo 'AC00008','PC Escritorio2','Computadora de escritorio DELL T2','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,2,NULL,1,4
-EXEC setActivo 'AC00009','PC Escritorio3','Computadora de escritorio DELL T3','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,2,NULL,1,4
-EXEC setActivo 'AC00010','PC Escritorio4','Computadora de escritorio DELL T4','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,2,NULL,1,4
-EXEC setActivo 'AC00011','PC Escritorio5','Computadora de escritorio DELL T5','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,2,NULL,1,4
-EXEC setActivo 'AC00012','PC Escritorio6','Computadora de escritorio DELL T6','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,2,NULL,1,4
+EXEC setActivo 'AC00007','PC Escritorio1','Computadora de escritorio DELL T1','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',8,500,2,1,4
+EXEC setActivo 'AC00008','PC Escritorio2','Computadora de escritorio DELL T2','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',8,500,2,1,4
+EXEC setActivo 'AC00009','PC Escritorio3','Computadora de escritorio DELL T3','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',8,500,2,1,4
+EXEC setActivo 'AC00010','PC Escritorio4','Computadora de escritorio DELL T4','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',8,500,2,1,4
+EXEC setActivo 'AC00011','PC Escritorio5','Computadora de escritorio DELL T5','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',8,500,2,1,4
+EXEC setActivo 'AC00012','PC Escritorio6','Computadora de escritorio DELL T6','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',8,500,2,1,4
 
-EXEC setActivo 'AC00013','Proyector1','Proyector CANON T1','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',NULL,8,600,NULL,3,NULL,1,4
-EXEC setActivo 'AC00014','Proyector2','Proyector CANON T2','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',NULL,8,600,NULL,3,NULL,1,4
-EXEC setActivo 'AC00015','Proyector3','Proyector CANON T3','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',NULL,8,600,NULL,3,NULL,1,4
-EXEC setActivo 'AC00016','Proyector4','Proyector CANON T4','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',NULL,8,600,NULL,3,NULL,1,4
-EXEC setActivo 'AC00017','Proyector5','Proyector CANON T5','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',NULL,8,600,NULL,3,NULL,1,4
-EXEC setActivo 'AC00018','Proyector6','Proyector CANON T6','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',NULL,8,600,NULL,3,NULL,1,4
+EXEC setActivo 'AC00013','Proyector1','Proyector CANON T1','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',8,600,3,1,4
+EXEC setActivo 'AC00014','Proyector2','Proyector CANON T2','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',8,600,3,1,4
+EXEC setActivo 'AC00015','Proyector3','Proyector CANON T3','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',8,600,3,1,4
+EXEC setActivo 'AC00016','Proyector4','Proyector CANON T4','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',8,600,3,1,4
+EXEC setActivo 'AC00017','Proyector5','Proyector CANON T5','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',8,600,3,1,4
+EXEC setActivo 'AC00018','Proyector6','Proyector CANON T6','Enlace',400000,1,7,0.15,'2019-01-30','2019-02-08',8,600,3,1,4
 
-EXEC setActivo 'AC00019','Impresora1','Impresora HP T1','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',NULL,8,100,NULL,4,NULL,1,4
-EXEC setActivo 'AC00020','Impresora2','Impresora HP T2','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',NULL,8,100,NULL,4,NULL,1,4
-EXEC setActivo 'AC00021','Impresora3','Impresora HP T3','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',NULL,8,100,NULL,4,NULL,1,4
-EXEC setActivo 'AC00022','Impresora4','Impresora HP T4','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',NULL,8,100,NULL,4,NULL,1,4
-EXEC setActivo 'AC00023','Impresora5','Impresora HP T5','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',NULL,8,100,NULL,4,NULL,1,4
-EXEC setActivo 'AC00024','Impresora6','Impresora HP T6','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',NULL,8,100,NULL,4,NULL,1,4
+EXEC setActivo 'AC00019','Impresora1','Impresora HP T1','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',8,100,4,1,4
+EXEC setActivo 'AC00020','Impresora2','Impresora HP T2','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',8,100,4,1,4
+EXEC setActivo 'AC00021','Impresora3','Impresora HP T3','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',8,100,4,1,4
+EXEC setActivo 'AC00022','Impresora4','Impresora HP T4','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',8,100,4,1,4
+EXEC setActivo 'AC00023','Impresora5','Impresora HP T5','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',8,100,4,1,4
+EXEC setActivo 'AC00024','Impresora6','Impresora HP T6','Enlace',250000,1,3,0.05,'2018-02-20','2018-02-21',8,100,4,1,4
 
-EXEC setActivo 'AC00025','Fotocopiadora1','Fotocopiadora DELL T1','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,NULL,1,4
-EXEC setActivo 'AC00026','Fotocopiadora2','Fotocopiadora DELL T2','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,NULL,1,4
-EXEC setActivo 'AC00027','Fotocopiadora3','Fotocopiadora DELL T3','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,NULL,1,4
-EXEC setActivo 'AC00028','Fotocopiadora4','Fotocopiadora DELL T4','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,NULL,1,4
-EXEC setActivo 'AC00029','Fotocopiadora5','Fotocopiadora DELL T5','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,NULL,1,4
-EXEC setActivo 'AC00030','Fotocopiadora6','Fotocopiadora DELL T6','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,5,NULL,1,4
+EXEC setActivo 'AC00025','Fotocopiadora1','Fotocopiadora DELL T1','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,5,1,4
+EXEC setActivo 'AC00026','Fotocopiadora2','Fotocopiadora DELL T2','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,5,1,4
+EXEC setActivo 'AC00027','Fotocopiadora3','Fotocopiadora DELL T3','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,5,1,4
+EXEC setActivo 'AC00028','Fotocopiadora4','Fotocopiadora DELL T4','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,5,1,4
+EXEC setActivo 'AC00029','Fotocopiadora5','Fotocopiadora DELL T5','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,5,1,4
+EXEC setActivo 'AC00030','Fotocopiadora6','Fotocopiadora DELL T6','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,5,1,4
 
-EXEC setActivo 'AC00031','Escritorio1','Escritorio T1','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,6,NULL,1,4
-EXEC setActivo 'AC00032','Escritorio2','Escritorio T2','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,6,NULL,1,4
-EXEC setActivo 'AC00033','Escritorio3','Escritorio T3','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,6,NULL,1,4
-EXEC setActivo 'AC00034','Escritorio4','Escritorio T4','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,6,NULL,1,4
-EXEC setActivo 'AC00035','Escritorio5','Escritorio T5','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,6,NULL,1,4
-EXEC setActivo 'AC00036','Escritorio6','Escritorio T6','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,6,NULL,1,4
+EXEC setActivo 'AC00031','Escritorio1','Escritorio T1','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,6,1,4
+EXEC setActivo 'AC00032','Escritorio2','Escritorio T2','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,6,1,4
+EXEC setActivo 'AC00033','Escritorio3','Escritorio T3','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,6,1,4
+EXEC setActivo 'AC00034','Escritorio4','Escritorio T4','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,6,1,4
+EXEC setActivo 'AC00035','Escritorio5','Escritorio T5','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,6,1,4
+EXEC setActivo 'AC00036','Escritorio6','Escritorio T6','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,6,1,4
 
-EXEC setActivo 'AC00037','Silla1','Silla T1','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',NULL,8,500,NULL,7,NULL,1,4
-EXEC setActivo 'AC00038','Silla2','Silla T2','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',NULL,8,500,NULL,7,NULL,1,4
-EXEC setActivo 'AC00039','Silla3','Silla T3','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',NULL,8,500,NULL,7,NULL,1,4
-EXEC setActivo 'AC00040','Silla4','Silla T4','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',NULL,8,500,NULL,7,NULL,1,4
-EXEC setActivo 'AC00041','Silla5','Silla T5','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',NULL,8,500,NULL,7,NULL,1,4
-EXEC setActivo 'AC00042','Silla6','Silla T6','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',NULL,8,500,NULL,7,NULL,1,4
+EXEC setActivo 'AC00037','Silla1','Silla T1','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',8,500,7,1,4
+EXEC setActivo 'AC00038','Silla2','Silla T2','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',8,500,7,1,4
+EXEC setActivo 'AC00039','Silla3','Silla T3','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',8,500,7,1,4
+EXEC setActivo 'AC00040','Silla4','Silla T4','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',8,500,7,1,4
+EXEC setActivo 'AC00041','Silla5','Silla T5','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',8,500,7,1,4
+EXEC setActivo 'AC00042','Silla6','Silla T6','Enlace',30000,1,2,5.2,'2019-01-30','2019-02-01',8,500,7,1,4
 
-EXEC setActivo 'AC00043','USB1','USB Kingston T1','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',NULL,8,500,NULL,8,NULL,1,4
-EXEC setActivo 'AC00044','USB2','USB Kingston T2','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',NULL,8,500,NULL,8,NULL,1,4
-EXEC setActivo 'AC00045','USB3','USB Kingston T3','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',NULL,8,500,NULL,8,NULL,1,4
-EXEC setActivo 'AC00046','USB4','USB Kingston T4','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',NULL,8,500,NULL,8,NULL,1,4
-EXEC setActivo 'AC00047','USB5','USB Kingston T5','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',NULL,8,500,NULL,8,NULL,1,4
-EXEC setActivo 'AC00048','USB6','USB Kingston T6','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',NULL,8,500,NULL,8,NULL,1,4
+EXEC setActivo 'AC00043','USB1','USB Kingston T1','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',8,500,8,1,4
+EXEC setActivo 'AC00044','USB2','USB Kingston T2','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',8,500,8,1,4
+EXEC setActivo 'AC00045','USB3','USB Kingston T3','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',8,500,8,1,4
+EXEC setActivo 'AC00046','USB4','USB Kingston T4','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',8,500,8,1,4
+EXEC setActivo 'AC00047','USB5','USB Kingston T5','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',8,500,8,1,4
+EXEC setActivo 'AC00048','USB6','USB Kingston T6','Enlace',20000,1,5,0.1,'2019-01-30','2019-02-01',8,500,8,1,4
 
-EXEC setActivo 'AC00049','Carro1','Carro MARCA1','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',NULL,8,500,NULL,9,NULL,1,4
-EXEC setActivo 'AC00050','Carro2','Carro MARCA2','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',NULL,8,500,NULL,9,NULL,1,4
-EXEC setActivo 'AC00051','Carro3','Carro MARCA3','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',NULL,8,500,NULL,9,NULL,1,4
-EXEC setActivo 'AC00052','Carro4','Carro MARCA4','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',NULL,8,500,NULL,9,NULL,1,4
-EXEC setActivo 'AC00053','Carro5','Carro MARCA5','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',NULL,8,500,NULL,9,NULL,1,4
-EXEC setActivo 'AC00054','Carro6','Carro MARCA6','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',NULL,8,500,NULL,9,NULL,1,4
+EXEC setActivo 'AC00049','Carro1','Carro MARCA1','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',8,500,9,1,4
+EXEC setActivo 'AC00050','Carro2','Carro MARCA2','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',8,500,9,1,4
+EXEC setActivo 'AC00051','Carro3','Carro MARCA3','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',8,500,9,1,4
+EXEC setActivo 'AC00052','Carro4','Carro MARCA4','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',8,500,9,1,4
+EXEC setActivo 'AC00053','Carro5','Carro MARCA5','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',8,500,9,1,4
+EXEC setActivo 'AC00054','Carro6','Carro MARCA6','Enlace',32000,1,4,6.3,'2019-01-30','2019-03-01',8,500,9,1,4
 
-EXEC setActivo 'AC00055','Archivero1','Archivero Metalico T1','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',NULL,8,1000,NULL,10,NULL,1,4
-EXEC setActivo 'AC00056','Archivero2','Archivero Metalico T2','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',NULL,8,1000,NULL,10,NULL,1,4
-EXEC setActivo 'AC00057','Archivero3','Archivero Metalico T3','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',NULL,8,1000,NULL,10,NULL,1,4
-EXEC setActivo 'AC00058','Archivero4','Archivero Metalico T4','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',NULL,8,1000,NULL,10,NULL,1,4
-EXEC setActivo 'AC00059','Archivero5','Archivero Metalico T5','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',NULL,8,1000,NULL,10,NULL,1,4
-EXEC setActivo 'AC00060','Archivero6','Archivero Metalico T6','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',NULL,8,1000,NULL,10,NULL,1,4
+EXEC setActivo 'AC00055','Archivero1','Archivero Metalico T1','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',8,1000,10,1,4
+EXEC setActivo 'AC00056','Archivero2','Archivero Metalico T2','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',8,1000,10,1,4
+EXEC setActivo 'AC00057','Archivero3','Archivero Metalico T3','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',8,1000,10,1,4
+EXEC setActivo 'AC00058','Archivero4','Archivero Metalico T4','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',8,1000,10,1,4
+EXEC setActivo 'AC00059','Archivero5','Archivero Metalico T5','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',8,1000,10,1,4
+EXEC setActivo 'AC00060','Archivero6','Archivero Metalico T6','Enlace',350000,1,10,0.12,'2018-08-25','2018-08-29',8,1000,10,1,4
 
-EXEC setActivo 'AC00061','Mueble1','Mueble de madera T1','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,11,NULL,1,4
-EXEC setActivo 'AC00062','Mueble2','Mueble de madera T2','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,11,NULL,1,4
-EXEC setActivo 'AC00063','Mueble3','Mueble de madera T3','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,11,NULL,1,4
-EXEC setActivo 'AC00064','Mueble4','Mueble de madera T4','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,11,NULL,1,4
-EXEC setActivo 'AC00065','Mueble5','Mueble de madera T5','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,11,NULL,1,4
-EXEC setActivo 'AC00066','Mueble6','Mueble de madera T6','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,11,NULL,1,4
+EXEC setActivo 'AC00061','Mueble1','Mueble de madera T1','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,11,1,4
+EXEC setActivo 'AC00062','Mueble2','Mueble de madera T2','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,11,1,4
+EXEC setActivo 'AC00063','Mueble3','Mueble de madera T3','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,11,1,4
+EXEC setActivo 'AC00064','Mueble4','Mueble de madera T4','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,11,1,4
+EXEC setActivo 'AC00065','Mueble5','Mueble de madera T5','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,11,1,4
+EXEC setActivo 'AC00066','Mueble6','Mueble de madera T6','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,11,1,4
 
-EXEC setActivo 'AC00067','Limpieza1','Articulos varios de limpieza T1','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,12,NULL,1,4
-EXEC setActivo 'AC00068','Limpieza2','Articulos varios de limpieza T2','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,12,NULL,1,4
-EXEC setActivo 'AC00069','Limpieza3','Articulos varios de limpieza T3','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,12,NULL,1,4
-EXEC setActivo 'AC00070','Limpieza4','Articulos varios de limpieza T4','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,12,NULL,1,4
-EXEC setActivo 'AC00071','Limpieza5','Articulos varios de limpieza T5','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,12,NULL,1,4
-EXEC setActivo 'AC00072','Limpieza6','Articulos varios de limpieza T6','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',NULL,8,500,NULL,12,NULL,1,4
+EXEC setActivo 'AC00067','Limpieza1','Articulos varios de limpieza T1','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,12,1,4
+EXEC setActivo 'AC00068','Limpieza2','Articulos varios de limpieza T2','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,12,1,4
+EXEC setActivo 'AC00069','Limpieza3','Articulos varios de limpieza T3','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,12,1,4
+EXEC setActivo 'AC00070','Limpieza4','Articulos varios de limpieza T4','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,12,1,4
+EXEC setActivo 'AC00071','Limpieza5','Articulos varios de limpieza T5','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,12,1,4
+EXEC setActivo 'AC00072','Limpieza6','Articulos varios de limpieza T6','Enlace',1200,5,7,0.1,'2017-01-30','2017-02-08',8,500,12,1,4
 
-EXEC setActivo 'AC00073','Licencias de Programas1','Instaladores de programas varios T1','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',NULL,8,500,NULL,13,NULL,1,4
-EXEC setActivo 'AC00074','Licencias de Programas2','Instaladores de programas varios T2','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',NULL,8,500,NULL,13,NULL,1,4
-EXEC setActivo 'AC00075','Licencias de Programas3','Instaladores de programas varios T3','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',NULL,8,500,NULL,13,NULL,1,4
-EXEC setActivo 'AC00076','Licencias de Programas4','Instaladores de programas varios T4','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',NULL,8,500,NULL,13,NULL,1,4
-EXEC setActivo 'AC00077','Licencias de Programas5','Instaladores de programas varios T5','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',NULL,8,500,NULL,13,NULL,1,4
-EXEC setActivo 'AC00078','Licencias de Programas6','Instaladores de programas varios T6','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',NULL,8,500,NULL,13,NULL,1,4
+EXEC setActivo 'AC00073','Licencias de Programas1','Instaladores de programas varios T1','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',8,500,13,1,4
+EXEC setActivo 'AC00074','Licencias de Programas2','Instaladores de programas varios T2','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',8,500,13,1,4
+EXEC setActivo 'AC00075','Licencias de Programas3','Instaladores de programas varios T3','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',8,500,13,1,4
+EXEC setActivo 'AC00076','Licencias de Programas4','Instaladores de programas varios T4','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',8,500,13,1,4
+EXEC setActivo 'AC00077','Licencias de Programas5','Instaladores de programas varios T5','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',8,500,13,1,4
+EXEC setActivo 'AC00078','Licencias de Programas6','Instaladores de programas varios T6','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',8,500,13,1,4
+EXEC setActivo 'AC00079','Licencias de Programas7','Instaladores de programas varios T7','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',8,500,13,1,4
