@@ -424,7 +424,7 @@ GO
 -- Parametro de Entrada: <IdEmpleado>
 -- Parametro de Salida: <Ninguno>
 -- =============================================
-CREATE OR ALTER PROC [dbo].[infoSedeXEmpledo]
+CREATE OR ALTER PROC [dbo].[infoSedeXEmpleado]
 	@IdEmpleado int
 AS
 SET NOCOUNT ON
