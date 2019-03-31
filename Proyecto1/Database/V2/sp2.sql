@@ -22,9 +22,7 @@ SELECT [IdActivo],
 	[FechaRegistro],
 	[CentroCosto],
 	[ValorResidual],
-	[DetalleUbicacion],
 	[IdCategoria],
-	[IdSede],
 	[IdMoneda],
 	[IdEstado]
 FROM Activo
@@ -43,23 +41,7 @@ CREATE OR ALTER PROC [dbo].[getActivoLi]
 AS
 SET NOCOUNT ON
 
-SELECT [IdActivo],
-	[Codigo],
-	[Nombre],
-	[Descripcion],
-	[Foto],
-	[Precio],
-	[TiempoGarantia],
-	[VidaUtil],
-	[PorcentajeDepreciacion],
-	[FechaCompra],
-	[FechaRegistro],
-	[CentroCosto],
-	[ValorResidual],
-	[DetalleUbicacion],
-	[IdCategoria],
-	[IdSede],
-	[IdMoneda]
+SELECT [Activo].Codigo, [Activo].IdEmpleado, [Activo].FechaAsignacion, [Activo].DetalleUbicacion
 FROM Activo
 WHERE [IdEstado] = @IdEstado AND [IdCategoria] =@IdCategoria
 SET NOCOUNT OFF
@@ -204,15 +186,18 @@ GO
 -- =============================================
 CREATE OR ALTER PROC [dbo].[asigActivo]
 	@Codigo varchar(50),
-	@IdEmpleado int,
-	@FechaAsig date,
+	@Cedula varchar(50),
 	@IdEstado int,
 	@DetalleUbi varchar(100)
 	
 AS
 BEGIN
 	DECLARE
-	@IdSede int
+	@IdSede int,
+	@IdEmpleado int
+
+	SELECT @IdEmpleado = Empleado.IdEmpleado FROM Empleado
+	WHERE @Cedula = [Empleado].Cedula;
 
 	SELECT @IdSede = SedeXEmpleado.IdSede FROM SedeXEmpleado
 	WHERE @IdEmpleado = [SedeXEmpleado].IdEmpleado;
@@ -222,9 +207,10 @@ BEGIN
 		UPDATE Activo SET 
 		[IdEstado] = @IdEstado,
 		[IdEmpleado] = @IdEmpleado,
-		[FechaAsignacion] = @FechaAsig,
-		[IdSede] = @IdSede
-		WHERE @Codigo = [Activo].IdActivo
+		[IdSede] = @IdSede,
+		[DetalleUbicacion]= @DetalleUbi,
+		[FechaAsignacion] = GETDATE()
+		WHERE @Codigo = [Activo].Codigo
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -240,7 +226,7 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[quitarActivo]
-	@IdActivo int,
+	@Codigo varchar(50),
 	@IdEstado int
 	
 AS
@@ -249,8 +235,12 @@ BEGIN
 	BEGIN TRAN
 	BEGIN TRY
 		UPDATE Activo SET 
-		[IdEstado] = @IdEstado
-		WHERE @IdActivo = [Activo].IdActivo
+		[IdEstado] = @IdEstado,
+		[IdEmpleado] = NULL,
+		[IdSede] = NULL,
+		[DetalleUbicacion]= NULL,
+		[FechaAsignacion] = NULL
+		WHERE @Codigo = [Activo].Codigo
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
