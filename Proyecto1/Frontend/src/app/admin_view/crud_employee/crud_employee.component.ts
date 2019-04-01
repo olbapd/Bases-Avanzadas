@@ -13,7 +13,7 @@ import { updateComponent } from '../dialogs/update_employee/update-employee.comp
 import { DeleteComponent } from '../dialogs/delete_confirm/delete_confirm.component';
 import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from '@angular/forms';
 import { FotoService } from '../../services/foto.service';
-import { ConsoleReporter } from 'jasmine';
+
 
 @Component({
     selector: 'crud-employee',

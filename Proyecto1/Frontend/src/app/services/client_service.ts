@@ -229,7 +229,7 @@ return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(
   }
 
 
-  putSede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso){
+  setSede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso){
     let body;
     return this.http.post (this.apiURL+urls.sp_url+'putSede',body).pipe(retry(1),catchError(this.handleError));
 
@@ -237,9 +237,9 @@ return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(
 
   setActivo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado) {
     let body= {
-      "typesIn":["varchar","varchar","varchar","varchar","int","date","int","date","date","date","int","int","varchar","int" ,"int" ,"int" ,"int"],
+      "typesIn":["varchar","varchar","varchar","varchar","int","int","int","int","date","int","int","int" ,"int" ,"int" ,"int"],
       "typesOut":[],
-      "parameters":["Codigo","Nombre","Descripcion","Foto","Precio","TiempoGar","VidaU","PorcentajeD","FechaCompra","FechaRegistro","FechaAsig","CentroCosto","ValorResidual","DetalleUb","IdCategoria","IdSede","IdMoneda","IdEstado"],
+      "parameters":["Codigo","Nombre","Descripcion","Foto","Precio","TiempoGar","VidaU","PorcentajeD","FechaCompra","CentroCosto","ValorResidual","IdCategoria","IdMoneda","IdEstado"],
       "values":[codigo,nombre,descripcion,fecha_compra,precio_compre,valor_residual,detalle_ubicacion,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado],
       "ouputs":[],
       "name":"setActivo"
