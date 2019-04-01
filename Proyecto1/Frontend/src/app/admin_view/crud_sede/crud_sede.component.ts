@@ -27,26 +27,7 @@ export class SedeComponent implements OnInit {
     categoria;
     page = 1;
     pageSize = 4;
-    sedess: sede[];/* = [{
-        id:1,
-        name: "as",
-        provincia: "cartago",
-        canton: "paraiso",
-        distrito: "paraiso",
-        apellido1:"bla",
-        apellido2:"blaaa",
-        nombre:"blaaaaaaaa"
-    },{
-      id:1,
-      name: "as",
-      provincia: "cartago",
-      canton: "paraiso",
-      distrito: "paraiso",
-      apellido1:"bla",
-      apellido2:"blaaa",
-      nombre:"blaaaaaaaa"
-  }]; */
-
+    sedess: sede[];
    /*  collectionSize = this.sedess.length;
     activo: asset;
     sede: sede; */
@@ -96,9 +77,9 @@ export class SedeComponent implements OnInit {
             });
         }
     
-        add_sede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso) {
-            this.restApi.setSede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso);
-    
+        add_sede(Nombre,Ubicacion,IdDistrito,IdEstado) {
+            this.restApi.setSede(Nombre,Ubicacion,IdDistrito,IdEstado);
+
         }
     
         EstadoDropdown(){
