@@ -240,6 +240,17 @@ return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(
     return this.http.post (this.apiURL+urls.sp_url+'setSede',body).pipe(retry(1),catchError(this.handleError));
 
   }
+  setEmpleado(Nombre,Apellido1,Apellido2,Cedula,FechaN,Correo,Contasena,IdDepartamento,IdPuesto,Foto){
+    let body={
+              "typesIn":["varchar","varchar","varchar","varchar","date","varchar","varchar","int","int","varchar"],
+              "typesOut":[],
+              "parameters":["Nombre","Apellido1","Apellido2","Cedula","FechaN","Correo","Contasena","IdDepartamento","IdPuesto","Foto"],
+              "values":[Nombre,Apellido1,Apellido2,Cedula,FechaN,Correo,Contasena,IdDepartamento,IdPuesto,Foto],
+              "ouputs":[],
+              "name":"setEmpleado"
+            }
+     return this.http.post (this.apiURL+urls.sp_url+'setEmpleado',body).pipe(retry(1),catchError(this.handleError));
+  }
 
   setActivo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado) {
     let body= {
@@ -252,7 +263,7 @@ return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(
     }  
     return this.http.post (this.apiURL+urls.sp_url+'setActivong',body).pipe(retry(1),catchError(this.handleError));
   }
-
+//AGREGAR VENTANA PARA ESTAS CONSULTAS---------------
   setCategoria(Nombre, Tangible){
     let body={
               "typesIn":["varchar","bit"],
@@ -277,17 +288,6 @@ return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(
      return this.http.post (this.apiURL+urls.sp_url+'setDepartamento',body).pipe(retry(1),catchError(this.handleError));
   }
 
-  setEmpleado(Nombre,Apellido1,Apellido2,Cedula,FechaN,Correo,Contasena,IdDepartamento,IdPuesto,Foto){
-    let body={
-              "typesIn":["varchar","varchar","varchar","varchar","date","varchar","varchar","int","int","varchar"],
-              "typesOut":[],
-              "parameters":["Nombre","Apellido1","Apellido2","Cedula","FechaN","Correo","Contasena","IdDepartamento","IdPuesto","Foto"],
-              "values":[Nombre,Apellido1,Apellido2,Cedula,FechaN,Correo,Contasena,IdDepartamento,IdPuesto,Foto],
-              "ouputs":[],
-              "name":"setEmpleado"
-            }
-     return this.http.post (this.apiURL+urls.sp_url+'setEmpleado',body).pipe(retry(1),catchError(this.handleError));
-  }
   setEstado(Nombre){
     let body={
               "typesIn":["varchar"],
@@ -322,7 +322,7 @@ return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(
             }
      return this.http.post (this.apiURL+urls.sp_url+'setPuesto',body).pipe(retry(1),catchError(this.handleError));
   }
-
+//--------------------------------------
   // Error handling 
   handleError(error) {
      let errorMessage = '';
