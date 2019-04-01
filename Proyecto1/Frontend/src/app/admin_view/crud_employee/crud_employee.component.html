@@ -5,78 +5,106 @@
         <div class="col-md-4">
             <div class="card border-info" style="max-width: 50rem; margin-bottom: 20px">
                 <div class="card-body text-center">
+                    <h5 class="card-title"> Insertar Empleado</h5>
 
                     <form name="form" [formGroup]="form" (ngSubmit)="form.valid && onSubmit()">
-                        <h5 class="card-title"> Insertar Empleado</h5>
+                        <div class="row text-center">
+                            <div class="col-md-6">
+                                <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Nombre</h6>
 
-                        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Nombre</h6>
-
-                        <div class="form-group">
-                            <input type="text" #txt_name class="form-control" formControlName="lastName"
-                                [ngClass]="{'is-invalid':form.get('lastName').touched && form.get('lastName').invalid}"
-                                aria-describedby="basic-addon1">
-                            <div class="invalid-feedback">
-                                <div>Last Name is required</div>
-                            </div>
-                        </div>
-
-                        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Estado</h6>
-                        <div class="input-group mb-3">
-                            <select class="form-control" #select_estado data-style="btn-primary" data-live-search="true"
-                                data-selectpicker data-collection-name="items" ng-model="selected">
-                                <option selected>Casado?</option>
-                                <option *ngFor="let esta of estado" [value]="esta.Id">{{esta.Name}}</option>
-                            </select>
-                        </div>
-
-                        <div *ngIf="type>0">
-                            <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Sede</h6>
-                            <div class="input-group mb-3">
-                                <select class="form-control" #select_sede data-style="btn-primary"
-                                    data-live-search="true" data-selectpicker data-collection-name="items"
-                                    ng-model="selected">
-                                    <option selected>Cartago?</option>
-                                    <option *ngFor="let sed of sede" [value]="sed.Id">{{sed.Name}}</option>
-                                </select>
-                            </div>
-                        </div>
-
-
-                        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Departamento</h6>
-                        <div class="input-group mb-3">
-                            <select class="form-control" #select_dep data-style="btn-primary" data-live-search="true"
-                                data-selectpicker data-collection-name="items" ng-model="selected">
-                                <option selected>CE?</option>
-                                <option *ngFor="let dep of departamento" [value]="dep.Id">{{dep.Name}}</option>
-                            </select>
-                        </div>
-
-                        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Puesto</h6>
-                        <div class="input-group mb-3">
-                            <select class="form-control" #select_puesto data-style="btn-primary" data-live-search="true"
-                                data-selectpicker data-collection-name="items" ng-model="selected">
-                                <option selected>Cajero?</option>
-                                <option *ngFor="let job of puestos" [value]="job.Id">{{job.Name}}</option>
-                            </select>
-                        </div>
-                        <h6 class="card-subtitle mb-2 text-muted">Fecha de Ingreso</h6>
-                        <div class="input-group mb-3">
-                            <input type="date" #txt_fecha_ingreso [(ngModel)]="dateOfBirth" class="form-control" />
-                        </div>
-
-                        <div class="form-group">
-                            <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
-                            <span class="btn btn-rose btn-round btn-file">
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1" accept="image/png, image/jpeg, image/jpg, image/PNG, image/bmp"
-                                   (change)="onPhotoChange($event)" name="photo"> 
+                                <div class="form-group">
+                                    <input type="text" #txt_name class="form-control" formControlName="Nombre"
+                                        [ngClass]="{'is-invalid':form.get('Nombre').touched && form.get('Nombre').invalid}"
+                                        aria-describedby="basic-addon1">
+                                    <div class="invalid-feedback">
+                                        <div>Nombre Requerido</div>
+                                    </div>
+                                </div>
                                 
-                            </span>
+                                <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Apellido1</h6>
+                                <div class="form-group">
+                                    <input type="text" #txt_apellido1 class="form-control" formControlName="Apellido1"
+                                        [ngClass]="{'is-invalid':form.get('Apellido1').touched && form.get('Apellido1').invalid}"
+                                        aria-describedby="basic-addon1">
+                                    <div class="invalid-feedback">
+                                        <div>Apellido1 Requerido</div>
+                                    </div>
+                                </div>
+
+                                <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Apellido2</h6>
+                                <div class="form-group">
+                                    <input type="text" #txt_apellido2 class="form-control" formControlName="Apellido2"
+                                        [ngClass]="{'is-invalid':form.get('Apellido2').touched && form.get('Apellido2').invalid}"
+                                        aria-describedby="basic-addon1">
+                                    <div class="invalid-feedback">
+                                        <div>Apellido2 Requerido</div>
+                                    </div>
+                                </div>
+
+                                <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Cédula</h6>
+                                <div class="form-group">
+                                    <input type="text" #txt_cedula class="form-control" formControlName="Cedula"
+                                        [ngClass]="{'is-invalid':form.get('Cedula').touched && form.get('Cedula').invalid}"
+                                        aria-describedby="basic-addon1">
+                                    <div class="invalid-feedback">
+                                        <div>Cédula Requerida</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Correo</h6>
+                                <div class="form-group">
+                                    <input type="text" #txt_correo class="form-control" formControlName="Correo"
+                                        [ngClass]="{'is-invalid':form.get('Correo').touched && form.get('Correo').invalid}"
+                                        aria-describedby="basic-addon1">
+                                    <div class="invalid-feedback">
+                                        <div>Correo Invalido</div>
+                                    </div>
+                                </div>
+
+                                <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Contraseña</h6>
+                                <div class="form-group">
+                                    <input type="text" #txt_contrasena class="form-control" formControlName="Contraseña"
+                                        [ngClass]="{'is-invalid':form.get('Contraseña').touched && form.get('Contraseña').invalid}"
+                                        aria-describedby="basic-addon1">
+                                    <div class="invalid-feedback">
+                                        <div>Contraseña no cumple con requisitos</div>
+                                    </div>
+                                </div>
+
+                                <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Departamento</h6>
+                                <div class="input-group mb-3">
+                                    <select class="form-control" #select_dep data-style="btn-primary" data-live-search="true"
+                                        data-selectpicker data-collection-name="items" ng-model="selected">
+                                    </select>
+                                </div>
+
+                                <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Puesto</h6>
+                                <div class="input-group mb-3">
+                                    <select class="form-control" #select_puesto data-style="btn-primary" data-live-search="true"
+                                        data-selectpicker data-collection-name="items" ng-model="selected">
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
+                                    <span class="btn btn-rose btn-round btn-file">
+                                        <input type="file" class="form-control-file" id="exampleFormControlFile1" accept="image/png, image/jpeg, image/jpg, image/PNG, image/bmp"
+                                        (change)="onPhotoChange($event)" name="photo"> 
+                                        
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <button
-                                (click)="add_employee(txt_name.value,select_estado.value,select_sede.value,select_dep.value,select_puesto.value,txt_fecha_ingreso.value)"
-                                class="btn btn-primary" >Ingresar</button>
-                        </div>
+                            
+                            <div class="form-group">
+                                <button
+                                    (click)="add_employee(txt_name.value,txt_apellido1.value,txt_apellido2.value,
+                                    txt_cedula.value,txt_correo.value,txt_contrasena.value,select_dep.value,select_puesto.value)"
+                                    class="btn btn-primary" >Ingresar</button>
+                            </div>
+                        
                     </form>
                 </div>
 
@@ -87,18 +115,24 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Activo</th>
-                        <th scope="col">Codigo</th>
-                        <th scope="col">Depreciacion</th>
+                        <th scope="col">Cedula</th>
+                        <th scope="col">Apellido1</th>
+                        <th scope="col">Apellido2</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Departamento</th>
+                        <th scope="col">Puesto</th>
+                        <th scope="col">Fecha de Ingreso</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let asset of assets">
-                        <th scope="row">{{ asset.id }}</th>
-                        <td>{{ asset.name }}</td>
-                        <td>{{ asset.code}}</td>
-                        <td>{{ asset.depreciation}}</td>
+                    <tr *ngFor="let employee of employees">
+                        <th scope="row">{{ employee.cedula }}</th>
+                        <td>{{ employee.apellido1 }}</td>
+                        <td>{{ employee.apellido2}}</td>
+                        <td>{{ employee.nombre}}</td>
+                        <td>{{ employee.departamento}}</td>
+                        <td>{{ employee.puesto}}</td>
+                        <td>{{ employee.fechaIn}}</td>
                         <td>
                             <button mat-icon-button color="accent" class='btn btn-danger' (click)="updatesEmployee()">
                                 <mat-icon aria-label="Edit">edit</mat-icon>

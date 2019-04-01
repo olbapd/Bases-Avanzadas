@@ -30,18 +30,23 @@
             <input type="text" #txt_username class="form-control" placeholder="Username" aria-label="Username"
               aria-describedby="basic-addon1" style="max-width:30rem;">
           </div>
+          <show-hide-password  size="lg" btnStyle="primary" [btnOutline]="false">
+            <input #txt_password type="password" name="..." >
+          </show-hide-password>
 
-          <h6 class="card-subtitle mb-2 text-muted">Contraseña</h6>
-
-
+          <!-- <h6 class="card-subtitle mb-2 text-muted">Contraseña</h6>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
             </div>
-            <input type="text" #txt_password class="form-control" placeholder="Contraseña" aria-label="Contraseña"
+            <input type="{{ typePassword ? 'text' : 'password' }}" id="passwordtype" name="password" #txt_password class="form-control" placeholder="Contraseña" aria-label="Contraseña"
               aria-describedby="basic-addon1" style="max-width:40rem;">
-          </div>
+              <button (click)="showPassword()" type="button"  id="button_showpsw"
+            class="btn btn-success">Show</button>
+            <button (click)="hidePassword()"  style="margin-left:20px" type="button" id="button_showpsw"
+            class="btn btn-success">hide</button>
+          </div> -->
 
-          <button (click)="login(txt_username.value,txt_password.value,prueba)" type="button" id="button_login"
+          <button (click)="login(txt_username.value,txt_password.value)" type="button" id="button_login"
             class="btn btn-success">LogIn</button>
 
         </div>

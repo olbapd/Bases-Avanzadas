@@ -9,6 +9,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {LoginFailedComponent} from './dialogs/login_Failed/login_Failed.component';
 import {MatDialogModule, MatIconModule, MatCardModule, MatToolbarModule} from '@angular/material';
 //import { AuthService } from '../services/auth/auth.service'
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 
 import { AuthRoutes } from './auth.routing';
 
@@ -23,7 +24,8 @@ import { AuthRoutes } from './auth.routing';
     MatCardModule,
     MatToolbarModule,
     ReactiveFormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    ShowHidePasswordModule
   ],
   declarations: [   
       RegisterComponent,
