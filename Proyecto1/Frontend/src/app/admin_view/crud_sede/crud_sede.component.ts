@@ -97,7 +97,7 @@ export class SedeComponent implements OnInit {
         }
     
         add_sede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso) {
-            this.restApi.putSede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso);
+            this.restApi.setSede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso);
     
         }
     

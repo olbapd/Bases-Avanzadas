@@ -247,6 +247,30 @@ return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(
     return this.http.post (this.apiURL+urls.sp_url+'setActivong',body).pipe(retry(1),catchError(this.handleError));
   }
 
+  setCategoria(Nombre, Tangible){
+    let body={
+              "typesIn":["varchar","bit"],
+              "typesOut":[],
+              "parameters":["NombreC","Tangible"],
+              "values":[Nombre,Tangible],
+              "ouputs":[],
+              "name":"setCategoria"
+            }
+     return this.http.post (this.apiURL+urls.sp_url+'setCategoria',body).pipe(retry(1),catchError(this.handleError));
+  }
+
+  setDepartamento(Nombre){
+    let body={
+              "typesIn":["varchar"],
+              "typesOut":[],
+              "parameters":["NombreD"],
+              "values":[Nombre],
+              "ouputs":[],
+              "name":"setDepartamento"
+            }
+     return this.http.post (this.apiURL+urls.sp_url+'setDepartamento',body).pipe(retry(1),catchError(this.handleError));
+  }
+
   // Error handling 
   handleError(error) {
      let errorMessage = '';
