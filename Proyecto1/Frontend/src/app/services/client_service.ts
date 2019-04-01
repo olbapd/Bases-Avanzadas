@@ -151,20 +151,6 @@ export class RestApiService {
     return this.http.post (this.apiURL+urls.sp_url+'getCodigoDynamic',body).pipe(retry(1),catchError(this.handleError));
   }
 
-  setAssignActivo(Codigo,Cedula,DetalleUbi){
-
-    let body={
-              "typesIn":["varchar","varchar", "int","varchar"],
-              "typesOut":["Codigo","Cedula","IdEstado","DetalleUbi"],
-              "parameters":[],
-              "values":[Codigo,Cedula,3,DetalleUbi],
-              "ouputs":[],
-              "name":"asigActivo"
-            }
-return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(retry(1),catchError(this.handleError));
-
-  }
-
   getActivoXCodigo() {
     let body={
       "typesIn":["varchar"],
@@ -228,6 +214,19 @@ return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(
     return this.http.post (this.apiURL+urls.sp_url+'quitarActivo',body).pipe(retry(1),catchError(this.handleError));
   }
 
+  setAssignActivo(Codigo,Cedula,DetalleUbi){
+
+    let body={
+              "typesIn":["varchar","varchar", "int","varchar"],
+              "typesOut":["Codigo","Cedula","IdEstado","DetalleUbi"],
+              "parameters":[],
+              "values":[Codigo,Cedula,3,DetalleUbi],
+              "ouputs":[],
+              "name":"asigActivo"
+            }
+return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(retry(1),catchError(this.handleError));
+
+  }
 
   setSede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso){
     let body;
@@ -269,6 +268,52 @@ return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(
               "name":"setDepartamento"
             }
      return this.http.post (this.apiURL+urls.sp_url+'setDepartamento',body).pipe(retry(1),catchError(this.handleError));
+  }
+
+  setEmpleado(Nombre,Apellido1,Apellido2,Cedula,FechaN,Correo,Contasena,IdDepartamento,IdPuesto,Foto){
+    let body={
+              "typesIn":["varchar","varchar","varchar","varchar","date","varchar","varchar","int","int","varchar"],
+              "typesOut":[],
+              "parameters":["Nombre","Apellido1","Apellido2","Cedula","FechaN","Correo","Contasena","IdDepartamento","IdPuesto","Foto"],
+              "values":[Nombre,Apellido1,Apellido2,Cedula,FechaN,Correo,Contasena,IdDepartamento,IdPuesto,Foto],
+              "ouputs":[],
+              "name":"setEmpleado"
+            }
+     return this.http.post (this.apiURL+urls.sp_url+'setEmpleado',body).pipe(retry(1),catchError(this.handleError));
+  }
+  setEstado(Nombre){
+    let body={
+              "typesIn":["varchar"],
+              "typesOut":[],
+              "parameters":["NombreE"],
+              "values":[Nombre],
+              "ouputs":[],
+              "name":"setEstado"
+            }
+     return this.http.post (this.apiURL+urls.sp_url+'setEstado',body).pipe(retry(1),catchError(this.handleError));
+  }
+
+  setMoneda(Nombre){
+    let body={
+              "typesIn":["varchar"],
+              "typesOut":[],
+              "parameters":["NombreM"],
+              "values":[Nombre],
+              "ouputs":[],
+              "name":"setMoneda"
+            }
+     return this.http.post (this.apiURL+urls.sp_url+'setMoneda',body).pipe(retry(1),catchError(this.handleError));
+  }
+  setPuesto(Nombre){
+    let body={
+              "typesIn":["varchar"],
+              "typesOut":[],
+              "parameters":["NombreP"],
+              "values":[Nombre],
+              "ouputs":[],
+              "name":"setPuesto"
+            }
+     return this.http.post (this.apiURL+urls.sp_url+'setPuesto',body).pipe(retry(1),catchError(this.handleError));
   }
 
   // Error handling 
