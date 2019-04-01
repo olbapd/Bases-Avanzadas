@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material';
 import  {CodeErrorComponent} from '../dialogs/code_error/code_error.component';
 import { Options } from 'selenium-webdriver/edge';
 import { all } from 'q';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -14,15 +15,36 @@ import { all } from 'q';
   styleUrls: ['./manage-assets.component.css']
 })
 export class ManageAssetsComponent implements OnInit {
+  registerForm: FormGroup;
+  submitted = false;
   isPopupOpened = false;
-  constructor(public restApi: RestApiService,private router: Router,private dialog: MatDialog) {
+  constructor(public restApi: RestApiService,private router: Router,private dialog: MatDialog,private formBuilder: FormBuilder) {
    }
   ngOnInit() {
     this.CategoriaDropdown();
     this.AccionDropDown();
     this.MonedasDropdown();
+    /* this.registerForm = this.formBuilder.group({
+      Nombre: ['', Validators.required],
+      Descripcion: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+  }); */
     //this.activos = this.restApi.getActivos(); 
   }
+ /*  get f() { return this.registerForm.controls; }
+ */
+
+ /*  onSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.registerForm.invalid) {
+        return;
+    }
+
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
+} */
   EstadoDropdown(){
     let option;
     let dropdown2 = document.getElementById('estado3-Dropdown');
@@ -83,7 +105,7 @@ export class ManageAssetsComponent implements OnInit {
   });;
   }
   registrar_activo(nombre,descripcion,fecha_compra,precio_compre,
-    valor_residual,sede,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado)
+    valor_residual,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado)
     {
     let btn = document.getElementById('registrar_btn');
     this.restApi.getActivoXCodigo().subscribe((res)=>{
@@ -94,8 +116,9 @@ export class ManageAssetsComponent implements OnInit {
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(CodeErrorComponent);
       }
+
       else{
-        this.restApi.setActivo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,sede,detalle_ubicacion,codigo,
+        this.restApi.setActivo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,detalle_ubicacion,codigo,
           categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado);  
       }
   });;

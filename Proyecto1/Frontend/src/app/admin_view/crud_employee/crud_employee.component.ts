@@ -93,7 +93,12 @@ export class EmployeeComponent implements OnInit {
     }
     ngOnInit() {
         this.form = new FormGroup({
-            lastName: new FormControl('', Validators.required)
+           Nombre: new FormControl('', Validators.required),
+           Apellido1: new FormControl('', Validators.required),
+           Apellido2: new FormControl('', Validators.required),
+           Cedula: new FormControl('', Validators.required),
+           Correo: new FormControl('', [Validators.required, Validators.email]),
+           Contraseña: new FormControl('', [Validators.required, Validators.minLength(8)])
 
         });
     }

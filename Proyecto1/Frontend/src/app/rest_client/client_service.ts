@@ -227,16 +227,16 @@ return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(
 
   }
 
-  setActivo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,sede,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado) {
+  setActivo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado) {
     let body= {
-      "typesIn":["varchar","varchar","varchar","varchar","int","date","int","int","date","date","date","int","int","varchar","int" ,"int" ,"int" ,"int"],
+      "typesIn":["varchar","varchar","varchar","varchar","int","date","int","date","date","date","int","int","varchar","int" ,"int" ,"int" ,"int"],
       "typesOut":[],
       "parameters":["Codigo","Nombre","Descripcion","Foto","Precio","TiempoGar","VidaU","PorcentajeD","FechaCompra","FechaRegistro","FechaAsig","CentroCosto","ValorResidual","DetalleUb","IdCategoria","IdSede","IdMoneda","IdEstado"],
-      "values":[codigo,nombre,descripcion,fecha_compra,precio_compre,valor_residual,sede,detalle_ubicacion,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado],
+      "values":[codigo,nombre,descripcion,fecha_compra,precio_compre,valor_residual,detalle_ubicacion,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado],
       "ouputs":[],
       "name":"setActivo"
     }  
-    return this.http.post (this.apiURL+urls.sp_url+'getSedes',body).pipe(retry(1),catchError(this.handleError));
+    return this.http.post (this.apiURL+urls.sp_url+'setActivong',body).pipe(retry(1),catchError(this.handleError));
   }
 
   // Error handling 

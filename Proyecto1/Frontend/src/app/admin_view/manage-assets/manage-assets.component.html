@@ -1,5 +1,4 @@
 <app-admin></app-admin>
-
 <div class="container-fluid">
   <div class="row">
 
@@ -12,11 +11,13 @@
 
             <!--Columna de la Izquierda-->
             <div class="col-md-6">
+
               <h6 class="card-subtitle mb-2 text-muted">Nombre</h6>
               <div class="input-group mb-3">
                 <input type="text" #txt_nombre_activo class="form-control" placeholder="Nombre" aria-label="Nombre"
                   aria-describedby="basic-addon1">
               </div>
+
 
               <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
               <div class="input-group mb-3">
@@ -109,7 +110,7 @@
           <button (click)=" registrar_activo(txt_nombre_activo.value,txt_descripcion.value,txt_fecha_compra.value,
           txt_precio_compra.value,txt_valor_residual.value,select_sede.value,txt_detalle_ubicacion.value,txt_codigo.value,select_categoria.value,txt_fecha_registro.value,
           txt_tiempo_garantia.value,txt_vida_util.value,txt_centro_costo.value,select_estado.value)" type="button"
-            class="btn btn-primary" id="registrar_btn" name="registrar">Registrar</button>
+            class="btn btn-primary" id="registrar_btn" name="modificarEstado">Registrar</button>
         </div>
       </div>
 
