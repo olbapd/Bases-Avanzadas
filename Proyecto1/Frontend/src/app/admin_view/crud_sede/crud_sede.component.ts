@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RestApiService } from 'src/app/rest_client/client_service';
+import { RestApiService } from 'src/app/services/client_service';
 import { Router } from '@angular/router';
 import { asset } from 'src/app/interfaces/assets_Structure';
 import { sede } from 'src/app/interfaces/sede';
@@ -27,15 +27,25 @@ export class SedeComponent implements OnInit {
     categoria;
     page = 1;
     pageSize = 4;
-    sedess: sede[]; /* =data= [{
-        idSede:1
-        NombreSede: "as",
+    sedess: sede[];/* = [{
+        id:1,
+        name: "as",
         provincia: "cartago",
-        distrito: "paraiso",
         canton: "paraiso",
-        admin: "Pablo"
-    }
-    ]; */
+        distrito: "paraiso",
+        apellido1:"bla",
+        apellido2:"blaaa",
+        nombre:"blaaaaaaaa"
+    },{
+      id:1,
+      name: "as",
+      provincia: "cartago",
+      canton: "paraiso",
+      distrito: "paraiso",
+      apellido1:"bla",
+      apellido2:"blaaa",
+      nombre:"blaaaaaaaa"
+  }]; */
 
    /*  collectionSize = this.sedess.length;
     activo: asset;
@@ -58,7 +68,6 @@ export class SedeComponent implements OnInit {
 
         Rsede(){
           let idEmpleado:number=parseInt(localStorage.getItem('IdEmpleado'));
-          localStorage.clear();
           this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res)=>{
             const myObjStr = JSON.stringify(res)
                const json = JSON.parse(myObjStr);
@@ -68,10 +77,11 @@ export class SedeComponent implements OnInit {
                                 "provincia":json.data[0].Nombre[3],
                                 "canton":json.data[0].Nombre[2],
                                 "distrito":json.data[0].Nombre[1],
-                                "admin":json.data[0].Nombre[4]+" "+json.data[0].Apellido1+" "+json.data[0].Apellido2,
+                                "apellido1":json.data[0].Apellido1,
+                                "apellido2":json.data[0].Apellido2,
+                                "nombre":json.data[0].Nombre[4]
                               }];
-            
-          });
+           });
           }
         updateSede() {
             this.isPopupOpened = true;
@@ -105,9 +115,9 @@ export class SedeComponent implements OnInit {
                 dropdown.append(optionestado);
              } 
           });;
-          }
+        }
     
-          DistritoDropdown(){
+        DistritoDropdown(){
             let optionestado;
             let dropdown = document.getElementById('distrito-Dropdown');
              this.restApi.getDistritos().subscribe((res)=>{
@@ -121,9 +131,9 @@ export class SedeComponent implements OnInit {
                 dropdown.append(optionestado);
              } 
           });;
-          }
+        }
     
-          ProvinciaDropdown(){
+         ProvinciaDropdown(){
             let optionestado;
             let dropdown = document.getElementById('provincia-Dropdown');
              this.restApi.getProvincia().subscribe((res)=>{
@@ -137,5 +147,5 @@ export class SedeComponent implements OnInit {
                 dropdown.append(optionestado);
              } 
           });;
-          }
+        }
     }

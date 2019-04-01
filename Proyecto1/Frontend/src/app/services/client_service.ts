@@ -16,7 +16,6 @@ export class RestApiService {
   apiURL = urls.urlbase;
 
   constructor(private http: HttpClient) {
-    
 
    }
 
@@ -30,8 +29,6 @@ export class RestApiService {
       'Content-Type': 'application/json'
     })
   }  
-
-  // HttpClient API get() method => auth login
   getSate(username,password) {
 
     let body ={
@@ -205,6 +202,17 @@ return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(
     }
     
     return this.http.post (this.apiURL+urls.sp_url+'getEstadoXCodigo',body).pipe(retry(1),catchError(this.handleError));
+  }
+  getEmpleadosXSede(idSede){
+   let body= {
+                "typesIn":["int"],
+                "typesOut":[],
+                "parameters":["IdSede"],
+                "values":[idSede],
+                "ouputs":[],
+                "name":"getEmpleadoXSede"
+              }
+   return this.http.post (this.apiURL+urls.sp_url+'getEmpleadoXSede',body).pipe(retry(1),catchError(this.handleError));
   }
 
   getQuitarActivo(Codigo,IdEstado) {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import {RestApiService} from 'src/app/rest_client/client_service';
+import {RestApiService} from 'src/app/services/client_service';
 import { Router } from "@angular/router";
 import { MatDialog } from '@angular/material';
 import  {CodeErrorComponent} from '../dialogs/code_error/code_error.component';
@@ -24,27 +24,7 @@ export class ManageAssetsComponent implements OnInit {
     this.CategoriaDropdown();
     this.AccionDropDown();
     this.MonedasDropdown();
-    /* this.registerForm = this.formBuilder.group({
-      Nombre: ['', Validators.required],
-      Descripcion: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-  }); */
-    //this.activos = this.restApi.getActivos(); 
   }
- /*  get f() { return this.registerForm.controls; }
- */
-
- /*  onSubmit() {
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.registerForm.invalid) {
-        return;
-    }
-
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
-} */
   EstadoDropdown(){
     let option;
     let dropdown2 = document.getElementById('estado3-Dropdown');
@@ -124,6 +104,8 @@ export class ManageAssetsComponent implements OnInit {
   });;
   }
   CodigoDropDown_Modif_State(idCategoria){
+    let btn = document.getElementById('modifstate_btn');
+    btn.setAttribute('class','btn btn-primary');
     $("#codigo_modif_state-Dropdown").empty(); //jquery clear dropdown
     let dropdown = document.getElementById('codigo_modif_state-Dropdown');
     let defaulOption;
@@ -145,6 +127,8 @@ export class ManageAssetsComponent implements OnInit {
   });;
   }
   EstadoDropDown_Modif_State(Codigo){
+    let btn = document.getElementById('modifstate_btn');
+    btn.setAttribute('class','btn btn-primary');
     $("#estado3-Dropdown").empty(); //jquery clear dropdown
     let option;
     let dropdown = document.getElementById('estado3-Dropdown');
@@ -154,17 +138,42 @@ export class ManageAssetsComponent implements OnInit {
       var count = Object.keys(json.data).length;
       for (var _i = 0; _i < count; _i++) {
         option= document.createElement('option');
-        option.text = "--Actual:--" + json.data[_i].Nombre;
+        option.text = "--Actual--:" + json.data[_i].Nombre;
         option.value = json.data[_i].idEstado;
         dropdown.append(option);
      } 
   });;
   this.EstadoDropdown();
   }
+  estadoXCodigo(){
+    let btn = document.getElementById('modifstate_btn');
+    btn.setAttribute('class','btn btn-primary');
+  }
+
+  UpdateEstado(Codigo){
+    $("#estado3-Dropdown").empty(); //jquery clear dropdown
+    let option;
+    let dropdown = document.getElementById('estado3-Dropdown');
+    this.restApi.getEstadoXCodigo(Codigo).subscribe((res)=>{
+      const myObjStr = JSON.stringify(res)
+       const json = JSON.parse(myObjStr);
+      var count = Object.keys(json.data).length;
+      for (var _i = 0; _i < count; _i++) {
+        option= document.createElement('option');
+        option.text = "--Actual--:" + json.data[_i].Nombre;
+        option.value = json.data[_i].idEstado;
+        dropdown.append(option);
+     } 
+  });;
+  this.EstadoDropdown();
+  }
+
   modificar_estado_activo(Codigo,IdEstado){
+    console.log("IdEstado"+IdEstado);
     let btn = document.getElementById('modifstate_btn');
     if (Codigo=="" || IdEstado==""){
       btn.setAttribute('class','btn btn-danger');
+      window.alert("No ha sido posible modificar estado del Activo Código:"+" "+Codigo+"\n" +"Error: Estado:"+" "+IdEstado+"\n"+"Revise los datos");
      }
      else{
       this.restApi.getQuitarActivo(Codigo,IdEstado).subscribe((res)=>{
@@ -173,18 +182,16 @@ export class ManageAssetsComponent implements OnInit {
         
          if(json.success==true){
            btn.setAttribute('class','btn btn-success');
-  
+           this.UpdateEstado(Codigo);
+           window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de froma exitosa");
          }
       });;
      }
   }
+  //-----------ASIGNAR ACTIVO------------------
   asignar_activo(Codigo,Cedula,DetalleUbi){
     //this.restApi.setAssignActivo(Codigo,Cedula,DetalleUbi);
     console.log("Si:"+localStorage.getItem('IdEmpleado'));
-    
-  
-    
-    
   }
   AccionDropDown(){
     $("#accion-Dropdown").empty(); //jquery clear dropdown

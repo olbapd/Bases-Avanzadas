@@ -118,7 +118,6 @@
 
     <!--Card para la Baja de Activos-->
 
-    
       <div class="card border-info" style="max-width: 18rem; max-height: 23rem; margin-bottom: 20px">
         <div class="card-body text-center">
           <h5 class="card-title"> Modificar Estado del Activo</h5>
@@ -147,7 +146,8 @@
               <h6 class="card-subtitle mb-2 text-muted">Seleccionar Estado</h6>
               <div class="input-group mb-3">
                 <select id="estado3-Dropdown" name="estado3" class="form-control"  #select_estado_activo data-style="btn-primary" data-live-search="true"
-                  data-selectpicker data-collection-name="items" ng-model="selected">
+                  data-selectpicker data-collection-name="items" ng-model="selected"
+                  (change)="estadoXCodigo()">
                   <!--LLenado de Select-->
                 </select>
               </div>

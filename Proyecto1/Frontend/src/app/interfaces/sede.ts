@@ -4,5 +4,7 @@ export interface sede{
     provincia:string;
     canton:string;
     distrito:string;
-    admin:string;
+    apellido1:string;
+    apellido2:string;
+    nombre:string;
 }

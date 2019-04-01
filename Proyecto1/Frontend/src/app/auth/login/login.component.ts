@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Injectable } from '@angular/core';
-import {RestApiService} from 'src/app/rest_client/client_service';
+import {RestApiService} from 'src/app/services/client_service';
 import { Router } from "@angular/router";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material';
@@ -10,8 +10,6 @@ import  {LoginFailedComponent} from '../dialogs/login_Failed/login_Failed.compon
     styleUrls: ['./login.component.css']
 })
 
-
-
 export class LoginComponent implements OnInit {
     isPopupOpened = false;
   
@@ -19,11 +17,10 @@ export class LoginComponent implements OnInit {
         
     }
     ngOnInit() { 
+        localStorage.clear();
     }
 
     login(username,password){
-        console.log("pass:"+password);
-        console.log("name:"+username);
         
         this.restApi.getSate(username,password).subscribe((res)=>{
             const myObjStr = JSON.stringify(res)

@@ -109,7 +109,9 @@
                         <th scope="col">Provincia</th>
                         <th scope="col">Canton</th>
                         <th scope="col">Distrito</th>
-                        <th scope="col">Administrador</th>
+                        <th scope="col">Apellido1</th>
+                        <th scope="col">Apellido2</th>
+                        <th scope="col">Nombre</th>
 
                     </tr>
                 </thead>
@@ -120,7 +122,9 @@
                         <td>{{ sede.provincia}}</td>
                         <td>{{ sede.canton}}</td>
                         <td>{{ sede.distrito}}</td>
-                        <td>{{ sede.admin}}</td>
+                        <td>{{ sede.apellido1}}</td>
+                        <td>{{ sede.apellido2}}</td>
+                        <td>{{ sede.nombre}}</td>
                         <td>
                             <button mat-icon-button color="accent" class='btn btn-danger' (click)="updateSede()">
                                 <mat-icon aria-label="Edit">edit</mat-icon>
