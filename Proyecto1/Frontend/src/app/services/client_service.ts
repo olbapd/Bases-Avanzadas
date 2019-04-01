@@ -228,9 +228,16 @@ return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(
 
   }
 
-  setSede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso){
-    let body;
-    return this.http.post (this.apiURL+urls.sp_url+'putSede',body).pipe(retry(1),catchError(this.handleError));
+  setSede(Nombre,Ubicacion,IdDistrito,IdEstado){
+    let body={
+                "typesIn":["varchar","varchar","input","input"],
+                "typesOut":[],
+                "parameters":["NombreS","Ubicacion","IdDistrito","IdEstado"],
+                "values":[Nombre,Ubicacion,IdDistrito,IdEstado],
+                "ouputs":[],
+                "name":"setSede"
+              }
+    return this.http.post (this.apiURL+urls.sp_url+'setSede',body).pipe(retry(1),catchError(this.handleError));
 
   }
 
