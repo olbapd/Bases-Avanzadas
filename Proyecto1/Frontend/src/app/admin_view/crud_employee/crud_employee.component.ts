@@ -24,6 +24,7 @@ import { FotoService } from '../../services/foto.service';
 export class EmployeeComponent implements OnInit {
     photo: any;
     isPopupOpened = false;
+    submitted = false;
     sede;
     estado;
     puestos: jobs[];
@@ -57,6 +58,13 @@ export class EmployeeComponent implements OnInit {
         this.photo="";
 
     }
+    get employees(): Empleado[] { //BIND TABLE
+        
+        return this.empleados
+        .map((empleados, i) => ({ id: i + 1, ...empleados}))
+        .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+    }
+    get f() { return this.form.controls; }
     ngOnInit() {
         this.form = new FormGroup({
            Nombre: new FormControl('', Validators.required),
@@ -64,8 +72,10 @@ export class EmployeeComponent implements OnInit {
            Apellido2: new FormControl('', Validators.required),
            Cedula: new FormControl('', Validators.required),
            Correo: new FormControl('', [Validators.required, Validators.email]),
-           Contraseña: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(10)]),
-           FechaN: new FormControl('', Validators.required)
+           Contrasena: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(10)]),
+           FechaN: new FormControl('', Validators.required),
+           Departamento: new FormControl('', Validators.required),
+           Puesto: new FormControl('', Validators.required)
 
         });
        this.Remployees();
@@ -73,13 +83,37 @@ export class EmployeeComponent implements OnInit {
        this.puesto_DropDown();
     }
     
-    get employees(): Empleado[] { //BIND TABLE
-        
-        return this.empleados
-        .map((empleados, i) => ({ id: i + 1, ...empleados}))
-        .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-    }
+    onSubmit() {
+        this.submitted = true;
+        let nombre = this.form.get('Nombre').value;
+        let apellido1 = this.form.get('Apellido1').value;
+        let apellido2 = this.form.get('Apellido1').value;
+        let cedula = this.form.get('Cedula').value;
+        let FechaN = this.form.get('FechaN').value;
+        let correo = this.form.get('Correo').value;
+        let contrasena = this.form.get('Contrasena').value;
+        let departamento = this.form.get('Departamento').value;
+        let puesto = this.form.get('Puesto').value;
 
+        // stop here if form is invalid
+        if (this.form.invalid) {
+            return;
+        }
+        else{
+        let btn = document.getElementById('registrar_btn');
+        //Se debe almacenar la imagen primero
+        this.fotoService.uploadFile(this.photo)
+        .subscribe((data)=>{
+            let photoHash = (data && data.hash)? data.hash : null;
+            console.log(photoHash);
+                this.restApi.setEmpleado(nombre,apellido1,apellido2,cedula,FechaN,correo,contrasena,departamento,puesto,photoHash).subscribe(res => {
+                    
+                    });  
+        });
+
+        }
+    }
+  
     dep_DropDown(){
         let option;
         let dropdowndep = document.getElementById('dep-Dropdown');
@@ -164,25 +198,6 @@ export class EmployeeComponent implements OnInit {
         const dialogRef = this.dialog.open(updateComponent, {
             data: {}
         });
-    }
-    add_employee(name,apellido1,apellido2,cedula,correo,contrasena,dep,puesto,FechaN) {
-        //Se debe almacenar la imagen primero
-        this.fotoService.uploadFile(this.photo)
-            .subscribe((data)=>{
-                let photoHash = (data && data.hash)? data.hash : null;
-                console.log(photoHash);
-                this.restApi.setEmpleado(name,apellido1,apellido2,cedula,FechaN,correo,contrasena,dep,puesto,photoHash).subscribe(res => {
-                    
-                });
-                //POner el resto de su codigo aqui adentro
-                //Cuando se va usar el sp de agregar cliente, en el espacio de 
-                //Foto utilizar la cariable photoHas.
-
-
-                //
-            });
-
-        
     }
 
     onPhotoChange(event){
