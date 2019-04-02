@@ -18,6 +18,20 @@
       	"server"  : "192.168.1.7", 
       	"database": "Proyecto1BDA" 
 	},
+	"sqlservers":[
+		{
+			"user"    : "api",
+	      	"password": "admin",
+	      	"server"  : "localhost", 
+	      	"database": "Proyecto1BDA" 
+		},
+		{
+			"user"    : "api",
+	      	"password": "admin",
+	      	"server"  : "192.168.1.7", 
+	      	"database": "Proyecto1BDA" 
+		}
+	],
 	
 	"mail" : {
 	  "host" : "smtp.gmail.com",
