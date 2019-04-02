@@ -138,6 +138,17 @@ export class RestApiService {
               }
    return this.http.post (this.apiURL+urls.sp_url+'getDistrito',body).pipe(retry(1),catchError(this.handleError));
   }
+  getDepartamento() {
+    let body = {
+                "typesIn":[],
+                "typesOut":[],
+                "parameters":[],
+                "values":[],
+                "ouputs":[],
+                "name":"getDepartamento"
+              }
+   return this.http.post (this.apiURL+urls.sp_url+'getDepartamento',body).pipe(retry(1),catchError(this.handleError));
+  }
 
   getCodigoDynamic(idEstado,idCategoria){
     let body ={

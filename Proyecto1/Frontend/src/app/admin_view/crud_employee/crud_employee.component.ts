@@ -47,9 +47,35 @@ export class EmployeeComponent implements OnInit {
     activo: asset;
     empleado: Empleado; */
     form: FormGroup;
+    constructor(private fb: FormBuilder,
+        private modalService: NgbModal,
+        public restApi: RestApiService,
+        private router: Router,
+        private http: HttpClient,
+        private dialog: MatDialog,
+        private fotoService: FotoService) {
+        this.photo="";
+
+    }
 
     get employees(): Empleado[] {
         return this.empleados.map((empleados, i) => ({ id: i + 1, ...empleados})).slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+    }
+
+    dep_DropDown(){
+        let option;
+        let dropdowndep = document.getElementById('dep-Dropdown');
+        this.restApi.getCategorias().subscribe((res)=>{
+        const myObjStr = JSON.stringify(res)
+        const json = JSON.parse(myObjStr);
+        var count = Object.keys(json.data).length;
+        for (var _i = 0; _i < count; _i++) {
+            option = document.createElement('option');
+            option.text = json.data[_i].Nombre;
+            option.value = json.data[_i].IdDepartamento;
+            dropdowndep.append(option);
+        } 
+    });
     }
 
     Remployees(){
@@ -90,16 +116,7 @@ export class EmployeeComponent implements OnInit {
 
     }
 
-    constructor(private fb: FormBuilder,
-                private modalService: NgbModal,
-                public restApi: RestApiService,
-                private router: Router,
-                private http: HttpClient,
-                private dialog: MatDialog,
-                private fotoService: FotoService) {
-        this.photo="";
-
-    }
+    
     ngOnInit() {
         this.form = new FormGroup({
            Nombre: new FormControl('', Validators.required),
@@ -107,7 +124,7 @@ export class EmployeeComponent implements OnInit {
            Apellido2: new FormControl('', Validators.required),
            Cedula: new FormControl('', Validators.required),
            Correo: new FormControl('', [Validators.required, Validators.email]),
-           Contraseña: new FormControl('', [Validators.required, Validators.minLength(8)])
+           Contraseña: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(10)])
 
         });
        this.Remployees();
