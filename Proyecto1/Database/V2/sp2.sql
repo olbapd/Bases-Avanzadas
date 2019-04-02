@@ -704,29 +704,23 @@ BEGIN
 	BEGIN TRAN
 	BEGIN TRY
 		UPDATE Empleado SET 
-		[IdPuesto] = 1
-		FROM Empleado
-		INNER JOIN SedeXEmpleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
-		WHERE @IdAdminN = [SedeXEmpleado].IdEmpleado AND @IdSede = [SedeXEmpleado].IdSede
-		COMMIT TRANSACTION
-	END TRY
-	BEGIN CATCH
-		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
-		ROLLBACK TRANSACTION
-	END CATCH
+		[IdPuesto] = 2
+		WHERE @IdAdminN = [Empleado].IdEmpleado
 
-	BEGIN TRAN
-	BEGIN TRY
+		UPDATE SedeXEmpleado SET 
+		[IdSede] = @IdSede
+		WHERE  @IdAdminN = [SedeXEmpleado].IdEmpleado
+
 		UPDATE Empleado SET 
 		[IdPuesto] = 3
 		WHERE @IdAdminV = [Empleado].IdEmpleado
+
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
 		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
 		ROLLBACK TRANSACTION
 	END CATCH
-
 END
 GO
 
