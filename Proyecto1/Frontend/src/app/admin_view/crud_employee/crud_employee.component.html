@@ -85,14 +85,14 @@
 
                                 <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Departamento</h6>
                                 <div class="input-group mb-3">
-                                    <select class="form-control" #select_dep data-style="btn-primary" data-live-search="true"
+                                    <select class="form-control" id="dep-Dropdown" name="departamento" #select_dep data-style="btn-primary" data-live-search="true"
                                         data-selectpicker data-collection-name="items" ng-model="selected">
                                     </select>
                                 </div>
 
                                 <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Puesto</h6>
                                 <div class="input-group mb-3">
-                                    <select class="form-control" #select_puesto data-style="btn-primary" data-live-search="true"
+                                    <select class="form-control" id="puesto-Dropdown" name="puesto" #select_puesto data-style="btn-primary" data-live-search="true"
                                         data-selectpicker data-collection-name="items" ng-model="selected">
                                     </select>
                                 </div>
@@ -108,20 +108,21 @@
                             </div>
                         </div>
                             
-                            <div class="form-group">
+                            
                                 <button
                                     (click)="add_employee(txt_name.value,txt_apellido1.value,txt_apellido2.value,
                                     txt_cedula.value,txt_correo.value,txt_contrasena.value,select_dep.value,select_puesto.value,txt_FechaN.value)"
                                     class="btn btn-primary" >Ingresar</button>
-                            </div>
+                            
                     </form>
                 </div>
 
             </div>
 
         </div>
+        <!--TABLA-->
         <div class="col-md-8">
-            <table class="table table-striped">
+            <table id ="table_empleado_Table" name="table_empleado" class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Cedula</th>

@@ -57,15 +57,33 @@ export class EmployeeComponent implements OnInit {
         this.photo="";
 
     }
+    ngOnInit() {
+        this.form = new FormGroup({
+           Nombre: new FormControl('', Validators.required),
+           Apellido1: new FormControl('', Validators.required),
+           Apellido2: new FormControl('', Validators.required),
+           Cedula: new FormControl('', Validators.required),
+           Correo: new FormControl('', [Validators.required, Validators.email]),
+           Contraseña: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(10)]),
+           FechaN: new FormControl('', Validators.required)
 
-    get employees(): Empleado[] {
-        return this.empleados.map((empleados, i) => ({ id: i + 1, ...empleados})).slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+        });
+       this.Remployees();
+       this.dep_DropDown();
+       this.puesto_DropDown();
+    }
+    
+    get employees(): Empleado[] { //BIND TABLE
+        
+        return this.empleados
+        .map((empleados, i) => ({ id: i + 1, ...empleados}))
+        .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
     }
 
     dep_DropDown(){
         let option;
         let dropdowndep = document.getElementById('dep-Dropdown');
-        this.restApi.getCategorias().subscribe((res)=>{
+        this.restApi.getDepartamento().subscribe((res)=>{
         const myObjStr = JSON.stringify(res)
         const json = JSON.parse(myObjStr);
         var count = Object.keys(json.data).length;
@@ -73,6 +91,22 @@ export class EmployeeComponent implements OnInit {
             option = document.createElement('option');
             option.text = json.data[_i].Nombre;
             option.value = json.data[_i].IdDepartamento;
+            dropdowndep.append(option);
+        } 
+    });
+    }
+
+    puesto_DropDown(){
+        let option;
+        let dropdowndep = document.getElementById('puesto-Dropdown');
+        this.restApi.getPuesto().subscribe((res)=>{
+        const myObjStr = JSON.stringify(res)
+        const json = JSON.parse(myObjStr);
+        var count = Object.keys(json.data).length;
+        for (var _i = 0; _i < count; _i++) {
+            option = document.createElement('option');
+            option.text = json.data[_i].Nombre;
+            option.value = json.data[_i].IdPuesto;
             dropdowndep.append(option);
         } 
     });
@@ -99,6 +133,7 @@ export class EmployeeComponent implements OnInit {
                         "fechaIn":json.data[_i].FechaIngreso
                      });
                  }
+                 
              });
          });
         
@@ -110,26 +145,12 @@ export class EmployeeComponent implements OnInit {
     onUpload() {
         const fd = new FormData();
         fd.append('image', this.selectedFile, this.selectedFile.name);
-        this.http.post('http://API/REST', fd).subscribe(res => {
+        this.http.post('http://localhost:300', fd).subscribe(res => {
             console.log(res);
         });
 
     }
-
     
-    ngOnInit() {
-        this.form = new FormGroup({
-           Nombre: new FormControl('', Validators.required),
-           Apellido1: new FormControl('', Validators.required),
-           Apellido2: new FormControl('', Validators.required),
-           Cedula: new FormControl('', Validators.required),
-           Correo: new FormControl('', [Validators.required, Validators.email]),
-           Contraseña: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(10)])
-
-        });
-       this.Remployees();
-    }
-
     deleteEmployee() {
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(DeleteComponent, {

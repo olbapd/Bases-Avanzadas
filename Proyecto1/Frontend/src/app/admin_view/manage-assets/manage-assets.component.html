@@ -7,143 +7,142 @@
       <div class="card border-info" style="max-width: 50rem; margin-bottom: 20px">
         <div class="card-body text-center">
           <h5 class="card-title"> Registro de Activos</h5>
-            <form name="form" [formGroup]="form" (ngSubmit)="form.valid && onSubmit()">
+            <form name="form" [formGroup]="form" (ngSubmit)="onSubmit()">
               <div class="row text-center">
                 <!--Columna de la Izquierda-->
                 <div class="col-md-6">
                   <h6 class="card-subtitle mb-2 text-muted">Nombre</h6>
                   <div class="form-group">
                     <input type="text" #txt_nombre_activo class="form-control" formControlName="Nombre"
-                        [ngClass]="{'is-invalid':form.get('Nombre').touched && form.get('Nombre').invalid}"
-                        aria-describedby="basic-addon1">
-                    <div class="invalid-feedback">
-                        <div>Nombre Requerido</div>
+                    [ngClass]="{ 'is-invalid': submitted && f.Nombre.errors }"/>
+                    <div *ngIf="submitted && f.Nombre.errors" class="invalid-feedback">
+                      <div *ngIf="f.Nombre.errors.required">Nombre Requerido</div>
                     </div>
                   </div>
                   <h6 class="card-subtitle mb-2 text-muted">Descripción</h6>
                   <div class="form-group">
                     <input type="text" #txt_descripcion class="form-control" formControlName="Descripcion"
-                        [ngClass]="{'is-invalid':form.get('Descripcion').touched && form.get('Descripcion').invalid}"
-                        aria-describedby="basic-addon1">
-                    <div class="invalid-feedback">
-                        <div>Descripción Requerida</div>
+                    [ngClass]="{ 'is-invalid': submitted && f.Descripcion.errors }"/>
+                    <div *ngIf="submitted && f.Descripcion.errors" class="invalid-feedback">
+                      <div *ngIf="f.Descripcion.errors.required">Descripcion Requerida</div>
                     </div>
                   </div>
 
                   <h6 class="card-subtitle mb-2 text-muted">Fecha de Compra</h6>
                   <div class="form-group">
                     <input type="text" #txt_fecha_compra class="form-control" formControlName="FechaCompra"
-                        [ngClass]="{'is-invalid':form.get('FechaCompra').touched && form.get('FechaCompra').invalid}"
-                        aria-describedby="basic-addon1">
-                    <div class="invalid-feedback">
-                        <div>Fecha de Compra Requerida</div>
+                    [ngClass]="{ 'is-invalid': submitted && f.FechaCompra.errors }"/>
+                    <div *ngIf="submitted && f.FechaCompra.errors" class="invalid-feedback">
+                      <div *ngIf="f.FechaCompra.errors.required">Fecha de Compra Requerida</div>
                     </div>
                   </div>
 
                   <h6 class="card-subtitle mb-2 text-muted">Precio de Compra</h6>
                   <div class="form-group">
                     <input type="text" #txt_precio_compra class="form-control" formControlName="PrecioCompra"
-                        [ngClass]="{'is-invalid':form.get('PrecioCompra').touched && form.get('PrecioCompra').invalid}"
-                        aria-describedby="basic-addon1">
-                    <div class="invalid-feedback">
-                        <div>Precio de Compra Requerido</div>
+                    [ngClass]="{ 'is-invalid': submitted && f.PrecioCompra.errors }"/>
+                    <div *ngIf="submitted && f.PrecioCompra.errors" class="invalid-feedback">
+                      <div *ngIf="f.PrecioCompra.errors.required">Precio de Compra Requerido</div>
                     </div>
                   </div>
 
                   <h6 class="card-subtitle mb-2 text-muted">Valor Residual</h6>
                   <div class="form-group">
                     <input type="text" #txt_valor_residual class="form-control" formControlName="ValorResidual"
-                        [ngClass]="{'is-invalid':form.get('ValorResidual').touched && form.get('ValorResidual').invalid}"
-                        aria-describedby="basic-addon1">
-                    <div class="invalid-feedback">
-                        <div>Valor Residual Requerido</div>
+                    [ngClass]="{ 'is-invalid': submitted && f.ValorResidual.errors }"/>
+                    <div *ngIf="submitted && f.ValorResidual.errors" class="invalid-feedback">
+                      <div *ngIf="f.ValorResidual.errors.required">Valor Residual Requerido</div>
                     </div>
                   </div>
 
                   <h6 class="card-subtitle mb-2 text-muted">Codigo</h6>
                   <div class="form-group">
                     <input type="text" #txt_codigo class="form-control" formControlName="Codigo"
-                        [ngClass]="{'is-invalid':form.get('Codigo').touched && form.get('Codigo').invalid}"
-                        aria-describedby="basic-addon1">
-                    <div class="invalid-feedback">
-                        <div>Código Requerido</div>
+                    [ngClass]="{ 'is-invalid': submitted && f.Codigo.errors }"/>
+                    <div *ngIf="submitted && f.Codigo.errors" class="invalid-feedback">
+                      <div *ngIf="f.Codigo.errors.required">Codigo Requerido</div>
                     </div>
                   </div>
 
                   <h6 class="card-subtitle mb-2 text-muted">% Depreciación</h6>
                   <div class="form-group">
                     <input type="text" #txt_depreciacion class="form-control" formControlName="Depreciacion"
-                        [ngClass]="{'is-invalid':form.get('Depreciacion').touched && form.get('Depreciacion').invalid}"
-                        aria-describedby="basic-addon1">
-                    <div class="invalid-feedback">
-                        <div>Depreciacion Requerida</div>
+                    [ngClass]="{ 'is-invalid': submitted && f.Depreciacion.errors }"/>
+                    <div *ngIf="submitted && f.Depreciacion.errors" class="invalid-feedback">
+                      <div *ngIf="f.Depreciacion.errors.required">Depreciacion Requerida</div>
                     </div>
                   </div>
                 </div>
 
-                
-
                 <!--Columna de la Derecha-->
                 <div class="col-md-6">
                   <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <div class="input-group mb-3">
-                    <select id="categoria-Dropdown" name="categoria" class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
-                      data-selectpicker data-collection-name="items" ng-model="selected">
-                      <option selected>--Categoría--</option>
-                    </select>
-                  </div>
+                  <div class="form-group">
+                    <div class="input-group mb-3">
+                      <select id="categoria-Dropdown" name="categoria"  formControlName="Categoria" class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
+                        data-selectpicker data-collection-name="items" ng-model="selected"  [ngClass]="{ 'is-invalid': submitted && f.Categoria.errors }">
+                        <option [ngValue]="null">Seleccione una categoría</option>
+                      </select>
+                      <div *ngIf="submitted && f.Categoria.errors" class="invalid-feedback">
+                        <div *ngIf="f.Categoria.errors.required">Categoria Requerida</div>
+                      </div>
+                    </div>
+                </div>
 
                   <h6 class="card-subtitle mb-2 text-muted">Tiempo de Garantía</h6>
                   <div class="form-group">
                     <input type="text" #txt_tiempo_garantia class="form-control" formControlName="TiempoGarantia"
-                        [ngClass]="{'is-invalid':form.get('TiempoGarantia').touched && form.get('TiempoGarantia').invalid}"
-                        aria-describedby="basic-addon1">
-                    <div class="invalid-feedback">
-                        <div>Tiempo de Garantía Requerido</div>
+                    [ngClass]="{ 'is-invalid': submitted && f.TiempoGarantia.errors }"/>
+                    <div *ngIf="submitted && f.TiempoGarantia.errors" class="invalid-feedback">
+                      <div *ngIf="f.TiempoGarantia.errors.required">Tiempo de Garantia Requerido</div>
                     </div>
                   </div>
 
                   <h6 class="card-subtitle mb-2 text-muted">Vida Util</h6>
                   <div class="form-group">
                     <input type="text" #txt_vida_util class="form-control" formControlName="VidaUtil"
-                        [ngClass]="{'is-invalid':form.get('VidaUtil').touched && form.get('VidaUtil').invalid}"
-                        aria-describedby="basic-addon1">
-                    <div class="invalid-feedback">
-                        <div>Vida Útil Requerida</div>
+                    [ngClass]="{ 'is-invalid': submitted && f.VidaUtil.errors }"/>
+                    <div *ngIf="submitted && f.VidaUtil.errors" class="invalid-feedback">
+                      <div *ngIf="f.VidaUtil.errors.required">Vida Util Requerida</div>
                     </div>
                   </div>
 
                   <h6 class="card-subtitle mb-2 text-muted">Centro de Costo</h6>
                   <div class="form-group">
                     <input type="text" #txt_centro_costo class="form-control" formControlName="CentroCosto"
-                        [ngClass]="{'is-invalid':form.get('CentroCosto').touched && form.get('CentroCosto').invalid}"
-                        aria-describedby="basic-addon1">
-                    <div class="invalid-feedback">
-                        <div>Centro de Costo Requerido</div>
+                    [ngClass]="{ 'is-invalid': submitted && f.CentroCosto.errors }"/>
+                    <div *ngIf="submitted && f.CentroCosto.errors" class="invalid-feedback">
+                      <div *ngIf="f.CentroCosto.errors.required">Centro de Costo Requerido</div>
                     </div>
                   </div>
 
-                  <h6 class="card-subtitle mb-2 text-muted">Estado</h6>
-                  <div class="input-group mb-3">
-                      <input type="text" readonly="readonly" #txt_estado class="form-control" placeholder="No Asignado" aria-label="Estado"
-                        aria-describedby="basic-addon1">
-                    </div>
+                  
                   
                   <h6 class="card-subtitle mb-2 text-muted">Moneda</h6>
-                  <div class="input-group mb-3">
-                    <select id="moneda-Dropdown" name="moneda" class="form-control" #select_estado data-style="btn-primary" data-live-search="true"
-                      data-selectpicker data-collection-name="items" ng-model="selected">
-                      <option selected>--Monedas--</option>
-                    </select>
+                  <div class="form-group">
+                    <div class="input-group mb-3">
+                      <select id="moneda-Dropdown" name="moneda" formControlName="Moneda" class="form-control" #select_estado data-style="btn-primary" data-live-search="true"
+                        data-selectpicker data-collection-name="items" ng-model="selected"[ngClass]="{ 'is-invalid': submitted && f.Moneda.errors }">
+                        <option [ngValue]="null">Seleccione una Moneda</option>
+                      </select>
+                      <div *ngIf="submitted && f.Moneda.errors" class="invalid-feedback">
+                        <div *ngIf="f.Moneda.errors.required">Moneda Requerida</div>
+                      </div>
+                    </div>
                   </div>
-
+                  <div class="form-group">
+                    <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
+                    <span class="btn btn-rose btn-round btn-file">
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1" accept="image/png, image/jpeg, image/jpg, image/PNG, image/bmp"
+                        (change)="onPhotoChange($event)" name="photo"> 
+                        
+                    </span>
+                </div>
                 </div>
               </div>
-              <button (click)=" registrar_activo(txt_nombre_activo.value,txt_descripcion.value,txt_fecha_compra.value,
-              txt_precio_compra.value,txt_valor_residual.value,select_sede.value,txt_detalle_ubicacion.value,txt_codigo.value,select_categoria.value,txt_fecha_registro.value,
-              txt_tiempo_garantia.value,txt_vida_util.value,txt_centro_costo.value,select_estado.value)" type="button"
-                class="btn btn-primary" id="registrar_btn" name="modificarEstado">Registrar</button>
-
+              <div class="form-group">
+                  <button id="registrar_btn" class="btn btn-primary" >Registrar</button>
+              </div>
           </form>
         </div>
       </div>

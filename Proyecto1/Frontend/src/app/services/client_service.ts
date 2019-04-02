@@ -149,6 +149,17 @@ export class RestApiService {
               }
    return this.http.post (this.apiURL+urls.sp_url+'getDepartamento',body).pipe(retry(1),catchError(this.handleError));
   }
+  getPuesto() {
+    let body = {
+                "typesIn":[],
+                "typesOut":[],
+                "parameters":[],
+                "values":[],
+                "ouputs":[],
+                "name":"getPuesto"
+              }
+   return this.http.post (this.apiURL+urls.sp_url+'getPuesto',body).pipe(retry(1),catchError(this.handleError));
+  }
 
   getCodigoDynamic(idEstado,idCategoria){
     let body ={
@@ -162,14 +173,14 @@ export class RestApiService {
     return this.http.post (this.apiURL+urls.sp_url+'getCodigoDynamic',body).pipe(retry(1),catchError(this.handleError));
   }
 
-  getActivoXCodigo() {
+  getActivoXCodigo(Codigo) {
     let body={
       "typesIn":["varchar"],
       "typesOut":[],
       "parameters":["Codigo"],
-      "values":[],
+      "values":[Codigo],
       "ouputs":[],
-      "name":"getActivoLi"
+      "name":"getActivo"
     }
     
     return this.http.post (this.apiURL+urls.sp_url+'getActivoXCodigo',body).pipe(retry(1),catchError(this.handleError));
@@ -261,16 +272,16 @@ export class RestApiService {
      return this.http.post (this.apiURL+urls.sp_url+'setEmpleado',body).pipe(retry(1),catchError(this.handleError));
   }
 
-  setActivo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado) {
+  setActivo(codigo,nombre,descripcion,foto,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,centro_costo,valor_residual,categoria,moneda) {
     let body= {
-      "typesIn":["varchar","varchar","varchar","varchar","int","int","int","int","date","int","int","int" ,"int" ,"int" ,"int"],
+      "typesIn":["varchar","varchar","varchar","varchar","int","int","int","int","date","int","int","int" ,"int" ,"int"],
       "typesOut":[],
       "parameters":["Codigo","Nombre","Descripcion","Foto","Precio","TiempoGar","VidaU","PorcentajeD","FechaCompra","CentroCosto","ValorResidual","IdCategoria","IdMoneda","IdEstado"],
-      "values":[codigo,nombre,descripcion,fecha_compra,precio_compre,valor_residual,detalle_ubicacion,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado],
+      "values":[codigo,nombre,descripcion,foto,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,centro_costo,valor_residual,categoria,moneda,4],
       "ouputs":[],
       "name":"setActivo"
     }  
-    return this.http.post (this.apiURL+urls.sp_url+'setActivong',body).pipe(retry(1),catchError(this.handleError));
+    return this.http.post (this.apiURL+urls.sp_url+'setActivo',body).pipe(retry(1),catchError(this.handleError));
   }
 //AGREGAR VENTANA PARA ESTAS CONSULTAS---------------
   setCategoria(Nombre, Tangible){
