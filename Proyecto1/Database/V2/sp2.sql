@@ -689,6 +689,48 @@ END
 GO
 
 -- =============================================
+-- Descripcion:	<Cambiar el administrado de una sede>
+-- Parametro de Entrada: <IdAdminViejo, IdAdminNuevo, IdSede>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[updateAdmin]
+	@IdAdminV int,
+	@IdAdminN int,
+	@IdSede int
+	
+AS
+BEGIN
+
+	BEGIN TRAN
+	BEGIN TRY
+		UPDATE Empleado SET 
+		[IdPuesto] = 1
+		FROM Empleado
+		INNER JOIN SedeXEmpleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
+		WHERE @IdAdminN = [SedeXEmpleado].IdEmpleado AND @IdSede = [SedeXEmpleado].IdSede
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
+		ROLLBACK TRANSACTION
+	END CATCH
+
+	BEGIN TRAN
+	BEGIN TRY
+		UPDATE Empleado SET 
+		[IdPuesto] = 3
+		WHERE @IdAdminV = [Empleado].IdEmpleado
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
+		ROLLBACK TRANSACTION
+	END CATCH
+
+END
+GO
+
+-- =============================================
 -- Descripcion:	<Realiza la asignacion de un empleado a una sede>
 -- Parametro de Entrada: <IdSede, IdEmpleado, FechaIngreso>
 -- Parametro de Salida: <Ninguno>
