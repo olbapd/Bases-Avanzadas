@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import * as $ from 'jquery';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import * as $ from 'jquery';
     FormsModule,
     RouterModule.forRoot(AppRoutes),
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

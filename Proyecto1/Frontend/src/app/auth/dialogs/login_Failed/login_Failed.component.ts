@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RestApiService } from 'src/app/rest_client/client_service';
+import { RestApiService } from 'src/app/services/client_service';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material';
 

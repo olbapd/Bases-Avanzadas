@@ -2,7 +2,7 @@ import { Component, OnInit, PipeTransform } from "@angular/core";
 import { templateJitUrl } from '@angular/compiler';
 import { Router } from "@angular/router";
 import { AdminComponent } from 'src/app/admin_view/admin/admin.component';
-import { RestApiService } from 'src/app/rest_client/client_service';
+import { RestApiService } from 'src/app/services/client_service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { asset } from './../../interfaces/assets_Structure';
 

@@ -1,5 +1,4 @@
 <app-admin></app-admin>
-
 <div class="container-fluid">
   <div class="row">
 
@@ -8,109 +7,144 @@
       <div class="card border-info" style="max-width: 50rem; margin-bottom: 20px">
         <div class="card-body text-center">
           <h5 class="card-title"> Registro de Activos</h5>
-          <div class="row text-center">
+            <form name="form" [formGroup]="form" (ngSubmit)="form.valid && onSubmit()">
+              <div class="row text-center">
+                <!--Columna de la Izquierda-->
+                <div class="col-md-6">
+                  <h6 class="card-subtitle mb-2 text-muted">Nombre</h6>
+                  <div class="form-group">
+                    <input type="text" #txt_nombre_activo class="form-control" formControlName="Nombre"
+                        [ngClass]="{'is-invalid':form.get('Nombre').touched && form.get('Nombre').invalid}"
+                        aria-describedby="basic-addon1">
+                    <div class="invalid-feedback">
+                        <div>Nombre Requerido</div>
+                    </div>
+                  </div>
+                  <h6 class="card-subtitle mb-2 text-muted">Descripción</h6>
+                  <div class="form-group">
+                    <input type="text" #txt_descripcion class="form-control" formControlName="Descripcion"
+                        [ngClass]="{'is-invalid':form.get('Descripcion').touched && form.get('Descripcion').invalid}"
+                        aria-describedby="basic-addon1">
+                    <div class="invalid-feedback">
+                        <div>Descripción Requerida</div>
+                    </div>
+                  </div>
 
-            <!--Columna de la Izquierda-->
-            <div class="col-md-6">
+                  <h6 class="card-subtitle mb-2 text-muted">Fecha de Compra</h6>
+                  <div class="form-group">
+                    <input type="text" #txt_fecha_compra class="form-control" formControlName="FechaCompra"
+                        [ngClass]="{'is-invalid':form.get('FechaCompra').touched && form.get('FechaCompra').invalid}"
+                        aria-describedby="basic-addon1">
+                    <div class="invalid-feedback">
+                        <div>Fecha de Compra Requerida</div>
+                    </div>
+                  </div>
 
-              <h6 class="card-subtitle mb-2 text-muted">Nombre</h6>
-              <div class="input-group mb-3">
-                <input type="text" #txt_nombre_activo class="form-control" placeholder="Nombre" aria-label="Nombre"
-                  aria-describedby="basic-addon1">
-              </div>
+                  <h6 class="card-subtitle mb-2 text-muted">Precio de Compra</h6>
+                  <div class="form-group">
+                    <input type="text" #txt_precio_compra class="form-control" formControlName="PrecioCompra"
+                        [ngClass]="{'is-invalid':form.get('PrecioCompra').touched && form.get('PrecioCompra').invalid}"
+                        aria-describedby="basic-addon1">
+                    <div class="invalid-feedback">
+                        <div>Precio de Compra Requerido</div>
+                    </div>
+                  </div>
 
-              <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
-              <div class="input-group mb-3">
-                <input type="text" #txt_descripcion class="form-control" placeholder="Descripcion"
-                  aria-label="Descripcion" aria-describedby="basic-addon1">
-              </div>
+                  <h6 class="card-subtitle mb-2 text-muted">Valor Residual</h6>
+                  <div class="form-group">
+                    <input type="text" #txt_valor_residual class="form-control" formControlName="ValorResidual"
+                        [ngClass]="{'is-invalid':form.get('ValorResidual').touched && form.get('ValorResidual').invalid}"
+                        aria-describedby="basic-addon1">
+                    <div class="invalid-feedback">
+                        <div>Valor Residual Requerido</div>
+                    </div>
+                  </div>
 
-              <h6 class="card-subtitle mb-2 text-muted">Fecha de Compra</h6>
-              <div class="input-group mb-3">
-                <input type="date" #txt_fecha_compra id="dateOfBirth" [(ngModel)]="dateOfBirth" class="form-control" />
-              </div>
+                  <h6 class="card-subtitle mb-2 text-muted">Codigo</h6>
+                  <div class="form-group">
+                    <input type="text" #txt_codigo class="form-control" formControlName="Codigo"
+                        [ngClass]="{'is-invalid':form.get('Codigo').touched && form.get('Codigo').invalid}"
+                        aria-describedby="basic-addon1">
+                    <div class="invalid-feedback">
+                        <div>Código Requerido</div>
+                    </div>
+                  </div>
 
-              <h6 class="card-subtitle mb-2 text-muted">Precio de Compra</h6>
-              <div class="input-group mb-3">
-                <input type="text" #txt_precio_compra class="form-control" placeholder="1000000" aria-label="Compra"
-                  aria-describedby="basic-addon1">
-              </div>
-
-              <h6 class="card-subtitle mb-2 text-muted">Valor Residual</h6>
-              <div class="input-group mb-3">
-                <input type="text" #txt_valor_residual class="form-control" placeholder="1000000" aria-label="residual"
-                  aria-describedby="basic-addon1">
-              </div>
-
-              <h6 class="card-subtitle mb-2 text-muted">Codigo</h6>
-              <div class="input-group mb-3">
-                <input type="text" #txt_codigo class="form-control" placeholder="Codigo" aria-label="Codigo"
-                  aria-describedby="basic-addon1">
-              </div>
-
-              <h6 class="card-subtitle mb-2 text-muted">% Depreciación</h6>
-              <div class="input-group mb-3">
-                <input type="text" #txt_depreciacion class="form-control" placeholder="%" aria-label="Codigo"
-                  aria-describedby="basic-addon1">
-              </div>
-            </div>
-
-            
-
-            <!--Columna de la Derecha-->
-            <div class="col-md-6">
-              <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-              <div class="input-group mb-3">
-                <select id="categoria-Dropdown" name="categoria" class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
-                  data-selectpicker data-collection-name="items" ng-model="selected">
-                  <option selected>--Categoría--</option>
-                </select>
-              </div>
-
-              <h6 class="card-subtitle mb-2 text-muted">Fecha de Registro</h6>
-              <div class="input-group mb-3">
-                <input type="date" #txt_fecha_registro [(ngModel)]="dateOfBirth" class="form-control" />
-              </div>
-
-              <h6 class="card-subtitle mb-2 text-muted">Tiempo de Garantía</h6>
-              <div class="input-group mb-3">
-                <input type="text" #txt_tiempo_garantia class="form-control" placeholder="Tiempo de Garantia"
-                  aria-label="Garantia" aria-describedby="basic-addon1">
-              </div>
-
-              <h6 class="card-subtitle mb-2 text-muted">Vida Util</h6>
-              <div class="input-group mb-3">
-                <input type="text" #txt_vida_util class="form-control" placeholder="1000000" aria-label="vidaUtil"
-                  aria-describedby="basic-addon1">
-              </div>
-
-              <h6 class="card-subtitle mb-2 text-muted">Centro de Costo</h6>
-              <div class="input-group mb-3">
-                <input type="text" #txt_centro_costo class="form-control" placeholder="1000000" aria-label="centroCosto"
-                  aria-describedby="basic-addon1">
-              </div>
-
-              <h6 class="card-subtitle mb-2 text-muted">Estado</h6>
-              <div class="input-group mb-3">
-                  <input type="text" readonly="readonly" #txt_estado class="form-control" placeholder="No Asignado" aria-label="Estado"
-                    aria-describedby="basic-addon1">
+                  <h6 class="card-subtitle mb-2 text-muted">% Depreciación</h6>
+                  <div class="form-group">
+                    <input type="text" #txt_depreciacion class="form-control" formControlName="Depreciacion"
+                        [ngClass]="{'is-invalid':form.get('Depreciacion').touched && form.get('Depreciacion').invalid}"
+                        aria-describedby="basic-addon1">
+                    <div class="invalid-feedback">
+                        <div>Depreciacion Requerida</div>
+                    </div>
+                  </div>
                 </div>
-              
 
-              <h6 class="card-subtitle mb-2 text-muted">Moneda</h6>
-              <div class="input-group mb-3">
-                <select id="moneda-Dropdown" name="moneda" class="form-control" #select_estado data-style="btn-primary" data-live-search="true"
-                  data-selectpicker data-collection-name="items" ng-model="selected">
-                  <option selected>--Monedas--</option>
-                </select>
+                
+
+                <!--Columna de la Derecha-->
+                <div class="col-md-6">
+                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
+                  <div class="input-group mb-3">
+                    <select id="categoria-Dropdown" name="categoria" class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
+                      data-selectpicker data-collection-name="items" ng-model="selected">
+                      <option selected>--Categoría--</option>
+                    </select>
+                  </div>
+
+                  <h6 class="card-subtitle mb-2 text-muted">Tiempo de Garantía</h6>
+                  <div class="form-group">
+                    <input type="text" #txt_tiempo_garantia class="form-control" formControlName="TiempoGarantia"
+                        [ngClass]="{'is-invalid':form.get('TiempoGarantia').touched && form.get('TiempoGarantia').invalid}"
+                        aria-describedby="basic-addon1">
+                    <div class="invalid-feedback">
+                        <div>Tiempo de Garantía Requerido</div>
+                    </div>
+                  </div>
+
+                  <h6 class="card-subtitle mb-2 text-muted">Vida Util</h6>
+                  <div class="form-group">
+                    <input type="text" #txt_vida_util class="form-control" formControlName="VidaUtil"
+                        [ngClass]="{'is-invalid':form.get('VidaUtil').touched && form.get('VidaUtil').invalid}"
+                        aria-describedby="basic-addon1">
+                    <div class="invalid-feedback">
+                        <div>Vida Útil Requerida</div>
+                    </div>
+                  </div>
+
+                  <h6 class="card-subtitle mb-2 text-muted">Centro de Costo</h6>
+                  <div class="form-group">
+                    <input type="text" #txt_centro_costo class="form-control" formControlName="CentroCosto"
+                        [ngClass]="{'is-invalid':form.get('CentroCosto').touched && form.get('CentroCosto').invalid}"
+                        aria-describedby="basic-addon1">
+                    <div class="invalid-feedback">
+                        <div>Centro de Costo Requerido</div>
+                    </div>
+                  </div>
+
+                  <h6 class="card-subtitle mb-2 text-muted">Estado</h6>
+                  <div class="input-group mb-3">
+                      <input type="text" readonly="readonly" #txt_estado class="form-control" placeholder="No Asignado" aria-label="Estado"
+                        aria-describedby="basic-addon1">
+                    </div>
+                  
+                  <h6 class="card-subtitle mb-2 text-muted">Moneda</h6>
+                  <div class="input-group mb-3">
+                    <select id="moneda-Dropdown" name="moneda" class="form-control" #select_estado data-style="btn-primary" data-live-search="true"
+                      data-selectpicker data-collection-name="items" ng-model="selected">
+                      <option selected>--Monedas--</option>
+                    </select>
+                  </div>
+
+                </div>
               </div>
+              <button (click)=" registrar_activo(txt_nombre_activo.value,txt_descripcion.value,txt_fecha_compra.value,
+              txt_precio_compra.value,txt_valor_residual.value,select_sede.value,txt_detalle_ubicacion.value,txt_codigo.value,select_categoria.value,txt_fecha_registro.value,
+              txt_tiempo_garantia.value,txt_vida_util.value,txt_centro_costo.value,select_estado.value)" type="button"
+                class="btn btn-primary" id="registrar_btn" name="modificarEstado">Registrar</button>
 
-            </div>
-          </div>
-          <button (click)=" registrar_activo(txt_nombre_activo.value,txt_descripcion.value,txt_fecha_compra.value,
-          txt_precio_compra.value,txt_valor_residual.value,select_sede.value,txt_detalle_ubicacion.value,txt_codigo.value,select_categoria.value,txt_fecha_registro.value,
-          txt_tiempo_garantia.value,txt_vida_util.value,txt_centro_costo.value,select_estado.value)" type="button"
-            class="btn btn-primary">Registrar</button>
+          </form>
         </div>
       </div>
 
@@ -118,7 +152,6 @@
 
     <!--Card para la Baja de Activos-->
 
-    
       <div class="card border-info" style="max-width: 18rem; max-height: 23rem; margin-bottom: 20px">
         <div class="card-body text-center">
           <h5 class="card-title"> Modificar Estado del Activo</h5>
@@ -147,13 +180,14 @@
               <h6 class="card-subtitle mb-2 text-muted">Seleccionar Estado</h6>
               <div class="input-group mb-3">
                 <select id="estado3-Dropdown" name="estado3" class="form-control"  #select_estado_activo data-style="btn-primary" data-live-search="true"
-                  data-selectpicker data-collection-name="items" ng-model="selected">
+                  data-selectpicker data-collection-name="items" ng-model="selected"
+                  (change)="estadoXCodigo()">
                   <!--LLenado de Select-->
                 </select>
               </div>
             
           </div>
-          <button (click)="modificar_estado_activo(select_activo.value,select_estado_activo.value)" type="button"
+          <button (click)="modificar_estado_activo(select_codigo_baja.value,select_estado_activo.value)" id="modifstate_btn" name="modificarEstado" type="button"
             class="btn btn-primary">Modificar Estado</button>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RestApiService } from 'src/app/rest_client/client_service';
+import { RestApiService } from 'src/app/services/client_service';
 import { Router } from '@angular/router';
 import { asset } from 'src/app/interfaces/assets_Structure';
 import { sede } from 'src/app/interfaces/sede';
@@ -16,6 +16,7 @@ import { UpdateSedeComponent } from '../dialogs/update_sede/udpate-sede.componen
     styleUrls: ['./crud_sede.component.css']
 })
 export class SedeComponent implements OnInit {
+  
     isPopupOpened = false;
     provincia;
     canton;
@@ -26,35 +27,43 @@ export class SedeComponent implements OnInit {
     categoria;
     page = 1;
     pageSize = 4;
-
-    sedess: sede[] = [{
-        name: "as",
-        provincia: "cartago",
-        distrito: "paraiso",
-        canton: "paraiso",
-        admin: "Pablo"
-    }
-    ];
-
-    collectionSize = this.sedess.length;
+    sedess: sede[];
+   /*  collectionSize = this.sedess.length;
     activo: asset;
-    sede: sede;
+    sede: sede; */
 
+    
     constructor(private modalService: NgbModal, public restApi: RestApiService,
         private router: Router, private dialog: MatDialog) { }
         ngOnInit() { 
             this.EstadoDropdown();
             this.ProvinciaDropdown();
+           this.Rsede();
         }
     
-        get sedes(): sede[] {
+        get sedes(): sede[] { //BIND TABLE
             return this.sedess
-                .map((sede, i) => ({ id: i + 1, ...sede }))
+                .map((sedess, i) => ({ id: i + 1, ...sedess }))
                 .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
         }
-    
-    
-    
+
+        Rsede(){
+          let idEmpleado:number=parseInt(localStorage.getItem('IdEmpleado'));
+          this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res)=>{
+            const myObjStr = JSON.stringify(res)
+               const json = JSON.parse(myObjStr);
+               this.sedess = [{
+                                "id":json.data[0].IdSede,
+                                "name":json.data[0].Nombre[0],
+                                "provincia":json.data[0].Nombre[3],
+                                "canton":json.data[0].Nombre[2],
+                                "distrito":json.data[0].Nombre[1],
+                                "apellido1":json.data[0].Apellido1,
+                                "apellido2":json.data[0].Apellido2,
+                                "nombre":json.data[0].Nombre[4]
+                              }];
+           });
+          }
         updateSede() {
             this.isPopupOpened = true;
             const dialogRef = this.dialog.open(UpdateSedeComponent, {
@@ -68,9 +77,9 @@ export class SedeComponent implements OnInit {
             });
         }
     
-        add_sede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso) {
-            this.restApi.putSede(name, code, description, provincia, canton, distrito, estado, employee, fecha_ingreso);
-    
+        add_sede(Nombre,Ubicacion,IdDistrito,IdEstado) {
+            this.restApi.setSede(Nombre,Ubicacion,IdDistrito,IdEstado);
+
         }
     
         EstadoDropdown(){
@@ -87,9 +96,9 @@ export class SedeComponent implements OnInit {
                 dropdown.append(optionestado);
              } 
           });;
-          }
+        }
     
-          DistritoDropdown(){
+        DistritoDropdown(){
             let optionestado;
             let dropdown = document.getElementById('distrito-Dropdown');
              this.restApi.getDistritos().subscribe((res)=>{
@@ -103,9 +112,9 @@ export class SedeComponent implements OnInit {
                 dropdown.append(optionestado);
              } 
           });;
-          }
+        }
     
-          ProvinciaDropdown(){
+         ProvinciaDropdown(){
             let optionestado;
             let dropdown = document.getElementById('provincia-Dropdown');
              this.restApi.getProvincia().subscribe((res)=>{
@@ -119,5 +128,5 @@ export class SedeComponent implements OnInit {
                 dropdown.append(optionestado);
              } 
           });;
-          }
+        }
     }

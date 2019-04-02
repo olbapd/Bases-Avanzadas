@@ -64,7 +64,6 @@ CREATE OR ALTER PROC [dbo].[setActivo]
 	@VidaU int,
 	@PorcentajeD int,
 	@FechaCompra date,
-	@FechaRegistro date,
 	@CentroCosto int,
 	@ValorResidual int,
 	@IdCategoria int,
@@ -79,7 +78,7 @@ BEGIN
 		INSERT INTO Activo (Codigo, Nombre, Descripcion, Foto, Precio, TiempoGarantia, VidaUtil, PorcentajeDepreciacion, FechaCompra,
 		FechaRegistro, FechaAsignacion, CentroCosto, ValorResidual, DetalleUbicacion, IdEmpleado,IdCategoria, IdSede, IdMoneda, IdEstado) 
 		VALUES (@Codigo, @Nombre, @Descripcion, @Foto, @Precio, @TiempoGar, @VidaU, @PorcentajeD, @FechaCompra,
-		@FechaRegistro, NULL, @CentroCosto, @ValorResidual, NULL, NULL,@IdCategoria, NULL, @IdMoneda, @IdEstado) 
+		GETDATE(), NULL, @CentroCosto, @ValorResidual, NULL, NULL,@IdCategoria, NULL, @IdMoneda, @IdEstado) 
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -430,7 +429,7 @@ AS
 SET NOCOUNT ON
 
 SELECT [SedeXEmpleado].IdSede, [Sede].Nombre, [Distrito].Nombre, [Canton].Nombre,
-[Provincia].Nombre, [Empleado].Nombre
+[Provincia].Nombre, [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2
 FROM SedeXEmpleado
 INNER JOIN Sede ON [SedeXEmpleado].IdSede = [Sede].IdSede
 INNER JOIN Distrito  ON [Sede].IdDistrito = [Distrito].IdDistrito
@@ -621,6 +620,65 @@ BEGIN
 		Contrasena, IdDepartamento, IdPuesto, Foto)
 		VALUES (@Nombre, @Apellido1, @Apellido2, @Cedula, @FechaN ,
 		 @Correo, @Contrasena,@IdDepartamento, @IdPuesto, @Foto)
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
+		ROLLBACK TRANSACTION
+	END CATCH
+END
+GO
+
+-- =============================================
+-- Descripcion:	<Actualiza la información de un empleado>
+-- Parametro de Entrada: <Correo, Contrasena, IdDepartamento, IdPuesto, Foto>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[updateEmpleado]
+	@IdEmpleado int,
+	@Correo varchar(50),
+	@Contrasena varchar(50),
+	@Foto varchar(50),
+	@IdDepartamento int,
+	@IdPuesto int
+	
+AS
+BEGIN
+
+	BEGIN TRAN
+	BEGIN TRY
+		UPDATE Empleado SET 
+		[Correo] = @Correo,
+		[Contrasena]=  @Contrasena,
+		[IdDepartamento] = @IdDepartamento,
+		[IdPuesto] = @IdPuesto,
+		[Foto] = @Foto
+		WHERE @IdEmpleado = [Empleado].IdEmpleado
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
+		ROLLBACK TRANSACTION
+	END CATCH
+END
+GO
+
+-- =============================================
+-- Descripcion:	<Inactivar la cuenta de un empleado>
+-- Parametro de Entrada: <IdEmpleado>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[desEmpleado]
+	@IdEmpleado int
+	
+AS
+BEGIN
+
+	BEGIN TRAN
+	BEGIN TRY
+		UPDATE Empleado SET 
+		[IdEstado] = 2
+		WHERE @IdEmpleado = [Empleado].IdEmpleado
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH

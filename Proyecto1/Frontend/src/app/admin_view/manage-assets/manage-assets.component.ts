@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {RestApiService} from 'src/app/rest_client/client_service';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import {RestApiService} from 'src/app/services/client_service';
 import { Router } from "@angular/router";
 import { MatDialog } from '@angular/material';
 import  {CodeErrorComponent} from '../dialogs/code_error/code_error.component';
 import { Options } from 'selenium-webdriver/edge';
 import { all } from 'q';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 
 @Component({
@@ -13,14 +15,15 @@ import { all } from 'q';
   styleUrls: ['./manage-assets.component.css']
 })
 export class ManageAssetsComponent implements OnInit {
+  registerForm: FormGroup;
+  submitted = false;
   isPopupOpened = false;
-  constructor(public restApi: RestApiService,private router: Router,private dialog: MatDialog) {
+  constructor(public restApi: RestApiService,private router: Router,private dialog: MatDialog,private formBuilder: FormBuilder) {
    }
   ngOnInit() {
     this.CategoriaDropdown();
     this.AccionDropDown();
     this.MonedasDropdown();
-    //this.activos = this.restApi.getActivos(); 
   }
   EstadoDropdown(){
     let option;
@@ -29,7 +32,7 @@ export class ManageAssetsComponent implements OnInit {
        const myObjStr = JSON.stringify(res)
        const json = JSON.parse(myObjStr);
       var count = Object.keys(json.data).length;
-     for (var _i = 2; _i < count; _i++) {
+     for (var _i = 3; _i < count; _i++) {
       option = document.createElement('option');
       option.text = json.data[_i].Nombre;
       option.value = json.data[_i].IdEstado;
@@ -82,23 +85,27 @@ export class ManageAssetsComponent implements OnInit {
   });;
   }
   registrar_activo(nombre,descripcion,fecha_compra,precio_compre,
-    valor_residual,sede,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado)
+    valor_residual,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado)
     {
+    let btn = document.getElementById('registrar_btn');
     this.restApi.getActivoXCodigo().subscribe((res)=>{
       const myObjStr = JSON.stringify(res)
       const json = JSON.parse(myObjStr);
       if (json.data[0]==null){
-        console.log("Codigo de Activo en existencia")
+        btn.setAttribute('class','btn bnt-danger');
         this.isPopupOpened = true;
-               const dialogRef = this.dialog.open(CodeErrorComponent);
+        const dialogRef = this.dialog.open(CodeErrorComponent);
       }
+
       else{
-        this.restApi.setActivo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,sede,detalle_ubicacion,codigo,
+        this.restApi.setActivo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,detalle_ubicacion,codigo,
           categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado);  
       }
   });;
   }
   CodigoDropDown_Modif_State(idCategoria){
+    let btn = document.getElementById('modifstate_btn');
+    btn.setAttribute('class','btn btn-primary');
     $("#codigo_modif_state-Dropdown").empty(); //jquery clear dropdown
     let dropdown = document.getElementById('codigo_modif_state-Dropdown');
     let defaulOption;
@@ -120,6 +127,8 @@ export class ManageAssetsComponent implements OnInit {
   });;
   }
   EstadoDropDown_Modif_State(Codigo){
+    let btn = document.getElementById('modifstate_btn');
+    btn.setAttribute('class','btn btn-primary');
     $("#estado3-Dropdown").empty(); //jquery clear dropdown
     let option;
     let dropdown = document.getElementById('estado3-Dropdown');
@@ -129,19 +138,60 @@ export class ManageAssetsComponent implements OnInit {
       var count = Object.keys(json.data).length;
       for (var _i = 0; _i < count; _i++) {
         option= document.createElement('option');
-        option.text = "--Actual:--" + json.data[_i].Nombre;
+        option.text = "--Actual--:" + json.data[_i].Nombre;
         option.value = json.data[_i].idEstado;
         dropdown.append(option);
      } 
   });;
   this.EstadoDropdown();
   }
-  modificar_estado_activo(activo,estado_activo){
-    $("#estado3-Dropdown").load;
-    //console.log(activo);
+  estadoXCodigo(){
+    let btn = document.getElementById('modifstate_btn');
+    btn.setAttribute('class','btn btn-primary');
   }
+
+  UpdateEstado(Codigo){
+    $("#estado3-Dropdown").empty(); //jquery clear dropdown
+    let option;
+    let dropdown = document.getElementById('estado3-Dropdown');
+    this.restApi.getEstadoXCodigo(Codigo).subscribe((res)=>{
+      const myObjStr = JSON.stringify(res)
+       const json = JSON.parse(myObjStr);
+      var count = Object.keys(json.data).length;
+      for (var _i = 0; _i < count; _i++) {
+        option= document.createElement('option');
+        option.text = "--Actual--:" + json.data[_i].Nombre;
+        option.value = json.data[_i].idEstado;
+        dropdown.append(option);
+     } 
+  });;
+  this.EstadoDropdown();
+  }
+
+  modificar_estado_activo(Codigo,IdEstado){
+    console.log("IdEstado"+IdEstado);
+    let btn = document.getElementById('modifstate_btn');
+    if (Codigo=="" || IdEstado==""){
+      btn.setAttribute('class','btn btn-danger');
+      window.alert("No ha sido posible modificar estado del Activo Código:"+" "+Codigo+"\n" +"Error: Estado:"+" "+IdEstado+"\n"+"Revise los datos");
+     }
+     else{
+      this.restApi.getQuitarActivo(Codigo,IdEstado).subscribe((res)=>{
+        const myObjStr = JSON.stringify(res)
+        const json = JSON.parse(myObjStr);
+        
+         if(json.success==true){
+           btn.setAttribute('class','btn btn-success');
+           this.UpdateEstado(Codigo);
+           window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de froma exitosa");
+         }
+      });;
+     }
+  }
+  //-----------ASIGNAR ACTIVO------------------
   asignar_activo(Codigo,Cedula,DetalleUbi){
-    this.restApi.setAssignActivo(Codigo,Cedula,DetalleUbi);
+    //this.restApi.setAssignActivo(Codigo,Cedula,DetalleUbi);
+    console.log("Si:"+localStorage.getItem('IdEmpleado'));
   }
   AccionDropDown(){
     $("#accion-Dropdown").empty(); //jquery clear dropdown

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RestApiService } from 'src/app/rest_client/client_service';
+import { RestApiService } from 'src/app/services/client_service';
 import { HttpClient } from '@angular/common/http';
 import { sede } from '../../interfaces/sede';
 import { department } from '../../interfaces/department';
@@ -13,6 +13,7 @@ import { updateComponent } from '../dialogs/update_employee/update-employee.comp
 import { DeleteComponent } from '../dialogs/delete_confirm/delete_confirm.component';
 import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from '@angular/forms';
 import { FotoService } from '../../services/foto.service';
+
 
 @Component({
     selector: 'crud-employee',
@@ -29,14 +30,10 @@ export class EmployeeComponent implements OnInit {
     departamento: department[];
     selectedFile: File = null;
     type = 0;
-    empleados: Empleado[] = [{
-        name: "asd",
-        estado: "asd",
-        sede: "asd",
-        departamente: "asd",
-        puesto: "asd",
-    }]
-
+    page = 1;
+    pageSize = 4;
+    empleados: Empleado[]=[];//debe de inicializarse de lo contrario muestra vacio
+/* 
     categoria;
     page = 1;
     pageSize = 4;
@@ -48,29 +45,41 @@ export class EmployeeComponent implements OnInit {
     ];
     collectionSize = this.activos.length;
     activo: asset;
-    empleado: Empleado;
+    empleado: Empleado; */
     form: FormGroup;
 
-
-
-    get assets(): asset[] {
-        return this.activos
-            .map((country, i) => ({ id: i + 1, ...country }))
-            .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-    }
-
     get employees(): Empleado[] {
-        return this.empleados
-            .map((country, i) => ({ id: i + 1, ...country }))
-            .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+        return this.empleados.map((empleados, i) => ({ id: i + 1, ...empleados})).slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
     }
 
-
+    Remployees(){
+        let idEmpleado:number=parseInt(localStorage.getItem('IdEmpleado'));
+        this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res)=>{
+            const myObjStr = JSON.stringify(res)
+            const json = JSON.parse(myObjStr);
+            const idSede=json.data[0].IdSede;
+            this.restApi.getEmpleadosXSede(idSede).subscribe((res)=>{
+                const myObjStr = JSON.stringify(res)
+                const json = JSON.parse(myObjStr);
+                var count = Object.keys(json.data).length;
+                for (var _i = 0; _i < count; _i++) {
+                    this.empleados.push({
+                        "cedula":json.data[_i].Cedula,
+                        "apellido1":json.data[_i].Apellido1,
+                        "apellido2":json.data[_i].Apellido2,
+                        "nombre":json.data[_i].Nombre[0],
+                        "departamento":json.data[_i].Nombre[1],
+                        "puesto":json.data[_i].Nombre[2],
+                        "fechaIn":json.data[_i].FechaIngreso
+                     });
+                 }
+             });
+         });
+        
+    }
     onFileSelected(event) {
         this.selectedFile = <File>event.target.files[0];
     }
-
-
 
     onUpload() {
         const fd = new FormData();
@@ -93,9 +102,15 @@ export class EmployeeComponent implements OnInit {
     }
     ngOnInit() {
         this.form = new FormGroup({
-            lastName: new FormControl('', Validators.required)
+           Nombre: new FormControl('', Validators.required),
+           Apellido1: new FormControl('', Validators.required),
+           Apellido2: new FormControl('', Validators.required),
+           Cedula: new FormControl('', Validators.required),
+           Correo: new FormControl('', [Validators.required, Validators.email]),
+           Contraseña: new FormControl('', [Validators.required, Validators.minLength(8)])
 
         });
+       this.Remployees();
     }
 
     deleteEmployee() {
