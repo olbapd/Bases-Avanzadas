@@ -22,13 +22,19 @@ const sqlserver = require('mssql');
 
 let router = module.exports = express.Router();
 
+let currentConfig = config.get('sqlserver');
 
 let getSp = (req,res) => {
-
-    console.log(sqltool.getPool());
-    sqltool.getPool().connect(err=>{
-      console.log(err);
-    }) 
+     
+    if(!sqltool.getPool().connected){
+      global.log4us.log(`Verifying connection to database server (${currentConfig.server})`); 
+      global.log4us.log(`Not connected to (${currentConfig.server}), creating new conectiion....`);  
+      sqltool.getPool().connect(err=>{
+        global.log4us.error(`Error creating connection to database server (${currentConfig.server}), retrying conection...`);
+        console.log(err); 
+      }) 
+    }
+    
     let request =  new sqlserver.Request(sqltool.getPool());
     let typesIn = req.body.typesIn;
     let typesOut = req.body.typesOut;
@@ -53,13 +59,13 @@ let getSp = (req,res) => {
 
     for(let i =0;i<outputs.length;i++){
       if(typesOut[i]=="int"){
-        request.input(outputs[i],sqlserver.Int);
+        request.input(outputs[i],sqlserver.Int,null);
       }
       else if(typesOut[i]=="varchar"){
-        request.input(outputs[i],sqlserver.NVarChar);
+        request.input(outputs[i],sqlserver.NVarChar,null);
       }
       else if(typesOut[i]=="date"){
-        request.input(outputs[i],sqlserver.DateTime);
+        request.input(outputs[i],sqlserver.DateTime,null);
       }
       else{
         global.log4us.error('Error on building sp: '+spName);
@@ -72,7 +78,6 @@ let getSp = (req,res) => {
             success : false,
             error: err
         });
-        console.error(err);
         return;
       }
       res.status(200).json({

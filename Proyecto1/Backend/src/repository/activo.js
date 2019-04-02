@@ -48,9 +48,12 @@ expose.assignActive = (data,cb) =>{
   request.input('Cedula',sqlserver.NVarChar,data.cedula);
   request.input('IdEstado',sqlserver.NVarChar,data.idEstado);
   request.input('DetalleUbi',sqlserver.NVarChar,data.detalleUbi);
+  request.output('Correo',sqlserver.NVarChar,null);
+  request.output('Nombre',sqlserver.NVarChar,null);
+  request.output('Apellido',sqlserver.NVarChar,null);
   //request.input('IdEmpleado',sqlserver.Int,data.idEmployee);
   //request.input('IdActivo',sqlserver.Int,data.idActivo);
-  request.execute('asigActivo',(err,result)=>{
+  request.execute('sp_assignActive',(err,result)=>{
       if (err) {
         global.log4us.error(`Error assiging active: ${err}`);
         to_return.error=err;
@@ -58,7 +61,14 @@ expose.assignActive = (data,cb) =>{
         cb(to_return);
         return;
       }
-      emailAssignActive(data.email,data.name);
+      if(result.output.Correo ==null){
+        to_return.success=true;
+        to_return.data=false;
+        cb(to_return);
+        return;
+      }
+      let name = result.output.Nombre + " "+result.output.Apellido;
+      emailAssignActive(result.output.Correo,name);
       to_return.success=true;
       to_return.data=true;
       cb(to_return);

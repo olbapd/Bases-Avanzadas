@@ -21,8 +21,6 @@ let activo = require('../business/activo');
 
 router.post("/assign", function(req,res){
 	activo.assignActive({
-	 	email:req.body.email,
-	 	name: req.body.name,
 	 	codigo : req.body.codigo,
 	 	cedula : req.body.cedula,
 	 	idEstado : req.body.idEstado,
@@ -39,5 +37,5 @@ router.post("/assign", function(req,res){
 	 	  success : true,
 	 	  data : result.data
 	 	});
-	 })
+	 })	
 });
