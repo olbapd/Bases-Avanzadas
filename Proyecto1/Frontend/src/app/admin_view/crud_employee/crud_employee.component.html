@@ -50,6 +50,16 @@
                                         <div>Cédula Requerida</div>
                                     </div>
                                 </div>
+
+                                <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Fecha Nacimiento</h6>
+                                <div class="form-group">
+                                    <input type="text" #txt_FechaN class="form-control" formControlName="FechaN"
+                                        [ngClass]="{'is-invalid':form.get('FechaN').touched && form.get('FechaN').invalid}"
+                                        aria-describedby="basic-addon1">
+                                    <div class="invalid-feedback">
+                                        <div>Fecha Requerida</div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-md-6">
@@ -101,10 +111,9 @@
                             <div class="form-group">
                                 <button
                                     (click)="add_employee(txt_name.value,txt_apellido1.value,txt_apellido2.value,
-                                    txt_cedula.value,txt_correo.value,txt_contrasena.value,select_dep.value,select_puesto.value)"
+                                    txt_cedula.value,txt_correo.value,txt_contrasena.value,select_dep.value,select_puesto.value,txt_FechaN.value)"
                                     class="btn btn-primary" >Ingresar</button>
                             </div>
-                        
                     </form>
                 </div>
 

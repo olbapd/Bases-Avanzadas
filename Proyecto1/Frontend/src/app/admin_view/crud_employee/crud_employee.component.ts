@@ -127,12 +127,15 @@ export class EmployeeComponent implements OnInit {
             data: {}
         });
     }
-    add_employee(name, estado, sede, dep, puesto, fecha_ingreso) {
+    add_employee(name,apellido1,apellido2,cedula,correo,contrasena,dep,puesto,FechaN) {
         //Se debe almacenar la imagen primero
         this.fotoService.uploadFile(this.photo)
             .subscribe((data)=>{
                 let photoHash = (data && data.hash)? data.hash : null;
                 console.log(photoHash);
+                this.restApi.setEmpleado(name,apellido1,apellido2,cedula,FechaN,correo,contrasena,dep,puesto,photoHash).subscribe(res => {
+                    
+                });
                 //POner el resto de su codigo aqui adentro
                 //Cuando se va usar el sp de agregar cliente, en el espacio de 
                 //Foto utilizar la cariable photoHas.
