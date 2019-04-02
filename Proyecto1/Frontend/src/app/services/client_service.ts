@@ -217,14 +217,12 @@ export class RestApiService {
   setAssignActivo(Codigo,Cedula,DetalleUbi){
 
     let body={
-              "typesIn":["varchar","varchar", "int","varchar"],
-              "typesOut":["Codigo","Cedula","IdEstado","DetalleUbi"],
-              "parameters":[],
-              "values":[Codigo,Cedula,3,DetalleUbi],
-              "ouputs":[],
-              "name":"asigActivo"
-            }
-return this.http.post (this.apiURL+urls.activo_url+'setAssignActivo',body).pipe(retry(1),catchError(this.handleError));
+                "codigo" : Codigo,
+                "cedula" : Cedula,
+                "idEstado" : 3,
+                "detalleUbi" : DetalleUbi
+              }
+     return this.http.post (this.apiURL+urls.activo_url,body).pipe(retry(1),catchError(this.handleError));
 
   }
 

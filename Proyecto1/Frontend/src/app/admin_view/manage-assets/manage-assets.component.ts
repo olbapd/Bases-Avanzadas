@@ -190,8 +190,8 @@ export class ManageAssetsComponent implements OnInit {
   }
   //-----------ASIGNAR ACTIVO------------------
   asignar_activo(Codigo,Cedula,DetalleUbi){
-    //this.restApi.setAssignActivo(Codigo,Cedula,DetalleUbi);
-    console.log("Si:"+localStorage.getItem('IdEmpleado'));
+    this.restApi.setAssignActivo(Codigo,Cedula,DetalleUbi).subscribe((res)=>{});
+    console.log("Si:"+Codigo+" "+Cedula+" "+DetalleUbi);
   }
   AccionDropDown(){
     $("#accion-Dropdown").empty(); //jquery clear dropdown
