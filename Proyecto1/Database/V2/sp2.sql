@@ -629,7 +629,64 @@ BEGIN
 END
 GO
 
---UPDATEEMPLEADO
+-- =============================================
+-- Descripcion:	<Actualiza la información de un empleado>
+-- Parametro de Entrada: <Correo, Contrasena, IdDepartamento, IdPuesto, Foto>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[updateEmpleado]
+	@IdEmpleado int,
+	@Correo varchar(50),
+	@Contrasena varchar(50),
+	@Foto varchar(50),
+	@IdDepartamento int,
+	@IdPuesto int
+	
+AS
+BEGIN
+
+	BEGIN TRAN
+	BEGIN TRY
+		UPDATE Empleado SET 
+		[Correo] = @Correo,
+		[Contrasena]=  @Contrasena,
+		[IdDepartamento] = @IdDepartamento,
+		[IdPuesto] = @IdPuesto,
+		[Foto] = @Foto
+		WHERE @IdEmpleado = [Empleado].IdEmpleado
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
+		ROLLBACK TRANSACTION
+	END CATCH
+END
+GO
+
+-- =============================================
+-- Descripcion:	<Inactivar la cuenta de un empleado>
+-- Parametro de Entrada: <IdEmpleado>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[desEmpleado]
+	@IdEmpleado int
+	
+AS
+BEGIN
+
+	BEGIN TRAN
+	BEGIN TRY
+		UPDATE Empleado SET 
+		[IdEstado] = 2
+		WHERE @IdEmpleado = [Empleado].IdEmpleado
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
+		ROLLBACK TRANSACTION
+	END CATCH
+END
+GO
 
 -- =============================================
 -- Descripcion:	<Realiza la asignacion de un empleado a una sede>
