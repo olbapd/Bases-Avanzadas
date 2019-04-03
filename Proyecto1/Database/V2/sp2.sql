@@ -858,6 +858,24 @@ WHERE @CodigoActivo = [Activo].Codigo
 SET NOCOUNT OFF
 GO
 
+-- =============================================
+-- Descripcion:	<Seleccionar los datos necesarios para hacer los calculos de depresiación a los Activos>
+-- Parametro de Entrada: <CodigoActivo>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[getCalculos]
+	@CodigoActivo int
+AS
+SET NOCOUNT ON
+
+SELECT [Activo].PorcentajeDepreciacion, [Activo].Precio, YEAR([Activo].FechaCompra), [Activo].ValorResidual
+FROM Activo
+
+WHERE @CodigoActivo = [Activo].Codigo
+
+SET NOCOUNT OFF
+GO
+
 CREATE OR ALTER PROC sp_assignActive   
     @IdEmpleado int,   
     @IdActivo int   
@@ -867,3 +885,5 @@ AS
 	SET IdEmpleado= @IdEmpleado, FechaAsignacion = GETDATE()
 	WHERE IdActivo = @IdActivo;
 GO 
+
+
