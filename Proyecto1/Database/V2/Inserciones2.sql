@@ -756,19 +756,19 @@ EXEC setEmpleado 'Pedro','Villalta','Lemus','2015000012','1993-05-04','Pvillanta
 EXEC setEmpleado 'Ana','Castellanos','Ortiz','2015000013','1995-04-08','AnaCO@gmail.com','95000530',10,23,'C'
 
 --INSERTAR SEDEXEMPLEADO
-EXEC Contrato 1,1,'2007-01-30'
-EXEC Contrato 2,3,'2009-01-30'
-EXEC Contrato 3,5,'2007-01-30'
-EXEC Contrato 1,9,'2017-01-30'
-EXEC Contrato 2,2,'2017-01-30'
-EXEC Contrato 1,4,'2017-01-30'
-EXEC Contrato 1,6,'2017-01-30'
-EXEC Contrato 1,7,'2017-01-30'
-EXEC Contrato 2,8,'2017-01-30'
-EXEC Contrato 2,10,'2017-01-30'
-EXEC Contrato 3,11,'2017-01-30'
-EXEC Contrato 3,12,'2017-01-30'
-EXEC Contrato 3,13,'2017-01-30'
+EXEC Contrato 1,1,'2007-01-30',NULL
+EXEC Contrato 2,3,'2009-01-30',NULL
+EXEC Contrato 3,5,'2007-01-30',NULL
+EXEC Contrato 1,9,'2017-01-30',NULL
+EXEC Contrato 2,2,'2017-01-30',NULL
+EXEC Contrato 1,4,'2017-01-30',NULL
+EXEC Contrato 1,6,'2017-01-30',NULL
+EXEC Contrato 1,7,'2017-01-30',NULL
+EXEC Contrato 2,8,'2017-01-30',NULL
+EXEC Contrato 2,10,'2017-01-30',NULL
+EXEC Contrato 3,11,'2017-01-30',NULL
+EXEC Contrato 3,12,'2017-01-30',NULL
+EXEC Contrato 3,13,'2017-01-30',NULL
 
 --INSERTAR ACTIVO
 EXEC setActivo 'AC00001','Laptop1','Computadora DELL T1','Enlace',1200,1,7,0.1,'2017-01-30','2017-02-08',8,500,1,1,4

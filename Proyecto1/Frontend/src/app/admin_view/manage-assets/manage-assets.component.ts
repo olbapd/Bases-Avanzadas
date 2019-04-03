@@ -5,7 +5,8 @@ import { MatDialog } from '@angular/material';
 import  {CodeErrorComponent} from '../dialogs/code_error/code_error.component';
 import { Options } from 'selenium-webdriver/edge';
 import { all } from 'q';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from '@angular/forms';
+import { FotoService } from '../../services/foto.service';
 
 
 
@@ -15,19 +16,143 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./manage-assets.component.css']
 })
 export class ManageAssetsComponent implements OnInit {
-  registerForm: FormGroup;
+  photo: any;
+  form: FormGroup;
+  formModif: FormGroup;
   submitted = false;
+  submitted2 = false;
   isPopupOpened = false;
-  constructor(public restApi: RestApiService,private router: Router,private dialog: MatDialog,private formBuilder: FormBuilder) {
+  constructor(public restApi: RestApiService,private router: Router,private dialog: MatDialog,private formBuilder: FormBuilder,private fotoService: FotoService) {
+    
    }
   ngOnInit() {
+    this.form = new FormGroup({
+      Nombre: new FormControl('', Validators.required),
+      Descripcion: new FormControl('', Validators.required),
+      FechaCompra: new FormControl('', Validators.required),
+      PrecioCompra: new FormControl('', Validators.required),
+      ValorResidual: new FormControl('', Validators.required),
+      Codigo: new FormControl('', Validators.required),
+      Categoria: new FormControl('', Validators.required),
+      Depreciacion: new FormControl('', Validators.required),
+      TiempoGarantia: new FormControl('', Validators.required),
+      VidaUtil: new FormControl('', Validators.required),
+      CentroCosto: new FormControl('', Validators.required),
+      Moneda: new FormControl('', Validators.required),
+      categoria3: new FormControl('', Validators.required),
+      codigo_modif_state: new FormControl('', Validators.required),
+      estado3: new FormControl('', Validators.required),
+   });
+   this.formModif = new FormGroup({
+    categoria3: new FormControl('', Validators.required),
+    codigo_modif_state: new FormControl('', Validators.required),
+    estado3: new FormControl('', Validators.required)
+ });
     this.CategoriaDropdown();
     this.AccionDropDown();
     this.MonedasDropdown();
   }
+  get f() { return this.form.controls; }
+  get f2() { return this.formModif.controls; }
+  onPhotoChange(event){
+    this.photo = event.target.files[0];
+
+    //this.pictures[idNumber-1].name = photoName;
+}
+  onSubmit() {
+    this.submitted = true;
+    let nombre = this.form.get('Nombre').value;
+    let descripcion = this.form.get('Descripcion').value;
+    let fecha_compra = this.form.get('FechaCompra').value;
+    let precio_compre = this.form.get('PrecioCompra').value;
+    let valor_residual = this.form.get('ValorResidual').value;
+    let codigo = this.form.get('Codigo').value;
+    let depreciacion = this.form.get('Depreciacion').value;
+    let categoria = this.form.get('Categoria').value;
+    let tiempo_garantia = this.form.get('TiempoGarantia').value;
+    let vida_util = this.form.get('VidaUtil').value;
+    let centro_costo = this.form.get('CentroCosto').value;
+    let moneda = this.form.get('Moneda').value;
+
+    // stop here if form is invalid
+    if (this.form.invalid) {
+        return;
+    }
+    else{
+      let btn = document.getElementById('registrar_btn');
+       //Se debe almacenar la imagen primero
+       this.fotoService.uploadFile(this.photo)
+       .subscribe((data)=>{
+           let photoHash = (data && data.hash)? data.hash : null;
+           console.log(photoHash);
+           this.restApi.getActivoXCodigo(codigo).subscribe((res)=>{
+            const myObjStr = JSON.stringify(res)
+            const json = JSON.parse(myObjStr);
+            if (json.data[0]==null){
+              this.restApi.setActivo(codigo,nombre,descripcion,photoHash,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,centro_costo,valor_residual,categoria,moneda).subscribe((res)=>{});; 
+              
+            }
+      
+            else{
+              //btn.setAttribute('class','btn bnt-danger');
+              this.isPopupOpened = true;
+              const dialogRef = this.dialog.open(CodeErrorComponent);
+              
+            }
+    });;
+           //POner el resto de su codigo aqui adentro
+           //Cuando se va usar el sp de agregar cliente, en el espacio de 
+           //Foto utilizar la cariable photoHas.
+
+
+           //
+       });
+
+      
+
+    }
+}
+  onSubmit2() {
+    this.submitted2 = true;
+    let btn = document.getElementById('modifstate_btn');
+    let Codigo = this.formModif.get('codigo_modif_state').value;
+    let IdEstado = this.formModif.get('estado3').value;
+    
+    // stop here if form is invalid
+    if (this.formModif.invalid) {
+      btn.setAttribute('class','btn btn-danger');
+        return;
+    }
+    else{
+      //Se debe almacenar la imagen primero
+      this.fotoService.uploadFile(this.photo)
+      .subscribe((data)=>{
+          let photoHash = (data && data.hash)? data.hash : null;
+          console.log(photoHash);
+            this.restApi.getQuitarActivo(Codigo,IdEstado).subscribe((res)=>{
+              const myObjStr = JSON.stringify(res)
+              const json = JSON.parse(myObjStr);
+              
+               if(json.success==true){
+                 btn.setAttribute('class','btn btn-success');
+                 this.UpdateEstado(Codigo);
+                 window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
+               }
+            
+    });;
+      
+      });
+
+    }
+}
   EstadoDropdown(){
     let option;
     let dropdown2 = document.getElementById('estado3-Dropdown');
+    let defaulOption;
+    defaulOption= document.createElement('option');
+    defaulOption.text = "Seleccione un Código";
+    defaulOption.value = null;
+    dropdown2.append(defaulOption);
      this.restApi.getEstados().subscribe((res)=>{
        const myObjStr = JSON.stringify(res)
        const json = JSON.parse(myObjStr);
@@ -84,25 +209,6 @@ export class ManageAssetsComponent implements OnInit {
     }  
   });;
   }
-  registrar_activo(nombre,descripcion,fecha_compra,precio_compre,
-    valor_residual,detalle_ubicacion,codigo,categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado)
-    {
-    let btn = document.getElementById('registrar_btn');
-    this.restApi.getActivoXCodigo().subscribe((res)=>{
-      const myObjStr = JSON.stringify(res)
-      const json = JSON.parse(myObjStr);
-      if (json.data[0]==null){
-        btn.setAttribute('class','btn bnt-danger');
-        this.isPopupOpened = true;
-        const dialogRef = this.dialog.open(CodeErrorComponent);
-      }
-
-      else{
-        this.restApi.setActivo(nombre,descripcion,fecha_compra,precio_compre,valor_residual,detalle_ubicacion,codigo,
-          categoria,fecha_registro,tiempo_garantia,vida_util,centro_costo,estado);  
-      }
-  });;
-  }
   CodigoDropDown_Modif_State(idCategoria){
     let btn = document.getElementById('modifstate_btn');
     btn.setAttribute('class','btn btn-primary');
@@ -110,8 +216,8 @@ export class ManageAssetsComponent implements OnInit {
     let dropdown = document.getElementById('codigo_modif_state-Dropdown');
     let defaulOption;
     defaulOption= document.createElement('option');
-    defaulOption.text = "--Codigo--";
-    defaulOption.value = 0;
+    defaulOption.text = "Seleccione un Estado";
+    defaulOption.value = null;
     dropdown.append(defaulOption);
     this.restApi.getCodigoXCategoria(idCategoria).subscribe((res)=>{
       const myObjStr = JSON.stringify(res)
@@ -138,7 +244,7 @@ export class ManageAssetsComponent implements OnInit {
       var count = Object.keys(json.data).length;
       for (var _i = 0; _i < count; _i++) {
         option= document.createElement('option');
-        option.text = "--Actual--:" + json.data[_i].Nombre;
+        option.text = "Estado Actual:" + json.data[_i].Nombre;
         option.value = json.data[_i].idEstado;
         dropdown.append(option);
      } 
@@ -176,16 +282,7 @@ export class ManageAssetsComponent implements OnInit {
       window.alert("No ha sido posible modificar estado del Activo Código:"+" "+Codigo+"\n" +"Error: Estado:"+" "+IdEstado+"\n"+"Revise los datos");
      }
      else{
-      this.restApi.getQuitarActivo(Codigo,IdEstado).subscribe((res)=>{
-        const myObjStr = JSON.stringify(res)
-        const json = JSON.parse(myObjStr);
-        
-         if(json.success==true){
-           btn.setAttribute('class','btn btn-success');
-           this.UpdateEstado(Codigo);
-           window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de froma exitosa");
-         }
-      });;
+      
      }
   }
   //-----------ASIGNAR ACTIVO------------------

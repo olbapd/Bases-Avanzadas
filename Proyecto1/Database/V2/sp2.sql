@@ -64,6 +64,7 @@ CREATE OR ALTER PROC [dbo].[setActivo]
 	@VidaU int,
 	@PorcentajeD int,
 	@FechaCompra date,
+	@FechaRegistro date,
 	@CentroCosto int,
 	@ValorResidual int,
 	@IdCategoria int,
@@ -78,7 +79,7 @@ BEGIN
 		INSERT INTO Activo (Codigo, Nombre, Descripcion, Foto, Precio, TiempoGarantia, VidaUtil, PorcentajeDepreciacion, FechaCompra,
 		FechaRegistro, FechaAsignacion, CentroCosto, ValorResidual, DetalleUbicacion, IdEmpleado,IdCategoria, IdSede, IdMoneda, IdEstado) 
 		VALUES (@Codigo, @Nombre, @Descripcion, @Foto, @Precio, @TiempoGar, @VidaU, @PorcentajeD, @FechaCompra,
-		GETDATE(), NULL, @CentroCosto, @ValorResidual, NULL, NULL,@IdCategoria, NULL, @IdMoneda, @IdEstado) 
+		@FechaRegistro, NULL, @CentroCosto, @ValorResidual, NULL, NULL,@IdCategoria, NULL, @IdMoneda, @IdEstado) 
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -103,7 +104,7 @@ CREATE OR ALTER PROC [dbo].[updateActivo]
 	@Precio int,
 	@TiempoGar int,
 	@VidaU int,
-	@PorcentajeD int,
+	@PorcentajeD float,
 	@FechaCompra date,
 	@FechaRegistro date,
 	@CentroCosto int,
@@ -179,7 +180,7 @@ SET NOCOUNT OFF
 GO
 
 -- =============================================
--- Descripcion:	<Asignar un activo a un empleado>
+-- Descripcion:	<Asignar un activo a un empleado> YA NO SE USA
 -- Parametro de Entrada: <IdActivo, IdEmpleado, FechaAsignacion, IdEstado>
 -- Parametro de Salida: <Ninguno>
 -- =============================================
@@ -187,7 +188,8 @@ CREATE OR ALTER PROC [dbo].[asigActivo]
 	@Codigo varchar(50),
 	@Cedula varchar(50),
 	@IdEstado int,
-	@DetalleUbi varchar(100)
+	@DetalleUbi varchar(100),
+	@FechaAsig date
 	
 AS
 BEGIN
@@ -208,7 +210,7 @@ BEGIN
 		[IdEmpleado] = @IdEmpleado,
 		[IdSede] = @IdSede,
 		[DetalleUbicacion]= @DetalleUbi,
-		[FechaAsignacion] = GETDATE()
+		[FechaAsignacion] = @FechaAsig
 		WHERE @Codigo = [Activo].Codigo
 		COMMIT TRANSACTION
 	END TRY
@@ -577,7 +579,7 @@ GO
 
 
 -- =============================================
--- Descripcion:	<Sleccionar informacion del empleado a partir del login>
+-- Descripcion:	<Seleccionar informacion del empleado a partir del login>
 -- Parametro de Entrada: <CorreoEmpleado>
 -- Parametro de Salida: <Ninguno>
 -- =============================================
@@ -732,15 +734,16 @@ GO
 CREATE OR ALTER PROCEDURE [dbo].[Contrato]
 	@IdSede int,
 	@IdEmpleado int,
-	@FechaIngreso date
+	@FechaIngreso date,
+	@FechaSalida date
 	 
 AS
 BEGIN
 
 	BEGIN TRAN
 	BEGIN TRY
-		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso)
-		VALUES (@IdSede, @IdEmpleado, @FechaIngreso)
+		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso, FechaSalida)
+		VALUES (@IdSede, @IdEmpleado, @FechaIngreso, NULL)
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -833,27 +836,6 @@ SET NOCOUNT OFF
 GO
 
 -- =============================================
--- Descripcion:	<Seleccionar a los empleados que entraron en un rango de fechas>
--- Parametro de Entrada: <FechaInicial, FechaFinal>
--- Parametro de Salida: <Ninguno>
--- =============================================
-CREATE OR ALTER PROC [dbo].[getEmpleadoFechaI]
-	@FechaInicial date
-AS
-SET NOCOUNT ON
-
-SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
-[Empleado].Cedula, [SedeXEmpleado].Fechaingreso, [Departamento].Nombre, [Puesto].Nombre
-FROM SedeXEmpleado
-INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
-INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
-INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
-WHERE [SedeXEmpleado].Fechaingreso = @FechaInicial
-
-SET NOCOUNT OFF
-GO
-
--- =============================================
 -- Descripcion:	<Seleccionar a un empleado que tiene un activo en especifico>
 -- Parametro de Entrada: <CodigoActivo>
 -- Parametro de Salida: <Ninguno>
@@ -876,6 +858,24 @@ WHERE @CodigoActivo = [Activo].Codigo
 SET NOCOUNT OFF
 GO
 
+-- =============================================
+-- Descripcion:	<Seleccionar los datos necesarios para hacer los calculos de depresiación a los Activos>
+-- Parametro de Entrada: <CodigoActivo>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[getCalculos]
+	@CodigoActivo int
+AS
+SET NOCOUNT ON
+
+SELECT [Activo].PorcentajeDepreciacion, [Activo].Precio, YEAR([Activo].FechaCompra), [Activo].ValorResidual
+FROM Activo
+
+WHERE @CodigoActivo = [Activo].Codigo
+
+SET NOCOUNT OFF
+GO
+
 CREATE OR ALTER PROC sp_assignActive   
     @IdEmpleado int,   
     @IdActivo int   
@@ -885,3 +885,5 @@ AS
 	SET IdEmpleado= @IdEmpleado, FechaAsignacion = GETDATE()
 	WHERE IdActivo = @IdActivo;
 GO 
+
+

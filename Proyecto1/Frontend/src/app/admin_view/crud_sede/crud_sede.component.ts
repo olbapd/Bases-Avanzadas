@@ -27,7 +27,7 @@ export class SedeComponent implements OnInit {
     categoria;
     page = 1;
     pageSize = 4;
-    sedess: sede[];
+    sedess: sede[]=[];
    /*  collectionSize = this.sedess.length;
     activo: asset;
     sede: sede; */
@@ -38,7 +38,7 @@ export class SedeComponent implements OnInit {
         ngOnInit() { 
             this.EstadoDropdown();
             this.ProvinciaDropdown();
-           this.Rsede();
+            this.Rsede();
         }
     
         get sedes(): sede[] { //BIND TABLE
