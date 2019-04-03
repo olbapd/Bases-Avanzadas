@@ -148,48 +148,69 @@
       </div>
 
     </div>
+    <div class="col-md-1"></div>
 
     <!--Card para la Baja de Activos-->
-
-      <div class="card border-info" style="max-width: 18rem; max-height: 23rem; margin-bottom: 20px">
+    <div class="col-md-2">
+      <div class="card border-info" style="max-width: 18rem; margin-bottom: 20px">
         <div class="card-body text-center">
           <h5 class="card-title"> Modificar Estado del Activo</h5>
-          <div class="row text-center">
-              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Categoria</h6>
-              <div class="input-group mb-3">
-                <select id="categoria3-Dropdown"  name="categoria3" class="form-control" #select_categoria1 data-style="btn-primary" data-live-search="true"
-                  data-selectpicker data-collection-name="items" ng-model="selected"
-                  (change)="CodigoDropDown_Modif_State($event.target.value)">
-                  <option selected>--Categoría--</option>
-                  <!--LLenado de Select-->
-                </select>
-              </div>
+          <form name="formModif" [formGroup]="formModif" (ngSubmit)="onSubmit2()">
+              <div class="row text-center">
+                <div class="col-md-12">
+                  <h6 class="card-subtitle mb-2 text-muted">Seleccionar Categoria</h6>
+                  <div class="form-group">
+                      <div class="input-group mb-3">
+                        <select id="categoria3-Dropdown"  name="categoria3" formControlName="categoria3" class="form-control" #select_categoria1 data-style="btn-primary" data-live-search="true"
+                          data-selectpicker data-collection-name="items" ng-model="selected"
+                          (change)="CodigoDropDown_Modif_State($event.target.value)" [ngClass]="{ 'is-invalid': submitted2 && f2.categoria3.errors }">
+                          <option [ngValue]="null">Seleccione una categoría</option>
+                        </select>
+                        <div *ngIf="submitted2 && f2.categoria3.errors" class="invalid-feedback">
+                          <div *ngIf="f2.categoria3.errors.required">Categoria Requerida</div>
+                        </div>
+                      </div>
+                    </div>
 
-              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Codigo</h6>
-              <div class="input-group mb-3">
-                <select id="codigo_modif_state-Dropdown" name="codigo_modif_state" class="form-control" #select_codigo_baja data-style="btn-primary" data-live-search="true"
-                  data-selectpicker data-collection-name="items" ng-model="selected"
-                  (change)="EstadoDropDown_Modif_State($event.target.value)">
-                  <option selected>--Código--</option>
-                  <!--LLenado de Select-->
-                </select>
+                  <h6 class="card-subtitle mb-2 text-muted">Seleccionar Código</h6>
+                  <div class="formModif-group">
+                    <div class="input-group mb-3">
+                      <select id="codigo_modif_state-Dropdown" name="codigo_modif_state"  formControlName="codigo_modif_state" class="form-control" #select_codigo_baja data-style="btn-primary" data-live-search="true"
+                        data-selectpicker data-collection-name="items" ng-model="selected"
+                        (change)="EstadoDropDown_Modif_State($event.target.value)" [ngClass]="{ 'is-invalid': submitted2 && f2.codigo_modif_state.errors }">
+                        <option [ngValue]="null">Seleccione un Estado</option>
+                      </select>
+                      <div *ngIf="submitted2 && f2.codigo_modif_state.errors" class="invalid-feedback">
+                        <div *ngIf="f2.codigo_modif_state.errors.required">Código Requerido</div>
+                      </div>
+                    </div>
+                 </div>
 
+                  <h6 class="card-subtitle mb-2 text-muted">Seleccionar Estado</h6>
+                  <div class="formModif-group">
+                      <div class="input-group mb-3">
+                        <select id="estado3-Dropdown" name="estado3" formControlName="estado3" class="form-control"  #select_estado_activo data-style="btn-primary" data-live-search="true"
+                          data-selectpicker data-collection-name="items" ng-model="selected"
+                          (change)="estadoXCodigo()"[ngClass]="{ 'is-invalid': submitted2 && f2.estado3.errors }">
+                          <option [ngValue]="null">Seleccione un Estado</option>
+                        </select>
+                        <div *ngIf="submitted2 && f2.estado3.errors" class="invalid-feedback">
+                          <div *ngIf="f2.estado3.errors.required">Estado Requerido</div>
+                        </div>
+                      </div>
+                  </div>
+                
               </div>
-
-              <h6 class="card-subtitle mb-2 text-muted">Seleccionar Estado</h6>
-              <div class="input-group mb-3">
-                <select id="estado3-Dropdown" name="estado3" class="form-control"  #select_estado_activo data-style="btn-primary" data-live-search="true"
-                  data-selectpicker data-collection-name="items" ng-model="selected"
-                  (change)="estadoXCodigo()">
-                  <!--LLenado de Select-->
-                </select>
+              <div class="formModif-group">
+                <button id="modifstate_btn" class="btn btn-primary" >Modificar Estado</button>
               </div>
-            
           </div>
-          <button (click)="modificar_estado_activo(select_codigo_baja.value,select_estado_activo.value)" id="modifstate_btn" name="modificarEstado" type="button"
-            class="btn btn-primary">Modificar Estado</button>
+          </form>
+        
         </div>
       </div>
+      </div>
+      <div class="col-md-1"></div>
  
     <!--Card para la Asignacion de Activos-->
 
