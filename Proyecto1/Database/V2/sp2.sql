@@ -680,7 +680,7 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[desEmpleado]
-	@IdEmpleado int
+	@Cedula int
 	
 AS
 BEGIN
@@ -689,7 +689,7 @@ BEGIN
 	BEGIN TRY
 		UPDATE Empleado SET 
 		[IdEstado] = 2
-		WHERE @IdEmpleado = [Empleado].IdEmpleado
+		WHERE @Cedula = [Empleado].Cedula
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
