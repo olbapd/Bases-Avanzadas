@@ -830,7 +830,7 @@ FROM SedeXEmpleado
 INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
-WHERE @IdSede = [SedeXEmpleado].IdSede
+WHERE @IdSede = [SedeXEmpleado].IdSede AND [Empleado].IdEstado = 1
 
 SET NOCOUNT OFF
 GO
