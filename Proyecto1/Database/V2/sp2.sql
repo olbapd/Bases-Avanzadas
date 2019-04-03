@@ -62,7 +62,7 @@ CREATE OR ALTER PROC [dbo].[setActivo]
 	@Precio int,
 	@TiempoGar int,
 	@VidaU int,
-	@PorcentajeD int,
+	@PorcentajeD float,
 	@FechaCompra date,
 	@FechaRegistro date,
 	@CentroCosto int,
@@ -671,15 +671,19 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[desEmpleado]
-	@IdEmpleado int
+	@Cedula varchar
 	
 AS
 BEGIN
+DECLARE
+	@IdEmpleado int
 
 	BEGIN TRAN
 	BEGIN TRY
+		SELECT @IdEmpleado FROM Empleado
+		WHERE @Cedula = [Empleado].Cedula;
 		UPDATE Empleado SET 
-		[IdEstado] = 2
+		[IdEstado] = 1
 		WHERE @IdEmpleado = [Empleado].IdEmpleado
 		COMMIT TRANSACTION
 	END TRY

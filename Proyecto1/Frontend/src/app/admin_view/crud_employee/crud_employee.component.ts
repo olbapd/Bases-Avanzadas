@@ -168,6 +168,7 @@ export class EmployeeComponent implements OnInit {
                         "fechaIn":json.data[_i].FechaIngreso
                      });
                  }
+                 console.log(this.empleados);
                  
              });
          });
@@ -186,7 +187,12 @@ export class EmployeeComponent implements OnInit {
 
     }
     
-    deleteEmployee() {
+    deleteEmployee(id) {
+        const employee = this.empleados.findIndex(c=> c.cedula=== id);
+        this.empleados.splice(employee,1);
+        console.log("Id"+id);
+
+
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(DeleteComponent, {
             data: {}
