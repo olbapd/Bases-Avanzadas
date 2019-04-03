@@ -18,7 +18,9 @@ import { FotoService } from '../../services/foto.service';
 export class ManageAssetsComponent implements OnInit {
   photo: any;
   form: FormGroup;
+  formModif: FormGroup;
   submitted = false;
+  submitted2 = false;
   isPopupOpened = false;
   constructor(public restApi: RestApiService,private router: Router,private dialog: MatDialog,private formBuilder: FormBuilder,private fotoService: FotoService) {
     
@@ -36,15 +38,22 @@ export class ManageAssetsComponent implements OnInit {
       TiempoGarantia: new FormControl('', Validators.required),
       VidaUtil: new FormControl('', Validators.required),
       CentroCosto: new FormControl('', Validators.required),
-      Moneda: new FormControl('', Validators.required)
- 
-
+      Moneda: new FormControl('', Validators.required),
+      categoria3: new FormControl('', Validators.required),
+      codigo_modif_state: new FormControl('', Validators.required),
+      estado3: new FormControl('', Validators.required),
    });
+   this.formModif = new FormGroup({
+    categoria3: new FormControl('', Validators.required),
+    codigo_modif_state: new FormControl('', Validators.required),
+    estado3: new FormControl('', Validators.required)
+ });
     this.CategoriaDropdown();
     this.AccionDropDown();
     this.MonedasDropdown();
   }
   get f() { return this.form.controls; }
+  get f2() { return this.formModif.controls; }
   onPhotoChange(event){
     this.photo = event.target.files[0];
 
@@ -103,9 +112,47 @@ export class ManageAssetsComponent implements OnInit {
 
     }
 }
+  onSubmit2() {
+    this.submitted2 = true;
+    let btn = document.getElementById('modifstate_btn');
+    let Codigo = this.formModif.get('codigo_modif_state').value;
+    let IdEstado = this.formModif.get('estado3').value;
+    
+    // stop here if form is invalid
+    if (this.formModif.invalid) {
+      btn.setAttribute('class','btn btn-danger');
+        return;
+    }
+    else{
+      //Se debe almacenar la imagen primero
+      this.fotoService.uploadFile(this.photo)
+      .subscribe((data)=>{
+          let photoHash = (data && data.hash)? data.hash : null;
+          console.log(photoHash);
+            this.restApi.getQuitarActivo(Codigo,IdEstado).subscribe((res)=>{
+              const myObjStr = JSON.stringify(res)
+              const json = JSON.parse(myObjStr);
+              
+               if(json.success==true){
+                 btn.setAttribute('class','btn btn-success');
+                 this.UpdateEstado(Codigo);
+                 window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
+               }
+            
+    });;
+      
+      });
+
+    }
+}
   EstadoDropdown(){
     let option;
     let dropdown2 = document.getElementById('estado3-Dropdown');
+    let defaulOption;
+    defaulOption= document.createElement('option');
+    defaulOption.text = "Seleccione un Código";
+    defaulOption.value = null;
+    dropdown2.append(defaulOption);
      this.restApi.getEstados().subscribe((res)=>{
        const myObjStr = JSON.stringify(res)
        const json = JSON.parse(myObjStr);
@@ -169,8 +216,8 @@ export class ManageAssetsComponent implements OnInit {
     let dropdown = document.getElementById('codigo_modif_state-Dropdown');
     let defaulOption;
     defaulOption= document.createElement('option');
-    defaulOption.text = "--Codigo--";
-    defaulOption.value = 0;
+    defaulOption.text = "Seleccione un Estado";
+    defaulOption.value = null;
     dropdown.append(defaulOption);
     this.restApi.getCodigoXCategoria(idCategoria).subscribe((res)=>{
       const myObjStr = JSON.stringify(res)
@@ -197,7 +244,7 @@ export class ManageAssetsComponent implements OnInit {
       var count = Object.keys(json.data).length;
       for (var _i = 0; _i < count; _i++) {
         option= document.createElement('option');
-        option.text = "--Actual--:" + json.data[_i].Nombre;
+        option.text = "Estado Actual:" + json.data[_i].Nombre;
         option.value = json.data[_i].idEstado;
         dropdown.append(option);
      } 
@@ -235,16 +282,7 @@ export class ManageAssetsComponent implements OnInit {
       window.alert("No ha sido posible modificar estado del Activo Código:"+" "+Codigo+"\n" +"Error: Estado:"+" "+IdEstado+"\n"+"Revise los datos");
      }
      else{
-      this.restApi.getQuitarActivo(Codigo,IdEstado).subscribe((res)=>{
-        const myObjStr = JSON.stringify(res)
-        const json = JSON.parse(myObjStr);
-        
-         if(json.success==true){
-           btn.setAttribute('class','btn btn-success');
-           this.UpdateEstado(Codigo);
-           window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de froma exitosa");
-         }
-      });;
+      
      }
   }
   //-----------ASIGNAR ACTIVO------------------
