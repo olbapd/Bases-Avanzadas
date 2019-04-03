@@ -197,9 +197,7 @@ export class EmployeeComponent implements OnInit {
         const dialogRef = this.dialog.open(DeleteComponent, {
             data: {}
         });
-        if(localStorage.getItem("succesful")=="true"){
-            this.empleados.splice(employee,1);
-        }
+        this.empleados.splice(employee,1);
         
     }
 
