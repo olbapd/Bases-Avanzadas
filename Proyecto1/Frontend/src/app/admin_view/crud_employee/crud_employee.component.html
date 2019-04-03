@@ -55,6 +55,15 @@
                                       <div *ngIf="f.FechaN.errors.required">Fecha de Nacimiento Requerida</div>
                                     </div>
                                 </div>
+
+                                <h6 class="card-subtitle mb-2 text-muted">Fecha de Registro</h6>
+                                <div class="form-group">
+                                    <input type="text" #txt_vida_util class="form-control" formControlName="FechaR"
+                                    [ngClass]="{ 'is-invalid': submitted && f.FechaR.errors }"/>
+                                    <div *ngIf="submitted && f.FechaR.errors" class="invalid-feedback">
+                                    <div *ngIf="f.FechaR.errors.required">Fecha de Registro Requerida</div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-md-6">
@@ -99,6 +108,19 @@
                                           </div>
                                     </div>
                                 </div>
+
+                                <!-- <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Sede</h6>
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <select class="form-control" id="Sede-Dropdown" name="Sede"  formControlName="Sede" #select_puesto data-style="btn-primary" data-live-search="true"
+                                            data-selectpicker data-collection-name="items" ng-model="selected" [ngClass]="{ 'is-invalid': submitted && f.Sede.errors }">
+                                            <option [ngValue]="null">Seleccione un Puesto</option>
+                                          </select>
+                                          <div *ngIf="submitted && f.Sede.errors" class="invalid-feedback">
+                                            <div *ngIf="f.Sede.errors.required">Sede Requerida</div>
+                                          </div>
+                                    </div>
+                                </div> -->
 
                                
                                     <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>

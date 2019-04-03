@@ -607,18 +607,14 @@ CREATE OR ALTER PROCEDURE [dbo].[setEmpleado]
 	@Apellido2 varchar(25),
 	@Cedula varchar(10),
 	@FechaN date,
-	@FechaIngreso date,
 	@Correo varchar (50),
 	@Contrasena varchar(50),
 	@IdDepartamento int,
 	@IdPuesto int,
-	@IdSede int,
 	@Foto varchar(50)
 	 
 AS
 BEGIN
-DECLARE
-	@IdEmpleado int
 
 	BEGIN TRAN
 	BEGIN TRY
@@ -626,11 +622,6 @@ DECLARE
 		Contrasena, IdDepartamento, IdPuesto, Foto)
 		VALUES (@Nombre, @Apellido1, @Apellido2, @Cedula, @FechaN ,
 		 @Correo, @Contrasena,@IdDepartamento, @IdPuesto, @Foto)
-
-		 SET @IdEmpleado = SCOPE_IDENTITY() 
-
-		 EXEC Contrato @IdSede, @IdEmpleado, @FechaIngreso, NULL
-
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -680,7 +671,7 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[desEmpleado]
-	@Cedula varchar
+	@Cedula varchar(50)
 	
 AS
 BEGIN
@@ -692,7 +683,7 @@ DECLARE
 		SELECT @IdEmpleado FROM Empleado
 		WHERE @Cedula = [Empleado].Cedula;
 		UPDATE Empleado SET 
-		[IdEstado] = 1
+		[IdEstado] = 2
 		WHERE @IdEmpleado = [Empleado].IdEmpleado
 		COMMIT TRANSACTION
 	END TRY

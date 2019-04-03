@@ -235,6 +235,17 @@ export class RestApiService {
     
     return this.http.post (this.apiURL+urls.sp_url+'quitarActivo',body).pipe(retry(1),catchError(this.handleError));
   }
+  quitarEmpleado(Cedula){
+    let body={
+              "typesIn":["varchar"],
+              "typesOut":[],
+              "parameters":["Cedula"],
+              "values":[Cedula],
+              "ouputs":[],
+              "name":"desEmpleado"
+            }
+     return this.http.post (this.apiURL+urls.sp_url+'desEmpleado',body).pipe(retry(1),catchError(this.handleError));
+  }
 
   setAssignActivo(Codigo,Cedula,DetalleUbi){
 
@@ -260,12 +271,12 @@ export class RestApiService {
     return this.http.post (this.apiURL+urls.sp_url+'setSede',body).pipe(retry(1),catchError(this.handleError));
 
   }
-  setEmpleado(Nombre,Apellido1,Apellido2,Cedula,FechaN,Correo,Contasena,IdDepartamento,IdPuesto,Foto){
+  setEmpleado(Nombre,Apellido1,Apellido2,Cedula,FechaN,FechaIngreso,Correo,Contrasena,IdDepartamento,IdPuesto,Foto){
     let body={
-              "typesIn":["varchar","varchar","varchar","varchar","date","varchar","varchar","int","int","varchar"],
+              "typesIn":["varchar","varchar","varchar","varchar","date","date","varchar","varchar","int","int","int","varchar"],
               "typesOut":[],
-              "parameters":["Nombre","Apellido1","Apellido2","Cedula","FechaN","Correo","Contasena","IdDepartamento","IdPuesto","Foto"],
-              "values":[Nombre,Apellido1,Apellido2,Cedula,FechaN,Correo,Contasena,IdDepartamento,IdPuesto,Foto],
+              "parameters":["Nombre","Apellido1","Apellido2","Cedula","FechaN","FechaIngreso","Correo","Contrasena","IdDepartamento","IdPuesto","IdSede","Foto"],
+              "values":[Nombre,Apellido1,Apellido2,Cedula,FechaN,FechaIngreso,Correo,Contrasena,IdDepartamento,IdPuesto,1,Foto],
               "ouputs":[],
               "name":"setEmpleado"
             }
