@@ -104,7 +104,7 @@ CREATE OR ALTER PROC [dbo].[updateActivo]
 	@Precio int,
 	@TiempoGar int,
 	@VidaU int,
-	@PorcentajeD int,
+	@PorcentajeD float,
 	@FechaCompra date,
 	@FechaRegistro date,
 	@CentroCosto int,
