@@ -569,14 +569,14 @@ GO
 -- Parametro de Entrada: <CorreoEmpleado>
 -- Parametro de Salida: <Ninguno>
 -- =============================================
-CREATE OR ALTER PROC sp_login
-    @CorreoEmp nvarchar(50)   
-AS   
+ 
+CREATE OR ALTER PROC [dbo].[sp_login]
+	@CorreoEmp nvarchar(50)
+AS
 	SELECT *
 	FROM Empleado
-    WHERE Correo= @CorreoEmp;
-GO  
-
+	WHERE Correo=@CorreoEmp
+GO
 
 -- =============================================
 -- Descripcion:	<Seleccionar informacion del empleado a partir del login>
@@ -887,3 +887,46 @@ AS
 GO 
 
 
+CREATE OR ALTER PROC [dbo].[sp_assignActive]
+	@Codigo varchar(50),
+	@Cedula varchar(50),
+	@IdEstado int,
+	@DetalleUbi varchar(100),
+	@Correo varchar(50) OUTPUT,
+	@Nombre varchar(50) OUTPUT,
+	@Apellido varchar(50) OUTPUT
+
+	
+AS
+BEGIN
+	DECLARE
+	@IdSede int,
+	@IdEmpleado int
+
+	SELECT @IdEmpleado = Empleado.IdEmpleado, @Correo=Empleado.Correo,
+			@Nombre=Empleado.Nombre, @Apellido=Empleado.Apellido1 FROM Empleado
+	WHERE @Cedula = [Empleado].Cedula;
+
+	SELECT @IdSede = SedeXEmpleado.IdSede FROM SedeXEmpleado
+	WHERE @IdEmpleado = [SedeXEmpleado].IdEmpleado;
+
+	BEGIN TRAN
+	BEGIN TRY
+		UPDATE Activo SET 
+		[IdEstado] = @IdEstado,
+		[IdEmpleado] = @IdEmpleado,
+		[IdSede] = @IdSede,
+		[DetalleUbicacion]= @DetalleUbi,
+		[FechaAsignacion] = GETDATE()
+		WHERE @Codigo = [Activo].Codigo
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
+		ROLLBACK TRANSACTION
+	END CATCH
+	SELECT	@Correo as N'@Correo',
+		@Nombre as N'@Nombre',
+		@Apellido as N'@Apellido'
+END
+GO

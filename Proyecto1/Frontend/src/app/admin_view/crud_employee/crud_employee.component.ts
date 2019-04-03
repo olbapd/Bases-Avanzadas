@@ -152,6 +152,7 @@ export class EmployeeComponent implements OnInit {
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
             const idSede=json.data[0].IdSede;
+            
             this.restApi.getEmpleadosXSede(idSede).subscribe((res)=>{
                 const myObjStr = JSON.stringify(res)
                 const json = JSON.parse(myObjStr);

@@ -21,7 +21,7 @@ AS
 	WHERE IdActivo = @IdActivo;
 GO*/ 
 
-CREATE OR ALTER PROC [dbo].sp_assignActive
+CREATE OR ALTER PROC [dbo].[sp_assignActive]
 	@Codigo varchar(50),
 	@Cedula varchar(50),
 	@IdEstado int,

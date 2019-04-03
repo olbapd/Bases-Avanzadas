@@ -124,24 +124,18 @@ export class ManageAssetsComponent implements OnInit {
         return;
     }
     else{
-      //Se debe almacenar la imagen primero
-      this.fotoService.uploadFile(this.photo)
-      .subscribe((data)=>{
-          let photoHash = (data && data.hash)? data.hash : null;
-          console.log(photoHash);
-            this.restApi.getQuitarActivo(Codigo,IdEstado).subscribe((res)=>{
-              const myObjStr = JSON.stringify(res)
-              const json = JSON.parse(myObjStr);
-              
-               if(json.success==true){
-                 btn.setAttribute('class','btn btn-success');
-                 this.UpdateEstado(Codigo);
-                 window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
-               }
+      this.restApi.getQuitarActivo(Codigo,IdEstado).subscribe((res)=>{
+        const myObjStr = JSON.stringify(res)
+        const json = JSON.parse(myObjStr);
+        
+          if(json.success==true){
+            btn.setAttribute('class','btn btn-success');
+            this.UpdateEstado(Codigo);
+            //window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
+          }
             
     });;
       
-      });
 
     }
 }
