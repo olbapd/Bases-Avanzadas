@@ -680,7 +680,7 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[desEmpleado]
-	@Cedula int
+	@Cedula varchar(50)
 	
 AS
 BEGIN
