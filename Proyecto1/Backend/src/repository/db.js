@@ -18,6 +18,7 @@ expose.storedProcedure = (data, cb) => {
   let servers = sqlServer.getServers();
   let i =0;
   let lastError="";
+  console.log("In sp dynamic.");
   while(i<servers.length){
     try{
       sql.connect(servers[i]).then(pool => {
@@ -82,6 +83,7 @@ expose.storedProcedure = (data, cb) => {
       });
       return;
     }catch(error){
+      console.log(error);
       lastError=error;
       i++
     }

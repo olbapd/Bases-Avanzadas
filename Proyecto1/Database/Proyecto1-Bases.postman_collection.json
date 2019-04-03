@@ -1,0 +1,258 @@
+{
+	"info": {
+		"_postman_id": "c0f3bfaa-5159-4f4e-82ee-ac21b48c32c4",
+		"name": "Proyecto1-Bases",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Assign Active",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"codigo\" : \"A00001\",\n\t\"cedula\" : \"2015000001\",\n\t\"idEstado\" : 3,\n\t\"detalleUbi\" : \"a\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/activo/assign",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"activo",
+						"assign"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NO USAR test active",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"typesIn\":[\"varchar\",\"varchar\",\"int\",\"varchar\"],\n\t\"typesOut\":[\"varchar\",\"varchar\",\"varchar\"],\n\t\"parameters\":[\"Codigo\",\"Cedula\",\"IdEstado\",\"DetalleUbi\"],\n\t\"values\":[\"AC00001\",\"201500asd0001\",3,\"nada\"],\n\t\"ouputs\":[\"Correo\",\"Nombre\",\"Apellido\"],\n\t\"name\":\"sp_assignActive\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/dynamic/sp_assignActive",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"dynamic",
+						"sp_assignActive"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Provincia By Id",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"typesIn\":[],\n\t\"typesOut\":[],\n\t\"parameters\":[],\n\t\"values\":[],\n\t\"ouputs\":[],\n\t\"name\":\"getProvincia\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/dynamic/getProvincia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"dynamic",
+						"getProvincia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Empleado",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"typesIn\":[\"varchar\",\"varchar\",\"varchar\",\"varchar\",\"date\",\"varchar\",\"varchar\",\"int\",\"int\",\"varchar\"],\n  \"typesOut\":[],\n  \"parameters\":[\"Nombre\",\"Apellido1\",\"Apellido2\",\"Cedula\",\"FechaN\",\"Correo\",\"Contrasena\",\"IdDepartamento\",\"IdPuesto\",\"Foto\"],\n  \"values\":[\"Jose\",\"Rivera\",\"Rivera\",\"2015045476\",\"2006-12-30\",\"jose7rivera77@gmail.com\",\"12345678\",1,1,\"1\"],\n  \"ouputs\":[],\n  \"name\":\"setEmpleado\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/dynamic/setEmpleado",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"dynamic",
+						"setEmpleado"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Category",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"typesIn\":[\"varchar\"],\n\t\"typesOut\":[],\n\t\"parameters\":[\"NombreC\"],\n\t\"values\":[\"Escritorio\"],\n\t\"ouputs\":[],\n\t\"name\":\"setCategoria\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/dynamic/addCategory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"dynamic",
+						"addCategory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"erick@gmail.com\",\n\t\"pass\":\"123123\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/authentication/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"authentication",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload File",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "fileUploaded",
+							"type": "file",
+							"src": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/storage/put",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"storage",
+						"put"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Download File",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/storage/pull/HZxnOijiEUxLdTeVMOWxhvrwFDEhwiceMFEwhDeGyvIEBPxObSOlUsSwgqY.jpg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"storage",
+						"pull",
+						"HZxnOijiEUxLdTeVMOWxhvrwFDEhwiceMFEwhDeGyvIEBPxObSOlUsSwgqY.jpg"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

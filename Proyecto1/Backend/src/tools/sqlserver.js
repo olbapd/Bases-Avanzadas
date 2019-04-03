@@ -19,7 +19,8 @@ let pool = null;
 
 let instance = {
   getPool : null,
-  getServers: null
+  getServers: null,
+  getCurrentPool:null
 }
 
 let initializePool = () => {
@@ -59,6 +60,9 @@ instance.getPool = () => {
   return pool;  
 }
 
+instance.getCurrentPool = () => {
+   console.log(pool.connected);
+}
 instance.getServers= () =>{
   return servers;
 }  
