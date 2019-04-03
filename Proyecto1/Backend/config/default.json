@@ -24,13 +24,13 @@
 	      	"password": "admin",
 	      	"server"  : "localhost", 
 	      	"database": "Proyecto1BDA" 
-		},
-		{
+		},{
 			"user"    : "api",
 	      	"password": "admin",
-	      	"server"  : "192.168.1.7", 
+	      	"server"  : "172.20.10.5", 
 	      	"database": "Proyecto1BDA" 
 		}
+		
 	],
 	
 	"mail" : {
@@ -48,3 +48,4 @@
 	  	"subject":"Assignacion de Activo"
 	}
 }
+//victor.castrillo.99@gmail.com
