@@ -39,9 +39,6 @@ export class ManageAssetsComponent implements OnInit {
       VidaUtil: new FormControl('', Validators.required),
       CentroCosto: new FormControl('', Validators.required),
       Moneda: new FormControl('', Validators.required),
-      categoria3: new FormControl('', Validators.required),
-      codigo_modif_state: new FormControl('', Validators.required),
-      estado3: new FormControl('', Validators.required),
       FechaR: new FormControl('', Validators.required)
    });
    this.formModif = new FormGroup({
@@ -245,8 +242,8 @@ export class ManageAssetsComponent implements OnInit {
       var count = Object.keys(json.data).length;
       for (var _i = 0; _i < count; _i++) {
         option= document.createElement('option');
-        option.text = "Estado Actual:" + json.data[_i].Nombre;
-        option.value = json.data[_i].idEstado;
+        option.text = "Estado Actual:" +" "+ json.data[_i].Nombre;
+        option.value = json.data[_i].IdEstado;
         dropdown.append(option);
      } 
   });;
@@ -267,8 +264,8 @@ export class ManageAssetsComponent implements OnInit {
       var count = Object.keys(json.data).length;
       for (var _i = 0; _i < count; _i++) {
         option= document.createElement('option');
-        option.text = "--Actual--:" + json.data[_i].Nombre;
-        option.value = json.data[_i].idEstado;
+        option.text = "Estado Actual:" +" "+ json.data[_i].Nombre;
+        option.value = json.data[_i].IdEstado;
         dropdown.append(option);
      } 
   });;

@@ -62,7 +62,7 @@ CREATE OR ALTER PROC [dbo].[setActivo]
 	@Precio int,
 	@TiempoGar int,
 	@VidaU int,
-	@PorcentajeD int,
+	@PorcentajeD float,
 	@FechaCompra date,
 	@FechaAsig date,
 	@CentroCosto int,
