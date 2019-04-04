@@ -67,15 +67,17 @@ export class EmployeeComponent implements OnInit {
     get f() { return this.form.controls; }
     ngOnInit() {
         this.form = new FormGroup({
-           Nombre: new FormControl('', Validators.required),
-           Apellido1: new FormControl('', Validators.required),
-           Apellido2: new FormControl('', Validators.required),
-           Cedula: new FormControl('', Validators.required),
-           Correo: new FormControl('', [Validators.required, Validators.email]),
-           Contrasena: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(10)]),
-           FechaN: new FormControl('', Validators.required),
+           Nombre: new FormControl('Kenneth', Validators.required),
+           Apellido1: new FormControl('Alvarado', Validators.required),
+           Apellido2: new FormControl('Mendez', Validators.required),
+           Cedula: new FormControl('20202020', Validators.required),
+           Correo: new FormControl('pol@gmail.com', [Validators.required, Validators.email]),
+           Contrasena: new FormControl('alavarado', [Validators.required, Validators.minLength(8),Validators.maxLength(10)]),
+           FechaN: new FormControl('1996-12-12', Validators.required),
            Departamento: new FormControl('', Validators.required),
-           Puesto: new FormControl('', Validators.required)
+           Puesto: new FormControl('', Validators.required),
+           FechaR: new FormControl('2019-04-03', Validators.required),
+
 
         });
        this.Remployees();
@@ -94,6 +96,7 @@ export class EmployeeComponent implements OnInit {
         let contrasena = this.form.get('Contrasena').value;
         let departamento = this.form.get('Departamento').value;
         let puesto = this.form.get('Puesto').value;
+        let FechaR = this.form.get('FechaR').value;
 
         // stop here if form is invalid
         if (this.form.invalid) {
@@ -106,7 +109,7 @@ export class EmployeeComponent implements OnInit {
         .subscribe((data)=>{
             let photoHash = (data && data.hash)? data.hash : null;
             console.log(photoHash);
-                this.restApi.setEmpleado(nombre,apellido1,apellido2,cedula,FechaN,correo,contrasena,departamento,puesto,photoHash).subscribe(res => {
+                this.restApi.setEmpleado(nombre,apellido1,apellido2,cedula,FechaN,FechaR,correo,contrasena,departamento,puesto,photoHash).subscribe(res => {
                     
                     });  
         });
@@ -152,6 +155,7 @@ export class EmployeeComponent implements OnInit {
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
             const idSede=json.data[0].IdSede;
+            
             this.restApi.getEmpleadosXSede(idSede).subscribe((res)=>{
                 const myObjStr = JSON.stringify(res)
                 const json = JSON.parse(myObjStr);
@@ -167,6 +171,7 @@ export class EmployeeComponent implements OnInit {
                         "fechaIn":json.data[_i].FechaIngreso
                      });
                  }
+                 console.log(this.empleados);
                  
              });
          });
@@ -185,11 +190,15 @@ export class EmployeeComponent implements OnInit {
 
     }
     
-    deleteEmployee() {
+    deleteEmployee(id) {
+        const employee = this.empleados.findIndex(c=> c.cedula=== id);
+        localStorage.setItem('Cedula',id);
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(DeleteComponent, {
             data: {}
         });
+        this.empleados.splice(employee,1);
+        
     }
 
     

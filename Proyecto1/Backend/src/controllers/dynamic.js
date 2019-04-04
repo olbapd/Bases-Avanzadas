@@ -131,7 +131,7 @@ let getSp = (req,res) => {
         global.log4us.error('Error on building sp: '+spName);
       }
     }
-
+    console.log(values);
     for(let i =0;i<outputs.length;i++){
       if(typesOut[i]=="int"){
         request.input(outputs[i],sqlserver.Int,null);

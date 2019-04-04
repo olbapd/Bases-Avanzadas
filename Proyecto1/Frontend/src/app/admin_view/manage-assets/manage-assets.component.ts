@@ -42,6 +42,7 @@ export class ManageAssetsComponent implements OnInit {
       categoria3: new FormControl('', Validators.required),
       codigo_modif_state: new FormControl('', Validators.required),
       estado3: new FormControl('', Validators.required),
+      FechaR: new FormControl('', Validators.required)
    });
    this.formModif = new FormGroup({
     categoria3: new FormControl('', Validators.required),
@@ -73,27 +74,33 @@ export class ManageAssetsComponent implements OnInit {
     let vida_util = this.form.get('VidaUtil').value;
     let centro_costo = this.form.get('CentroCosto').value;
     let moneda = this.form.get('Moneda').value;
+    let FechaR = this.form.get('FechaR').value;
 
     // stop here if form is invalid
     if (this.form.invalid) {
+      console.log("SI0");
         return;
     }
     else{
+      console.log("SI1");
       let btn = document.getElementById('registrar_btn');
        //Se debe almacenar la imagen primero
        this.fotoService.uploadFile(this.photo)
        .subscribe((data)=>{
+        console.log("SI2");
            let photoHash = (data && data.hash)? data.hash : null;
            console.log(photoHash);
            this.restApi.getActivoXCodigo(codigo).subscribe((res)=>{
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
             if (json.data[0]==null){
-              this.restApi.setActivo(codigo,nombre,descripcion,photoHash,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,centro_costo,valor_residual,categoria,moneda).subscribe((res)=>{});; 
+              console.log("SI3");
+              this.restApi.setActivo(codigo,nombre,descripcion,photoHash,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,FechaR,centro_costo,valor_residual,categoria,moneda).subscribe((res)=>{});; 
               
             }
       
             else{
+              console.log("SI4");
               //btn.setAttribute('class','btn bnt-danger');
               this.isPopupOpened = true;
               const dialogRef = this.dialog.open(CodeErrorComponent);
@@ -124,24 +131,18 @@ export class ManageAssetsComponent implements OnInit {
         return;
     }
     else{
-      //Se debe almacenar la imagen primero
-      this.fotoService.uploadFile(this.photo)
-      .subscribe((data)=>{
-          let photoHash = (data && data.hash)? data.hash : null;
-          console.log(photoHash);
-            this.restApi.getQuitarActivo(Codigo,IdEstado).subscribe((res)=>{
-              const myObjStr = JSON.stringify(res)
-              const json = JSON.parse(myObjStr);
-              
-               if(json.success==true){
-                 btn.setAttribute('class','btn btn-success');
-                 this.UpdateEstado(Codigo);
-                 window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
-               }
+      this.restApi.getQuitarActivo(Codigo,IdEstado).subscribe((res)=>{
+        const myObjStr = JSON.stringify(res)
+        const json = JSON.parse(myObjStr);
+        
+          if(json.success==true){
+            btn.setAttribute('class','btn btn-success');
+            this.UpdateEstado(Codigo);
+            //window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
+          }
             
     });;
       
-      });
 
     }
 }

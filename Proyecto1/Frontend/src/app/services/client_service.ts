@@ -235,6 +235,17 @@ export class RestApiService {
     
     return this.http.post (this.apiURL+urls.sp_url+'quitarActivo',body).pipe(retry(1),catchError(this.handleError));
   }
+  quitarEmpleado(Cedula){
+    let body={
+              "typesIn":["varchar"],
+              "typesOut":[],
+              "parameters":["Cedula"],
+              "values":[Cedula],
+              "ouputs":[],
+              "name":"desEmpleado"
+            }
+     return this.http.post (this.apiURL+urls.sp_url+'desEmpleado',body).pipe(retry(1),catchError(this.handleError));
+  }
 
   setAssignActivo(Codigo,Cedula,DetalleUbi){
 
@@ -260,24 +271,24 @@ export class RestApiService {
     return this.http.post (this.apiURL+urls.sp_url+'setSede',body).pipe(retry(1),catchError(this.handleError));
 
   }
-  setEmpleado(Nombre,Apellido1,Apellido2,Cedula,FechaN,Correo,Contasena,IdDepartamento,IdPuesto,Foto){
+  setEmpleado(Nombre,Apellido1,Apellido2,Cedula,FechaN,FechaIngreso,Correo,Contrasena,IdDepartamento,IdPuesto,Foto){
     let body={
-              "typesIn":["varchar","varchar","varchar","varchar","date","varchar","varchar","int","int","varchar"],
+              "typesIn":["varchar","varchar","varchar","varchar","date","date","varchar","varchar","int","int","int","varchar"],
               "typesOut":[],
-              "parameters":["Nombre","Apellido1","Apellido2","Cedula","FechaN","Correo","Contasena","IdDepartamento","IdPuesto","Foto"],
-              "values":[Nombre,Apellido1,Apellido2,Cedula,FechaN,Correo,Contasena,IdDepartamento,IdPuesto,Foto],
+              "parameters":["Nombre","Apellido1","Apellido2","Cedula","FechaN","FechaIngreso","Correo","Contrasena","IdDepartamento","IdPuesto","IdSede","Foto"],
+              "values":[Nombre,Apellido1,Apellido2,Cedula,FechaN,FechaIngreso,Correo,Contrasena,IdDepartamento,IdPuesto,1,Foto],
               "ouputs":[],
               "name":"setEmpleado"
             }
      return this.http.post (this.apiURL+urls.sp_url+'setEmpleado',body).pipe(retry(1),catchError(this.handleError));
   }
 
-  setActivo(codigo,nombre,descripcion,foto,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,centro_costo,valor_residual,categoria,moneda) {
+  setActivo(codigo,nombre,descripcion,foto,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,FechaR,centro_costo,valor_residual,categoria,moneda) {
     let body= {
-      "typesIn":["varchar","varchar","varchar","varchar","int","int","int","int","date","int","int","int" ,"int" ,"int"],
+      "typesIn":["varchar","varchar","varchar","varchar","int","int","int","float","date","date","int","int","int" ,"int" ,"int"],
       "typesOut":[],
-      "parameters":["Codigo","Nombre","Descripcion","Foto","Precio","TiempoGar","VidaU","PorcentajeD","FechaCompra","CentroCosto","ValorResidual","IdCategoria","IdMoneda","IdEstado"],
-      "values":[codigo,nombre,descripcion,foto,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,centro_costo,valor_residual,categoria,moneda,4],
+      "parameters":["Codigo","Nombre","Descripcion","Foto","Precio","TiempoGar","VidaU","PorcentajeD","FechaCompra","FechaRegistro","CentroCosto","ValorResidual","IdCategoria","IdMoneda","IdEstado"],
+      "values":[codigo,nombre,descripcion,foto,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,FechaR,centro_costo,valor_residual,categoria,moneda,4],
       "ouputs":[],
       "name":"setActivo"
     }  

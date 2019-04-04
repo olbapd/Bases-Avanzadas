@@ -17,4 +17,10 @@ export class DeleteComponent implements OnInit{
     onNoClick(): void {
         this.dialogRef.close();
        }
+    confirmDelete(){
+     let cedula = localStorage.getItem('Cedula');
+     console.log("sasa"+" "+cedula);
+     this.restApi.quitarEmpleado(cedula).subscribe(res => {      
+    }); 
+ }
 }

@@ -64,7 +64,7 @@ CREATE OR ALTER PROC [dbo].[setActivo]
 	@VidaU int,
 	@PorcentajeD int,
 	@FechaCompra date,
-	@FechaRegistro date,
+	@FechaAsig date,
 	@CentroCosto int,
 	@ValorResidual int,
 	@IdCategoria int,
@@ -79,7 +79,7 @@ BEGIN
 		INSERT INTO Activo (Codigo, Nombre, Descripcion, Foto, Precio, TiempoGarantia, VidaUtil, PorcentajeDepreciacion, FechaCompra,
 		FechaRegistro, FechaAsignacion, CentroCosto, ValorResidual, DetalleUbicacion, IdEmpleado,IdCategoria, IdSede, IdMoneda, IdEstado) 
 		VALUES (@Codigo, @Nombre, @Descripcion, @Foto, @Precio, @TiempoGar, @VidaU, @PorcentajeD, @FechaCompra,
-		@FechaRegistro, NULL, @CentroCosto, @ValorResidual, NULL, NULL,@IdCategoria, NULL, @IdMoneda, @IdEstado) 
+		@FechaAsig, NULL, @CentroCosto, @ValorResidual, NULL, NULL,@IdCategoria, NULL, @IdMoneda, @IdEstado) 
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -104,7 +104,7 @@ CREATE OR ALTER PROC [dbo].[updateActivo]
 	@Precio int,
 	@TiempoGar int,
 	@VidaU int,
-	@PorcentajeD float,
+	@PorcentajeD int,
 	@FechaCompra date,
 	@FechaRegistro date,
 	@CentroCosto int,
@@ -607,18 +607,14 @@ CREATE OR ALTER PROCEDURE [dbo].[setEmpleado]
 	@Apellido2 varchar(25),
 	@Cedula varchar(10),
 	@FechaN date,
-	@FechaIngreso date,
 	@Correo varchar (50),
 	@Contrasena varchar(50),
 	@IdDepartamento int,
 	@IdPuesto int,
-	@IdSede int,
 	@Foto varchar(50)
 	 
 AS
 BEGIN
-DECLARE
-	@IdEmpleado int
 
 	BEGIN TRAN
 	BEGIN TRY
@@ -626,11 +622,6 @@ DECLARE
 		Contrasena, IdDepartamento, IdPuesto, Foto)
 		VALUES (@Nombre, @Apellido1, @Apellido2, @Cedula, @FechaN ,
 		 @Correo, @Contrasena,@IdDepartamento, @IdPuesto, @Foto)
-
-		 SET @IdEmpleado = SCOPE_IDENTITY() 
-
-		 EXEC Contrato @IdSede, @IdEmpleado, @FechaIngreso, NULL
-
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -680,7 +671,7 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[desEmpleado]
-	@IdEmpleado int
+	@Cedula varchar(50)
 	
 AS
 BEGIN
@@ -689,7 +680,7 @@ BEGIN
 	BEGIN TRY
 		UPDATE Empleado SET 
 		[IdEstado] = 2
-		WHERE @IdEmpleado = [Empleado].IdEmpleado
+		WHERE @Cedula = [Empleado].Cedula
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -839,7 +830,7 @@ FROM SedeXEmpleado
 INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
-WHERE @IdSede = [SedeXEmpleado].IdSede
+WHERE @IdSede = [SedeXEmpleado].IdSede AND [Empleado].IdEstado = 1
 
 SET NOCOUNT OFF
 GO
