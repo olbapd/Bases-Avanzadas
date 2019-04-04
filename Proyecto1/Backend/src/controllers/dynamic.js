@@ -52,6 +52,9 @@ let getSp = (req,res) => {
           else if(typesIn[i]=="varchar"){
             request.input(inputs[i],sqlserver.NVarChar,values[i]);
           }
+          else if(typesIn[i]=="float"){
+            request.input(inputs[i],sqlserver.Float,values[i]);
+          }
           else if(typesIn[i]=="date"){
             let yourDate = new Date(values[i]);
             request.input(inputs[i],sqlserver.DateTime,values[i]);
@@ -67,6 +70,9 @@ let getSp = (req,res) => {
           }
           else if(typesOut[i]=="varchar"){
             request.input(outputs[i],sqlserver.NVarChar,null);
+          }
+          else if(typesOut[i]=="float"){
+            request.input(inputs[i],sqlserver.Float);
           }
           else if(typesOut[i]=="date"){
             request.input(outputs[i],sqlserver.DateTime,null);
@@ -123,6 +129,9 @@ let getSp = (req,res) => {
       else if(typesIn[i]=="varchar"){
         request.input(inputs[i],sqlserver.NVarChar,values[i]);
       }
+      else if(typesIn[i]=="float"){
+        request.input(inputs[i],sqlserver.Float,values[i]);
+      }
       else if(typesIn[i]=="date"){
         let yourDate = new Date(values[i]);
         request.input(inputs[i],sqlserver.DateTime,yourDate);
@@ -131,10 +140,12 @@ let getSp = (req,res) => {
         global.log4us.error('Error on building sp: '+spName);
       }
     }
-    console.log(values);
     for(let i =0;i<outputs.length;i++){
       if(typesOut[i]=="int"){
         request.input(outputs[i],sqlserver.Int,null);
+      }
+      else if(typesOut[i]=="float"){
+        request.input(outputs[i],sqlserver.Float);
       }
       else if(typesOut[i]=="varchar"){
         request.input(outputs[i],sqlserver.NVarChar,null);
