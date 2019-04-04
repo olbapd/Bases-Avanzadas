@@ -6,63 +6,74 @@
 
     <!--Card para el Registro de Activos-->
     <div class="col-md-12">
-      <div class="card border-info" style="max-width: 50rem; margin-bottom: 20px">
+      <div class="card border-info" style="max-width: 50rem; margin-bottom:
+        20px">
         <div class="card-body text-center">
           <h5 class="card-title"> Calculo Depreciacion</h5>
           <div class="row text-center">
 
             <h6 class="card-subtitle mb-2 text-muted">Metodo</h6>
             <div class="input-group mb-3">
-              <select class="form-control" #select_metodo data-style="btn-primary" data-live-search="true"
-                data-selectpicker data-collection-name="items" ng-model="selected">
+              <select class="form-control" #select_metodo
+                data-style="btn-primary" data-live-search="true"
+                data-selectpicker data-collection-name="items"
+                ng-model="selected">
                 <option *ngFor="let caltype of calType">{{caltype}}</option>
               </select>
             </div>
 
             <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
             <div class="input-group mb-3">
-              <select class="form-control" #select_categoria data-style="btn-primary" data-live-search="true"
-                data-selectpicker data-collection-name="items" ng-model="selected">
+              <select class="form-control" #select_categoria
+                data-style="btn-primary" data-live-search="true"
+                data-selectpicker data-collection-name="items"
+                ng-model="selected">
                 <option *ngFor="let caltype of calType">{{caltype}}</option>
               </select>
             </div>
 
             <h6 class="card-subtitle mb-2 text-muted">Codigo Activo</h6>
             <div class="input-group mb-3">
-              <input type="text" #txt_cod_activo class="form-control" placeholder="1000000" aria-label="Codigo_Activo"
+              <input type="text" #txt_cod_activo class="form-control"
+                placeholder="1000000" aria-label="Codigo_Activo"
                 aria-describedby="basic-addon1">
             </div>
           </div>
-          <button (click)="calculate(select_metodo.value,select_categoria)" type="button" class="btn btn-primary">Calcular</button>
+          <button (click)="calculate(select_metodo.value,select_categoria)"
+            type="button" class="btn btn-primary">Calcular</button>
         </div>
       </div>
     </div>
 
   </div>
   <div class="col-md-8">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Activo</th>
-          <th scope="col">Codigo</th>
-          <th scope="col">Depreciacion</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let asset of assets">
-          <th scope="row">{{ asset.id }}</th>
-          <td>{{ asset.name }}</td>
-          <td>{{ asset.code}}</td>
-          <td>{{ asset.depreciation}}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="d-flex justify-content-between p-2">
-      <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
-      </ngb-pagination>
-    </div>
+      <form>
+          <div class="form-group form-inline">
+              Full text search: <input class="form-control ml-2" type="text" [formControl]="filter"/>
+          </div>
+        </form>
+        
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Country</th>
+            <th scope="col">Area</th>
+            <th scope="col">Population</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let country of countries$ | async; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
+              <ngb-highlight [result]="country.name" [term]="filter.value"></ngb-highlight>
+            </td>
+            <td><ngb-highlight [result]="country.area | number" [term]="filter.value"></ngb-highlight></td>
+            <td><ngb-highlight [result]="country.population | number" [term]="filter.value"></ngb-highlight></td>
+          </tr>
+          </tbody>
+        </table>
   </div>
 
 

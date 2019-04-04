@@ -5,45 +5,89 @@ import { AdminComponent } from 'src/app/admin_view/admin/admin.component';
 import { RestApiService } from 'src/app/services/client_service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { asset } from './../../interfaces/assets_Structure';
+import { DecimalPipe } from '@angular/common';
+import { FormControl } from '@angular/forms';
+
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+
+interface Country {
+    name: string;
+    flag: string;
+    area: number;
+    population: number;
+}
+
+const COUNTRIES: Country[] = [
+    {
+        name: 'Russia',
+        flag: 'f/f3/Flag_of_Russia.svg',
+        area: 17075200,
+        population: 146989754
+    },
+    {
+        name: 'Canada',
+        flag: 'c/cf/Flag_of_Canada.svg',
+        area: 9976140,
+        population: 36624199
+    },
+    {
+        name: 'United States',
+        flag: 'a/a4/Flag_of_the_United_States.svg',
+        area: 9629091,
+        population: 324459463
+    },
+    {
+        name: 'China',
+        flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
+        area: 9596960,
+        population: 1409517397
+    }
+];
+
+function search(text: string, pipe: PipeTransform): Country[] {
+    return COUNTRIES.filter(country => {
+        const term = text.toLowerCase();
+        return country.name.toLowerCase().includes(term)
+            || pipe.transform(country.area).includes(term)
+            || pipe.transform(country.population).includes(term);
+    });
+}
+
+
+
 
 @Component({
     selector: 'cal-depreciation',
     templateUrl: './depreciation.component.html',
-    styleUrls: ['./depreciation.component.css']
+    styleUrls: ['./depreciation.component.css'],
+    providers: [DecimalPipe]
 
 })
 export class DepreciationComponent implements OnInit {
-    calType=["Lineal","Suma de Digitos"];
+    countries$: Observable<Country[]>;
+    filter = new FormControl('');
+
+    calType = ["Lineal", "Suma de Digitos"];
     categoria;
-    page = 1;
-    pageSize = 4;
-    activos: asset[];
-    collectionSize = this.activos.length;
-    activo: asset;
 
-    get assets(): asset[] {
-        return this.activos
-            .map((country, i) => ({ id: i + 1, ...country }))
-            .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-    }
-    constructor(private modalService: NgbModal, public restApi: RestApiService, private router: Router) {
-    
+    constructor(pipe: DecimalPipe, private modalService: NgbModal, public restApi: RestApiService, private router: Router) {
+        this.countries$ = this.filter.valueChanges.pipe(
+            startWith(''),
+            map(text => search(text, pipe))
+        );
 
-    }
-    public addAsset(asset: asset) {
-        this.activos.push(asset);
-    }
-
-    calculate(metodo,categoria){
 
     }
 
-    
+
+    calculate(metodo, categoria) {
+
+    }
+
+
     ngOnInit() {
-        this.addAsset({ name: 'asda', code: 1212, depreciation: 22 });
 
-
-        console.log(this.activos[0].name); //=> 0:{id: "222", category: "testcat", event_name: "name"}
 
     }
 
