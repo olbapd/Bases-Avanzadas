@@ -171,7 +171,6 @@ export class EmployeeComponent implements OnInit {
                         "fechaIn":json.data[_i].FechaIngreso
                      });
                  }
-                 console.log(this.empleados);
                  
              });
          });
@@ -205,10 +204,14 @@ export class EmployeeComponent implements OnInit {
     }
 
     
-    updateEmployee(id) {
+    updateEmployee(cedula,departamento,puesto) {
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(updateComponent, {
-            data: {}
+            data: {
+                    "Cedula":cedula,    
+                    "Departamento":departamento,
+                    "Puesto":puesto            
+                  }
         });
     }
 
