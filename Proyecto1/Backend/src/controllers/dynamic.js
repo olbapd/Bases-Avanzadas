@@ -97,7 +97,7 @@ let getSp = (req,res) => {
       }
     }  
 }*/
-/*
+
 let getSp = (req,res) => {
      
     if(!sqltool.getPool().connected){
@@ -160,7 +160,7 @@ let getSp = (req,res) => {
         data: recordset.recordset
       });
     });
-}*/
+}
 
 router.post('/*', (req, res) => {
   getSp(req,res);
