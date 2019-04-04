@@ -1,10 +1,10 @@
-<form>
+<form name="form" [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <mat-toolbar class="toolbar">
-      <mat-card-title>Editar Sede</mat-card-title>
+      <mat-card-title>Editar Empleado</mat-card-title>
       <span class="toolbar-spacer"></span>
       <div>
-        <button mat-icon-button color="accent" (click)="onNoClick()">
+        <button mat-icon-button color="accent" class="btn btn-danger" style="margin-left: 560px" (click)="onNoClick()">
           <mat-icon (click)="onNoClick()">cancel</mat-icon>
         </button>
       </div>
@@ -12,58 +12,49 @@
 
     <div class="row">
       <div class="col-md-6">
-
-        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Provincia</h6>
-        <div class="input-group mb-3">
-          <select class="form-control" #select_provincia data-style="btn-primary" data-live-search="true"
-            data-selectpicker data-collection-name="items" ng-model="selected">
-            <option selected>Cartago</option>
-            <option *ngFor="let provin of provincia" [value]="provin.Id">{{provin.Name}}</option>
-          </select>
-        </div>
-
-        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Canton</h6>
-        <div class="input-group mb-3">
-          <select class="form-control" #select_canton data-style="btn-primary" data-live-search="true" data-selectpicker
-            data-collection-name="items" ng-model="selected">
-            <option selected>Cartago?</option>
-            <option *ngFor="let cant of canton" [value]="cant.Id">{{cant.Name}}</option>
-          </select>
-        </div>
-        
-        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Distrito</h6>
-        <div class="input-group mb-3">
-          <select class="form-control" #select_distrito data-style="btn-primary" data-live-search="true"
-            data-selectpicker data-collection-name="items" ng-model="selected">
-            <option selected>CE?</option>
-            <option *ngFor="let dist of distrito" [value]="dist.Id">{{dist.Name}}</option>
-          </select>
-        </div>
-
+      
+      <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Departamento</h6>
+      <div class="form-group">
+          <div class="input-group mb-3">
+              <select class="form-control" id="dep1-Dropdown" name="departamento" formControlName="Departamento"  #select_dep data-style="btn-primary" data-live-search="true"
+                  data-selectpicker data-collection-name="items" ng-model="selected" [ngClass]="{ 'is-invalid': submitted && f.Departamento.errors }">
+                  <option [ngValue]="null">Seleccione un Departamento</option>
+                </select>
+                <div *ngIf="submitted && f.Departamento.errors" class="invalid-feedback">
+                  <div *ngIf="f.Departamento.errors.required">Departamento Requerido</div>
+                </div>
+          </div>
       </div>
-
+      <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Puesto</h6>
+      <div class="form-group">
+        <div class="input-group mb-3">
+            <select class="form-control" id="puesto1-Dropdown" name="puesto"  formControlName="Puesto" #select_puesto data-style="btn-primary" data-live-search="true"
+                data-selectpicker data-collection-name="items" ng-model="selected" [ngClass]="{ 'is-invalid': submitted && f.Puesto.errors }">
+                <option [ngValue]="null">Seleccione un Puesto</option>
+              </select>
+              <div *ngIf="submitted && f.Puesto.errors" class="invalid-feedback">
+                <div *ngIf="f.Puesto.errors.required">Puesto Requerido</div>
+              </div>
+        </div>
+       </div>
+      </div>
       <div class="col-md-6">
+          <div mat-dialog-content>
+              Cedula: {{data.Cedula}}
+              <p></p>
+              Departamento: {{data.Departamento}}
+              <p></p>
+              Puesto: {{data.Puesto}}
+              <p></p>
+          </div>
 
-        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Asignar Administrador</h6>
-        <div class="input-group mb-3">
-          <select class="form-control" #select_employee data-style="btn-primary" data-live-search="true"
-            data-selectpicker data-collection-name="items" ng-model="selected">
-            <option selected>Jeanpol</option>
-            <option *ngFor="let employee of empleado" [value]="employee.Id">{{employee.Name}}
-            </option>
-          </select>
-        </div>
 
-        <h6 class="card-subtitle mb-2 text-muted">Fecha de Ingreso Admin</h6>
-        <div class="input-group mb-3">
-          <input type="date" #txt_fecha_ingreso [(ngModel)]="dateOfBirth" class="form-control" />
-        </div>
 
       </div>
     </div>
   </div>
-  <button mat-icon-button color="accent" class="btn btn-success" (click)="onNoClick()">
-    <mat-icon (click)="onNoClick()">save</mat-icon>
+  <button mat-icon-button color="accent" class="btn btn-success">
+    <mat-icon>save</mat-icon>
   </button>
 
 </form>
