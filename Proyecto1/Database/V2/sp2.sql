@@ -622,6 +622,27 @@ SET NOCOUNT OFF
 GO
 
 -- =============================================
+-- Descripcion:	<Seleccionar informacion de todos los empleados>
+-- Parametro de Entrada: <Ninguno>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+ CREATE OR ALTER   PROC [dbo].[getEmpleados]
+
+AS
+SET NOCOUNT ON
+
+SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
+[Empleado].Cedula,[Empleado].Correo, [SedeXEmpleado].FechaIngreso, [Departamento].Nombre, [Puesto].Nombre
+FROM SedeXEmpleado
+INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
+INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
+INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
+WHERE [Empleado].IdEstado = 1
+
+SET NOCOUNT OFF
+GO
+
+-- =============================================
 -- Descripcion:	<Insertar un Nuevo empleado>
 -- Parametro de Entrada: <NombreEmpleado, Apellido1, Apellido2, Cedula, FechaNacimiento, FechaIngreso, Correo
 --Contrasena, IdSede, IdDepartamento, IdPuesto, Foto>

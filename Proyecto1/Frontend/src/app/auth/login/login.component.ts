@@ -28,8 +28,18 @@ export class LoginComponent implements OnInit {
             
             
             if (json.success==true){
+                console.log("esta:"+" "+myObjStr);
                 localStorage.setItem('IdEmpleado', json.data.IdEmpleado);
-               this.router.navigate(['./admin_view/admin']); //ruta a admin si el login es exitoso
+                localStorage.setItem('IdPuesto',json.data.IdPuesto);
+                if((json.data.IdPuesto)==2){
+                    this.router.navigate(['./admin_view/admin']); //ruta a admin si el login es exitoso
+
+                }
+                else if((json.data.IdPuesto)==7){
+                    this.router.navigate(['./manager_view/admin']); //ruta a admin si el login es exitoso
+
+                }
+               
             }
             else{
                this.isPopupOpened = true;

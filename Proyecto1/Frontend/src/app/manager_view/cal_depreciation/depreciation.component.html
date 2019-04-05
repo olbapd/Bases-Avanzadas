@@ -1,0 +1,82 @@
+<app-admin></app-admin>
+
+
+<div class="row">
+  <div class="col-md-4">
+
+    <!--Card para el Registro de Activos-->
+    <div class="col-md-12">
+      <div class="card border-info" style="max-width: 50rem; margin-bottom:
+        20px">
+        <div class="card-body text-center">
+          <h5 class="card-title"> Calculo Depreciacion</h5>
+          <div class="row text-center">
+
+            <h6 class="card-subtitle mb-2 text-muted">Metodo</h6>
+            <div class="input-group mb-3">
+              <select class="form-control" #select_metodo
+                data-style="btn-primary" data-live-search="true"
+                data-selectpicker data-collection-name="items"
+                ng-model="selected">
+                <option *ngFor="let caltype of calType">{{caltype}}</option>
+              </select>
+            </div>
+
+            <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
+            <div class="input-group mb-3">
+              <select class="form-control" #select_categoria
+                data-style="btn-primary" data-live-search="true"
+                data-selectpicker data-collection-name="items"
+                ng-model="selected">
+                <option *ngFor="let caltype of calType">{{caltype}}</option>
+              </select>
+            </div>
+
+            <h6 class="card-subtitle mb-2 text-muted">Codigo Activo</h6>
+            <div class="input-group mb-3">
+              <input type="text" #txt_cod_activo class="form-control"
+                placeholder="1000000" aria-label="Codigo_Activo"
+                aria-describedby="basic-addon1">
+            </div>
+          </div>
+          <button (click)="calculate(select_metodo.value,select_categoria)"
+            type="button" class="btn btn-primary">Calcular</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-8">
+      <form>
+          <div class="form-group form-inline">
+              Full text search: <input class="form-control ml-2" type="text" [formControl]="filter"/>
+          </div>
+        </form>
+        
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">Codigo</th>
+            <th scope="col">Periodo</th>
+            <th scope="col">Depreciacion Anual</th>
+            <th scope="col">Depreciacion acumulada</th>
+            <th scope="col">Valor neto</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let country of countries$ | async; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
+              <ngb-highlight [result]="country.name" [term]="filter.value"></ngb-highlight>
+            </td>
+            <td><ngb-highlight [result]="country.area | number" [term]="filter.value"></ngb-highlight></td>
+            <td><ngb-highlight [result]="country.population | number" [term]="filter.value"></ngb-highlight></td>
+          </tr>
+          </tbody>
+        </table>
+  </div>
+
+
+
+</div>
