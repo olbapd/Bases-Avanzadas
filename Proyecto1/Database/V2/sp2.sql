@@ -667,7 +667,9 @@ CREATE OR ALTER PROC [dbo].[updateEmpleado]
 	@Contrasena varchar(50),
 	@Foto varchar(50),
 	@IdDepartamento int,
-	@IdPuesto int
+	@IdPuesto int,
+	@IdSede int,
+	@FechaIngreso date
 	
 AS
 BEGIN
@@ -681,6 +683,10 @@ BEGIN
 		[IdPuesto] = @IdPuesto,
 		[Foto] = @Foto
 		WHERE @IdEmpleado = [Empleado].IdEmpleado
+
+
+		EXEC Contrato @IdSede, @IdEmpleado, @FechaIngreso, NULL
+
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
