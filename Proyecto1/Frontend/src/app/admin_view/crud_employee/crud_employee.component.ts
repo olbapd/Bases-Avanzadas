@@ -13,10 +13,11 @@ import { updateComponent } from '../dialogs/update_employee/update-employee.comp
 import { DeleteComponent } from '../dialogs/delete_confirm/delete_confirm.component';
 import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from '@angular/forms';
 import { FotoService } from '../../services/foto.service';
-
 import { FilterPipe } from 'src/app/services/filter.pipe';
-
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {formatDate} from '@angular/common';
+
+
 
 @Component({
     selector: 'crud-employee',
@@ -84,7 +85,6 @@ export class EmployeeComponent implements OnInit {
             FechaN: new FormControl('', Validators.required),
             Departamento: new FormControl('', Validators.required),
             Puesto: new FormControl('', Validators.required),
-            FechaR: new FormControl('', Validators.required),
             Sede: new FormControl('', Validators.required)
 
 
@@ -108,7 +108,6 @@ export class EmployeeComponent implements OnInit {
         let contrasena = this.form.get('Contrasena').value;
         let departamento = this.form.get('Departamento').value;
         let puesto = this.form.get('Puesto').value;
-        let FechaR = this.form.get('FechaR').value;
 
         // stop here if form is invalid
         if (this.form.invalid) {
@@ -125,7 +124,7 @@ export class EmployeeComponent implements OnInit {
                     this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
                         const myObjStr = JSON.stringify(res)
                         const json = JSON.parse(myObjStr);
-                        this.restApi.setEmpleado(nombre, apellido1, apellido2, cedula, FechaN, FechaR, correo, contrasena, departamento, puesto, photoHash, json.data[0].IdSede).subscribe(res => {
+                        this.restApi.setEmpleado(nombre, apellido1, apellido2, cedula, FechaN, correo, contrasena, departamento, puesto, photoHash, json.data[0].IdSede,formatDate(new Date(), 'yyyy-MM-dd', 'en')).subscribe(res => {
 
                         });
                     });
