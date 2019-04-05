@@ -2,98 +2,51 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4" *ngIf="type>0">
+        <div class="col-md-4">
             <div class="card border-info" style="max-width: 50rem; margin-bottom: 20px">
                 <div class="card-body text-center">
                     <h5 class="card-title"> Insertar Sede</h5>
-                    <form>
+                    <form name="form" [formGroup]="form" (ngSubmit)="onSubmit()">
                         <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Nombre</h6>
-                        <div class="input-group mb-3">
-                            <input type="text" #txt_name class="form-control" placeholder="Carlos Alfaro Santos"
-                                aria-label="Descripcion" aria-describedby="basic-addon1">
+                        <div class="form-group">
+                            <input type="text" #txt_name class="form-control" formControlName="Nombre"
+                                [ngClass]="{ 'is-invalid': submitted && f.Nombre.errors }" />
+                            <div *ngIf="submitted && f.Nombre.errors" class="invalid-feedback">
+                                <div *ngIf="f.Nombre.errors.required">Nombre Requerido</div>
+                            </div>
                         </div>
 
-                        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Codigo</h6>
-                        <div class="input-group mb-3">
-                            <input type="text" #txt_code class="form-control" placeholder="090909"
-                                aria-label="Descripcion" aria-describedby="basic-addon1">
+                        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Detalle Ubicacion</h6>
+                        <div class="form-group">
+                            <input type="text" #DetalleUbi class="form-control" formControlName="DetalleUbi"
+                                [ngClass]="{ 'is-invalid': submitted && f.DetalleUbi.errors }" />
+                            <div *ngIf="submitted && f.DetalleUbi.errors" class="invalid-feedback">
+                                <div *ngIf="f.DetalleUbi.errors.required">DetalleUbi Requerido</div>
+                            </div>
                         </div>
 
-                        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Descripcion</h6>
-                        <div class="input-group mb-3">
-                            <input type="text" #txt_description class="form-control" placeholder="xxxxxxx"
-                                aria-label="Descripcion" aria-describedby="basic-addon1">
-                        </div>
-
-                        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Provincia</h6>
-                        <div class="input-group mb-3">
-                            <select id="provincia-Dropdown" name="provincia"class="form-control" #select_provincia data-style="btn-primary"
-                                data-live-search="true" data-selectpicker data-collection-name="items"
-                                ng-model="selected">
-                            </select>
-                        </div>
-
-
-                        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Canton</h6>
-                        <div class="input-group mb-3">
-                            <select class="form-control" #select_canton data-style="btn-primary" data-live-search="true"
-                                data-selectpicker data-collection-name="items" ng-model="selected">
-                                <option selected>Cartago?</option>
-                                <option *ngFor="let cant of canton" [value]="cant.Id">{{cant.Name}}</option>
-                            </select>
-                        </div>
 
                         <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Distrito</h6>
-                        <div class="input-group mb-3">
-                            <select id="distrito-Dropdown" name="distrito"class="form-control" #select_distrito data-style="btn-primary"
-                                data-live-search="true" data-selectpicker data-collection-name="items"
-                                ng-model="selected">
-                            </select>
-                        </div>
-
-                        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Estado</h6>
-                        <div class="input-group mb-3">
-                            <select  id="estadoSede-Dropdown" name="estadoSede" class="form-control" #select_estado data-style="btn-primary" data-live-search="true"
-                                data-selectpicker data-collection-name="items" ng-model="selected">
-                            </select>
-                        </div>
-
-                        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Asignar Administrador</h6>
-                        <div class="input-group mb-3">
-                            <select class="form-control" #select_employee data-style="btn-primary"
-                                data-live-search="true" data-selectpicker data-collection-name="items"
-                                ng-model="selected">
-                                <option selected>Jeanpol</option>
-                                <option *ngFor="let employee of empleado" [value]="employee.Id">{{employee.Name}}
-                                </option>
-                            </select>
-                        </div>
-
-
-                        <div *ngIf="type>0">
-                            <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">NGIF</h6>
+                        <div class="form-group">
                             <div class="input-group mb-3">
-                                <select class="form-control" #select_employee data-style="btn-primary"
+                                <select class="form-control" id="Distrito-Dropdown" name="Distrito"
+                                    formControlName="Distrito" #select_dep data-style="btn-primary"
                                     data-live-search="true" data-selectpicker data-collection-name="items"
-                                    ng-model="selected">
-                                    <option selected>Jeanpol</option>
-                                    <option *ngFor="let employee of empleado" [value]="employee.Id">{{employee.Name}}
-                                    </option>
+                                    ng-model="selected"
+                                    [ngClass]="{ 'is-invalid': submitted && f.Distrito.errors }">
+                                    <option [ngValue]="null">Seleccione un Distrito</option>
                                 </select>
+                                <div *ngIf="submitted && f.Distrito.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Distrito.errors.required">Distrito Requerido</div>
+                                </div>
                             </div>
                         </div>
 
 
 
-                        <h6 class="card-subtitle mb-2 text-muted">Fecha de Ingreso Admin</h6>
-                        <div class="input-group mb-3">
-                            <input type="date" #txt_fecha_ingreso [(ngModel)]="dateOfBirth" class="form-control" />
+                        <div class="form-group">
+                            <button id="insertar_btn" class="btn btn-primary">Insertar</button>
                         </div>
-
-
-                        <button type="button" class="btn btn-primary" (click)="add_sede(txt_name.value,txt_code.value,txt_description.value,select_provincia.value,select_canton.value,
-                        select_distrito.value,select_estado.value,select_employee.value,txt_fecha_ingreso.value)">
-                            Ingresar</button>
 
                     </form>
                 </div>
@@ -101,7 +54,7 @@
         </div>
         <!--TABLA-->
         <div class="col-md-8">
-            <table id ="table_Sede_Table" name="table_Sede" class="table table-striped">
+            <table id="table_Sede_Table" name="table_Sede" class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">#Codigo</th>

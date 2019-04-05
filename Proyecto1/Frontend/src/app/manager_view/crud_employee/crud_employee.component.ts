@@ -96,12 +96,15 @@ export class EmployeeComponent implements OnInit {
         let IdSede = this.form.get('Sede').value;
 
         // stop here if form is invalid
+        let btn = document.getElementById('registrar_btn');
         if (this.form.invalid) {
+            btn.setAttribute('class', 'btn btn-danger');
             return;
         }
         else {
-            let btn = document.getElementById('registrar_btn');
+            
             //Se debe almacenar la imagen primero
+            btn.setAttribute('class', 'btn btn-danger');
             this.fotoService.uploadFile(this.photo)
                 .subscribe((data) => {
                     let photoHash = (data && data.hash) ? data.hash : null;

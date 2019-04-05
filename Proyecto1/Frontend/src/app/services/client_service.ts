@@ -64,6 +64,19 @@ export class RestApiService {
     return this.http.post (this.apiURL+urls.sp_url+'getSedes',body).pipe(retry(1),catchError(this.handleError));
   }
 
+  getAdminSedes() {
+    let body= {
+                "typesIn":[],
+                "typesOut":[],
+                "parameters":[],
+                "values":[],
+                "ouputs":[],
+                "name":"sp_getAdministrators"
+              }
+    ;
+    return this.http.post (this.apiURL+urls.sp_url+'getAdminSedes',body).pipe(retry(1),catchError(this.handleError));
+  }
+
   getSedeXEmpleado(idEmpleado) {
     let body= {
                 "typesIn":["int"],
@@ -311,7 +324,7 @@ export class RestApiService {
 
   setSede(Nombre,Ubicacion,IdDistrito,IdEstado){
     let body={
-                "typesIn":["varchar","varchar","input","input"],
+                "typesIn":["varchar","varchar","int","int"],
                 "typesOut":[],
                 "parameters":["NombreS","Ubicacion","IdDistrito","IdEstado"],
                 "values":[Nombre,Ubicacion,IdDistrito,IdEstado],
