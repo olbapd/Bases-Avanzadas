@@ -406,9 +406,15 @@ CREATE OR ALTER PROC [dbo].[cerrarSede]
 AS
 SET NOCOUNT ON
 
-UPDATE Sede SET 
-		[IdEstado] = 2
-		WHERE @IdSede = [Sede].IdSede
+	UPDATE Sede SET 
+	[IdEstado] = 2
+	WHERE @IdSede = [Sede].IdSede
+
+	UPDATE Empleado 
+	SET [Empleado].IdEstado = 2
+	FROM SedeXEmpleado
+	INNER JOIN Empleado ON SedeXEmpleado.IdEmpleado = Empleado.IdEmpleado
+	WHERE @IdSede = SedeXEmpleado.IdSede
 
 SET NOCOUNT OFF
 GO
@@ -838,22 +844,7 @@ GO
 -- Parametro de Entrada: <IdSede>
 -- Parametro de Salida: <Ninguno>
 -- =============================================
-CREATE OR ALTER PROC [dbo].[getEmpleadoXSede]
-	@IdSede int
-AS
-SET NOCOUNT ON
-
-SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
-[Empleado].Cedula,[Empleado].Correo, [SedeXEmpleado].FechaIngreso, [Departamento].Nombre, [Puesto].Nombre
-FROM SedeXEmpleado
-INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
-INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
-INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
-WHERE @IdSede = [SedeXEmpleado].IdSede AND [Empleado].IdEstado = 1
-
-SET NOCOUNT OFF
-GO
-
+ 
 -- =============================================
 -- Descripcion:	<Seleccionar a un empleado que tiene un activo en especifico>
 -- Parametro de Entrada: <CodigoActivo>
