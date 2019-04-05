@@ -155,13 +155,15 @@ export class ManageAssetsComponent implements OnInit {
         return;
     }
     else{
+      console.log("si1");
       this.restApi.setAssignActivo(Codigo,Cedula,DetalleUbi).subscribe((res)=>{
         const myObjStr = JSON.stringify(res)
         const json = JSON.parse(myObjStr);
         
           if(json.success==true){
+            console.log("si2");
             btn.setAttribute('class','btn btn-success');
-            this.UpdateEstado(Codigo);
+            
           } 
     });;
     }

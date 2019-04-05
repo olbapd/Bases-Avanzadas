@@ -14,54 +14,54 @@
 
                                 <div class="form-group">
                                     <input type="text" #txt_name class="form-control" formControlName="Nombre"
-                                    [ngClass]="{ 'is-invalid': submitted && f.Nombre.errors }"/>
+                                        [ngClass]="{ 'is-invalid': submitted && f.Nombre.errors }" />
                                     <div *ngIf="submitted && f.Nombre.errors" class="invalid-feedback">
-                                      <div *ngIf="f.Nombre.errors.required">Nombre Requerido</div>
+                                        <div *ngIf="f.Nombre.errors.required">Nombre Requerido</div>
                                     </div>
                                 </div>
-                                
+
                                 <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Apellido1</h6>
                                 <div class="form-group">
                                     <input type="text" #txt_apellido1 class="form-control" formControlName="Apellido1"
-                                    [ngClass]="{ 'is-invalid': submitted && f.Apellido1.errors }"/>
+                                        [ngClass]="{ 'is-invalid': submitted && f.Apellido1.errors }" />
                                     <div *ngIf="submitted && f.Apellido1.errors" class="invalid-feedback">
-                                      <div *ngIf="f.Apellido1.errors.required">Apellido1 Requerido</div>
+                                        <div *ngIf="f.Apellido1.errors.required">Apellido1 Requerido</div>
                                     </div>
                                 </div>
 
                                 <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Apellido2</h6>
                                 <div class="form-group">
                                     <input type="text" #txt_apellido2 class="form-control" formControlName="Apellido2"
-                                    [ngClass]="{ 'is-invalid': submitted && f.Apellido2.errors }"/>
+                                        [ngClass]="{ 'is-invalid': submitted && f.Apellido2.errors }" />
                                     <div *ngIf="submitted && f.Apellido2.errors" class="invalid-feedback">
-                                      <div *ngIf="f.Apellido2.errors.required">Apellido2 Requerido</div>
+                                        <div *ngIf="f.Apellido2.errors.required">Apellido2 Requerido</div>
                                     </div>
                                 </div>
 
                                 <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Cédula</h6>
                                 <div class="form-group">
                                     <input type="text" #txt_cedula class="form-control" formControlName="Cedula"
-                                    [ngClass]="{ 'is-invalid': submitted && f.Cedula.errors }"/>
+                                        [ngClass]="{ 'is-invalid': submitted && f.Cedula.errors }" />
                                     <div *ngIf="submitted && f.Cedula.errors" class="invalid-feedback">
-                                      <div *ngIf="f.Cedula.errors.required">Cedula Requerida</div>
+                                        <div *ngIf="f.Cedula.errors.required">Cedula Requerida</div>
                                     </div>
                                 </div>
 
                                 <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Fecha Nacimiento</h6>
                                 <div class="form-group">
                                     <input type="text" #txt_FechaN class="form-control" formControlName="FechaN"
-                                    [ngClass]="{ 'is-invalid': submitted && f.FechaN.errors }"/>
+                                        [ngClass]="{ 'is-invalid': submitted && f.FechaN.errors }" />
                                     <div *ngIf="submitted && f.FechaN.errors" class="invalid-feedback">
-                                      <div *ngIf="f.FechaN.errors.required">Fecha de Nacimiento Requerida</div>
+                                        <div *ngIf="f.FechaN.errors.required">Fecha de Nacimiento Requerida</div>
                                     </div>
                                 </div>
 
                                 <h6 class="card-subtitle mb-2 text-muted">Fecha de Registro</h6>
                                 <div class="form-group">
                                     <input type="text" #txt_vida_util class="form-control" formControlName="FechaR"
-                                    [ngClass]="{ 'is-invalid': submitted && f.FechaR.errors }"/>
+                                        [ngClass]="{ 'is-invalid': submitted && f.FechaR.errors }" />
                                     <div *ngIf="submitted && f.FechaR.errors" class="invalid-feedback">
-                                    <div *ngIf="f.FechaR.errors.required">Fecha de Registro Requerida</div>
+                                        <div *ngIf="f.FechaR.errors.required">Fecha de Registro Requerida</div>
                                     </div>
                                 </div>
                             </div>
@@ -70,72 +70,85 @@
                                 <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Correo</h6>
                                 <div class="form-group">
                                     <input type="text" #txt_correo class="form-control" formControlName="Correo"
-                                    [ngClass]="{ 'is-invalid': submitted && f.Correo.errors }"/>
+                                        [ngClass]="{ 'is-invalid': submitted && f.Correo.errors }" />
                                     <div *ngIf="submitted && f.Correo.errors" class="invalid-feedback">
-                                      <div *ngIf="f.Correo.errors.required">Correo Requerido</div>
+                                        <div *ngIf="f.Correo.errors.required">Correo Requerido</div>
                                     </div>
                                 </div>
 
                                 <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Contraseña</h6>
                                 <div class="form-group">
                                     <input type="text" #txt_contrasena class="form-control" formControlName="Contrasena"
-                                    [ngClass]="{ 'is-invalid': submitted && f.Contrasena.errors }"/>
+                                        [ngClass]="{ 'is-invalid': submitted && f.Contrasena.errors }" />
                                     <div *ngIf="submitted && f.Contrasena.errors" class="invalid-feedback">
-                                      <div *ngIf="f.Contrasena.errors.required">Contraseña Requerida</div>
+                                        <div *ngIf="f.Contrasena.errors.required">Contraseña Requerida</div>
                                     </div>
                                 </div>
+
                                 <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Departamento</h6>
                                 <div class="form-group">
                                     <div class="input-group mb-3">
-                                        <select class="form-control" id="dep-Dropdown" name="departamento" formControlName="Departamento"  #select_dep data-style="btn-primary" data-live-search="true"
-                                            data-selectpicker data-collection-name="items" ng-model="selected" [ngClass]="{ 'is-invalid': submitted && f.Departamento.errors }">
+                                        <select class="form-control" id="dep-Dropdown" name="departamento"
+                                            formControlName="Departamento" #select_dep data-style="btn-primary"
+                                            data-live-search="true" data-selectpicker data-collection-name="items"
+                                            ng-model="selected"
+                                            [ngClass]="{ 'is-invalid': submitted && f.Departamento.errors }">
                                             <option [ngValue]="null">Seleccione un Departamento</option>
-                                          </select>
-                                          <div *ngIf="submitted && f.Departamento.errors" class="invalid-feedback">
+                                        </select>
+                                        <div *ngIf="submitted && f.Departamento.errors" class="invalid-feedback">
                                             <div *ngIf="f.Departamento.errors.required">Departamento Requerido</div>
-                                          </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Puesto</h6>
                                 <div class="form-group">
                                     <div class="input-group mb-3">
-                                        <select class="form-control" id="puesto-Dropdown" name="puesto"  formControlName="Puesto" #select_puesto data-style="btn-primary" data-live-search="true"
-                                            data-selectpicker data-collection-name="items" ng-model="selected" [ngClass]="{ 'is-invalid': submitted && f.Puesto.errors }">
+                                        <select class="form-control" id="puesto-Dropdown" name="puesto"
+                                            formControlName="Puesto" #select_puesto data-style="btn-primary"
+                                            data-live-search="true" data-selectpicker data-collection-name="items"
+                                            ng-model="selected"
+                                            [ngClass]="{ 'is-invalid': submitted && f.Puesto.errors }">
                                             <option [ngValue]="null">Seleccione un Puesto</option>
-                                          </select>
-                                          <div *ngIf="submitted && f.Puesto.errors" class="invalid-feedback">
+                                        </select>
+                                        <div *ngIf="submitted && f.Puesto.errors" class="invalid-feedback">
                                             <div *ngIf="f.Puesto.errors.required">Puesto Requerido</div>
-                                          </div>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Sede</h6>
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                        <select class="form-control" id="Sede-Dropdown" name="Sede"  formControlName="Sede" #select_puesto data-style="btn-primary" data-live-search="true"
-                                            data-selectpicker data-collection-name="items" ng-model="selected" [ngClass]="{ 'is-invalid': submitted && f.Sede.errors }">
-                                            <option [ngValue]="null">Seleccione un Puesto</option>
-                                          </select>
-                                          <div *ngIf="submitted && f.Sede.errors" class="invalid-feedback">
-                                            <div *ngIf="f.Sede.errors.required">Sede Requerida</div>
-                                          </div>
-                                    </div>
-                                </div> -->
 
-                               
-                                    <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
-                                    
-                                    <span class="btn btn-rose btn-round btn-file">
-                                        <input type="file" class="form-control-file" id="exampleFormControlFile1" accept="image/png, image/jpeg, image/jpg, image/PNG, image/bmp"
-                                        (change)="onPhotoChange($event)" name="photo"> 
-                                        
-                                    </span>
-                                
+                                <div class="form-group" *ngIf="type>0">
+                                    <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Sede</h6>
+                                    <div class="input-group mb-3">
+                                        <select class="form-control" id="SedeDropdown" name="Sede"
+                                            formControlName="Sede" #select_puesto data-style="btn-primary"
+                                            data-live-search="true" data-selectpicker data-collection-name="items"
+                                            ng-model="selected"
+                                            [ngClass]="{ 'is-invalid': submitted && f.Sede.errors }">
+                                            <option [ngValue]="null">Seleccione una Sede</option>
+                                        </select>
+                                        <div *ngIf="submitted && f.Sede.errors" class="invalid-feedback">
+                                            <div *ngIf="f.Sede.errors.required">Sede Requerida</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
+
+                                <span class="btn btn-rose btn-round btn-file">
+                                    <input type="file" class="form-control-file" id="exampleFormControlFile1"
+                                        accept="image/png, image/jpeg, image/jpg, image/PNG, image/bmp"
+                                        (change)="onPhotoChange($event)" name="photo">
+
+                                </span>
+
                             </div>
                         </div>
-                    
+
                         <div class="form-group">
-                            <button id="registrar_btn" class="btn btn-primary" >Registrar</button>
+                            <button id="registrar_btn" class="btn btn-primary">Registrar</button>
                         </div>
                     </form>
                 </div>
@@ -145,7 +158,7 @@
         </div>
         <!--TABLA-->
         <div class="col-md-8">
-            <table id ="table_empleado_Table" name="table_empleado" class="table table-striped">
+            <table id="table_empleado_Table" name="table_empleado" class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Cedula</th>
@@ -169,12 +182,13 @@
                         <td>{{ employee.fechaIn}}</td>
                         <td>{{ employee.correo}}</td>
                         <td>
-                            <button mat-icon-button color="accent" class='btn btn-danger' (click)="updateEmployee(employee.cedula,employee.departamento,employee.puesto)">
+                            <button mat-icon-button color="accent" class='btn btn-danger'
+                                (click)="updateEmployee(employee.cedula,employee.departamento,employee.puesto,employee.correo)">
                                 <mat-icon aria-label="Edit">edit</mat-icon>
                             </button> </td>
                         <td>
                             <button mat-icon-button color="accent" class='btn btn-danger' (click)="deleteEmployee(employee.cedula,employee.apellido1,employee
-                            .apellido2,employee.nombre)" >
+                            .apellido2,employee.nombre)">
                                 <mat-icon aria-label="Edit">delete</mat-icon>
                             </button> </td>
 

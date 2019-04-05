@@ -30,7 +30,7 @@ export class EmployeeComponent implements OnInit {
     puestos: jobs[];
     departamento: department[];
     selectedFile: File = null;
-    type = 0;
+    type = 1;
     page = 1;
     pageSize = 4;
     empleados: Empleado[]=[];//debe de inicializarse de lo contrario muestra vacio
@@ -77,12 +77,16 @@ export class EmployeeComponent implements OnInit {
            Departamento: new FormControl('', Validators.required),
            Puesto: new FormControl('', Validators.required),
            FechaR: new FormControl('', Validators.required),
+           Sede: new FormControl('', Validators.required)
 
 
         });
        this.Remployees();
        this.dep_DropDown();
        this.puesto_DropDown();
+        this.sedes_DropDown();
+       
+       
     }
     
     onSubmit() {
@@ -115,6 +119,21 @@ export class EmployeeComponent implements OnInit {
         });
 
         }
+    }
+    sedes_DropDown(){
+        let option;
+        let dropdowndep = document.getElementById('SedeDropdown');
+        this.restApi.getSedes().subscribe((res)=>{
+        const myObjStr = JSON.stringify(res)
+        const json = JSON.parse(myObjStr);
+        var count = Object.keys(json.data).length;
+        for (var _i = 0; _i < count; _i++) {
+            option = document.createElement('option');
+            option.text = json.data[_i].Nombre;
+            option.value = json.data[_i].IdSede;
+            dropdowndep.append(option);
+        } 
+    });
     }
   
     dep_DropDown(){
@@ -178,18 +197,6 @@ export class EmployeeComponent implements OnInit {
          });
         
     }
-    onFileSelected(event) {
-        this.selectedFile = <File>event.target.files[0];
-    }
-
-    onUpload() {
-        const fd = new FormData();
-        fd.append('image', this.selectedFile, this.selectedFile.name);
-        this.http.post('http://localhost:300', fd).subscribe(res => {
-            console.log(res);
-        });
-
-    }
     
     deleteEmployee(id,apellido1,apellido2,nombre) {
         let empl
@@ -215,13 +222,14 @@ export class EmployeeComponent implements OnInit {
     }
 
     
-    updateEmployee(cedula,departamento,puesto) {
+    updateEmployee(cedula,departamento,puesto,correo) {
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(updateComponent, {
             data: {
                     "Cedula":cedula,    
                     "Departamento":departamento,
-                    "Puesto":puesto            
+                    "Puesto":puesto,
+                    "Correo":correo       
                   }
         });
     }

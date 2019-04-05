@@ -12,41 +12,97 @@
 
     <div class="row">
       <div class="col-md-6">
-      
-      <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Departamento</h6>
-      <div class="form-group">
+
+        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Departamento</h6>
+        <div class="form-group">
           <div class="input-group mb-3">
-              <select class="form-control" id="dep1-Dropdown" name="departamento" formControlName="Departamento"  #select_dep data-style="btn-primary" data-live-search="true"
-                  data-selectpicker data-collection-name="items" ng-model="selected" [ngClass]="{ 'is-invalid': submitted && f.Departamento.errors }">
-                  <option [ngValue]="null">Seleccione un Departamento</option>
-                </select>
-                <div *ngIf="submitted && f.Departamento.errors" class="invalid-feedback">
-                  <div *ngIf="f.Departamento.errors.required">Departamento Requerido</div>
-                </div>
+            <select class="form-control" id="dep1-Dropdown" name="departamento" formControlName="Departamento"
+              #select_dep data-style="btn-primary" data-live-search="true" data-selectpicker
+              data-collection-name="items" ng-model="selected"
+              [ngClass]="{ 'is-invalid': submitted && f.Departamento.errors }">
+              <option [ngValue]="null">Seleccione un Departamento</option>
+            </select>
+            <div *ngIf="submitted && f.Departamento.errors" class="invalid-feedback">
+              <div *ngIf="f.Departamento.errors.required">Departamento Requerido</div>
+            </div>
           </div>
-      </div>
-      <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Puesto</h6>
-      <div class="form-group">
-        <div class="input-group mb-3">
-            <select class="form-control" id="puesto1-Dropdown" name="puesto"  formControlName="Puesto" #select_puesto data-style="btn-primary" data-live-search="true"
-                data-selectpicker data-collection-name="items" ng-model="selected" [ngClass]="{ 'is-invalid': submitted && f.Puesto.errors }">
-                <option [ngValue]="null">Seleccione un Puesto</option>
-              </select>
-              <div *ngIf="submitted && f.Puesto.errors" class="invalid-feedback">
-                <div *ngIf="f.Puesto.errors.required">Puesto Requerido</div>
-              </div>
         </div>
-       </div>
-      </div>
-      <div class="col-md-6">
-          <div mat-dialog-content>
-              Cedula: {{data.Cedula}}
-              <p></p>
-              Departamento: {{data.Departamento}}
-              <p></p>
-              Puesto: {{data.Puesto}}
-              <p></p>
+        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Puesto</h6>
+        <div class="form-group">
+          <div class="input-group mb-3">
+            <select class="form-control" id="puesto1-Dropdown" name="puesto" formControlName="Puesto" #select_puesto
+              data-style="btn-primary" data-live-search="true" data-selectpicker data-collection-name="items"
+              ng-model="selected" [ngClass]="{ 'is-invalid': submitted && f.Puesto.errors }">
+              <option [ngValue]="null">Seleccione un Puesto</option>
+            </select>
+            <div *ngIf="submitted && f.Puesto.errors" class="invalid-feedback">
+              <div *ngIf="f.Puesto.errors.required">Puesto Requerido</div>
+            </div>
           </div>
+        </div>
+
+        <!--  <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Sede</h6>
+        <div class="form-group">
+          <div class="input-group mb-3">
+            <select class="form-control" id="sedes-Dropdown" name="sedes" formControlName="Sede" #select_puesto
+              data-style="btn-primary" data-live-search="true" data-selectpicker data-collection-name="items"
+              ng-model="selected" [ngClass]="{ 'is-invalid': submitted && f.Sede.errors }">
+              <option [ngValue]="null">Seleccione una Sede</option>
+            </select>
+            <div *ngIf="submitted && f.Sede.errors" class="invalid-feedback">
+              <div *ngIf="f.Sede.errors.required">Sede Requerida</div>
+            </div>
+          </div>
+        </div> -->
+        <h6 class="card-subtitle mb-2 text-muted">Fecha de Registro</h6>
+        <div class="form-group">
+          <input type="text" #txt_vida_util class="form-control" formControlName="FechaR"
+            [ngClass]="{ 'is-invalid': submitted && f.FechaR.errors }" />
+          <div *ngIf="submitted && f.FechaR.errors" class="invalid-feedback">
+            <div *ngIf="f.FechaR.errors.required">Fecha de Registro Requerida</div>
+          </div>
+        </div>
+
+        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Correo</h6>
+        <div class="form-group">
+          <input type="text" #txt_correo class="form-control" formControlName="CorreoP"
+            [ngClass]="{ 'is-invalid': submitted && f.CorreoP.errors }" />
+          <div *ngIf="submitted && f.CorreoP.errors" class="invalid-feedback">
+            <div *ngIf="f.CorreoP.errors.required">Correo Requerido</div>
+          </div>
+        </div>
+
+        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Contraseña</h6>
+        <div class="form-group">
+          <input type="text" #txt_contrasena class="form-control" formControlName="ContrasenaP"
+            [ngClass]="{ 'is-invalid': submitted && f.ContrasenaP.errors }" />
+          <div *ngIf="submitted && f.ContrasenaP.errors" class="invalid-feedback">
+            <div *ngIf="f.ContrasenaP.errors.required">Contraseña Requerida</div>
+          </div>
+        </div>
+
+        <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
+        <span class="btn btn-rose btn-round btn-file">
+          <input type="file" class="form-control-file" id="exampleFormControlFile1"
+            accept="image/png, image/jpeg, image/jpg, image/PNG, image/bmp" (change)="onPhotoChange($event)"
+            name="photo">
+
+        </span>
+      </div>
+
+
+      <div class="col-md-6">
+        <h5 class="card-title">Información Actual:</h5>
+        <div mat-dialog-content>
+          Cedula: {{data.Cedula}}
+          <p></p>
+          Departamento: {{data.Departamento}}
+          <p></p>
+          Puesto: {{data.Puesto}}
+          <p></p>
+          Correo: {{data.Correo}}
+          <p></p>
+        </div>
 
 
 

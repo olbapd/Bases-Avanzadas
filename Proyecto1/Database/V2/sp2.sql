@@ -662,7 +662,7 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[updateEmpleado]
-	@IdEmpleado int,
+	@Cedula varchar(50),
 	@Correo varchar(50),
 	@Contrasena varchar(50),
 	@Foto varchar(50),
@@ -682,10 +682,10 @@ BEGIN
 		[IdDepartamento] = @IdDepartamento,
 		[IdPuesto] = @IdPuesto,
 		[Foto] = @Foto
-		WHERE @IdEmpleado = [Empleado].IdEmpleado
+		WHERE @Cedula = [Empleado].Cedula
 
 
-		EXEC Contrato @IdSede, @IdEmpleado, @FechaIngreso, NULL
+		EXEC Contrato @IdSede, @Cedula, @FechaIngreso, NULL
 
 		COMMIT TRANSACTION
 	END TRY
