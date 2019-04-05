@@ -84,3 +84,36 @@ FROM Activo
 WHERE @IdCategoria = [Activo].IdCategoria
 
 GO
+
+
+GO
+CREATE OR ALTER PROC [dbo].[sp_getActivoByCategory]
+	@IdCategoria int,
+	@IdSede int
+AS
+
+SELECT	[Activo].Codigo,
+		[Activo].Nombre,
+		[Activo].Descripcion
+
+	FROM Activo
+	
+	WHERE [IdCategoria] = @IdCategoria AND @IdSede = Activo.IdSede
+GO
+
+GO
+CREATE OR ALTER   PROC [dbo].[sp_getActivoLi]
+	@IdEstado int,
+	@IdCategoria int,
+	@IdSede int
+AS
+SELECT  [Activo].Codigo,
+		[Activo].IdEmpleado,
+		[Activo].FechaAsignacion,
+		[Activo].DetalleUbicacion
+	
+	FROM Activo
+	
+	WHERE [IdEstado] = @IdEstado AND [IdCategoria] =@IdCategoria AND Activo.IdSede = @IdSede
+
+GO
