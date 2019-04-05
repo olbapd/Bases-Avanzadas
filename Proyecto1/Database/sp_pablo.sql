@@ -83,6 +83,27 @@ WHERE @IdCategoria = [Activo].IdCategoria
 
 GO
 
+
+GO
+CREATE OR ALTER   PROC [dbo].[sp_calculosBySede]
+	@IdCategoria int,
+	@IdSede int
+
+AS
+
+SELECT [Activo].Codigo,
+	   [Activo].PorcentajeDepreciacion,
+	   [Activo].Precio,
+	   YEAR([Activo].FechaCompra) AS Anho,
+	   [Activo].ValorResidual,
+	   [Activo].CentroCosto
+
+FROM Activo
+
+WHERE @IdCategoria = [Activo].IdCategoria AND @IdSede = [Activo].IdSede
+
+GO
+
 GO
 CREATE OR ALTER PROC [dbo].[sp_getActivoByCategory]
 	@IdCategoria int,
@@ -130,7 +151,7 @@ GO
 
 GO
 CREATE OR ALTER   PROC [dbo].[sp_getAdministrators]
-	@IdSede int
+	
 AS
 
 SELECT 
@@ -156,5 +177,5 @@ INNER JOIN
 	Provincia ON Canton.IdProvincia = Provincia.IdProvincia
 
 WHERE 
-	[Empleado].IdPuesto=2 AND [Empleado].IdEstado = 1 AND SedeXEmpleado.FechaSalida=NULL
+	[Empleado].IdPuesto=2 AND [Empleado].IdEstado = 1 
 GO
