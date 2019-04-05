@@ -11,20 +11,27 @@ import { AppRoutes } from './app.routing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import * as $ from 'jquery';
 import {MatDialogModule} from '@angular/material/dialog';
+import { HomeEmployeeComponent } from './employeeHome.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeEmployeeComponent
   ],
   imports: [
     
     BrowserAnimationsModule,
     CommonModule,
     FormsModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot(AppRoutes),
     HttpModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

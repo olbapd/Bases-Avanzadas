@@ -20,9 +20,11 @@
     "mssql": "^5.0.3",
     "nodemailer": "^5.1.1",
     "nodemailer-smtp-transport": "^2.7.4",
-    "nodemon": "^1.18.10",
     "path": "^0.12.7",
     "randomstring": "^1.1.5",
     "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
   }
 }
