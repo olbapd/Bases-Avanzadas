@@ -55,15 +55,6 @@
                                         <div *ngIf="f.FechaN.errors.required">Fecha de Nacimiento Requerida</div>
                                     </div>
                                 </div>
-
-                                <h6 class="card-subtitle mb-2 text-muted">Fecha de Registro</h6>
-                                <div class="form-group">
-                                    <input type="text" #txt_vida_util class="form-control" formControlName="FechaR"
-                                        [ngClass]="{ 'is-invalid': submitted && f.FechaR.errors }" />
-                                    <div *ngIf="submitted && f.FechaR.errors" class="invalid-feedback">
-                                        <div *ngIf="f.FechaR.errors.required">Fecha de Registro Requerida</div>
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="col-md-6">

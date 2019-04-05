@@ -13,10 +13,9 @@ import { updateComponent } from '../dialogs/update_employee/update-employee.comp
 import { DeleteComponent } from '../dialogs/delete_confirm/delete_confirm.component';
 import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from '@angular/forms';
 import { FotoService } from '../../services/foto.service';
-
 import { FilterPipe } from 'src/app/services/filter.pipe';
-
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {formatDate} from '@angular/common';
 
 @Component({
     selector: 'crud-employee',
@@ -70,7 +69,6 @@ export class EmployeeComponent implements OnInit {
             FechaN: new FormControl('', Validators.required),
             Departamento: new FormControl('', Validators.required),
             Puesto: new FormControl('', Validators.required),
-            FechaR: new FormControl('', Validators.required),
             Sede: new FormControl('', Validators.required)
 
 
@@ -95,22 +93,24 @@ export class EmployeeComponent implements OnInit {
         let contrasena = this.form.get('Contrasena').value;
         let departamento = this.form.get('Departamento').value;
         let puesto = this.form.get('Puesto').value;
-        let FechaR = this.form.get('FechaR').value;
         let IdSede = this.form.get('Sede').value;
 
         // stop here if form is invalid
+        let btn = document.getElementById('registrar_btn');
         if (this.form.invalid) {
+            btn.setAttribute('class', 'btn btn-danger');
             return;
         }
         else {
-            let btn = document.getElementById('registrar_btn');
+            
             //Se debe almacenar la imagen primero
+            btn.setAttribute('class', 'btn btn-danger');
             this.fotoService.uploadFile(this.photo)
                 .subscribe((data) => {
                     let photoHash = (data && data.hash) ? data.hash : null;
                     console.log(photoHash);
-                    this.restApi.setEmpleado(nombre, apellido1, apellido2, cedula, FechaN, FechaR, correo, contrasena, departamento, puesto, photoHash,IdSede).subscribe(res => {
-
+                    this.restApi.setEmpleado(nombre, apellido1, apellido2, cedula, FechaN,correo, contrasena, departamento, puesto, photoHash,IdSede,formatDate(new Date(), 'yyyy-MM-dd', 'en')).subscribe(res => {
+                        window.location.reload();
                     });
                 });
 
