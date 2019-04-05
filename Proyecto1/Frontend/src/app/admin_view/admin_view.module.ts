@@ -22,7 +22,6 @@ import { FotoService } from '../services/foto.service';
 
 import {DataTableModule} from "angular2-datatable";
 import { Observable, of } from 'rxjs'; // only need to import from rxjs
-import { FilterPipe } from '../services/filter.pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
@@ -51,8 +50,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     updateComponent,
     DeleteComponent,
     UpdateSedeComponent,
-    CodeErrorComponent,
-    FilterPipe
+    CodeErrorComponent
 
 
   ],

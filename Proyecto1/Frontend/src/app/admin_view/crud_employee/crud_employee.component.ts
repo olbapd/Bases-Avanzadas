@@ -37,20 +37,8 @@ export class EmployeeComponent implements OnInit {
     type = 1;
     page = 1;
     pageSize = 4;
-    empleados: Empleado[]=[];//debe de inicializarse de lo contrario muestra vacio
-/* 
-    categoria;
-    page = 1;
-    pageSize = 4;
-    activos: asset[] = [{
-        name: "as",
-        code: 123,
-        depreciation: 123
-    }
-    ];
-    collectionSize = this.activos.length;
-    activo: asset;
-    empleado: Empleado; */
+    empleados: Empleado[] = [];//debe de inicializarse de lo contrario muestra vacio
+    collectionSize: number = 0;
     form: FormGroup;
     constructor(private fb: FormBuilder,
         private modalService: NgbModal,
@@ -59,40 +47,40 @@ export class EmployeeComponent implements OnInit {
         private http: HttpClient,
         private dialog: MatDialog,
         private fotoService: FotoService) {
-        this.photo="";
+        this.photo = "";
 
     }
     get employees(): Empleado[] { //BIND TABLE
-        
+
         return this.empleados
-        .map((empleados, i) => ({ id: i + 1, ...empleados}))
-        .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+            .map((empleados, i) => ({ id: i + 1, ...empleados }))
+            .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
     }
     get f() { return this.form.controls; }
     ngOnInit() {
         this.form = new FormGroup({
-           Nombre: new FormControl('', Validators.required),
-           Apellido1: new FormControl('', Validators.required),
-           Apellido2: new FormControl('', Validators.required),
-           Cedula: new FormControl('', Validators.required),
-           Correo: new FormControl('', [Validators.required, Validators.email]),
-           Contrasena: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(10)]),
-           FechaN: new FormControl('', Validators.required),
-           Departamento: new FormControl('', Validators.required),
-           Puesto: new FormControl('', Validators.required),
-           FechaR: new FormControl('', Validators.required),
-           Sede: new FormControl('', Validators.required)
+            Nombre: new FormControl('', Validators.required),
+            Apellido1: new FormControl('', Validators.required),
+            Apellido2: new FormControl('', Validators.required),
+            Cedula: new FormControl('', Validators.required),
+            Correo: new FormControl('', [Validators.required, Validators.email]),
+            Contrasena: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(10)]),
+            FechaN: new FormControl('', Validators.required),
+            Departamento: new FormControl('', Validators.required),
+            Puesto: new FormControl('', Validators.required),
+            FechaR: new FormControl('', Validators.required),
+            Sede: new FormControl('', Validators.required)
 
 
         });
-       this.Remployees();
-       this.dep_DropDown();
-       this.puesto_DropDown();
+        this.Remployees();
+        this.dep_DropDown();
+        this.puesto_DropDown();
         this.sedes_DropDown();
-       
-       
+
+
     }
-    
+
     onSubmit() {
         this.submitted = true;
         let nombre = this.form.get('Nombre').value;
@@ -110,135 +98,141 @@ export class EmployeeComponent implements OnInit {
         if (this.form.invalid) {
             return;
         }
-        else{
-        let btn = document.getElementById('registrar_btn');
-        //Se debe almacenar la imagen primero
-        this.fotoService.uploadFile(this.photo)
-        .subscribe((data)=>{
-            let photoHash = (data && data.hash)? data.hash : null;
-            console.log(photoHash);
-                this.restApi.setEmpleado(nombre,apellido1,apellido2,cedula,FechaN,FechaR,correo,contrasena,departamento,puesto,photoHash).subscribe(res => {
-                    
-                    });  
-        });
+        else {
+            let btn = document.getElementById('registrar_btn');
+            //Se debe almacenar la imagen primero
+            this.fotoService.uploadFile(this.photo)
+                .subscribe((data) => {
+                    let photoHash = (data && data.hash) ? data.hash : null;
+                    console.log(photoHash);
+                    let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
+                    this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
+                        const myObjStr = JSON.stringify(res)
+                        const json = JSON.parse(myObjStr);
+                        this.restApi.setEmpleado(nombre, apellido1, apellido2, cedula, FechaN, FechaR, correo, contrasena, departamento, puesto, photoHash, json.data[0].IdSede).subscribe(res => {
 
+                        });
+                    });
+                });
         }
     }
-    sedes_DropDown(){
+
+    sedes_DropDown() {
         let option;
         let dropdowndep = document.getElementById('SedeDropdown');
-        this.restApi.getSedes().subscribe((res)=>{
-        const myObjStr = JSON.stringify(res)
-        const json = JSON.parse(myObjStr);
-        var count = Object.keys(json.data).length;
-        for (var _i = 0; _i < count; _i++) {
-            option = document.createElement('option');
-            option.text = json.data[_i].Nombre;
-            option.value = json.data[_i].IdSede;
-            dropdowndep.append(option);
-        } 
-    });
-    }
-  
-    dep_DropDown(){
-        let option;
-        let dropdowndep = document.getElementById('dep-Dropdown');
-        this.restApi.getDepartamento().subscribe((res)=>{
-        const myObjStr = JSON.stringify(res)
-        const json = JSON.parse(myObjStr);
-        var count = Object.keys(json.data).length;
-        for (var _i = 0; _i < count; _i++) {
-            option = document.createElement('option');
-            option.text = json.data[_i].Nombre;
-            option.value = json.data[_i].IdDepartamento;
-            dropdowndep.append(option);
-        } 
-    });
-    }
-
-    puesto_DropDown(){
-        let option;
-        let dropdowndep = document.getElementById('puesto-Dropdown');
-        this.restApi.getPuesto().subscribe((res)=>{
-        const myObjStr = JSON.stringify(res)
-        const json = JSON.parse(myObjStr);
-        var count = Object.keys(json.data).length;
-        for (var _i = 0; _i < count; _i++) {
-            option = document.createElement('option');
-            option.text = json.data[_i].Nombre;
-            option.value = json.data[_i].IdPuesto;
-            dropdowndep.append(option);
-        } 
-    });
-    }
-
-    Remployees(){
-        let idEmpleado:number=parseInt(localStorage.getItem('IdEmpleado'));
-        this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res)=>{
+        this.restApi.getSedes().subscribe((res) => {
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
-            const idSede=json.data[0].IdSede;
-            
-            this.restApi.getEmpleadosXSede(idSede).subscribe((res)=>{
+            var count = Object.keys(json.data).length;
+            for (var _i = 0; _i < count; _i++) {
+                option = document.createElement('option');
+                option.text = json.data[_i].Nombre;
+                option.value = json.data[_i].IdSede;
+                dropdowndep.append(option);
+            }
+        });
+    }
+
+    dep_DropDown() {
+        let option;
+        let dropdowndep = document.getElementById('dep-Dropdown');
+        this.restApi.getDepartamento().subscribe((res) => {
+            const myObjStr = JSON.stringify(res)
+            const json = JSON.parse(myObjStr);
+            var count = Object.keys(json.data).length;
+            for (var _i = 0; _i < count; _i++) {
+                option = document.createElement('option');
+                option.text = json.data[_i].Nombre;
+                option.value = json.data[_i].IdDepartamento;
+                dropdowndep.append(option);
+            }
+        });
+    }
+
+    puesto_DropDown() {
+        let option;
+        let dropdowndep = document.getElementById('puesto-Dropdown');
+        this.restApi.getPuesto().subscribe((res) => {
+            const myObjStr = JSON.stringify(res)
+            const json = JSON.parse(myObjStr);
+            var count = Object.keys(json.data).length;
+            for (var _i = 0; _i < count; _i++) {
+                option = document.createElement('option');
+                option.text = json.data[_i].Nombre;
+                option.value = json.data[_i].IdPuesto;
+                dropdowndep.append(option);
+            }
+        });
+    }
+
+    Remployees() {
+        let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
+        this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
+            const myObjStr = JSON.stringify(res)
+            const json = JSON.parse(myObjStr);
+            const idSede = json.data[0].IdSede;
+
+            this.restApi.getEmpleadosXSede(idSede).subscribe((res) => {
                 const myObjStr = JSON.stringify(res)
                 const json = JSON.parse(myObjStr);
                 var count = Object.keys(json.data).length;
+                this.collectionSize = count;
                 for (var _i = 0; _i < count; _i++) {
                     this.empleados.push({
-                        "cedula":json.data[_i].Cedula,
-                        "apellido1":json.data[_i].Apellido1,
-                        "apellido2":json.data[_i].Apellido2,
-                        "nombre":json.data[_i].Nombre[0],
-                        "departamento":json.data[_i].Nombre[1],
-                        "puesto":json.data[_i].Nombre[2],
-                        "fechaIn":json.data[_i].FechaIngreso,
-                        "correo":json.data[_i].Correo
-                
-                     });
-                 }
-                 
-             });
-         });
-        
+                        "cedula": json.data[_i].Cedula,
+                        "apellido1": json.data[_i].Apellido1,
+                        "apellido2": json.data[_i].Apellido2,
+                        "nombre": json.data[_i].Nombre[0],
+                        "departamento": json.data[_i].Nombre[1],
+                        "puesto": json.data[_i].Nombre[2],
+                        "fechaIn": json.data[_i].FechaIngreso,
+                        "correo": json.data[_i].Correo
+
+                    });
+                }
+
+            });
+        });
+
     }
-    
-    deleteEmployee(id,apellido1,apellido2,nombre) {
+
+    deleteEmployee(id, apellido1, apellido2, nombre) {
         let empl
-        localStorage.setItem('Cedula',id);
+        localStorage.setItem('Cedula', id);
         this.isPopupOpened = true;
-        const employee = this.empleados.findIndex(c=> c.cedula=== id);
-        
+        const employee = this.empleados.findIndex(c => c.cedula === id);
+
         const dialogRef = this.dialog.open(DeleteComponent, {
-            data: { 
-                    "cedula":id,
-                    "apellido1":apellido1,
-                    "apellido2":apellido2,
-                    "nombre":nombre
-                  }
-        }).afterClosed().subscribe(response=>{
-            if(response.data=="true"){
+            data: {
+                "cedula": id,
+                "apellido1": apellido1,
+                "apellido2": apellido2,
+                "nombre": nombre
+            }
+        }).afterClosed().subscribe(response => {
+            if (response.data == "true") {
                 console.log("entro");
-                this.empleados.splice(employee,1);
+                this.empleados.splice(employee, 1);
             }
 
-    });
-        
+        });
+
     }
 
-    
-    updateEmployee(cedula,departamento,puesto,correo) {
+
+    updateEmployee(cedula, departamento, puesto, correo) {
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(updateComponent, {
             data: {
-                    "Cedula":cedula,    
-                    "Departamento":departamento,
-                    "Puesto":puesto,
-                    "Correo":correo       
-                  }
+                "Cedula": cedula,
+                "Departamento": departamento,
+                "Puesto": puesto,
+                "Correo": correo
+            }
         });
     }
 
-    onPhotoChange(event){
+    onPhotoChange(event) {
         this.photo = event.target.files[0];
 
         //this.pictures[idNumber-1].name = photoName;

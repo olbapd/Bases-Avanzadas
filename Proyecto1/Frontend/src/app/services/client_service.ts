@@ -283,12 +283,12 @@ export class RestApiService {
     return this.http.post (this.apiURL+urls.sp_url+'setSede',body).pipe(retry(1),catchError(this.handleError));
 
   }
-  setEmpleado(Nombre,Apellido1,Apellido2,Cedula,FechaN,FechaIngreso,Correo,Contrasena,IdDepartamento,IdPuesto,Foto){
+  setEmpleado(Nombre,Apellido1,Apellido2,Cedula,FechaN,FechaIngreso,Correo,Contrasena,IdDepartamento,IdPuesto,Foto,IdSede){
     let body={
               "typesIn":["varchar","varchar","varchar","varchar","date","date","varchar","varchar","int","int","int","varchar"],
               "typesOut":[],
               "parameters":["Nombre","Apellido1","Apellido2","Cedula","FechaN","FechaIngreso","Correo","Contrasena","IdDepartamento","IdPuesto","IdSede","Foto"],
-              "values":[Nombre,Apellido1,Apellido2,Cedula,FechaN,FechaIngreso,Correo,Contrasena,IdDepartamento,IdPuesto,1,Foto],
+              "values":[Nombre,Apellido1,Apellido2,Cedula,FechaN,FechaIngreso,Correo,Contrasena,IdDepartamento,IdPuesto,IdSede,Foto],
               "ouputs":[],
               "name":"setEmpleado"
             }
