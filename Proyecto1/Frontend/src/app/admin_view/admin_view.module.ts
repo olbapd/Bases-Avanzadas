@@ -23,6 +23,7 @@ import { FotoService } from '../services/foto.service';
 import {DataTableModule} from "angular2-datatable";
 import { Observable, of } from 'rxjs'; // only need to import from rxjs
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Depreciation } from '../services/depreciation';
 
 
 @NgModule({
@@ -55,7 +56,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
   ],
   providers: [
-    FotoService
+    FotoService, Depreciation
   ],
   entryComponents:[updateComponent, DeleteComponent, UpdateSedeComponent,CodeErrorComponent]
 })

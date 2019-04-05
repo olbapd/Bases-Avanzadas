@@ -90,7 +90,7 @@ CREATE OR ALTER PROC [dbo].[sp_getActivoBySede]
         @IdSede int
 
 AS 
-SELECT [Activo].Codigo, [Activo].Nombre, [Activo].Descipcion 
+SELECT [Activo].Codigo, [Activo].Nombre, [Activo].Descripcion 
 FROM Activo
 WHERE @IdSede = Activo.IdSede
 GO

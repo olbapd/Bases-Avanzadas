@@ -32,12 +32,13 @@
               </select>
             </div>
 
-            <h6 class="card-subtitle mb-2 text-muted">Codigo Activo</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Cantidad Años</h6>
             <div class="input-group mb-3">
               <input type="text" #txt_cod_activo class="form-control"
-                placeholder="1000000" aria-label="Codigo_Activo"
+                placeholder="1" aria-label="Cantidad_Anos"
                 aria-describedby="basic-addon1">
             </div>
+
           </div>
           <button (click)="calculate(select_metodo.value,select_categoria)"
             type="button" class="btn btn-primary">Calcular</button>
@@ -57,23 +58,23 @@
           <thead>
           <tr>
             <th scope="col">Codigo</th>
-            <th scope="col">Periodo</th>
-            <th scope="col">Depreciacion Anual</th>
-            <th scope="col">Depreciacion acumulada</th>
-            <th scope="col">Valor neto</th>
+            <th scope="col">Porcentaje Depreciacion</th>
+            <th scope="col">Precio Inicial</th>
+            <th scope="col">Valor Residual</th>
+            <th scope="col">Centro Costo</th>
+            <th scope="col">Resultado</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let country of countries$ | async; index as i">
-            <th scope="row">{{ i + 1 }}</th>
-            <td>
-              <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
-              <ngb-highlight [result]="country.name" [term]="filter.value"></ngb-highlight>
-            </td>
-            <td><ngb-highlight [result]="country.area | number" [term]="filter.value"></ngb-highlight></td>
-            <td><ngb-highlight [result]="country.population | number" [term]="filter.value"></ngb-highlight></td>
-          </tr>
-          </tbody>
+            <tr *ngFor="let calculo of calculos|  filter:searchText">
+                <th scope="row">{{ calculo.codigo }}</th>
+                <td>{{ calculo.PorcentajeDepreciacion}}</td>
+                <td>{{ calculo.precio}}</td>
+                <td>{{ calculo.ValorResidual}}</td>
+                <td>{{ calculo.CentroCosto}}</td>
+                <td>{{ calculo.resultado}}</td>
+            </tr>
+        </tbody>
         </table>
   </div>
 
