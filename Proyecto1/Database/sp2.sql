@@ -648,7 +648,7 @@ GO
 --Contrasena, IdSede, IdDepartamento, IdPuesto, Foto>
 -- Parametro de Salida: <Ninguno>
 -- =============================================
-CREATE OR ALTER PROCEDURE [dbo].[setEmpleado]
+CREATE OR ALTER   PROCEDURE [dbo].[setEmpleado]
 	@Nombre varchar(50),
 	@Apellido1 varchar(25),
 	@Apellido2 varchar(25),
@@ -658,17 +658,27 @@ CREATE OR ALTER PROCEDURE [dbo].[setEmpleado]
 	@Contrasena varchar(50),
 	@IdDepartamento int,
 	@IdPuesto int,
-	@Foto varchar(50)
+	@Foto varchar(50),
+	@IdSede int,
+	@FechaActual date
 	 
 AS
 BEGIN
-
+	DECLARE
+	@IdEmpleado int 
+	
 	BEGIN TRAN
 	BEGIN TRY
 		INSERT INTO Empleado (Nombre, Apellido1, Apellido2, Cedula,FechaNacimiento, Correo,
 		Contrasena, IdDepartamento, IdPuesto, Foto)
 		VALUES (@Nombre, @Apellido1, @Apellido2, @Cedula, @FechaN ,
 		 @Correo, @Contrasena,@IdDepartamento, @IdPuesto, @Foto)
+		
+		SELECT @IdEmpleado = Empleado.IdEmpleado FROM Empleado WHERE @Cedula = Empleado.Cedula
+		
+		INSERT INTO [SedeXEmpleado] (IdSede,IdEmpleado,FechaIngreso,FechaSalida)
+		VALUES (@IdSede,@IdEmpleado,@FechaActual,null)
+
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -676,7 +686,7 @@ BEGIN
 		ROLLBACK TRANSACTION
 	END CATCH
 END
-GO
+
 
 -- =============================================
 -- Descripcion:	<Actualiza la información de un empleado>
