@@ -63,17 +63,17 @@ export class DepreciationComponent implements OnInit {
             }
         });
     }
-    updateEmployee(T,B,VS) {
+    firstMethod(T,B,VS) {
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(FirstMethodComponent, {
             data: [T,B,VS]
         });
     }
 
-    oso() {
+    secondMethod(T,B,VS) {
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(SecondMethodComponent, {
-            data: {}
+            data: [T,B,VS]
         });
     }
 

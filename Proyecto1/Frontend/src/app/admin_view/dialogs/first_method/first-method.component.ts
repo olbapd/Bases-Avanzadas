@@ -28,8 +28,6 @@ export class FirstMethodComponent implements OnInit{
             "t": _i,
             "acumulada":(_i*this.calcular.getDep(this.data[0],this.data[1],this.data[2])),  
             "valor":this.data[1]-(_i*this.calcular.getDep(this.data[0],this.data[1],this.data[2]))
-
-
         });
     }
 }
