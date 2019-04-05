@@ -29,6 +29,19 @@ export class RestApiService {
       'Content-Type': 'application/json'
     })
   }  
+  getCalculos() {
+    let body= {
+                "typesIn":[],
+                "typesOut":[],
+                "parameters":[],
+                "values":[],
+                "ouputs":[],
+                "name":"sp_calculos"
+              }
+    ;
+    return this.http.post (this.apiURL+urls.sp_url+'calculos',body).pipe(retry(1),catchError(this.handleError));
+  }
+
   getSate(username,password) {
 
     let body ={

@@ -24,6 +24,7 @@ export class HomeEmployeeComponent implements OnInit{
     activos: asset[]=[];//debe de inicializarse de lo contrario muestra vacio
     page = 1;
     pageSize = 4;
+    
 
     get assets(): asset[] { //BIND TABLE
         
