@@ -767,8 +767,8 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[updateAdmin]
-	@IdAdminV int,
-	@IdAdminN int,
+	@IdAdminV varchar(50),
+	@IdAdminN varchar(50),
 	@IdSede int
 	
 AS
