@@ -283,12 +283,12 @@ export class RestApiService {
      return this.http.post (this.apiURL+urls.sp_url+'setEmpleado',body).pipe(retry(1),catchError(this.handleError));
   }
 
-  setActivo(codigo,nombre,descripcion,foto,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,FechaR,centro_costo,valor_residual,categoria,moneda) {
+  setActivo(codigo,nombre,descripcion,foto,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,FechaR,centro_costo,valor_residual,categoria,moneda,idsede) {
     let body= {
       "typesIn":["varchar","varchar","varchar","varchar","int","int","int","float","date","date","int","int","int" ,"int" ,"int"],
       "typesOut":[],
-      "parameters":["Codigo","Nombre","Descripcion","Foto","Precio","TiempoGar","VidaU","PorcentajeD","FechaCompra","FechaAsig","CentroCosto","ValorResidual","IdCategoria","IdMoneda","IdEstado"],
-      "values":[codigo,nombre,descripcion,foto,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,FechaR,centro_costo,valor_residual,categoria,moneda,'4'],
+      "parameters":["Codigo","Nombre","Descripcion","Foto","Precio","TiempoGar","VidaU","PorcentajeD","FechaCompra","FechaAsig","CentroCosto","ValorResidual","IdCategoria","IdMoneda","IdEstado","IdSede"],
+      "values":[codigo,nombre,descripcion,foto,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,FechaR,centro_costo,valor_residual,categoria,moneda,'4',idsede],
       "ouputs":[],
       "name":"setActivo"
     }  
@@ -352,6 +352,18 @@ export class RestApiService {
               "name":"setPuesto"
             }
      return this.http.post (this.apiURL+urls.sp_url+'setPuesto',body).pipe(retry(1),catchError(this.handleError));
+  }
+
+  updateEmpleado(Cedula,Correo,Contrasena,Foto,IdDepartamento,IdPuesto,IdSede,FechaR){
+    let body={
+              "typesIn":["varchar","varchar","varchar","varchar","int","int","int","date"],
+              "typesOut":[],
+              "parameters":["Cedula","Correo","Contrasena","Foto","IdDepartamento","IdPuesto","IdSede","FechaIngreso"],
+              "values":[Cedula,Correo,Contrasena,Foto,IdDepartamento,IdPuesto,IdSede,FechaR],
+              "ouputs":[],
+              "name":"updateEmpleado"
+            }
+     return this.http.post (this.apiURL+urls.sp_url+'updateEmpleado',body).pipe(retry(1),catchError(this.handleError));
   }
 //--------------------------------------
   // Error handling 

@@ -1,0 +1,28 @@
+<mat-toolbar class="toolbar">
+    <mat-card-title>Eliminar</mat-card-title>
+    <span class="toolbar-spacer"></span>
+    <div>
+        <button mat-icon-button color="accent" style="margin-left: 300px" class="btn btn-danger" (click)="onNoClick()">
+            <mat-icon (click)="onNoClick()">cancel</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
+
+<div class="container">
+    <h3 mat-dialog-title>Estas Seguro que quieres eliminarlo?</h3>
+    <div mat-dialog-content>
+        Cedula: {{data.cedula}}
+        <p></p>
+        Apellido1: {{data.apellido1}}
+        <p></p>
+        Apellido2: {{data.apellido2}}
+        <p></p>
+        Nombre: {{data.nombre}}
+        <p></p>
+    </div>
+
+    <div mat-dialog-actions>
+        <button mat-button [mat-dialog-close]="1" class="btn btn-success" (click)="confirmDelete()">Delete</button>
+        <button mat-button (click)="onNoClick()" class="btn btn-danger" style="margin-left: 30px" tabindex="-1">Cancel</button>
+    </div>
+</div>
