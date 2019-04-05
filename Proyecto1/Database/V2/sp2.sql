@@ -69,7 +69,8 @@ CREATE OR ALTER PROC [dbo].[setActivo]
 	@ValorResidual int,
 	@IdCategoria int,
 	@IdMoneda int,
-	@IdEstado int
+	@IdEstado int,
+	@IdSede int
 	
 AS
 BEGIN
@@ -79,7 +80,7 @@ BEGIN
 		INSERT INTO Activo (Codigo, Nombre, Descripcion, Foto, Precio, TiempoGarantia, VidaUtil, PorcentajeDepreciacion, FechaCompra,
 		FechaRegistro, FechaAsignacion, CentroCosto, ValorResidual, DetalleUbicacion, IdEmpleado,IdCategoria, IdSede, IdMoneda, IdEstado) 
 		VALUES (@Codigo, @Nombre, @Descripcion, @Foto, @Precio, @TiempoGar, @VidaU, @PorcentajeD, @FechaCompra,
-		@FechaAsig, NULL, @CentroCosto, @ValorResidual, NULL, NULL,@IdCategoria, NULL, @IdMoneda, @IdEstado) 
+		@FechaAsig, NULL, @CentroCosto, @ValorResidual, NULL, NULL,@IdCategoria, @IdSede, @IdMoneda, @IdEstado) 
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
