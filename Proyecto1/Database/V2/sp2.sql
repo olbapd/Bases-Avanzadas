@@ -684,10 +684,10 @@ BEGIN
 		[IdPuesto] = @IdPuesto,
 		[Foto] = @Foto
 		WHERE @Cedula = [Empleado].Cedula
-
-
-		EXEC Contrato @IdSede, @Cedula, @FechaIngreso, NULL
-
+		
+				INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso, FechaSalida)
+		VALUES (@IdSede, @Cedula, @FechaIngreso, NULL)
+		
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
