@@ -253,6 +253,53 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Banco Central",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET TIPO CAMBIO",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"date\" : \"03/04/2019\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/banco/tipoCambio",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"banco",
+						"tipoCambio"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
