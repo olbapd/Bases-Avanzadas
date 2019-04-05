@@ -300,6 +300,41 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "GET CALCULOS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"typesIn\":[\"int\"],\n  \"typesOut\":[],\n  \"parameters\":[\"IdCategoria\"],\n  \"values\":[1],\n  \"ouputs\":[],\n  \"name\":\"sp_calculos\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/dynamic/calculos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"dynamic",
+						"calculos"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

@@ -69,7 +69,7 @@ GO
 
 GO
 CREATE OR ALTER   PROC [dbo].[sp_calculos]
-	@IdCategoria varchar(50)
+	@IdCategoria int
 AS
 
 SELECT [Activo].Codigo,
