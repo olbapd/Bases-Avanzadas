@@ -88,7 +88,6 @@ GO
 CREATE OR ALTER   PROC [dbo].[sp_calculosBySede]
 	@IdCategoria int,
 	@IdSede int
-
 AS
 
 SELECT [Activo].Codigo,
@@ -159,6 +158,7 @@ SELECT
 	[Empleado].Apellido1, 
 	[Empleado].Apellido2,
 	[Sede].Nombre AS Sede,
+	[Sede].IdSede AS IdSede,
 	[Provincia].Nombre AS Provincia,
 	[Canton].Nombre AS Canton,
 	[Distrito].Nombre AS Distrito
@@ -178,4 +178,34 @@ INNER JOIN
 
 WHERE 
 	[Empleado].IdPuesto=2 AND [Empleado].IdEstado = 1 
+GO
+
+
+GO 
+CREATE OR ALTER PROC [dbo].[sp_getAllActivobySede]
+	@IdSede int
+AS
+SET NOCOUNT ON
+SELECT [IdActivo],
+	[Codigo],
+	Activo.[Nombre],
+	[Descripcion],
+	[Foto],
+	[Precio],
+	[TiempoGarantia],
+	[VidaUtil],
+	[PorcentajeDepreciacion],
+	[FechaCompra],
+	[FechaRegistro],
+	[CentroCosto],
+	[ValorResidual],
+	Activo.[IdCategoria],
+	[IdMoneda],
+	[IdEstado],
+	[Categoria].Nombre AS Categoria
+FROM Activo
+INNER JOIN
+	Categoria ON Activo.IdCategoria = Categoria.IdCategoria
+WHERE IdSede = @IdSede
+SET NOCOUNT OFF
 GO
