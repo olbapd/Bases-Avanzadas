@@ -565,10 +565,12 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[getCanton]
+	@IdProvincia int
 AS
 SET NOCOUNT ON
 
 SELECT [Canton].Nombre, [Canton].IdCanton FROM Canton
+WHERE @IdProvincia = [Canton].IdProvincia
 
 SET NOCOUNT OFF
 GO
