@@ -14,11 +14,13 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { HomeEmployeeComponent } from './employeeHome.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FilterPipe } from './services/filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeEmployeeComponent
+    HomeEmployeeComponent,
+    FilterPipe
   ],
   imports: [
     
