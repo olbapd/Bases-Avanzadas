@@ -155,6 +155,7 @@
                         <th scope="col">Departamento</th>
                         <th scope="col">Puesto</th>
                         <th scope="col">Fecha de Ingreso</th>
+                        <th scope="col">Correo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -166,6 +167,7 @@
                         <td>{{ employee.departamento}}</td>
                         <td>{{ employee.puesto}}</td>
                         <td>{{ employee.fechaIn}}</td>
+                        <td>{{ employee.correo}}</td>
                         <td>
                             <button mat-icon-button color="accent" class='btn btn-danger' (click)="updateEmployee(employee.cedula,employee.departamento,employee.puesto)">
                                 <mat-icon aria-label="Edit">edit</mat-icon>

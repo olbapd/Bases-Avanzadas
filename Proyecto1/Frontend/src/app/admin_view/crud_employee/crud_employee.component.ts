@@ -168,7 +168,9 @@ export class EmployeeComponent implements OnInit {
                         "nombre":json.data[_i].Nombre[0],
                         "departamento":json.data[_i].Nombre[1],
                         "puesto":json.data[_i].Nombre[2],
-                        "fechaIn":json.data[_i].FechaIngreso
+                        "fechaIn":json.data[_i].FechaIngreso,
+                        "correo":json.data[_i].Correo
+                
                      });
                  }
                  
@@ -190,8 +192,11 @@ export class EmployeeComponent implements OnInit {
     }
     
     deleteEmployee(id,apellido1,apellido2,nombre) {
+        let empl
         localStorage.setItem('Cedula',id);
         this.isPopupOpened = true;
+        const employee = this.empleados.findIndex(c=> c.cedula=== id);
+        
         const dialogRef = this.dialog.open(DeleteComponent, {
             data: { 
                     "cedula":id,
@@ -199,7 +204,13 @@ export class EmployeeComponent implements OnInit {
                     "apellido2":apellido2,
                     "nombre":nombre
                   }
-        });
+        }).afterClosed().subscribe(response=>{
+            if(response.data=="true"){
+                console.log("entro");
+                this.empleados.splice(employee,1);
+            }
+
+    });
         
     }
 
