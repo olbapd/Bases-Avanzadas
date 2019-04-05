@@ -85,15 +85,6 @@ WHERE @IdCategoria = [Activo].IdCategoria
 
 GO
 
-GO 
-CREATE OR ALTER PROC [dbo].[sp_getActivoBySede]
-        @IdSede int
-
-AS 
-SELECT [Activo].Codigo, [Activo].Nombre, [Activo].Descripcion 
-FROM Activo
-WHERE @IdSede = Activo.IdSede
-GO
 GO
 CREATE OR ALTER PROC [dbo].[sp_getActivoByCategory]
 	@IdCategoria int,
@@ -125,3 +116,16 @@ SELECT  [Activo].Codigo,
 	WHERE [IdEstado] = @IdEstado AND [IdCategoria] =@IdCategoria AND Activo.IdSede = @IdSede
 
 GO
+
+GO
+CREATE OR ALTER  PROC [dbo].[sp_getActivoBySede]
+	@IdSede int 
+AS 
+	SELECT 
+		[Activo].Codigo,
+		[Activo].Nombre,
+		[Activo].Descripcion
+	FROM Activo
+	WHERE  @IdSede = [Activo].IdSede
+GO
+
