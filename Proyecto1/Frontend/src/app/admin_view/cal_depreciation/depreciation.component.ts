@@ -10,6 +10,7 @@ import { FormControl } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { Depreciation } from 'src/app/services/depreciation';
 
 interface Country {
     name: string;
@@ -71,7 +72,9 @@ export class DepreciationComponent implements OnInit {
     calType = ["Lineal", "Suma de Digitos"];
     categoria;
 
-    constructor(pipe: DecimalPipe, private modalService: NgbModal, public restApi: RestApiService, private router: Router) {
+    calculos:asset[]=[];
+
+    constructor(public calcular:Depreciation, pipe: DecimalPipe, private modalService: NgbModal, public restApi: RestApiService, private router: Router) {
         this.countries$ = this.filter.valueChanges.pipe(
             startWith(''),
             map(text => search(text, pipe))
@@ -81,8 +84,26 @@ export class DepreciationComponent implements OnInit {
     }
 
 
-    calculate(metodo, categoria) {
+  
 
+    calculate(metodo, categoria){
+        let option;
+        this.restApi.getCalculos().subscribe((res)=>{
+        const myObjStr = JSON.stringify(res)
+        const json = JSON.parse(myObjStr);
+        var count = Object.keys(json.data).length;
+        for (var _i = 0; _i < count; _i++) {
+            this.calculos.push({
+                "codigo":json.data[_i].Codigo,
+                "PorcentajeDepreciacion":json.data[_i].PorcentajeDepreciacion,
+                "precio":json.data[_i].Precio,
+                "Anho":json.data[_i].Anho[0],
+                "ValorResidual":json.data[_i].ValorResidual[1],
+                "CentroCosto":json.data[_i].CentroCosto[2]
+        
+             });
+         }
+    });
     }
 
 

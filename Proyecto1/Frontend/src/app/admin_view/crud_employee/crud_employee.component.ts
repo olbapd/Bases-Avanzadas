@@ -38,6 +38,8 @@ export class EmployeeComponent implements OnInit {
     page = 1;
     pageSize = 4;
     empleados: Empleado[]=[];//debe de inicializarse de lo contrario muestra vacio
+    
+  collectionSize = this.empleados.length;
 /* 
     categoria;
     page = 1;
