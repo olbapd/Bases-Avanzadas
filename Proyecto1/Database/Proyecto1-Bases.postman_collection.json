@@ -256,23 +256,68 @@
 		},
 		{
 			"name": "Banco Central",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {},
 				"url": {
-					"raw": ""
+					"raw": "https://gee.bccr.fi.cr/indicadoreseconomicos/WebServices/wsIndicadoresEconomicos.asmx/ObtenerIndicadoresEconomicosXML?tcIndicador=317&tcFechaInicio=22/03/2019&tcFechaFinal=22/03/2019&tcNombre=Bases&tnSubNiveles=N",
+					"protocol": "https",
+					"host": [
+						"gee",
+						"bccr",
+						"fi",
+						"cr"
+					],
+					"path": [
+						"indicadoreseconomicos",
+						"WebServices",
+						"wsIndicadoresEconomicos.asmx",
+						"ObtenerIndicadoresEconomicosXML"
+					],
+					"query": [
+						{
+							"key": "tcIndicador",
+							"value": "317"
+						},
+						{
+							"key": "tcFechaInicio",
+							"value": "22/03/2019"
+						},
+						{
+							"key": "tcFechaFinal",
+							"value": "22/03/2019"
+						},
+						{
+							"key": "tcNombre",
+							"value": "Bases"
+						},
+						{
+							"key": "tnSubNiveles",
+							"value": "N"
+						}
+					]
 				}
 			},
 			"response": []
 		},
 		{
 			"name": "GET TIPO CAMBIO",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -303,11 +348,8 @@
 		},
 		{
 			"name": "GET CALCULOS",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -331,6 +373,38 @@
 						"api",
 						"dynamic",
 						"calculos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE EMPLEADO",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"typesIn\":[\"varchar\",\"varchar\",\"varchar\",\"varchar\",\"int\",\"int\",\"int\",\"date\"],\r\n  \"typesOut\":[],\r\n  \"parameters\":[\"Cedula\",\"Correo\",\"Contrasena\",\"Foto\",\"IdDepartamento\",\"IdPuesto\",\"IdSede\",\"FechaIngreso\"],\r\n  \"values\":[\"2015000004\",\"cejose7@gmail.com\",\"1\",\"a\",1,1,1,\"2017-01-30\"],\r\n  \"ouputs\":[],\r\n  \"name\":\"updateEmpleado\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/dynamic/updateEmpleado",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"dynamic",
+						"updateEmpleado"
 					]
 				}
 			},
