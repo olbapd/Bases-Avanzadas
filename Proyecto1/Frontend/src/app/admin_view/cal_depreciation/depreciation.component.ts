@@ -11,6 +11,9 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Depreciation } from 'src/app/services/depreciation';
+import { MatDialog } from '@angular/material';
+import { FirstMethodComponent } from '../dialogs/first_method/first-method.component';
+import { SecondMethodComponent } from '../dialogs/second_method/second-method.component';
 
 
 
@@ -33,8 +36,13 @@ export class DepreciationComponent implements OnInit {
     categoria;
 
     calculos: asset[] = [];
+    
+    isPopupOpened = false;
 
-    constructor(public calcular: Depreciation, pipe: DecimalPipe, private modalService: NgbModal, public restApi: RestApiService, private router: Router) {}
+    constructor(
+        private dialog: MatDialog,public calcular: Depreciation, 
+         private modalService: NgbModal, public restApi: RestApiService,
+         private router: Router) {}
     
     calculate() {
         console.log("si");
@@ -55,6 +63,19 @@ export class DepreciationComponent implements OnInit {
                 });
                 console.log("this" + " " + this.calculos);
             }
+        });
+    }
+    updateEmployee() {
+        this.isPopupOpened = true;
+        const dialogRef = this.dialog.open(FirstMethodComponent, {
+            data: {}
+        });
+    }
+
+    oso() {
+        this.isPopupOpened = true;
+        const dialogRef = this.dialog.open(SecondMethodComponent, {
+            data: {}
         });
     }
 

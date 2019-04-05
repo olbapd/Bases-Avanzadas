@@ -29,8 +29,6 @@ CREATE OR ALTER PROC [dbo].[sp_assignActive]
 	@Correo varchar(50) OUTPUT,
 	@Nombre varchar(50) OUTPUT,
 	@Apellido varchar(50) OUTPUT
-
-	
 AS
 BEGIN
 	DECLARE
@@ -85,6 +83,27 @@ WHERE @IdCategoria = [Activo].IdCategoria
 
 GO
 
+
+GO
+CREATE OR ALTER   PROC [dbo].[sp_calculosBySede]
+	@IdCategoria int,
+	@IdSede int
+
+AS
+
+SELECT [Activo].Codigo,
+	   [Activo].PorcentajeDepreciacion,
+	   [Activo].Precio,
+	   YEAR([Activo].FechaCompra) AS Anho,
+	   [Activo].ValorResidual,
+	   [Activo].CentroCosto
+
+FROM Activo
+
+WHERE @IdCategoria = [Activo].IdCategoria AND @IdSede = [Activo].IdSede
+
+GO
+
 GO
 CREATE OR ALTER PROC [dbo].[sp_getActivoByCategory]
 	@IdCategoria int,
@@ -129,3 +148,34 @@ AS
 	WHERE  @IdSede = [Activo].IdSede
 GO
 
+
+GO
+CREATE OR ALTER   PROC [dbo].[sp_getAdministrators]
+	
+AS
+
+SELECT 
+	[Empleado].Nombre,
+	[Empleado].Apellido1, 
+	[Empleado].Apellido2,
+	[Sede].Nombre AS Sede,
+	[Provincia].Nombre AS Provincia,
+	[Canton].Nombre AS Canton,
+	[Distrito].Nombre AS Distrito
+
+FROM 
+	SedeXEmpleado
+INNER JOIN 
+	Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
+INNER JOIN 
+	Sede ON [SedeXEmpleado].IdSede = [Sede].IdSede 
+INNER JOIN 
+	Distrito ON [Sede].IdDistrito = [Distrito].IdDistrito
+INNER JOIN
+	Canton ON Distrito.IdCanton = Canton.IdCanton
+INNER JOIN
+	Provincia ON Canton.IdProvincia = Provincia.IdProvincia
+
+WHERE 
+	[Empleado].IdPuesto=2 AND [Empleado].IdEstado = 1 
+GO

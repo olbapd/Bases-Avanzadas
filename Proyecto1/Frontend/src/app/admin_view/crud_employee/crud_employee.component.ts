@@ -42,20 +42,6 @@ export class EmployeeComponent implements OnInit {
     empleados: Empleado[] = [];//debe de inicializarse de lo contrario muestra vacio
     collectionSize: number = 0;
 
-/* 
-    categoria;
-    page = 1;
-    pageSize = 4;
-    activos: asset[] = [{
-        name: "as",
-        code: 123,
-        depreciation: 123
-    }
-    ];
-    collectionSize = this.activos.length;
-    activo: asset;
-    empleado: Empleado; */
-
     form: FormGroup;
     constructor(private fb: FormBuilder,
         private modalService: NgbModal,

@@ -24,6 +24,8 @@ import {DataTableModule} from "angular2-datatable";
 import { Observable, of } from 'rxjs'; // only need to import from rxjs
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { Depreciation } from '../services/depreciation';
+import { FirstMethodComponent } from './dialogs/first_method/first-method.component';
+import { SecondMethodComponent } from './dialogs/second_method/second-method.component';
 
 
 @NgModule({
@@ -51,14 +53,17 @@ import { Depreciation } from '../services/depreciation';
     updateComponent,
     DeleteComponent,
     UpdateSedeComponent,
-    CodeErrorComponent
+    CodeErrorComponent,
+    FirstMethodComponent,
+    SecondMethodComponent
 
 
   ],
   providers: [
     FotoService, Depreciation
   ],
-  entryComponents:[updateComponent, DeleteComponent, UpdateSedeComponent,CodeErrorComponent]
+  entryComponents:[updateComponent, DeleteComponent, UpdateSedeComponent,
+    CodeErrorComponent,FirstMethodComponent,SecondMethodComponent]
 })
 
 export class Admin_ViewModule { }
