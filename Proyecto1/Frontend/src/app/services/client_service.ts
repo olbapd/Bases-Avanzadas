@@ -29,12 +29,12 @@ export class RestApiService {
       'Content-Type': 'application/json'
     })
   }  
-  getCalculos() {
+  getCalculos(idCategoria) {
     let body= {
-                "typesIn":[],
+                "typesIn":["int"],
                 "typesOut":[],
-                "parameters":[],
-                "values":[],
+                "parameters":["IdCategoria"],
+                "values":[idCategoria],
                 "ouputs":[],
                 "name":"sp_calculos"
               }
