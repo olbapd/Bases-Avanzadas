@@ -36,7 +36,7 @@ export class EmployeeComponent implements OnInit {
     selectedFile: File = null;
     type = 1;
     page = 1;
-    pageSize = 4;
+    pageSize = 15;
     empleados: Empleado[]=[];//debe de inicializarse de lo contrario muestra vacio
 /* 
     categoria;
@@ -179,9 +179,11 @@ export class EmployeeComponent implements OnInit {
             const json = JSON.parse(myObjStr);
             const idSede=json.data[0].IdSede;
             
-            this.restApi.getEmpleadosXSede(idSede).subscribe((res)=>{
+            this.restApi.getEmpleados().subscribe((res)=>{
                 const myObjStr = JSON.stringify(res)
                 const json = JSON.parse(myObjStr);
+                console.log(myObjStr);
+                
                 var count = Object.keys(json.data).length;
                 for (var _i = 0; _i < count; _i++) {
                     this.empleados.push({
@@ -233,7 +235,8 @@ export class EmployeeComponent implements OnInit {
                     "Cedula":cedula,    
                     "Departamento":departamento,
                     "Puesto":puesto,
-                    "Correo":correo       
+                    "Correo":correo  
+                        
                   }
         });
     }

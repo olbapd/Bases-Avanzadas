@@ -223,6 +223,18 @@ export class RestApiService {
    return this.http.post (this.apiURL+urls.sp_url+'getEmpleadoXSede',body).pipe(retry(1),catchError(this.handleError));
   }
 
+  getEmpleados(){
+    let body= {
+                "typesIn":[],
+                "typesOut":[],
+                "parameters":[],
+                "values":[],
+                "ouputs":[],
+                "name":"getEmpleados"
+              }
+    return this.http.post (this.apiURL+urls.sp_url+'getEmpleados',body).pipe(retry(1),catchError(this.handleError));
+   }
+
   getQuitarActivo(Codigo,IdEstado) {
     let body={
               "typesIn":["varchar","int"],
@@ -285,7 +297,7 @@ export class RestApiService {
 
   setActivo(codigo,nombre,descripcion,foto,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,FechaR,centro_costo,valor_residual,categoria,moneda,idsede) {
     let body= {
-      "typesIn":["varchar","varchar","varchar","varchar","int","int","int","float","date","date","int","int","int" ,"int" ,"int"],
+      "typesIn":["varchar","varchar","varchar","varchar","int","int","int","float","date","date","int","int","int" ,"int" ,"int","int"],
       "typesOut":[],
       "parameters":["Codigo","Nombre","Descripcion","Foto","Precio","TiempoGar","VidaU","PorcentajeD","FechaCompra","FechaAsig","CentroCosto","ValorResidual","IdCategoria","IdMoneda","IdEstado","IdSede"],
       "values":[codigo,nombre,descripcion,foto,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,FechaR,centro_costo,valor_residual,categoria,moneda,'4',idsede],

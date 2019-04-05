@@ -73,12 +73,13 @@
                   </div>
                 </div>
 
-                <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Sede</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Sede</h6>
                 <div class="form-group">
                   <div class="input-group mb-3">
-                    <select class="form-control" id="sedes1-Dropdown" name="sedes1" formControlName="Sede" #select_sede
-                      data-style="btn-primary" data-live-search="true" data-selectpicker data-collection-name="items"
-                      ng-model="selected" [ngClass]="{ 'is-invalid': submitted && f.Sede.errors }">
+                    <select id="Sede-Dropdown" name="Sede" formControlName="Sede" class="form-control"
+                      #select_categoria data-style="btn-primary" data-live-search="true" data-selectpicker
+                      data-collection-name="items" ng-model="selected"
+                      [ngClass]="{ 'is-invalid': submitted && f.Sede.errors }">
                       <option [ngValue]="null">Seleccione una Sede</option>
                     </select>
                     <div *ngIf="submitted && f.Sede.errors" class="invalid-feedback">

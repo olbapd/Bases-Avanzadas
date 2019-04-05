@@ -64,7 +64,8 @@ export class updateComponent implements OnInit {
             const myObjStr = JSON.stringify(res)
                const json = JSON.parse(myObjStr);
                let IdSede=json.data[0].IdSede;
-               let Cedula = localStorage.getItem('Cedula');
+               let Cedula = this.data.Cedula;
+               console.log(Cedula+" "+correo+" "+contrasena+" "+photoHash+" "+departamento+" "+puesto+" "+IdSede+" "+fechar);
                this.restApi.updateEmpleado(Cedula,correo,contrasena,photoHash,departamento,puesto,IdSede,fechar).subscribe(res => {
                 window.location.reload();
                     

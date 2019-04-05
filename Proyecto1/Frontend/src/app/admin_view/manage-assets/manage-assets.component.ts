@@ -41,8 +41,7 @@ export class ManageAssetsComponent implements OnInit {
       VidaUtil: new FormControl('', Validators.required),
       CentroCosto: new FormControl('', Validators.required),
       Moneda: new FormControl('', Validators.required),
-      FechaR: new FormControl('', Validators.required),
-      Sede: new FormControl('', Validators.required)
+      FechaR: new FormControl('', Validators.required)
 
    });
    this.formModif = new FormGroup({
@@ -61,7 +60,7 @@ export class ManageAssetsComponent implements OnInit {
     this.CategoriaDropdown();
     this.AccionDropDown();
     this.MonedasDropdown();
-    this.sedes_DropDown();
+    
   }
   get f() { return this.form.controls; }
   get f2() { return this.formModif.controls; }
@@ -299,21 +298,8 @@ export class ManageAssetsComponent implements OnInit {
   });;
   this.EstadoDropdown();
   }
-  sedes_DropDown(){
-    let option;
-    let dropdowndep = document.getElementById('sedes1-Dropdown');
-    this.restApi.getSedes().subscribe((res)=>{
-    const myObjStr = JSON.stringify(res)
-    const json = JSON.parse(myObjStr);
-    var count = Object.keys(json.data).length;
-    for (var _i = 0; _i < count; _i++) {
-        option = document.createElement('option');
-        option.text = json.data[_i].Nombre;
-        option.value = json.data[_i].IdSede;
-        dropdowndep.append(option);
-    } 
-});
-}
+  
+
 
   modificar_estado_activo(Codigo,IdEstado){
     console.log("IdEstado"+IdEstado);
