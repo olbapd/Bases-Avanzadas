@@ -662,7 +662,7 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[updateEmpleado]
-	@IdEmpleado int,
+	@Cedula varchar(50),
 	@Correo varchar(50),
 	@Contrasena varchar(50),
 	@Foto varchar(50),
@@ -682,10 +682,10 @@ BEGIN
 		[IdDepartamento] = @IdDepartamento,
 		[IdPuesto] = @IdPuesto,
 		[Foto] = @Foto
-		WHERE @IdEmpleado = [Empleado].IdEmpleado
+		WHERE @Cedula = [Empleado].Cedula
 
 
-		EXEC Contrato @IdSede, @IdEmpleado, @FechaIngreso, NULL
+		EXEC Contrato @IdSede, @Cedula, @FechaIngreso, NULL
 
 		COMMIT TRANSACTION
 	END TRY
@@ -850,7 +850,21 @@ GO
 -- Parametro de Entrada: <IdSede>
 -- Parametro de Salida: <Ninguno>
 -- =============================================
- 
+ CREATE OR ALTER   PROC [dbo].[getEmpleadoXSede]
+	@IdSede int
+AS
+SET NOCOUNT ON
+
+SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
+[Empleado].Cedula,[Empleado].Correo, [SedeXEmpleado].FechaIngreso, [Departamento].Nombre, [Puesto].Nombre
+FROM SedeXEmpleado
+INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
+INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
+INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
+WHERE @IdSede = [SedeXEmpleado].IdSede AND [Empleado].IdEstado = 1
+
+SET NOCOUNT OFF
+GO
 -- =============================================
 -- Descripcion:	<Seleccionar a un empleado que tiene un activo en especifico>
 -- Parametro de Entrada: <CodigoActivo>

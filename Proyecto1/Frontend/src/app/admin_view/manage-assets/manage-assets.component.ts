@@ -19,8 +19,10 @@ export class ManageAssetsComponent implements OnInit {
   photo: any;
   form: FormGroup;
   formModif: FormGroup;
+  formAsig:FormGroup;
   submitted = false;
   submitted2 = false;
+  submitted3 = false;
   isPopupOpened = false;
   constructor(public restApi: RestApiService,private router: Router,private dialog: MatDialog,private formBuilder: FormBuilder,private fotoService: FotoService) {
     
@@ -45,13 +47,22 @@ export class ManageAssetsComponent implements OnInit {
     categoria3: new FormControl('', Validators.required),
     codigo_modif_state: new FormControl('', Validators.required),
     estado3: new FormControl('', Validators.required)
- });
+    });
+
+    this.formAsig = new FormGroup({
+      Accion: new FormControl('', Validators.required),
+      CedulaAsig: new FormControl('', Validators.required),
+      DetalleU: new FormControl('', Validators.required),
+      CategoriaAsig: new FormControl('', Validators.required),
+      CodigoaAsig: new FormControl('', Validators.required)
+    });
     this.CategoriaDropdown();
     this.AccionDropDown();
     this.MonedasDropdown();
   }
   get f() { return this.form.controls; }
   get f2() { return this.formModif.controls; }
+  get f3() { return this.formAsig.controls; }
   onPhotoChange(event){
     this.photo = event.target.files[0];
 
@@ -72,44 +83,35 @@ export class ManageAssetsComponent implements OnInit {
     let centro_costo = this.form.get('CentroCosto').value;
     let moneda = this.form.get('Moneda').value;
     let FechaR = this.form.get('FechaR').value;
+    let btn = document.getElementById('registrar_btn');
 
     // stop here if form is invalid
     if (this.form.invalid) {
-      console.log("SI0");
+        btn.setAttribute('class','btn btn-danger');
         return;
     }
     else{
-      console.log("SI1");
-      let btn = document.getElementById('registrar_btn');
        //Se debe almacenar la imagen primero
        this.fotoService.uploadFile(this.photo)
        .subscribe((data)=>{
-        console.log("SI2");
            let photoHash = (data && data.hash)? data.hash : null;
            console.log(photoHash);
            this.restApi.getActivoXCodigo(codigo).subscribe((res)=>{
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
             if (json.data[0]==null){
-              console.log("SI3");
+              btn.setAttribute('class','btn btn-success');
               this.restApi.setActivo(codigo,nombre,descripcion,photoHash,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,FechaR,centro_costo,valor_residual,categoria,moneda).subscribe((res)=>{});; 
               
             }
       
             else{
-              console.log("SI4");
-              //btn.setAttribute('class','btn bnt-danger');
+              btn.setAttribute('class','btn btn-danger');
               this.isPopupOpened = true;
               const dialogRef = this.dialog.open(CodeErrorComponent);
               
             }
     });;
-           //POner el resto de su codigo aqui adentro
-           //Cuando se va usar el sp de agregar cliente, en el espacio de 
-           //Foto utilizar la cariable photoHas.
-
-
-           //
        });
 
       
@@ -136,13 +138,36 @@ export class ManageAssetsComponent implements OnInit {
             btn.setAttribute('class','btn btn-success');
             this.UpdateEstado(Codigo);
             //window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
-          }
-            
+          } 
     });;
-      
-
     }
 }
+  onSubmit3() {
+    this.submitted3 = true;
+    let btn = document.getElementById('asig_btn');
+    let Codigo = this.formAsig.get('CodigoaAsig').value;
+    let Cedula = this.formAsig.get('CedulaAsig').value;
+    let DetalleUbi = this.formAsig.get('DetalleU').value;
+    
+    // stop here if form is invalid
+    if (this.formAsig.invalid) {
+      btn.setAttribute('class','btn btn-danger');
+        return;
+    }
+    else{
+      console.log("si1");
+      this.restApi.setAssignActivo(Codigo,Cedula,DetalleUbi).subscribe((res)=>{
+        const myObjStr = JSON.stringify(res)
+        const json = JSON.parse(myObjStr);
+        
+          if(json.success==true){
+            console.log("si2");
+            btn.setAttribute('class','btn btn-success');
+            
+          } 
+    });;
+    }
+  }
   EstadoDropdown(){
     let option;
     let dropdown2 = document.getElementById('estado3-Dropdown');
@@ -286,25 +311,15 @@ export class ManageAssetsComponent implements OnInit {
   //-----------ASIGNAR ACTIVO------------------
   asignar_activo(Codigo,Cedula,DetalleUbi){
     this.restApi.setAssignActivo(Codigo,Cedula,DetalleUbi).subscribe((res)=>{});
-    console.log("Si:"+Codigo+" "+Cedula+" "+DetalleUbi);
+  
   }
   AccionDropDown(){
-    $("#accion-Dropdown").empty(); //jquery clear dropdown
+    //$("#accion-Dropdown").empty(); //jquery clear dropdown
     $("#codigo2-Dropdown").empty(); //jquery clear dropdown
     let dropdown1 = document.getElementById('codigo2-Dropdown');
-    let defaulOption1;
-    defaulOption1= document.createElement('option');
-    defaulOption1.text = "--Codigo--";
-    defaulOption1.value = 0;
-    dropdown1.append(defaulOption1);
-    let defaulOption;
-    defaulOption= document.createElement('option');
-    defaulOption.text = "--Acción--";
-    defaulOption.value = 0;
     let option1;
     let option2;
     let dropdown = document.getElementById('accion-Dropdown');
-    dropdown.append(defaulOption);
     option1= document.createElement('option');
     option2= document.createElement('option');
     option1.text = "Asignar";

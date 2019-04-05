@@ -6,5 +6,6 @@ export interface Empleado{
     departamento:string;
     puesto:string;
     fechaIn:string;
+    correo:string;
 
 }

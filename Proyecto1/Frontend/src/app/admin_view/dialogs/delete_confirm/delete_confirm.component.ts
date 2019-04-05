@@ -18,12 +18,12 @@ export class DeleteComponent implements OnInit{
         }
     ngOnInit(){}
     onNoClick(): void {
-        this.dialogRef.close();
+        this.dialogRef.close({data:'false'});
        }
     confirmDelete(){
      let cedula = localStorage.getItem('Cedula');
      this.restApi.quitarEmpleado(cedula).subscribe(res => {      
     }); 
-    window.location.reload();
+    this.dialogRef.close({data:'true'});
  }
 }
