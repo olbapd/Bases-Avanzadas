@@ -64,3 +64,23 @@ BEGIN
 		@Apellido as N'@Apellido'
 END
 GO
+
+
+
+GO
+CREATE OR ALTER   PROC [dbo].[sp_calculos]
+	@IdCategoria varchar(50)
+AS
+
+SELECT [Activo].Codigo,
+	   [Activo].PorcentajeDepreciacion,
+	   [Activo].Precio,
+	   YEAR([Activo].FechaCompra) AS Anho,
+	   [Activo].ValorResidual,
+	   [Activo].CentroCosto
+
+FROM Activo
+
+WHERE @IdCategoria = [Activo].IdCategoria
+
+GO
