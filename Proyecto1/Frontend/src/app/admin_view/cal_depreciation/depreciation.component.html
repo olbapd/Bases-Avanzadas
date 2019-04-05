@@ -48,48 +48,44 @@
 
   </div>
   <div class="col-md-8">
-      <form >
-          <div class="form-group form-inline">
-            <input class="form-control ml-2" type="text" [ngModelOptions]="{standalone:true}" [(ngModel)]="searchText"/>
-          </div>
-        </form>
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th scope="col">Codigo</th>
-            <th scope="col">Porcentaje Depreciacion</th>
-            <th scope="col">Precio Inicial</th>
-            <th scope="col">Valor Residual</th>
-            <th scope="col">Centro Costo</th>
-            <th scope="col">Resultado</th>
-          </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let calculo of calculos|  filter:searchText">
-                <th scope="row">{{ calculo.codigo }}</th>
-                <td>{{ calculo.PorcentajeDepreciacion}}</td>
-                <td>{{ calculo.precio}}</td>
-                <td>{{ calculo.ValorResidual}}</td>
-                <td>{{ calculo.CentroCosto}}</td>
-                <td>{{ calculo.resultado}}</td>
-                <td>
-                  <button mat-icon-button color="accent" class='btn btn-danger'
-                      (click)="updateEmployee()">
-                      <mat-icon aria-label="Edit">edit</mat-icon>
-                  </button> </td>
-              <td>
+    <form>
+      <div class="form-group form-inline">
+        <input class="form-control ml-2" type="text"
+          [ngModelOptions]="{standalone:true}" [(ngModel)]="searchText" />
+      </div>
+    </form>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Codigo</th>
+          <th scope="col">Porcentaje Depreciacion</th>
+          <th scope="col">Precio Inicial</th>
+          <th scope="col">Valor Residual</th>
+          <th scope="col">Centro Costo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let calculo of calculos| filter:searchText">
+          <th scope="row">{{ calculo.codigo }}</th>
+          <td>{{ calculo.PorcentajeDepreciacion}}</td>
+          <td>{{ calculo.precio}}</td>
+          <td>{{ calculo.ValorResidual}}</td>
+          <td>{{ calculo.CentroCosto}}</td>
+          <td>
+            <button mat-icon-button color="accent" class='btn btn-danger'
+              (click)="updateEmployee(4,calculo.precio,calculo.ValorResidual)">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button> </td>
+          <td>
 
-                  <td>
-                      <button mat-icon-button color="accent" class='btn btn-danger'
-                          (click)="oso()">
-                          <mat-icon aria-label="Edit">edit2</mat-icon>
-                      </button> </td>
-                  <td>
+            <td>
+              <button mat-icon-button color="accent" class='btn btn-danger'
+                (click)="oso()">
+                <mat-icon aria-label="Edit">edit2</mat-icon>
+              </button> </td>
+            <td>
             </tr>
-        </tbody>
+          </tbody>
         </table>
-  </div>
-
-
-
-</div>
+      </div>
+    </div>

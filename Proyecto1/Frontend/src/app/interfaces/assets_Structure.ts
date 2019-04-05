@@ -4,6 +4,5 @@ export interface asset {
     precio: number;
     ValorResidual:number;
     CentroCosto:number;
-    resultado:number;
 }
 

@@ -1,34 +1,17 @@
-<form>
-    <div class="form-group form-inline">
-        <input class="form-control ml-2" type="text"
-            [ngModelOptions]="{standalone:true}" [(ngModel)]="searchText" />
-    </div>
-</form>
-
 <table id="table_empleado_Table" name="table_empleado" class="table
     table-striped">
     <thead>
         <tr>
-            <th scope="col">Cedula</th>
-            <th scope="col">Apellido1</th>
-            <th scope="col">Apellido2</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Departamento</th>
-            <th scope="col">Puesto</th>
-            <th scope="col">Fecha de Ingreso</th>
-            <th scope="col">Correo</th>
+            <th scope="col">Año</th>
+            <th scope="col">Depreciacion Acumulada</th>
+            <th scope="col">Valor Neto</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let employee of employees| filter:searchText">
-            <th scope="row">{{ employee.cedula }}</th>
-            <td>{{ employee.apellido1 }}</td>
-            <td>{{ employee.apellido2}}</td>
-            <td>{{ employee.nombre}}</td>
-            <td>{{ employee.departamento}}</td>
-            <td>{{ employee.puesto}}</td>
-            <td>{{ employee.fechaIn}}</td>
-            <td>{{ employee.correo}}</td>
+        <tr *ngFor="let calculo of calculos| filter:searchText">
+            <th scope="row">{{ calculo.t }}</th>
+            <td>{{ calculo.acumulada}}</td>
+            <td>{{ calculo.valor}}</td>
         </tr>
     </tbody>
 </table>

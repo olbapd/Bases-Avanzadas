@@ -57,18 +57,16 @@ export class DepreciationComponent implements OnInit {
                     "PorcentajeDepreciacion": json.data[_i].PorcentajeDepreciacion,
                     "precio": json.data[_i].Precio,
                     "ValorResidual": json.data[_i].ValorResidual,
-                    "CentroCosto": json.data[_i].CentroCosto,
-                    "resultado": this.calcular.straightLine(4, json.data[_i].Precio, json.data[_i].ValorResidual)
-
+                    "CentroCosto": json.data[_i].CentroCosto
                 });
                 console.log("this" + " " + this.calculos);
             }
         });
     }
-    updateEmployee() {
+    updateEmployee(T,B,VS) {
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(FirstMethodComponent, {
-            data: {}
+            data: [T,B,VS]
         });
     }
 

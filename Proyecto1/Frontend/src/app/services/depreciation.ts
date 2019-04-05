@@ -2,8 +2,18 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class Depreciation {
     constructor(){}
-    straightLine(t:number,B:number,VS:number) :number{
+    straightLine(t:number,B:number,VS:number){
+        var depAnual=(B-VS)/t;
+        let anual =[0];
+        for (var i=0; i<t;i++){
+            anual[i]=VS+((i+1)*depAnual);
+        }
+        return anual;
+    }
+
+    getDep(t:number,B:number,VS:number){
         return (B-VS)/t;
+
     }
     digitSum (t:number,B:number, VS:number, n:number){
         var vidaUtil= (n*(n+1))/2;
