@@ -396,6 +396,25 @@ SET NOCOUNT OFF
 GO
 
 -- =============================================
+-- Descripcion:	<Cambia el estado de una sede>
+-- Parametro de Entrada: <Ninguno>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[cerrarSede]
+	@IdSede int
+
+AS
+SET NOCOUNT ON
+
+UPDATE Sede SET 
+		[IdEstado] = 2
+		WHERE @IdSede = [Sede].IdSede
+
+SET NOCOUNT OFF
+GO
+
+
+-- =============================================
 -- Descripcion:	<Agregar una nueva sede>
 -- Parametro de Entrada: <NombreSede>
 -- Parametro de Salida: <Ninguno>
@@ -825,7 +844,7 @@ AS
 SET NOCOUNT ON
 
 SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
-[Empleado].Cedula, [SedeXEmpleado].FechaIngreso, [Departamento].Nombre, [Puesto].Nombre
+[Empleado].Cedula,[Empleado].Correo, [SedeXEmpleado].FechaIngreso, [Departamento].Nombre, [Puesto].Nombre
 FROM SedeXEmpleado
 INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
@@ -864,11 +883,13 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[getCalculos]
-	@CodigoActivo int
+	@CodigoActivo varchar(50)
 AS
 SET NOCOUNT ON
 
-SELECT [Activo].PorcentajeDepreciacion, [Activo].Precio, YEAR([Activo].FechaCompra), [Activo].ValorResidual
+SELECT [Activo].Codigo, [Activo].PorcentajeDepreciacion, [Activo].Precio, YEAR([Activo].FechaCompra), [Activo].ValorResidual,
+	[Activo].CentroCosto
+
 FROM Activo
 
 WHERE @CodigoActivo = [Activo].Codigo
