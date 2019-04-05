@@ -20,6 +20,9 @@ import { UpdateSedeComponent } from './dialogs/update_sede/udpate-sede.component
 import {CodeErrorComponent} from './dialogs/code_error/code_error.component';
 import { FotoService } from '../services/foto.service';
 
+import {DataTableModule} from "angular2-datatable";
+import { Observable, of } from 'rxjs'; // only need to import from rxjs
+
 
 @NgModule({
   imports: [
@@ -33,7 +36,8 @@ import { FotoService } from '../services/foto.service';
     MatIconModule,
     MatCardModule,
     MatToolbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DataTableModule
   ],
   declarations: [
     AdminComponent,

@@ -67,16 +67,16 @@ export class EmployeeComponent implements OnInit {
     get f() { return this.form.controls; }
     ngOnInit() {
         this.form = new FormGroup({
-           Nombre: new FormControl('Kenneth', Validators.required),
-           Apellido1: new FormControl('Alvarado', Validators.required),
-           Apellido2: new FormControl('Mendez', Validators.required),
-           Cedula: new FormControl('20202020', Validators.required),
-           Correo: new FormControl('pol@gmail.com', [Validators.required, Validators.email]),
-           Contrasena: new FormControl('alavarado', [Validators.required, Validators.minLength(8),Validators.maxLength(10)]),
-           FechaN: new FormControl('1996-12-12', Validators.required),
+           Nombre: new FormControl('', Validators.required),
+           Apellido1: new FormControl('', Validators.required),
+           Apellido2: new FormControl('', Validators.required),
+           Cedula: new FormControl('', Validators.required),
+           Correo: new FormControl('', [Validators.required, Validators.email]),
+           Contrasena: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(10)]),
+           FechaN: new FormControl('', Validators.required),
            Departamento: new FormControl('', Validators.required),
            Puesto: new FormControl('', Validators.required),
-           FechaR: new FormControl('2019-04-03', Validators.required),
+           FechaR: new FormControl('', Validators.required),
 
 
         });
@@ -171,7 +171,6 @@ export class EmployeeComponent implements OnInit {
                         "fechaIn":json.data[_i].FechaIngreso
                      });
                  }
-                 console.log(this.empleados);
                  
              });
          });
@@ -190,22 +189,29 @@ export class EmployeeComponent implements OnInit {
 
     }
     
-    deleteEmployee(id) {
-        const employee = this.empleados.findIndex(c=> c.cedula=== id);
+    deleteEmployee(id,apellido1,apellido2,nombre) {
         localStorage.setItem('Cedula',id);
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(DeleteComponent, {
-            data: {}
+            data: { 
+                    "cedula":id,
+                    "apellido1":apellido1,
+                    "apellido2":apellido2,
+                    "nombre":nombre
+                  }
         });
-        this.empleados.splice(employee,1);
         
     }
 
     
-    updateEmployee() {
+    updateEmployee(cedula,departamento,puesto) {
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(updateComponent, {
-            data: {}
+            data: {
+                    "Cedula":cedula,    
+                    "Departamento":departamento,
+                    "Puesto":puesto            
+                  }
         });
     }
 

@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RestApiService } from 'src/app/services/client_service';
 import { Router } from '@angular/router';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { updateComponent } from '../update_employee/update-employee.component';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component ({
 selector:'delete-confirm',
@@ -12,15 +13,17 @@ styleUrls:['./delete_confirm.component.css']
 })
 export class DeleteComponent implements OnInit{
     constructor(private modalService: NgbModal, public restApi: RestApiService, 
-        private router: Router,private dialogRef: MatDialogRef<updateComponent>){}
+        private router: Router,private dialogRef: MatDialogRef<updateComponent>, @Inject(MAT_DIALOG_DATA) public data: any){
+
+        }
     ngOnInit(){}
     onNoClick(): void {
         this.dialogRef.close();
        }
     confirmDelete(){
      let cedula = localStorage.getItem('Cedula');
-     console.log("sasa"+" "+cedula);
      this.restApi.quitarEmpleado(cedula).subscribe(res => {      
     }); 
+    window.location.reload();
  }
 }

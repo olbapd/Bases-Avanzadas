@@ -287,8 +287,8 @@ export class RestApiService {
     let body= {
       "typesIn":["varchar","varchar","varchar","varchar","int","int","int","float","date","date","int","int","int" ,"int" ,"int"],
       "typesOut":[],
-      "parameters":["Codigo","Nombre","Descripcion","Foto","Precio","TiempoGar","VidaU","PorcentajeD","FechaCompra","FechaRegistro","CentroCosto","ValorResidual","IdCategoria","IdMoneda","IdEstado"],
-      "values":[codigo,nombre,descripcion,foto,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,FechaR,centro_costo,valor_residual,categoria,moneda,4],
+      "parameters":["Codigo","Nombre","Descripcion","Foto","Precio","TiempoGar","VidaU","PorcentajeD","FechaCompra","FechaAsig","CentroCosto","ValorResidual","IdCategoria","IdMoneda","IdEstado"],
+      "values":[codigo,nombre,descripcion,foto,precio_compre,tiempo_garantia,vida_util,depreciacion,fecha_compra,FechaR,centro_costo,valor_residual,categoria,moneda,'4'],
       "ouputs":[],
       "name":"setActivo"
     }  

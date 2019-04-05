@@ -167,11 +167,12 @@
                         <td>{{ employee.puesto}}</td>
                         <td>{{ employee.fechaIn}}</td>
                         <td>
-                            <button mat-icon-button color="accent" class='btn btn-danger' (click)="updatesEmployee(employee.cedula)">
+                            <button mat-icon-button color="accent" class='btn btn-danger' (click)="updateEmployee(employee.cedula,employee.departamento,employee.puesto)">
                                 <mat-icon aria-label="Edit">edit</mat-icon>
                             </button> </td>
                         <td>
-                            <button class='btn btn-danger' (click)="deleteEmployee(employee.cedula)" >
+                            <button mat-icon-button color="accent" class='btn btn-danger' (click)="deleteEmployee(employee.cedula,employee.apellido1,employee
+                            .apellido2,employee.nombre)" >
                                 <mat-icon aria-label="Edit">delete</mat-icon>
                             </button> </td>
 
