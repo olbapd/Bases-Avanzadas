@@ -48,12 +48,11 @@
 
   </div>
   <div class="col-md-8">
-      <form>
+      <form >
           <div class="form-group form-inline">
-              Full text search: <input class="form-control ml-2" type="text" [formControl]="filter"/>
+            <input class="form-control ml-2" type="text" [ngModelOptions]="{standalone:true}" [(ngModel)]="searchText"/>
           </div>
         </form>
-        
         <table class="table table-striped">
           <thead>
           <tr>
@@ -73,6 +72,19 @@
                 <td>{{ calculo.ValorResidual}}</td>
                 <td>{{ calculo.CentroCosto}}</td>
                 <td>{{ calculo.resultado}}</td>
+                <td>
+                  <button mat-icon-button color="accent" class='btn btn-danger'
+                      (click)="updateEmployee()">
+                      <mat-icon aria-label="Edit">edit</mat-icon>
+                  </button> </td>
+              <td>
+
+                  <td>
+                      <button mat-icon-button color="accent" class='btn btn-danger'
+                          (click)="oso()">
+                          <mat-icon aria-label="Edit">edit2</mat-icon>
+                      </button> </td>
+                  <td>
             </tr>
         </tbody>
         </table>

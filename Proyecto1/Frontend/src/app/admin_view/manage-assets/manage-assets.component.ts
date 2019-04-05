@@ -255,7 +255,7 @@ export class ManageAssetsComponent implements OnInit {
       const myObjStr = JSON.stringify(res)
       const json = JSON.parse(myObjStr);
       let IdSede = json.data[0].IdSede;
-      this.restApi.getCodigoXCategoria_admin(idCategoria,IdSede).subscribe((res) => {
+      this.restApi.getCodigoXCategoria_admin(idCategoria, IdSede).subscribe((res) => {
         const myObjStr = JSON.stringify(res)
         const json = JSON.parse(myObjStr);
         var count = Object.keys(json.data).length;
@@ -355,17 +355,23 @@ export class ManageAssetsComponent implements OnInit {
     defaulOption.text = "--Codigo--";
     defaulOption.value = 0;
     dropdown.append(defaulOption);
-    this.restApi.getCodigoDynamic(idAccion, idCategoria).subscribe((res) => {
+    let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
+    this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
       const myObjStr = JSON.stringify(res)
       const json = JSON.parse(myObjStr);
-      var count = Object.keys(json.data).length;
-      for (var _i = 0; _i < count; _i++) {
-        let option;
-        option = document.createElement('option');
-        option
-        option.text = json.data[_i].Codigo;
-        dropdown.append(option);
-      }
+      let IdSede = json.data[0].IdSede;
+      this.restApi.getCodigoDynamic_admin(idAccion, idCategoria,IdSede).subscribe((res) => {
+        const myObjStr = JSON.stringify(res)
+        const json = JSON.parse(myObjStr);
+        var count = Object.keys(json.data).length;
+        for (var _i = 0; _i < count; _i++) {
+          let option;
+          option = document.createElement('option');
+          option
+          option.text = json.data[_i].Codigo;
+          dropdown.append(option);
+        }
+      });;
     });;
   }
 }
