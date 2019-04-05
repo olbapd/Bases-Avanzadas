@@ -674,9 +674,13 @@ CREATE OR ALTER PROC [dbo].[updateEmpleado]
 	
 AS
 BEGIN
-
+	DECLARE
+	@IdEmpleado int 
+	SELECT @IdEmpleado = Empleado.IdEmpleado FROM Empleado WHERE @Cedula = Empleado.Cedula
+	
 	BEGIN TRAN
 	BEGIN TRY
+
 		UPDATE Empleado SET 
 		[Correo] = @Correo,
 		[Contrasena]=  @Contrasena,
@@ -684,10 +688,11 @@ BEGIN
 		[IdPuesto] = @IdPuesto,
 		[Foto] = @Foto
 		WHERE @Cedula = [Empleado].Cedula
-		
-				INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso, FechaSalida)
-		VALUES (@IdSede, @Cedula, @FechaIngreso, NULL)
-		
+	 
+
+		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso, FechaSalida)
+		VALUES (@IdSede, @IdEmpleado, @FechaIngreso, NULL)
+
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -695,6 +700,7 @@ BEGIN
 		ROLLBACK TRANSACTION
 	END CATCH
 END
+
 GO
 
 -- =============================================
