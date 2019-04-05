@@ -14,6 +14,9 @@ import { DeleteComponent } from '../dialogs/delete_confirm/delete_confirm.compon
 import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from '@angular/forms';
 import { FotoService } from '../../services/foto.service';
 
+import { FilterPipe } from 'src/app/services/filter.pipe';
+
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @Component({
     selector: 'crud-employee',
@@ -22,6 +25,7 @@ import { FotoService } from '../../services/foto.service';
 })
 
 export class EmployeeComponent implements OnInit {
+    searchText;
     photo: any;
     isPopupOpened = false;
     submitted = false;

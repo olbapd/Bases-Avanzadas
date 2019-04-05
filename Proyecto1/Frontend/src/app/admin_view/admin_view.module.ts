@@ -22,6 +22,8 @@ import { FotoService } from '../services/foto.service';
 
 import {DataTableModule} from "angular2-datatable";
 import { Observable, of } from 'rxjs'; // only need to import from rxjs
+import { FilterPipe } from '../services/filter.pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { Observable, of } from 'rxjs'; // only need to import from rxjs
     MatCardModule,
     MatToolbarModule,
     ReactiveFormsModule,
-    DataTableModule
+    DataTableModule,
+    Ng2SearchPipeModule
   ],
   declarations: [
     AdminComponent,
@@ -48,7 +51,8 @@ import { Observable, of } from 'rxjs'; // only need to import from rxjs
     updateComponent,
     DeleteComponent,
     UpdateSedeComponent,
-    CodeErrorComponent
+    CodeErrorComponent,
+    FilterPipe
 
 
   ],
