@@ -85,7 +85,15 @@ WHERE @IdCategoria = [Activo].IdCategoria
 
 GO
 
+GO 
+CREATE OR ALTER PROC [dbo].[sp_getActivoBySede]
+        @IdSede int
 
+AS 
+SELECT [Activo].Codigo, [Activo].Nombre, [Activo].Descipcion 
+FROM Activo
+WHERE @IdSede = Activo.IdSede
+GO
 GO
 CREATE OR ALTER PROC [dbo].[sp_getActivoByCategory]
 	@IdCategoria int,
