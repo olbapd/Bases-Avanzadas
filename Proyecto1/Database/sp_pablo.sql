@@ -157,6 +157,7 @@ SELECT
 	[Empleado].Nombre,
 	[Empleado].Apellido1, 
 	[Empleado].Apellido2,
+	[Empleado].Cedula,
 	[Sede].Nombre AS Sede,
 	[Sede].IdSede AS IdSede,
 	[Provincia].Nombre AS Provincia,
