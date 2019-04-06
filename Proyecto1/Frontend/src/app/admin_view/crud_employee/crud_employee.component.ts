@@ -188,7 +188,9 @@ export class EmployeeComponent implements OnInit {
                         "departamento": json.data[_i].Nombre[1],
                         "puesto": json.data[_i].Nombre[2],
                         "fechaIn":  FechaIn.substring(0,10),
-                        "correo": json.data[_i].Correo
+                        "correo": json.data[_i].Correo,
+                        "contrasena":json.data[_i].Contrasena,
+                        "foto":json.data[_i].Foto
 
                     });
                 }
@@ -222,14 +224,16 @@ export class EmployeeComponent implements OnInit {
     }
 
 
-    updateEmployee(cedula, departamento, puesto, correo) {
+    updateEmployee(cedula, departamento, puesto, correo,contrasena,foto) {
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(updateComponent, {
             data: {
                 "Cedula": cedula,
                 "Departamento": departamento,
                 "Puesto": puesto,
-                "Correo": correo
+                "Correo": correo,
+                "Contrasena":contrasena,
+                "Foto":foto
             }
         });
     }

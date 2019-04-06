@@ -7,5 +7,6 @@ export interface Empleado{
     puesto:string;
     fechaIn:string;
     correo:string;
-
+    contrasena:string;
+    foto:string;
 }
