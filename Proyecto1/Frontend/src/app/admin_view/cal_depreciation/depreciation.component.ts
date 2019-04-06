@@ -36,44 +36,49 @@ export class DepreciationComponent implements OnInit {
     categoria;
 
     calculos: asset[] = [];
-    
+
     isPopupOpened = false;
 
     constructor(
-        private dialog: MatDialog,public calcular: Depreciation, 
-         private modalService: NgbModal, public restApi: RestApiService,
-         private router: Router) {}
-    
+        private dialog: MatDialog, public calcular: Depreciation,
+        private modalService: NgbModal, public restApi: RestApiService,
+        private router: Router) { }
+
     calculate() {
-        console.log("si");
-        let option;
-        this.restApi.getCalculosXSede(1,1).subscribe((res) => {
+        let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
+        this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
-            var count = Object.keys(json.data).length;
-            for (var _i = 0; _i < count; _i++) {
-                this.calculos.push({
-                    "codigo": json.data[_i].Codigo,
-                    "PorcentajeDepreciacion": json.data[_i].PorcentajeDepreciacion,
-                    "precio": json.data[_i].Precio,
-                    "ValorResidual": json.data[_i].ValorResidual,
-                    "CentroCosto": json.data[_i].CentroCosto
-                });
-                console.log("this" + " " + this.calculos);
-            }
+            const idSede = json.data[0].IdSede;
+
+            this.restApi.getCalculosXSede(1, idSede).subscribe((res) => {
+                const myObjStr = JSON.stringify(res)
+                const json = JSON.parse(myObjStr);
+                var count = Object.keys(json.data).length;
+                for (var _i = 0; _i < count; _i++) {
+                    this.calculos.push({
+                        "codigo": json.data[_i].Codigo,
+                        "PorcentajeDepreciacion": json.data[_i].PorcentajeDepreciacion,
+                        "precio": json.data[_i].Precio,
+                        "ValorResidual": json.data[_i].ValorResidual,
+                        "CentroCosto": json.data[_i].CentroCosto
+                    });
+                    console.log("this" + " " + this.calculos);
+                }
+            });
         });
     }
-    firstMethod(T,B,VS) {
+    firstMethod(T, B, VS) {
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(FirstMethodComponent, {
-            data: [T,B,VS]
+            data: [T, B, VS]
         });
     }
 
-    secondMethod(T,B,VS) {
+    secondMethod(T, B, VS) {
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(SecondMethodComponent, {
-            data: [T,B,VS]
+            data: [T, B, VS]
         });
     }
 

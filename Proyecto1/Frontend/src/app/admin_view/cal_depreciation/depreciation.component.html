@@ -12,16 +12,6 @@
           <h5 class="card-title"> Calculo Depreciacion</h5>
           <div class="row text-center">
 
-            <h6 class="card-subtitle mb-2 text-muted">Metodo</h6>
-            <div class="input-group mb-3">
-              <select class="form-control" #select_metodo
-                data-style="btn-primary" data-live-search="true"
-                data-selectpicker data-collection-name="items"
-                ng-model="selected">
-                <option *ngFor="let caltype of calType">{{caltype}}</option>
-              </select>
-            </div>
-
             <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
             <div class="input-group mb-3">
               <select class="form-control" #select_categoria
@@ -38,11 +28,6 @@
                 placeholder="1" aria-label="Cantidad_Anos"
                 aria-describedby="basic-addon1">
             </div>
-
-          </div>
-          <button (click)="calculate(select_metodo.value,select_categoria)"
-            type="button" class="btn btn-primary">Calcular</button>
-        </div>
       </div>
     </div>
 
