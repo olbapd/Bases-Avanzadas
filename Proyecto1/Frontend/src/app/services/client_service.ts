@@ -42,6 +42,21 @@ export class RestApiService {
     return this.http.post(this.apiURL + urls.sp_url + 'calculos', body).pipe(retry(1), catchError(this.handleError));
   }
 
+  getCalculosXSede(idCategoria,idSede) {
+    let body = {
+      "typesIn":["int","int"],
+      "typesOut":[],
+      "parameters":["IdCategoria","IdSede"],
+      "values":[idCategoria,idSede],
+      "ouputs":[],
+      "name":"[sp_calculosBySede]"
+    }
+      ;
+    return this.http.post(this.apiURL + urls.sp_url + 'sp_calculosBySede', body).pipe(retry(1), catchError(this.handleError));
+  }
+
+  
+
   getSate(username, password) {
 
     let body = {

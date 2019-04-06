@@ -10,50 +10,10 @@ import { FormControl } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-
-interface Country {
-    name: string;
-    flag: string;
-    area: number;
-    population: number;
-}
-
-const COUNTRIES: Country[] = [
-    {
-        name: 'Russia',
-        flag: 'f/f3/Flag_of_Russia.svg',
-        area: 17075200,
-        population: 146989754
-    },
-    {
-        name: 'Canada',
-        flag: 'c/cf/Flag_of_Canada.svg',
-        area: 9976140,
-        population: 36624199
-    },
-    {
-        name: 'United States',
-        flag: 'a/a4/Flag_of_the_United_States.svg',
-        area: 9629091,
-        population: 324459463
-    },
-    {
-        name: 'China',
-        flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
-        area: 9596960,
-        population: 1409517397
-    }
-];
-
-function search(text: string, pipe: PipeTransform): Country[] {
-    return COUNTRIES.filter(country => {
-        const term = text.toLowerCase();
-        return country.name.toLowerCase().includes(term)
-            || pipe.transform(country.area).includes(term)
-            || pipe.transform(country.population).includes(term);
-    });
-}
-
+import { Depreciation } from 'src/app/services/depreciation';
+import { MatDialog } from '@angular/material';
+import { FirstMethodComponent } from '../dialogs/first_method/first-method.component';
+import { SecondMethodComponent } from '../dialogs/second_method/second-method.component';
 
 
 
@@ -65,31 +25,55 @@ function search(text: string, pipe: PipeTransform): Country[] {
 
 })
 export class DepreciationComponent implements OnInit {
-    countries$: Observable<Country[]>;
+    ngOnInit(): void {
+        this.calculate();
+        console.log("siiiiiiii");
+    }
+
     filter = new FormControl('');
 
     calType = ["Lineal", "Suma de Digitos"];
     categoria;
 
-    constructor(pipe: DecimalPipe, private modalService: NgbModal, public restApi: RestApiService, private router: Router) {
-        this.countries$ = this.filter.valueChanges.pipe(
-            startWith(''),
-            map(text => search(text, pipe))
-        );
+    calculos: asset[] = [];
 
+    isPopupOpened = false;
 
+    constructor(
+        private dialog: MatDialog, public calcular: Depreciation,
+        private modalService: NgbModal, public restApi: RestApiService,
+        private router: Router) { }
+
+    calculate() {
+        console.log("si");
+        let option;
+        this.restApi.getCalculos(1).subscribe((res) => {
+            const myObjStr = JSON.stringify(res)
+            const json = JSON.parse(myObjStr);
+            var count = Object.keys(json.data).length;
+            for (var _i = 0; _i < count; _i++) {
+                this.calculos.push({
+                    "codigo": json.data[_i].Codigo,
+                    "PorcentajeDepreciacion": json.data[_i].PorcentajeDepreciacion,
+                    "precio": json.data[_i].Precio,
+                    "ValorResidual": json.data[_i].ValorResidual,
+                    "CentroCosto": json.data[_i].CentroCosto
+                });
+                console.log("this" + " " + this.calculos);
+            }
+        });
+    }
+    firstMethod(T, B, VS) {
+        this.isPopupOpened = true;
+        const dialogRef = this.dialog.open(FirstMethodComponent, {
+            data: [T, B, VS]
+        });
     }
 
-
-    calculate(metodo, categoria) {
-
+    secondMethod(T, B, VS) {
+        this.isPopupOpened = true;
+        const dialogRef = this.dialog.open(SecondMethodComponent, {
+            data: [T, B, VS]
+        });
     }
-
-
-    ngOnInit() {
-
-
-    }
-
-
 }

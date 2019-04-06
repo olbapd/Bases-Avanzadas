@@ -47,7 +47,7 @@ export class DepreciationComponent implements OnInit {
     calculate() {
         console.log("si");
         let option;
-        this.restApi.getCalculos(1).subscribe((res) => {
+        this.restApi.getCalculosXSede(1,1).subscribe((res) => {
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
             var count = Object.keys(json.data).length;

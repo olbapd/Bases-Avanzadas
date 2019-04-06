@@ -1,6 +1,5 @@
 <app-admin></app-admin>
 
-
 <div class="row">
   <div class="col-md-4">
 
@@ -32,12 +31,13 @@
               </select>
             </div>
 
-            <h6 class="card-subtitle mb-2 text-muted">Codigo Activo</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Cantidad Años</h6>
             <div class="input-group mb-3">
               <input type="text" #txt_cod_activo class="form-control"
-                placeholder="1000000" aria-label="Codigo_Activo"
+                placeholder="1" aria-label="Cantidad_Anos"
                 aria-describedby="basic-addon1">
             </div>
+
           </div>
           <button (click)="calculate(select_metodo.value,select_categoria)"
             type="button" class="btn btn-primary">Calcular</button>
@@ -47,36 +47,43 @@
 
   </div>
   <div class="col-md-8">
-      <form>
-          <div class="form-group form-inline">
-              Full text search: <input class="form-control ml-2" type="text" [formControl]="filter"/>
-          </div>
-        </form>
-        
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th scope="col">Codigo</th>
-            <th scope="col">Periodo</th>
-            <th scope="col">Depreciacion Anual</th>
-            <th scope="col">Depreciacion acumulada</th>
-            <th scope="col">Valor neto</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let country of countries$ | async; index as i">
-            <th scope="row">{{ i + 1 }}</th>
+    <form>
+      <div class="form-group form-inline">
+        <input class="form-control ml-2" type="text"
+          [ngModelOptions]="{standalone:true}" [(ngModel)]="searchText" />
+      </div>
+    </form>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Codigo</th>
+          <th scope="col">Porcentaje Depreciacion</th>
+          <th scope="col">Precio Inicial</th>
+          <th scope="col">Valor Residual</th>
+          <th scope="col">Centro Costo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let calculo of calculos| filter:searchText">
+          <th scope="row">{{ calculo.codigo }}</th>
+          <td>{{ calculo.PorcentajeDepreciacion}}</td>
+          <td>{{ calculo.precio}}</td>
+          <td>{{ calculo.ValorResidual}}</td>
+          <td>{{ calculo.CentroCosto}}</td>
+          <td>
+            <button mat-icon-button color="accent" class='btn btn-danger'
+              (click)="firstMethod(4,calculo.precio,calculo.ValorResidual)">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button> </td>
+          <td>
             <td>
-              <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
-              <ngb-highlight [result]="country.name" [term]="filter.value"></ngb-highlight>
-            </td>
-            <td><ngb-highlight [result]="country.area | number" [term]="filter.value"></ngb-highlight></td>
-            <td><ngb-highlight [result]="country.population | number" [term]="filter.value"></ngb-highlight></td>
-          </tr>
+              <button mat-icon-button color="accent" class='btn btn-danger'
+                (click)="secondMethod(4,calculo.precio,calculo.ValorResidual)">
+                <mat-icon aria-label="Edit">edit2</mat-icon>
+              </button> </td>
+            <td>
+            </tr>
           </tbody>
         </table>
-  </div>
-
-
-
-</div>
+      </div>
+    </div>

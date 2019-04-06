@@ -24,6 +24,8 @@ import { DeleteSedeComponent } from './dialogs/delete_confirm_Sede/delete_confir
 import {DataTableModule} from "angular2-datatable";
 import { Observable, of } from 'rxjs'; // only need to import from rxjs
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FirstMethodComponent } from './dialogs/first_method/first-method.component';
+import { SecondMethodComponent } from './dialogs/second_method/second-method.component';
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     DeleteComponent,
     DeleteSedeComponent,
     UpdateSedeComponent,
-    CodeErrorComponent
+    CodeErrorComponent,
+    FirstMethodComponent,
+    SecondMethodComponent
     
 
 
@@ -60,7 +64,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
   providers: [
     FotoService
   ],
-  entryComponents:[updateComponent, DeleteComponent, DeleteSedeComponent,UpdateSedeComponent,CodeErrorComponent]
+  entryComponents:[updateComponent, DeleteComponent, 
+    DeleteSedeComponent,UpdateSedeComponent,CodeErrorComponent,FirstMethodComponent,SecondMethodComponent]
 })
 
 export class Manager_ViewModule { }
