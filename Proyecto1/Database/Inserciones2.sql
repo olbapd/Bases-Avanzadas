@@ -848,3 +848,51 @@ EXEC setActivo 'AC00076','Licencias de Programas4','Instaladores de programas va
 EXEC setActivo 'AC00077','Licencias de Programas5','Instaladores de programas varios T5','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',8,500,13,1,4
 EXEC setActivo 'AC00078','Licencias de Programas6','Instaladores de programas varios T6','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',8,500,13,1,4
 EXEC setActivo 'AC00079','Licencias de Programas7','Instaladores de programas varios T7','Enlace',3000000,2,3,4.5,'2018-11-30','2018-11-08',8,500,13,1,4
+
+
+DECLARE
+	@Correo varchar(50),
+	@Nombre varchar(50),
+	@Apellido varchar(50)
+
+EXEC sp_assignActive 'AC00001','2015000001',3,'Oficina 20',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00002','2015000002',3,'Oficina 21',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00003','2015000003',3,'Oficina 22',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00004','2015000004',3,'Oficina 23',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00005','2015000005',3,'Oficina 24',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00006','2015000006',3,'Oficina 25',@Correo, @Nombre, @Apellido
+
+EXEC sp_assignActive 'AC00043','2015000001',3,'Oficina 20',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00044','2015000002',3,'Oficina 21',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00045','2015000003',3,'Oficina 22',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00046','2015000004',3,'Oficina 23',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00047','2015000005',3,'Oficina 24',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00048','2015000006',3,'Oficina 25',@Correo, @Nombre, @Apellido
+
+EXEC sp_assignActive 'AC00013','2015000001',3,'Oficina 20',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00014','2015000002',3,'Oficina 21',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00015','2015000003',3,'Oficina 22',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00016','2015000004',3,'Oficina 23',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00017','2015000005',3,'Oficina 24',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00018','2015000006',3,'Oficina 25',@Correo, @Nombre, @Apellido
+
+EXEC sp_assignActive 'AC00007','2015000007',3,'Oficina 26',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00008','2015000008',3,'Oficina 27',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00009','2015000009',3,'Oficina 28',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00010','2015000010',3,'Oficina 29',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00011','2015000011',3,'Oficina 30',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00012','2015000012',3,'Oficina 31',@Correo, @Nombre, @Apellido
+
+EXEC sp_assignActive 'AC00037','2015000007',3,'Oficina 26',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00038','2015000008',3,'Oficina 27',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00039','2015000009',3,'Oficina 28',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00040','2015000010',3,'Oficina 29',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00041','2015000011',3,'Oficina 30',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00042','2015000012',3,'Oficina 31',@Correo, @Nombre, @Apellido
+
+EXEC sp_assignActive 'AC00061','2015000007',3,'Oficina 26',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00062','2015000008',3,'Oficina 27',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00063','2015000009',3,'Oficina 28',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00064','2015000010',3,'Oficina 29',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00065','2015000011',3,'Oficina 30',@Correo, @Nombre, @Apellido
+EXEC sp_assignActive 'AC00066','2015000012',3,'Oficina 31',@Correo, @Nombre, @Apellido
