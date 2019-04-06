@@ -14,7 +14,8 @@
 
             <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
             <div class="input-group mb-3">
-              <select class="form-control" #select_categoria
+              <select class="form-control" name="categoria"
+                id="categoria-Dropdown" #select_categoria
                 data-style="btn-primary" data-live-search="true"
                 data-selectpicker data-collection-name="items"
                 ng-model="selected">
@@ -28,48 +29,48 @@
                 placeholder="1" aria-label="Cantidad_Anos"
                 aria-describedby="basic-addon1">
             </div>
-      </div>
-    </div>
+          </div>
+        </div>
 
-  </div>
-  <div class="col-md-8">
-    <form>
-      <div class="form-group form-inline">
-        <input class="form-control ml-2" type="text"
-          [ngModelOptions]="{standalone:true}" [(ngModel)]="searchText" />
       </div>
-    </form>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Codigo</th>
-          <th scope="col">Porcentaje Depreciacion</th>
-          <th scope="col">Precio Inicial</th>
-          <th scope="col">Valor Residual</th>
-          <th scope="col">Centro Costo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let calculo of calculos| filter:searchText">
-          <th scope="row">{{ calculo.codigo }}</th>
-          <td>{{ calculo.PorcentajeDepreciacion}}</td>
-          <td>{{ calculo.precio}}</td>
-          <td>{{ calculo.ValorResidual}}</td>
-          <td>{{ calculo.CentroCosto}}</td>
-          <td>
-            <button mat-icon-button color="accent" class='btn btn-danger'
-              (click)="firstMethod(4,calculo.precio,calculo.ValorResidual)">
-              <mat-icon aria-label="Edit">edit</mat-icon>
-            </button> </td>
-          <td>
-            <td>
-              <button mat-icon-button color="accent" class='btn btn-danger'
-                (click)="secondMethod(4,calculo.precio,calculo.ValorResidual)">
-                <mat-icon aria-label="Edit">edit2</mat-icon>
-              </button> </td>
-            <td>
+      <div class="col-md-8">
+        <form>
+          <div class="form-group form-inline">
+            <input class="form-control ml-2" type="text"
+              [ngModelOptions]="{standalone:true}" [(ngModel)]="searchText" />
+          </div>
+        </form>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Codigo</th>
+              <th scope="col">Porcentaje Depreciacion</th>
+              <th scope="col">Precio Inicial</th>
+              <th scope="col">Valor Residual</th>
+              <th scope="col">Centro Costo</th>
             </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+          </thead>
+          <tbody>
+            <tr *ngFor="let calculo of calculos| filter:searchText">
+              <th scope="row">{{ calculo.codigo }}</th>
+              <td>{{ calculo.PorcentajeDepreciacion}}</td>
+              <td>{{ calculo.precio}}</td>
+              <td>{{ calculo.ValorResidual}}</td>
+              <td>{{ calculo.CentroCosto}}</td>
+              <td>
+                <button mat-icon-button color="accent" class='btn btn-danger'
+                  (click)="firstMethod(4,calculo.precio,calculo.ValorResidual)">
+                  <mat-icon aria-label="Edit">edit</mat-icon>
+                </button> </td>
+              <td>
+                <td>
+                  <button mat-icon-button color="accent" class='btn btn-danger'
+                    (click)="secondMethod(4,calculo.precio,calculo.ValorResidual)">
+                    <mat-icon aria-label="Edit">edit2</mat-icon>
+                  </button> </td>
+                <td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>

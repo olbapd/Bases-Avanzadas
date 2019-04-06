@@ -6,7 +6,7 @@ import { RestApiService } from 'src/app/services/client_service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { asset } from './../../interfaces/assets_Structure';
 import { DecimalPipe } from '@angular/common';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -25,6 +25,9 @@ import { SecondMethodComponent } from '../dialogs/second_method/second-method.co
 
 })
 export class DepreciationComponent implements OnInit {
+
+
+    form: FormGroup;
     ngOnInit(): void {
         this.calculate();
         console.log("siiiiiiii");
@@ -46,12 +49,14 @@ export class DepreciationComponent implements OnInit {
 
     calculate() {
         let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
+        /*Tengo duda de si el valor del DropDown Categoria se tomará bien*/
+        let categoria = this.form.get('Categoria').value;
         this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
             const idSede = json.data[0].IdSede;
 
-            this.restApi.getCalculosXSede(1, idSede).subscribe((res) => {
+            this.restApi.getCalculosXSede(categoria, idSede).subscribe((res) => {
                 const myObjStr = JSON.stringify(res)
                 const json = JSON.parse(myObjStr);
                 var count = Object.keys(json.data).length;
@@ -82,8 +87,20 @@ export class DepreciationComponent implements OnInit {
         });
     }
 
-
-
-
+    CategoriaDropdown() {
+        let option;
+        let dropdown = document.getElementById('categoria-Dropdown');
+        this.restApi.getCategorias().subscribe((res) => {
+            const myObjStr = JSON.stringify(res)
+            const json = JSON.parse(myObjStr);
+            var count = Object.keys(json.data).length;
+            for (var _i = 0; _i < count; _i++) {
+                option = document.createElement('option');
+                option.text = json.data[_i].Nombre;
+                option.value = json.data[_i].IdCategoria;
+                dropdown.append(option);
+            }
+        });;
+    }
 
 }
