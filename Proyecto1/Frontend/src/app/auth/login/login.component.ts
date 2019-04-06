@@ -31,6 +31,11 @@ export class LoginComponent implements OnInit {
                 console.log("esta:"+" "+myObjStr);
                 localStorage.setItem('IdEmpleado', json.data.IdEmpleado);
                 localStorage.setItem('IdPuesto',json.data.IdPuesto);
+                this.restApi.getSedeXEmpleado(json.data.IdEmpleado).subscribe((res)=>{
+                    const myObjStr = JSON.stringify(res)
+                       const json = JSON.parse(myObjStr);
+                       localStorage.setItem('IdSede',json.data[0].IdSede);
+                   });
                 if((json.data.IdPuesto)==2){
                     this.router.navigate(['./admin_view/admin']); //ruta a admin si el login es exitoso
 

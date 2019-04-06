@@ -28,11 +28,6 @@ export class DepreciationComponent implements OnInit {
 
 
     form: FormGroup;
-    ngOnInit(): void {
-        this.calculate();
-        console.log("siiiiiiii");
-    }
-
     filter = new FormControl('');
 
     calType = ["Lineal", "Suma de Digitos"];
@@ -47,16 +42,22 @@ export class DepreciationComponent implements OnInit {
         private modalService: NgbModal, public restApi: RestApiService,
         private router: Router) { }
 
+    ngOnInit() {
+        this.CategoriaDropdown();
+        this.calculate();
+        console.log("siiiiiiii");
+    }
+
     calculate() {
         let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
         /*Tengo duda de si el valor del DropDown Categoria se tomará bien*/
-        let categoria = this.form.get('Categoria').value;
+       // let categoria = this.form.get('Categoria').value;
         this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
             const idSede = json.data[0].IdSede;
 
-            this.restApi.getCalculosXSede(categoria, idSede).subscribe((res) => {
+            this.restApi.getCalculosXSede(1, 1).subscribe((res) => {
                 const myObjStr = JSON.stringify(res)
                 const json = JSON.parse(myObjStr);
                 var count = Object.keys(json.data).length;

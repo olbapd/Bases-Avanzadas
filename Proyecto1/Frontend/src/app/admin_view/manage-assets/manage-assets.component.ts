@@ -163,17 +163,32 @@ export class ManageAssetsComponent implements OnInit {
       return;
     }
     else {
-      console.log("si1");
-      this.restApi.setAssignActivo(Codigo, Cedula, DetalleUbi).subscribe((res) => {
+      this.restApi.getIdEmpleado(Cedula).subscribe((res) => {
         const myObjStr = JSON.stringify(res)
         const json = JSON.parse(myObjStr);
+        this.restApi.getSedeXEmpleado(json.data[0].IdEmpleado).subscribe((res) => {
+          const myObjStr = JSON.stringify(res)
+          const json = JSON.parse(myObjStr);
+          if (json.data[0].IdSede == localStorage.getItem('IdSede')) {
+            this.restApi.setAssignActivo(Codigo, Cedula, DetalleUbi).subscribe((res) => {
+              const myObjStr = JSON.stringify(res)
+              const json = JSON.parse(myObjStr);
+              if (json.success == true) {
+                btn.setAttribute('class', 'btn btn-success');
 
-        if (json.success == true) {
-          console.log("si2");
-          btn.setAttribute('class', 'btn btn-success');
+              }
+            });;
 
-        }
+          }
+          else {
+            window.alert("El usuario código:" + " " + Cedula + "," + " " + "no pertenece a esta sede");
+            btn.setAttribute('class', 'btn btn-danger');
+          }
+        });
       });;
+
+
+
     }
   }
   EstadoDropdown() {
@@ -360,7 +375,7 @@ export class ManageAssetsComponent implements OnInit {
       const myObjStr = JSON.stringify(res)
       const json = JSON.parse(myObjStr);
       let IdSede = json.data[0].IdSede;
-      this.restApi.getCodigoDynamic_admin(idAccion, idCategoria,IdSede).subscribe((res) => {
+      this.restApi.getCodigoDynamic_admin(idAccion, idCategoria, IdSede).subscribe((res) => {
         const myObjStr = JSON.stringify(res)
         const json = JSON.parse(myObjStr);
         var count = Object.keys(json.data).length;

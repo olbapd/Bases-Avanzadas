@@ -325,6 +325,17 @@ export class RestApiService {
     }
     return this.http.post(this.apiURL + urls.sp_url + 'getEmpleados', body).pipe(retry(1), catchError(this.handleError));
   }
+  getIdEmpleado(Cedula) {
+    let body = {
+      "typesIn": ["varchar"],
+      "typesOut": [],
+      "parameters": ["Cedula"],
+      "values": [Cedula],
+      "ouputs": [],
+      "name": "getIdEmpleado"
+    }
+    return this.http.post(this.apiURL + urls.sp_url + 'getIdEmpleado', body).pipe(retry(1), catchError(this.handleError));
+  }
 
   getQuitarActivo(Codigo, IdEstado) {
     let body = {
