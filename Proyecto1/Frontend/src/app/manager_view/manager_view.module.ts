@@ -19,6 +19,7 @@ import { DeleteComponent } from './dialogs/delete_confirm/delete_confirm.compone
 import { UpdateSedeComponent } from './dialogs/update_sede/udpate-sede.component';
 import {CodeErrorComponent} from './dialogs/code_error/code_error.component';
 import { FotoService } from '../services/foto.service';
+import { DeleteSedeComponent } from './dialogs/delete_confirm_Sede/delete_confirmSede.component';
 
 import {DataTableModule} from "angular2-datatable";
 import { Observable, of } from 'rxjs'; // only need to import from rxjs
@@ -49,6 +50,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     SedeComponent,
     updateComponent,
     DeleteComponent,
+    DeleteSedeComponent,
     UpdateSedeComponent,
     CodeErrorComponent
     

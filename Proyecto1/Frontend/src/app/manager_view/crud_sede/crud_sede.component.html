@@ -26,6 +26,42 @@
                         </div>
 
 
+                        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Provincia</h6>
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <select class="form-control" id="Provincia-Dropdown" name="Provincia"
+                                    formControlName="Provincia" #select_prov data-style="btn-primary"
+                                    data-live-search="true" data-selectpicker data-collection-name="items"
+                                    ng-model="selected"
+                                    (change)="CantonDropdown(select_prov.value)"
+                                    [ngClass]="{ 'is-invalid': submitted && f.Provincia.errors }">
+                                    <option [ngValue]="null">Seleccione un Provincia</option>
+                                </select>
+                                <div *ngIf="submitted && f.Provincia.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Provincia.errors.required">Provincia Requerida</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Canton</h6>
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <select class="form-control" id="Canton-Dropdown" name="Canton"
+                                    formControlName="Canton" #select_canton data-style="btn-primary"
+                                    data-live-search="true" data-selectpicker data-collection-name="items"
+                                    ng-model="selected"
+                                    (change)="DistritoDropdown(select_canton.value)"
+                                    [ngClass]="{ 'is-invalid': submitted && f.Canton.errors }">
+                                    <option [ngValue]="null">Seleccione un Provincia</option>
+                                </select>
+                                <div *ngIf="submitted && f.Canton.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Canton.errors.required">Canton Requerido</div>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Distrito</h6>
                         <div class="form-group">
                             <div class="input-group mb-3">
@@ -83,7 +119,7 @@
                                 <mat-icon aria-label="Edit">edit</mat-icon>
                             </button> </td>
                         <td>
-                            <button class='btn btn-danger' (click)="deleteSede()">
+                            <button class='btn btn-danger' (click)="deleteSede(sede.id,sede.name)">
                                 <mat-icon aria-label="Edit">delete</mat-icon>
                             </button> </td>
 

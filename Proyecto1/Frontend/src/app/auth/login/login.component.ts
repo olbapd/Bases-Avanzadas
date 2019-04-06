@@ -39,6 +39,9 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['./manager_view/admin']); //ruta a admin si el login es exitoso
 
                 }
+                else{
+                    this.router.navigate(['../employee']);
+                }
                
             }
             else{

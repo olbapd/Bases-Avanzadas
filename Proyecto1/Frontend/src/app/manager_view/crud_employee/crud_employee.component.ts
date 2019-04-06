@@ -198,7 +198,6 @@ export class EmployeeComponent implements OnInit {
     }
 
     deleteEmployee(id, apellido1, apellido2, nombre) {
-        let empl
         localStorage.setItem('Cedula', id);
         this.isPopupOpened = true;
         const employee = this.empleados.findIndex(c => c.cedula === id);

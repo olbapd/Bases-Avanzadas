@@ -153,16 +153,28 @@ export class RestApiService {
    return this.http.post (this.apiURL+urls.sp_url+'getProvincia',body).pipe(retry(1),catchError(this.handleError));
   }
 
-  getDistritos() {
+  getDistritos(IdCanton) {
     let body = {
-                "typesIn":[],
+                "typesIn":["int"],
                 "typesOut":[],
-                "parameters":[],
-                "values":[],
+                "parameters":["IdCanton"],
+                "values":[IdCanton],
                 "ouputs":[],
-                "name":"getProvincia"
+                "name":"getDistrito"
               }
    return this.http.post (this.apiURL+urls.sp_url+'getDistrito',body).pipe(retry(1),catchError(this.handleError));
+  }
+
+  getCanton(IdProvincia) {
+    let body = {
+                "typesIn":["int"],
+                "typesOut":[],
+                "parameters":["IdProvincia"],
+                "values":[IdProvincia],
+                "ouputs":[],
+                "name":"getCanton"
+              }
+   return this.http.post (this.apiURL+urls.sp_url+'getCanton',body).pipe(retry(1),catchError(this.handleError));
   }
   getDepartamento() {
     let body = {
@@ -308,6 +320,18 @@ export class RestApiService {
               "name":"desEmpleado"
             }
      return this.http.post (this.apiURL+urls.sp_url+'desEmpleado',body).pipe(retry(1),catchError(this.handleError));
+  }
+
+  quitarSede(idSede){
+    let body={
+              "typesIn":["int"],
+              "typesOut":[],
+              "parameters":["IdSede"],
+              "values":[idSede],
+              "ouputs":[],
+              "name":"cerrarSede"
+            }
+     return this.http.post (this.apiURL+urls.sp_url+'cerrarSede',body).pipe(retry(1),catchError(this.handleError));
   }
 
   setAssignActivo(Codigo,Cedula,DetalleUbi){

@@ -7,7 +7,7 @@ import { sede } from 'src/app/interfaces/sede';
 import { MatDialog, MatPaginator, MatSort, MatDialogConfig } from '@angular/material';
 import { EmployeeComponent } from '../crud_employee/crud_employee.component';
 import { updateComponent } from '../dialogs/update_employee/update-employee.component';
-import { DeleteComponent } from '../dialogs/delete_confirm/delete_confirm.component';
+import { DeleteSedeComponent } from '../dialogs/delete_confirm_Sede/delete_confirmSede.component';
 import { UpdateSedeComponent } from '../dialogs/update_sede/udpate-sede.component';
 import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from '@angular/forms';
 
@@ -44,7 +44,7 @@ export class SedeComponent implements OnInit {
       Distrito: new FormControl('', Validators.required)
     });
 
-    this.DistritoDropdown();
+    this.ProvinciaDropdown();
     this.Rsede();
   }
 
@@ -67,7 +67,7 @@ export class SedeComponent implements OnInit {
       return;
     }
     else {
-      btn.setAttribute('class', 'btn btn-danger');
+      btn.setAttribute('class', 'btn btn-success');
 
       this.restApi.setSede(nombre, detalleu, distrito, 1).subscribe(res => {
         window.location.reload();
@@ -103,18 +103,29 @@ export class SedeComponent implements OnInit {
       data: {}
     });
   }
-  deleteSede() {
+  deleteSede(IdSede,nameSede) {
     this.isPopupOpened = true;
-    const dialogRef = this.dialog.open(DeleteComponent, {
-      data: {}
-    });
+        const sede = this.sedess.findIndex(c => c.id === IdSede);
+    const dialogRef = this.dialog.open(DeleteSedeComponent, {
+      data: {
+        "IdSede":IdSede,
+        "Nombre": nameSede
+      }
+    }).afterClosed().subscribe(response => {
+      if (response.data == "true") {
+          console.log("entro");
+          this.sedess.splice(sede, 1);
+      }
+
+  });
   }
 
 
-  DistritoDropdown() {
+  DistritoDropdown(IdCanton) {
+    $("#Distrito-Dropdown").empty();
     let optionestado;
     let dropdown = document.getElementById('Distrito-Dropdown');
-    this.restApi.getDistritos().subscribe((res) => {
+    this.restApi.getDistritos(IdCanton).subscribe((res) => {
       const myObjStr = JSON.stringify(res)
       const json = JSON.parse(myObjStr);
       var count = Object.keys(json.data).length;
@@ -122,6 +133,40 @@ export class SedeComponent implements OnInit {
         optionestado = document.createElement('option');
         optionestado.text = json.data[_i].Nombre;
         optionestado.value = json.data[_i].IdDistrito;
+        dropdown.append(optionestado);
+      }
+    });;
+  }
+
+  ProvinciaDropdown() {
+    let optionestado;
+    let dropdown = document.getElementById('Provincia-Dropdown');
+    this.restApi.getProvincia().subscribe((res) => {
+      const myObjStr = JSON.stringify(res)
+      const json = JSON.parse(myObjStr);
+      var count = Object.keys(json.data).length;
+      for (var _i = 0; _i < count; _i++) {
+        optionestado = document.createElement('option');
+        optionestado.text = json.data[_i].Nombre;
+        optionestado.value = json.data[_i].IdProvincia;
+        dropdown.append(optionestado);
+      }
+    });;
+  }
+
+
+  CantonDropdown(IdProvincia) {
+    $("#Canton-Dropdown").empty();
+    let optionestado;
+    let dropdown = document.getElementById('Canton-Dropdown');
+    this.restApi.getCanton(IdProvincia).subscribe((res) => {
+      const myObjStr = JSON.stringify(res)
+      const json = JSON.parse(myObjStr);
+      var count = Object.keys(json.data).length;
+      for (var _i = 0; _i < count; _i++) {
+        optionestado = document.createElement('option');
+        optionestado.text = json.data[_i].Nombre;
+        optionestado.value = json.data[_i].IdCanton;
         dropdown.append(optionestado);
       }
     });;
