@@ -48,11 +48,9 @@ export class updateComponent implements OnInit {
         let correo = this.form.get('CorreoP').value;
         let contrasena = this.form.get('ContrasenaP').value;
         let IdSede = this.form.get('Sede').value;
-        let btn = document.getElementById('registrar_btn');
-
         // stop here if form is invalid
         if (this.form.invalid) {
-            btn.setAttribute('class', 'btn btn-danger')
+            console.log( " C" + correo + " CC" + contrasena + " "  + "DEP " + departamento + " P" + puesto + "IDS " + IdSede + " FR" + fechar);
             return;
         }
         else {
@@ -64,9 +62,8 @@ export class updateComponent implements OnInit {
                     console.log(photoHash);
                     let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
                     let Cedula = this.data.Cedula;
-                    console.log(Cedula + " " + correo + " " + contrasena + " " + photoHash + " " + departamento + " " + puesto + " " + IdSede + " " + fechar);
+                    
                     this.restApi.updateEmpleado(Cedula, correo, contrasena, photoHash, departamento, puesto, IdSede, fechar).subscribe(res => {
-                        btn.setAttribute('class', 'btn btn-success');
                         window.location.reload();
 
                     });

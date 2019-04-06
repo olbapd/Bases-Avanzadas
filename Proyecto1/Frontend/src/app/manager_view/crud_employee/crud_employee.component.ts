@@ -104,7 +104,7 @@ export class EmployeeComponent implements OnInit {
         else {
             
             //Se debe almacenar la imagen primero
-            btn.setAttribute('class', 'btn btn-danger');
+            btn.setAttribute('class', 'btn btn-success');
             this.fotoService.uploadFile(this.photo)
                 .subscribe((data) => {
                     let photoHash = (data && data.hash) ? data.hash : null;
