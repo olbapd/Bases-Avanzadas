@@ -166,29 +166,31 @@ export class ManageAssetsComponent implements OnInit {
       this.restApi.getIdEmpleado(Cedula).subscribe((res) => {
         const myObjStr = JSON.stringify(res)
         const json = JSON.parse(myObjStr);
-        this.restApi.getSedeXEmpleado(json.data[0].IdEmpleado).subscribe((res) => {
-          const myObjStr = JSON.stringify(res)
-          const json = JSON.parse(myObjStr);
-          if (json.data[0].IdSede == localStorage.getItem('IdSede')) {
-            this.restApi.setAssignActivo(Codigo, Cedula, DetalleUbi).subscribe((res) => {
-              const myObjStr = JSON.stringify(res)
-              const json = JSON.parse(myObjStr);
-              if (json.success == true) {
-                btn.setAttribute('class', 'btn btn-success');
+        if (json.success == true) {
+          window.alert("El usuario código:" + " " + Cedula + "," + " " + "no pertenece a esta sede");
+          btn.setAttribute('class', 'btn btn-danger');
+        }
+        else {
+          this.restApi.getSedeXEmpleado(json.data[0].IdEmpleado).subscribe((res) => {
+            const myObjStr = JSON.stringify(res)
+            const json = JSON.parse(myObjStr);
+            if (json.data[0].IdSede == localStorage.getItem('IdSede')) {
+              this.restApi.setAssignActivo(Codigo, Cedula, DetalleUbi).subscribe((res) => {
+                const myObjStr = JSON.stringify(res)
+                const json = JSON.parse(myObjStr);
+                if (json.data == true) {
+                  btn.setAttribute('class', 'btn btn-success');
+                }
+              });;
 
-              }
-            });;
-
-          }
-          else {
-            window.alert("El usuario código:" + " " + Cedula + "," + " " + "no pertenece a esta sede");
-            btn.setAttribute('class', 'btn btn-danger');
-          }
-        });
+            }
+            else {
+              window.alert("El usuario código:" + " " + Cedula + "," + " " + "no pertenece a esta sede");
+              btn.setAttribute('class', 'btn btn-danger');
+            }
+          });
+        }
       });;
-
-
-
     }
   }
   EstadoDropdown() {
