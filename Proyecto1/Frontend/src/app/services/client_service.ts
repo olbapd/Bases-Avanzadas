@@ -77,6 +77,19 @@ export class RestApiService {
     return this.http.post(this.apiURL + urls.sp_url + 'getAdminSedes', body).pipe(retry(1), catchError(this.handleError));
   }
 
+  getActivoXSede(idSede) {
+    let body = {
+      "typesIn": ["int"],
+      "typesOut": [],
+      "parameters": ["IdSede"],
+      "values": [idSede],
+      "ouputs": [],
+      "name": "sp_getAllActivobySede"
+    }
+      ;
+    return this.http.post(this.apiURL + urls.sp_url + 'sp_getAllActivobySede', body).pipe(retry(1), catchError(this.handleError));
+  }
+
   getSedeXEmpleado(idEmpleado) {
     let body = {
       "typesIn": ["int"],
@@ -310,6 +323,9 @@ export class RestApiService {
 
     return this.http.post(this.apiURL + urls.sp_url + 'quitarActivo', body).pipe(retry(1), catchError(this.handleError));
   }
+
+
+
   quitarEmpleado(Cedula) {
     let body = {
       "typesIn": ["varchar"],

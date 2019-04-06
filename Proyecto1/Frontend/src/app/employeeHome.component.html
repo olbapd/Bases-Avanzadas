@@ -22,16 +22,22 @@
     table-striped">
     <thead>
         <tr>
-            <th scope="col">Nombre</th>
             <th scope="col">Codigo</th>
-            <th scope="col">Depreciacion</th>
+            <th scope="col">Categoría</th>
+            <th scope="col"> % Depreciacion</th>
+            <th scope="col">Precio</th>
+            <th scope="col"> ValorResidual</th>         
+            <th scope="col">CentroCosto</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let activo of activos| filter:searchText">
-            <th scope="row">{{ activo.nombre }}</th>
-            <td>{{ activo.code }}</td>
-            <td>{{ activo.depreciation}}</td>
+            <th scope="row">{{ activo.codigo }}</th>         
+            <td>{{ activo.Catname}}</td>
+            <td>{{ activo.PorcentajeDepreciacion }}</td>
+            <td>{{ activo.precio}}</td>            
+            <td>{{ activo.ValorResidual }}</td>
+            <td>{{ activo.CentroCosto}}</td>  
 
         </tr>
     </tbody>
