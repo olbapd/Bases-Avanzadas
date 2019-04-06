@@ -963,3 +963,15 @@ AS
 GO 
 
 
+
+CREATE OR ALTER PROC [dbo].[getIdEmpleado]
+	@Cedula varchar(50)
+AS
+SET NOCOUNT ON
+
+SELECT [Empleado].IdEmpleado
+FROM Empleado
+WHERE @Cedula = [Empleado].Cedula
+
+SET NOCOUNT OFF
+GO
