@@ -50,7 +50,7 @@ export class updateComponent implements OnInit {
         let IdSede = this.form.get('Sede').value;
         // stop here if form is invalid
         if (this.form.invalid) {
-            console.log( " C" + correo + " CC" + contrasena + " "  + "DEP " + departamento + " P" + puesto + "IDS " + IdSede + " FR" + fechar);
+            console.log(" C" + correo + " CC" + contrasena + " " + "DEP " + departamento + " P" + puesto + "IDS " + IdSede + " FR" + fechar);
             return;
         }
         else {
@@ -62,7 +62,7 @@ export class updateComponent implements OnInit {
                     console.log(photoHash);
                     let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
                     let Cedula = this.data.Cedula;
-                    
+
                     this.restApi.updateEmpleado(Cedula, correo, contrasena, photoHash, departamento, puesto, IdSede, fechar).subscribe(res => {
                         window.location.reload();
 

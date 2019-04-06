@@ -179,6 +179,7 @@ export class EmployeeComponent implements OnInit {
                 var count = Object.keys(json.data).length;
                 this.collectionSize = count;
                 for (var _i = 0; _i < count; _i++) {
+                    let FechaIn = json.data[_i].FechaIngreso;
                     this.empleados.push({
                         "cedula": json.data[_i].Cedula,
                         "apellido1": json.data[_i].Apellido1,
@@ -186,7 +187,7 @@ export class EmployeeComponent implements OnInit {
                         "nombre": json.data[_i].Nombre[0],
                         "departamento": json.data[_i].Nombre[1],
                         "puesto": json.data[_i].Nombre[2],
-                        "fechaIn": json.data[_i].FechaIngreso,
+                        "fechaIn": FechaIn.substring(0,10),
                         "correo": json.data[_i].Correo
 
                     });
