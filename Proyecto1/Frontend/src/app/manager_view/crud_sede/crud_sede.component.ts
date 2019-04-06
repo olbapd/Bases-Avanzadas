@@ -92,32 +92,37 @@ export class SedeComponent implements OnInit {
           "distrito": json.data[_i].Distrito,
           "apellido1": json.data[_i].Apellido1,
           "apellido2": json.data[_i].Apellido2,
-          "nombre": json.data[_i].Nombre
+          "nombre": json.data[_i].Nombre,
+          "cedula": json.data[_i].Cedula
         });
       }
     });
   }
-  updateSede() {
+  updateSede(cedula, IdSede) {
     this.isPopupOpened = true;
     const dialogRef = this.dialog.open(UpdateSedeComponent, {
-      data: {}
+      data: {
+              "cedula":cedula,
+              "IdSede":IdSede
+
+            }
     });
   }
-  deleteSede(IdSede,nameSede) {
+  deleteSede(IdSede, nameSede) {
     this.isPopupOpened = true;
-        const sede = this.sedess.findIndex(c => c.id === IdSede);
+    const sede = this.sedess.findIndex(c => c.id === IdSede);
     const dialogRef = this.dialog.open(DeleteSedeComponent, {
       data: {
-        "IdSede":IdSede,
+        "IdSede": IdSede,
         "Nombre": nameSede
       }
     }).afterClosed().subscribe(response => {
       if (response.data == "true") {
-          console.log("entro");
-          this.sedess.splice(sede, 1);
+        console.log("entro");
+        this.sedess.splice(sede, 1);
       }
 
-  });
+    });
   }
 
 

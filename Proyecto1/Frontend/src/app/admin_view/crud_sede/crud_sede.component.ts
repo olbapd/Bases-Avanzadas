@@ -36,8 +36,8 @@ export class SedeComponent implements OnInit {
     constructor(private modalService: NgbModal, public restApi: RestApiService,
         private router: Router, private dialog: MatDialog) { }
         ngOnInit() { 
-            this.EstadoDropdown();
-            this.ProvinciaDropdown();
+            /* this.EstadoDropdown();
+            this.ProvinciaDropdown(); */
             this.Rsede();
         }
     
@@ -60,7 +60,8 @@ export class SedeComponent implements OnInit {
                                 "distrito":json.data[0].Nombre[1],
                                 "apellido1":json.data[0].Apellido1,
                                 "apellido2":json.data[0].Apellido2,
-                                "nombre":json.data[0].Nombre[4]
+                                "nombre":json.data[0].Nombre[4],
+                                "cedula":"0"
                               }];
            });
           }
@@ -82,7 +83,7 @@ export class SedeComponent implements OnInit {
 
         }
     
-        EstadoDropdown(){
+        /* EstadoDropdown(){
             let optionestado;
             let dropdown = document.getElementById('estadoSede-Dropdown');
              this.restApi.getEstados().subscribe((res)=>{
@@ -128,5 +129,5 @@ export class SedeComponent implements OnInit {
                 dropdown.append(optionestado);
              } 
           });;
-        }
+        } */
     }

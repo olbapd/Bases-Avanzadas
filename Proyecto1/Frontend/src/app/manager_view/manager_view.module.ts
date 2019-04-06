@@ -60,7 +60,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
   providers: [
     FotoService
   ],
-  entryComponents:[updateComponent, DeleteComponent, UpdateSedeComponent,CodeErrorComponent]
+  entryComponents:[updateComponent, DeleteComponent, DeleteSedeComponent,UpdateSedeComponent,CodeErrorComponent]
 })
 
 export class Manager_ViewModule { }

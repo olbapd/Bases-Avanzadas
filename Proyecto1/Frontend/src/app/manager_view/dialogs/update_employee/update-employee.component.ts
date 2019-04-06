@@ -47,13 +47,15 @@ export class updateComponent implements OnInit {
         let fechar = this.form.get('FechaR').value;
         let correo = this.form.get('CorreoP').value;
         let contrasena = this.form.get('ContrasenaP').value;
+        let btn = document.getElementById('registrar_btn');
        
         // stop here if form is invalid
         if (this.form.invalid) {
+            btn.setAttribute('class','btn btn-danger')
             return;
         }
         else{
-        let btn = document.getElementById('registrar_btn');
+        
         //Se debe almacenar la imagen primero
         this.fotoService.uploadFile(this.photo)
         .subscribe((data)=>{
@@ -67,6 +69,7 @@ export class updateComponent implements OnInit {
                let Cedula = this.data.Cedula;
                console.log(Cedula+" "+correo+" "+contrasena+" "+photoHash+" "+departamento+" "+puesto+" "+IdSede+" "+fechar);
                this.restApi.updateEmpleado(Cedula,correo,contrasena,photoHash,departamento,puesto,IdSede,fechar).subscribe(res => {
+                   btn.setAttribute('class','btn btn-success');
                 window.location.reload();
                     
             }); 
