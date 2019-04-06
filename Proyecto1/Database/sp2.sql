@@ -1,9 +1,10 @@
-
+USE [Proyecto1BDA]
 -- =============================================
 -- Descripcion:	<Seleccionar la información de un Activo>
 -- Parametro de Entrada: <CodigoActivo>
 -- Parametro de Salida: <Ninguno>
 -- =============================================
+GO
 CREATE OR ALTER PROC [dbo].[getActivo]
 	@Codigo varchar(50)
 AS

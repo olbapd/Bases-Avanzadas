@@ -26,7 +26,7 @@ import { Observable, of } from 'rxjs'; // only need to import from rxjs
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FirstMethodComponent } from './dialogs/first_method/first-method.component';
 import { SecondMethodComponent } from './dialogs/second_method/second-method.component';
-
+import { Depreciation } from 'src/app/services/depreciation';
 
 @NgModule({
   imports: [
@@ -62,7 +62,7 @@ import { SecondMethodComponent } from './dialogs/second_method/second-method.com
 
   ],
   providers: [
-    FotoService
+    FotoService,Depreciation
   ],
   entryComponents:[updateComponent, DeleteComponent, 
     DeleteSedeComponent,UpdateSedeComponent,CodeErrorComponent,FirstMethodComponent,SecondMethodComponent]
