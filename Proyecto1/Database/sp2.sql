@@ -773,20 +773,23 @@ CREATE OR ALTER PROC [dbo].[updateAdmin]
 	
 AS
 BEGIN
+	DECLARE
+	@IdEmpleado int 
+	SELECT @IdEmpleado = Empleado.IdEmpleado FROM Empleado WHERE @IdAdminN = Empleado.Cedula
 
 	BEGIN TRAN
 	BEGIN TRY
 		UPDATE Empleado SET 
 		[IdPuesto] = 2
-		WHERE @IdAdminN = [Empleado].IdEmpleado
+		WHERE @IdAdminN = [Empleado].Cedula
 
 		UPDATE SedeXEmpleado SET 
 		[IdSede] = @IdSede
-		WHERE  @IdAdminN = [SedeXEmpleado].IdEmpleado
+		WHERE  @IdEmpleado = [SedeXEmpleado].IdEmpleado
 
 		UPDATE Empleado SET 
 		[IdPuesto] = 3
-		WHERE @IdAdminV = [Empleado].IdEmpleado
+		WHERE @IdAdminV = [Empleado].Cedula
 
 		COMMIT TRANSACTION
 	END TRY

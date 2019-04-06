@@ -102,10 +102,9 @@ export class SedeComponent implements OnInit {
     this.isPopupOpened = true;
     const dialogRef = this.dialog.open(UpdateSedeComponent, {
       data: {
-              "cedula":cedula,
-              "IdSede":IdSede
-
-            }
+        "cedula": cedula,
+        "IdSede": IdSede
+      }
     });
   }
   deleteSede(IdSede, nameSede) {
