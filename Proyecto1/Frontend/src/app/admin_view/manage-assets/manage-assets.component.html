@@ -3,11 +3,17 @@
   <div class="row">
 
     <!--Card para el Registro de Activos-->
-    <div class="col-md-4">
+    <div class="col-md-5">
       <div class="card border-info" style="max-width: 50rem; margin-bottom: 20px">
         <div class="card-body text-center">
           <h5 class="card-title"> Registro de Activos</h5>
           <form name="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!--Aqui Se Pondría la Imagen-->
+
+              <div style="margin-top: 20px">
+                  <img src="assets/images/avatar.png" alt="Avatar" class="avatar">
+                </div>
             <div class="row text-center">
               <!--Columna de la Izquierda-->
               <div class="col-md-6">
@@ -143,13 +149,11 @@
                 </div>
 
                 <div class="form-group">
-                  <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
-                  <span class="btn btn-rose btn-round btn-file">
+                  <h6 class="card-subtitle mb-2 text-muted">Foto</h6>
                     <input type="file" class="form-control-file" id="exampleFormControlFile1"
                       accept="image/png, image/jpeg, image/jpg, image/PNG, image/bmp" (change)="onPhotoChange($event)"
                       name="photo">
 
-                  </span>
                 </div>
               </div>
             </div>
@@ -161,10 +165,9 @@
       </div>
 
     </div>
-    <div class="col-md-1"></div>
 
     <!--Card para la Baja de Activos-->
-    <div class="col-md-2">
+    <div class="col-md-3">
       <div class="card border-info" style="max-width: 20rem; margin-bottom: 20px">
         <div class="card-body text-center">
           <h5 class="card-title"> Modificar Estado del Activo</h5>
@@ -219,16 +222,16 @@
                 </div>
 
               </div>
-              <div class="form-group">
-                <button id="modifstate_btn" class="btn btn-primary" style="margin-left:55px">Modificar Estado</button>
-              </div>
+
             </div>
+            <div class="form-group">
+                <button id="modifstate_btn" class="btn btn-primary">Modificar Estado</button>
+              </div>
           </form>
 
         </div>
       </div>
     </div>
-    <div class="col-md-1"></div>
 
     <!--Card para la Asignacion de Activos-->
 
@@ -268,10 +271,7 @@
                       <div *ngIf="f3.CedulaAsig.errors.required">Cédula Requerida</div>
                     </div>
                   </div>
-                </div>
-
-
-                
+                </div>        
 
                 <h6 class="card-subtitle mb-2 text-muted">Detalle de Ubicacion</h6>
                 <div class="form-group">
@@ -318,10 +318,11 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
-                <button id="asig_btn" class="btn btn-primary" style="margin-left:220px">Modificar</button>
-              </div>
+
             </div>
+            <div class="form-group">
+                <button id="asig_btn" class="btn btn-primary">Modificar</button>
+              </div>
           </form>
         </div>
       </div>

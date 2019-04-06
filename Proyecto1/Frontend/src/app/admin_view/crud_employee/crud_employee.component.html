@@ -2,12 +2,17 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-3">
             <div class="card border-info" style="max-width: 50rem; margin-bottom: 20px">
                 <div class="card-body text-center">
                     <h5 class="card-title"> Insertar Empleado</h5>
 
                     <form name="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+<!--Aqui Se Pondría la Imagen-->
+                            <div style="margin-top: 20px">
+
+                                    <img src="assets/images/avatar.png" alt="Avatar" class="avatar">
+                                  </div>
                         <div class="row text-center">
                             <div class="col-md-6">
                                 <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Nombre</h6>
@@ -115,7 +120,6 @@
                                     <input type="file" class="form-control-file" id="exampleFormControlFile1"
                                         accept="image/png, image/jpeg, image/jpg, image/PNG, image/bmp"
                                         (change)="onPhotoChange($event)" name="photo">
-
                                 </span>
 
                             </div>
@@ -131,7 +135,7 @@
 
         </div>
         <!--TABLA-->
-        <div class="col-md-8">
+        <div class="col-md-8 col-sm-12">
 
                 <form >
                         <div class="form-group form-inline">
@@ -139,7 +143,7 @@
                         </div>
                       </form>
                       
-            <table id ="table_empleado_Table" name="table_empleado" class="table table-striped">
+            <table mdbTable mdbTableScroll id ="table_empleado_Table" scrollX="true" maxWidth="400" name="table_empleado" class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Cedula</th>
