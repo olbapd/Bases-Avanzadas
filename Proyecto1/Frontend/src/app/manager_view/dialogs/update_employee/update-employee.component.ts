@@ -5,7 +5,7 @@ import { RestApiService } from 'src/app/services/client_service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from '@angular/forms';
 import { FotoService } from 'src/app/services/foto.service';
-import{formatDate} from '@angular/common';
+import { formatDate } from '@angular/common';
 @Component({
     selector: 'update-employee',
     templateUrl: './update-employee.component.html',
@@ -35,9 +35,10 @@ export class updateComponent implements OnInit {
             Departamento: new FormControl(this.data.IdDepartamento, Validators.required),
             Puesto: new FormControl(this.data.IdPuesto, Validators.required),
             Sede: new FormControl(this.data.IdSede, Validators.required),
-
-
         });
+        let img_load = document.getElementById('imgUPManager');
+        let photo_load = this.fotoService.downloadFile(this.data.Foto);
+        img_load.setAttribute('src', photo_load);
 
         this.dep_DropDown();
         this.puesto_DropDown();
@@ -91,9 +92,9 @@ export class updateComponent implements OnInit {
         else {
 
             let Cedula = this.data.Cedula;
-            let FechaActual = formatDate(new Date(),'yyyy-MM-dd','en');
+            let FechaActual = formatDate(new Date(), 'yyyy-MM-dd', 'en');
 
-            this.restApi.cambioEmpleado(Cedula,departamento, puesto, IdSede, FechaActual,FechaActual).subscribe(res => {
+            this.restApi.cambioEmpleado(Cedula, departamento, puesto, IdSede, FechaActual, FechaActual).subscribe(res => {
                 window.location.reload();
 
             });
@@ -150,6 +151,16 @@ export class updateComponent implements OnInit {
     }
     onPhotoChange(event) {
         this.photo = event.target.files[0];
+        this.fotoService.uploadFile(this.photo)
+            .subscribe((data) => {
+                let photoHash = (data && data.hash) ? data.hash : null;
+                let img_load = document.getElementById('imgUPManager');
+                let photo_load = this.fotoService.downloadFile(photoHash);
+                img_load.setAttribute('src', photo_load);
+
+
+            });
+
 
         //this.pictures[idNumber-1].name = photoName;
     }

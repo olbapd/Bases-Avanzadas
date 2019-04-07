@@ -67,9 +67,16 @@ export class ManageAssetsComponent implements OnInit {
   get f3() { return this.formAsig.controls; }
   onPhotoChange(event) {
     this.photo = event.target.files[0];
-
-    //this.pictures[idNumber-1].name = photoName;
-  }
+    this.fotoService.uploadFile(this.photo)
+    .subscribe((data) => {
+        let photoHash = (data && data.hash) ? data.hash : null;
+        console.log(photoHash);
+        let img_load = document.getElementById('imgActivo');
+       let photo_load = this.fotoService.downloadFile(photoHash);
+        img_load.setAttribute('src',photo_load)
+        
+            });
+}
   onSubmit() {
     this.submitted = true;
     let nombre = this.form.get('Nombre').value;

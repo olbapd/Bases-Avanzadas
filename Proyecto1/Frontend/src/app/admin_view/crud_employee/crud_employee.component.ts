@@ -268,7 +268,14 @@ export class EmployeeComponent implements OnInit {
 
     onPhotoChange(event) {
         this.photo = event.target.files[0];
-
-        //this.pictures[idNumber-1].name = photoName;
+        this.fotoService.uploadFile(this.photo)
+        .subscribe((data) => {
+            let photoHash = (data && data.hash) ? data.hash : null;
+            console.log(photoHash);
+            let img_load = document.getElementById('img');
+           let photo_load = this.fotoService.downloadFile(photoHash);
+            img_load.setAttribute('src',photo_load)
+            
+                });
     }
 }

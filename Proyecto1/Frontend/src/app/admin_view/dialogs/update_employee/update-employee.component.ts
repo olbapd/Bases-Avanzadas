@@ -38,6 +38,9 @@ export class updateComponent implements OnInit {
 
 
         });
+        let img_load = document.getElementById('imgUP');
+       let photo_load = this.fotoService.downloadFile(this.data.Foto);
+        img_load.setAttribute('src',photo_load);
         this.dep_DropDown();
         this.puesto_DropDown();
         this. sedes_DropDown();
@@ -149,6 +152,15 @@ export class updateComponent implements OnInit {
     }
     onPhotoChange(event){
         this.photo = event.target.files[0];
+        this.fotoService.uploadFile(this.photo)
+            .subscribe((data) => {
+                let photoHash = (data && data.hash) ? data.hash : null;
+                let img_load = document.getElementById('imgUP');
+                let photo_load = this.fotoService.downloadFile(photoHash);
+                img_load.setAttribute('src', photo_load);
+
+
+            });
 
         //this.pictures[idNumber-1].name = photoName;
     }
