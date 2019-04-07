@@ -763,12 +763,21 @@ CREATE OR ALTER PROC [dbo].[desEmpleado]
 	
 AS
 BEGIN
+	DECLARE
+		@IdEmpleado int
+
+	SELECT @IdEmpleado = Empleado.IdEmpleado FROM Empleado WHERE @Cedula = Empleado.Cedula  
 
 	BEGIN TRAN
 	BEGIN TRY
 		UPDATE Empleado SET 
 		[IdEstado] = 2
 		WHERE @Cedula = [Empleado].Cedula
+
+		UPDATE Activo SET
+		[IdEstado] = 4
+		WHERE IdEmpleado = @IdEmpleado
+
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -788,29 +797,47 @@ GO
 CREATE OR ALTER PROC [dbo].[updateAdmin]--AGREGAR FECHAS
 	@IdAdminV varchar(50),
 	@IdAdminN varchar(50),
-	@FechaSalidaV date,
-	@FechaIngresoN date,
+	@FechaSalida date,
+	@FechaIngreso date,
 	@IdSede int
 	
 AS
 BEGIN
 	DECLARE
-	@IdEmpleado int 
-	SELECT @IdEmpleado = Empleado.IdEmpleado FROM Empleado WHERE @IdAdminN = Empleado.Cedula
+	@IdEmpleadoN int,
+	@IdEmpleadoV int
+
+	SELECT @IdEmpleadoN = Empleado.IdEmpleado FROM Empleado WHERE @IdAdminN = Empleado.Cedula
+	SELECT @IdEmpleadoV = Empleado.IdEmpleado FROM Empleado WHERE @IdAdminV = Empleado.Cedula
 
 	BEGIN TRAN
 	BEGIN TRY
-		UPDATE Empleado SET 
-		[IdPuesto] = 2
-		WHERE @IdAdminN = [Empleado].Cedula
+		--ACTUALIZA LA FECHA DE SALIDA DE LOS DEPARTAMENTOS CORRESPONDIENTES
+		UPDATE SedeXEmpleado SET 
+		[FechaSalida] = @FechaSalida
+		WHERE @IdEmpleadoN = [SedeXEmpleado].IdEmpleado AND FechaSalida IS NULL
 
 		UPDATE SedeXEmpleado SET 
-		[IdSede] = @IdSede
-		WHERE  @IdEmpleado = [SedeXEmpleado].IdEmpleado
+		[FechaSalida] = @FechaSalida
+		WHERE @IdEmpleadoV = [SedeXEmpleado].IdEmpleado AND FechaSalida IS NULL
+
+		--CREA EL NUEVO REGISTRO DE HISTORIAL DE LOS NUEVOS DEPARTAMENTOS ASIGNADOS
+		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso, FechaSalida)
+		VALUES (@IdSede, @IdEmpleadoN, @FechaIngreso, NULL)
+
+		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso, FechaSalida)
+		VALUES (@IdSede, @IdEmpleadoV, @FechaIngreso, NULL)
+
+		--ACTUALIZA 
+		UPDATE Empleado SET 
+		[IdDepartamento] = 6,
+		[IdPuesto] = 2
+		WHERE @IdEmpleadoN = [Empleado].IdEmpleado
 
 		UPDATE Empleado SET 
-		[IdPuesto] = 3
-		WHERE @IdAdminV = [Empleado].Cedula
+		[IdDepartamento] = 11,
+		[IdPuesto] = 25
+		WHERE @IdEmpleadoV = [Empleado].IdEmpleado
 
 		COMMIT TRANSACTION
 	END TRY
