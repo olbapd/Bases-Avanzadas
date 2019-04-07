@@ -403,7 +403,8 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[cerrarSede]
-	@IdSede int
+	@IdSede int,
+	@FechaSalida date
 
 AS
 SET NOCOUNT ON
@@ -412,8 +413,13 @@ SET NOCOUNT ON
 	[IdEstado] = 2
 	WHERE @IdSede = [Sede].IdSede
 
+	UPDATE SedeXEmpleado
+	SET [SedeXEmpleado].FechaSalida = @FechaSalida
+	WHERE @IdSede = SedeXEmpleado.IdSede
+
 	UPDATE Empleado 
-	SET [Empleado].IdEstado = 2
+	SET [Empleado].IdDepartamento = 11,
+	[Empleado].IdPuesto = 25 
 	FROM SedeXEmpleado
 	INNER JOIN Empleado ON SedeXEmpleado.IdEmpleado = Empleado.IdEmpleado
 	WHERE @IdSede = SedeXEmpleado.IdSede
@@ -796,7 +802,7 @@ GO
 -- Parametro de Entrada: <IdAdminViejo, IdAdminNuevo, IdSede>
 -- Parametro de Salida: <Ninguno>
 -- =============================================
-CREATE OR ALTER PROC [dbo].[updateAdmin]--AGREGAR FECHAS
+CREATE OR ALTER PROC [dbo].[updateAdmin]
 	@IdAdminV varchar(50),
 	@IdAdminN varchar(50),
 	@FechaSalida date,

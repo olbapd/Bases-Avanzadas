@@ -26,7 +26,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { Depreciation } from '../services/depreciation';
 import { FirstMethodComponent } from './dialogs/first_method/first-method.component';
 import { SecondMethodComponent } from './dialogs/second_method/second-method.component';
-
+import { ChartsModule } from 'ng2-charts';
+import { DashboardComponent } from './Dashboard/dashboard.component';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { SecondMethodComponent } from './dialogs/second_method/second-method.com
     MatToolbarModule,
     ReactiveFormsModule,
     DataTableModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    ChartsModule
   ],
   declarations: [
     AdminComponent,
@@ -55,7 +57,8 @@ import { SecondMethodComponent } from './dialogs/second_method/second-method.com
     UpdateSedeComponent,
     CodeErrorComponent,
     FirstMethodComponent,
-    SecondMethodComponent
+    SecondMethodComponent,
+    DashboardComponent
 
 
   ],

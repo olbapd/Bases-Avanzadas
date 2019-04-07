@@ -12,9 +12,6 @@ import { MatDialog } from '@angular/material';
 import { FirstMethodComponent } from '../dialogs/first_method/first-method.component';
 import { SecondMethodComponent } from '../dialogs/second_method/second-method.component';
 
-
-
-
 @Component({
     selector: 'cal-depreciation',
     templateUrl: './depreciation.component.html',
@@ -24,7 +21,7 @@ import { SecondMethodComponent } from '../dialogs/second_method/second-method.co
 })
 export class DepreciationComponent implements OnInit {
 
-
+/*Comentariio */
     form: FormGroup;
 
     filter = new FormControl('');

@@ -20,13 +20,14 @@ import { UpdateSedeComponent } from './dialogs/update_sede/udpate-sede.component
 import {CodeErrorComponent} from './dialogs/code_error/code_error.component';
 import { FotoService } from '../services/foto.service';
 import { DeleteSedeComponent } from './dialogs/delete_confirm_Sede/delete_confirmSede.component';
-
 import {DataTableModule} from "angular2-datatable";
 import { Observable, of } from 'rxjs'; // only need to import from rxjs
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FirstMethodComponent } from './dialogs/first_method/first-method.component';
 import { SecondMethodComponent } from './dialogs/second_method/second-method.component';
 import { Depreciation } from 'src/app/services/depreciation';
+import { ChartsModule } from 'ng2-charts';
+import { DashboardComponent } from './Dashboard/dashboard.component';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { Depreciation } from 'src/app/services/depreciation';
     MatToolbarModule,
     ReactiveFormsModule,
     DataTableModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    ChartsModule 
   ],
   declarations: [
     AdminComponent,
@@ -56,7 +58,8 @@ import { Depreciation } from 'src/app/services/depreciation';
     UpdateSedeComponent,
     CodeErrorComponent,
     FirstMethodComponent,
-    SecondMethodComponent
+    SecondMethodComponent,
+    DashboardComponent
     
 
 

@@ -12,28 +12,48 @@
           <h5 class="card-title"> Calculo Depreciacion</h5>
           <div class="row text-center">
 
-            <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-            <div class="input-group mb-3">
-              <select class="form-control" name="categoria"
-                id="categoria-Dropdown" #select_categoria
-                data-style="btn-primary" data-live-search="true"
-                data-selectpicker data-collection-name="items"
-                ng-model="selected">
-                <option *ngFor="let caltype of calType">{{caltype}}</option>
-              </select>
-            </div>
+            <form name="form" [formGroup]="form" (ngSubmit)="onSubmit()">
 
-            <h6 class="card-subtitle mb-2 text-muted">Cantidad Años</h6>
-            <div class="input-group mb-3">
-              <input type="text" #txt_cod_activo class="form-control"
-                placeholder="1" aria-label="Cantidad_Anos"
-                aria-describedby="basic-addon1">
-            </div>
+              <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <select id="categoria-Dropdown" name="categoria"
+                    formControlName="Categoria" class="form-control"
+                    #select_categoria data-style="btn-primary"
+                    data-live-search="true" data-selectpicker
+                    data-collection-name="items" ng-model="selected"
+                    [ngClass]="{ 'is-invalid': submitted && f.Categoria.errors
+                    }">
+                    <option [ngValue]="null">Seleccione una categoría</option>
+                  </select>
+                  <div *ngIf="submitted && f.Categoria.errors"
+                    class="invalid-feedback">
+                    <div *ngIf="f.Categoria.errors.required">Categoria
+                      Requerida</div>
+                  </div>
+                </div>
+              </div>
+
+              <h6 class="card-subtitle mb-2 text-muted">Cantidad Años</h6>
+              <div class="form-group">
+                <input type="text" #txt_cantidad
+                  class="form-control"
+                  formControlName="Cantidad"
+                  [ngClass]="{ 'is-invalid': submitted &&
+                  f.Nombre.errors }" />
+              </div>
+
+              <div class="form-group">
+                <button id="registrar_btn" class="btn btn-primary">Registrar</button>
+              </div>
+
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+
   <div class="col-md-8">
     <form>
       <div class="form-group form-inline">

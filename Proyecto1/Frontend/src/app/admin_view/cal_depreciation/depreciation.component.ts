@@ -29,10 +29,9 @@ export class DepreciationComponent implements OnInit {
 
     form: FormGroup;
     filter = new FormControl('');
-
-    calType = ["Lineal", "Suma de Digitos"];
     categoria;
 
+    submitted = false;
     calculos: asset[] = [];
 
     isPopupOpened = false;
@@ -51,7 +50,7 @@ export class DepreciationComponent implements OnInit {
     calculate() {
         let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
         /*Tengo duda de si el valor del DropDown Categoria se tomará bien*/
-       // let categoria = this.form.get('Categoria').value;
+        // let categoria = this.form.get('Categoria').value;
         this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
@@ -102,6 +101,29 @@ export class DepreciationComponent implements OnInit {
                 dropdown.append(option);
             }
         });;
+    }
+
+    onSubmit() {
+        this.submitted = true;
+        let nombre = this.form.get('Nombre').value;
+        let apellido1 = this.form.get('Apellido1').value;
+        let apellido2 = this.form.get('Apellido1').value;
+        let cedula = this.form.get('Cedula').value;
+        let FechaN = this.form.get('FechaN').value;
+        let correo = this.form.get('Correo').value;
+        let contrasena = this.form.get('Contrasena').value;
+        let departamento = this.form.get('Departamento').value;
+        let puesto = this.form.get('Puesto').value;
+
+        // stop here if form is invalid
+        let btn = document.getElementById('registrar_btn');
+        if (this.form.invalid) {
+            btn.setAttribute('class', 'btn btn-danger');
+            return;
+        }
+        else {
+            this.calculate() ;
+        }
     }
 
 }
