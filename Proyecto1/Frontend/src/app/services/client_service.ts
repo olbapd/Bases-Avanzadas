@@ -55,7 +55,6 @@ export class RestApiService {
     return this.http.post(this.apiURL + urls.sp_url + 'sp_calculosBySede', body).pipe(retry(1), catchError(this.handleError));
   }
 
-  
 
   getSate(username, password) {
 
