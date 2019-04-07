@@ -44,17 +44,18 @@ export class DepreciationComponent implements OnInit {
 
         this.form = new FormGroup({
             Cantidad: new FormControl('', Validators.required),
-            Categoria: new FormControl('', Validators.required)
+            Categoria2: new FormControl('', Validators.required)
         });
 
         this.CategoriaDropdown();
         console.log("siiiiiiii");
     }
+    get f() { return this.form.controls; }
 
     calculate() {
         let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
         /*Tengo duda de si el valor del DropDown Categoria se tomará bien*/
-        let categoria = this.form.get('Categoria').value;
+        let categoria = this.form.get('Categoria2').value;
         this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
@@ -94,7 +95,7 @@ export class DepreciationComponent implements OnInit {
 
     CategoriaDropdown() {
         let option;
-        let dropdown = document.getElementById('categoria-Dropdown');
+        let dropdown = document.getElementById('Categoria2-Dropdown');
         this.restApi.getCategorias().subscribe((res) => {
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
@@ -110,16 +111,17 @@ export class DepreciationComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-        let categoria = this.form.get('Categoria').value;
-        let anos = this.form.get('Cantidad').value;
+       /*  let categoria = this.form.get('Categoria').value;
+        let anos = this.form.get('Cantidad').value; */
 
         // stop here if form is invalid
-        let btn = document.getElementById('registrar_btn');
+        let btn = document.getElementById('registrar_btnD');
         if (this.form.invalid) {
             btn.setAttribute('class', 'btn btn-danger');
             return;
         }
         else {
+            btn.setAttribute('class', 'btn btn-success');
             this.calculate() ;
         }
     }

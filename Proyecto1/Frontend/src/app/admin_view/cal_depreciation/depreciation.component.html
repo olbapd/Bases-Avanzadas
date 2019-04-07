@@ -16,18 +16,18 @@
 
               <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
               <div class="form-group">
-                  <select id="categoria-Dropdown" name="Categoria"
-                    formControlName="Categoria" class="form-control"
+                  <select id="Categoria2-Dropdown" name="Categoria2"
+                    formControlName="Categoria2" class="form-control"
                     #select_categoria data-style="btn-primary"
                     data-live-search="true" data-selectpicker
                     data-collection-name="items" ng-model="selected"
-                    [ngClass]="{ 'is-invalid': submitted && f.Categoria.errors
+                    [ngClass]="{ 'is-invalid': submitted && f.Categoria2.errors
                     }">
                     <option [ngValue]="null">Seleccione una categoría</option>
                   </select>
-                  <div *ngIf="submitted && f.Categoria.errors"
+                  <div *ngIf="submitted && f.Categoria2.errors"
                     class="invalid-feedback">
-                    <div *ngIf="f.Categoria.errors.required">Categoria
+                    <div *ngIf="f.Categoria2.errors.required">Categoria
                       Requerida</div>
                   </div>
                 
@@ -48,7 +48,7 @@
               </div>
 
               <div class="form-group">
-                <button id="registrar_btn" class="btn btn-primary">Registrar</button>
+                <button id="registrar_btnD" class="btn btn-primary">Registrar</button>
               </div>
 
             </form>
