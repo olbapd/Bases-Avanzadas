@@ -15,7 +15,7 @@ import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from
 import { FotoService } from '../../services/foto.service';
 import { FilterPipe } from 'src/app/services/filter.pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import {formatDate} from '@angular/common';
+import { formatDate } from '@angular/common';
 
 
 
@@ -110,7 +110,7 @@ export class EmployeeComponent implements OnInit {
                     this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
                         const myObjStr = JSON.stringify(res)
                         const json = JSON.parse(myObjStr);
-                        this.restApi.setEmpleado(nombre, apellido1, apellido2, cedula, FechaN, correo, contrasena, departamento, puesto, photoHash, json.data[0].IdSede,formatDate(new Date(), 'yyyy-MM-dd', 'en')).subscribe(res => {
+                        this.restApi.setEmpleado(nombre, apellido1, apellido2, cedula, FechaN, correo, contrasena, departamento, puesto, photoHash, json.data[0].IdSede, formatDate(new Date(), 'yyyy-MM-dd', 'en')).subscribe(res => {
 
                         });
                     });
@@ -187,10 +187,10 @@ export class EmployeeComponent implements OnInit {
                         "nombre": json.data[_i].Nombre[0],
                         "departamento": json.data[_i].Nombre[1],
                         "puesto": json.data[_i].Nombre[2],
-                        "fechaIn":  FechaIn.substring(0,10),
+                        "fechaIn": FechaIn.substring(0, 10),
                         "correo": json.data[_i].Correo,
-                        "contrasena":json.data[_i].Contrasena,
-                        "foto":json.data[_i].Foto
+                        "contrasena": json.data[_i].Contrasena,
+                        "foto": json.data[_i].Foto
 
                     });
                 }
@@ -224,18 +224,32 @@ export class EmployeeComponent implements OnInit {
     }
 
 
-    updateEmployee(cedula, departamento, puesto, correo,contrasena,foto) {
-        this.isPopupOpened = true;
-        const dialogRef = this.dialog.open(updateComponent, {
-            data: {
-                "Cedula": cedula,
-                "Departamento": departamento,
-                "Puesto": puesto,
-                "Correo": correo,
-                "Contrasena":contrasena,
-                "Foto":foto
-            }
-        });
+    updateEmployee(cedula, departamento, puesto, correo, contrasena, foto, fechaIn) {
+        this.restApi.getIdDepartamento(departamento).subscribe((resD) => {
+            this.restApi.getIdPuesto(puesto).subscribe((resP) => {
+                const myObjStrD = JSON.stringify(resD)
+                const jsonD = JSON.parse(myObjStrD);
+                const myObjStrP = JSON.stringify(resP)
+                const jsonP = JSON.parse(myObjStrP);
+                this.isPopupOpened = true;
+                const dialogRef = this.dialog.open(updateComponent, {
+                    data: {
+                        "Cedula": cedula,
+                        "Departamento": jsonD.data[0].IdDepartamento,
+                        "Puesto": jsonP.data[0].IdPuesto,
+                        "Correo": correo,
+                        "Contrasena": contrasena,
+                        "Foto": foto,
+                        "FechaIn": fechaIn
+                    }
+                });
+
+            });
+
+        });;
+
+
+
     }
 
     onPhotoChange(event) {

@@ -11,7 +11,7 @@
     </mat-toolbar>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
 
         <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Departamento</h6>
         <div class="form-group">
@@ -74,7 +74,7 @@
 
         <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Contraseña</h6>
         <div class="form-group">
-          <input type="text" #txt_contrasena class="form-control" formControlName="ContrasenaP"
+          <input type="password" #txt_contrasena class="form-control" formControlName="ContrasenaP"
             [ngClass]="{ 'is-invalid': submitted && f.ContrasenaP.errors }" />
           <div *ngIf="submitted && f.ContrasenaP.errors" class="invalid-feedback">
             <div *ngIf="f.ContrasenaP.errors.required">Contraseña Requerida</div>
@@ -91,7 +91,7 @@
       </div>
 
 
-      <div class="col-md-6">
+      <!-- <div class="col-md-6">
         <h5 class="card-title">Información Actual:</h5>
         <div mat-dialog-content>
           Cedula: {{data.Cedula}}
@@ -103,7 +103,7 @@
           Correo: {{data.Correo}}
           <p></p>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <button mat-icon-button color="accent" class="btn btn-success">

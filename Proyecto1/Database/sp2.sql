@@ -975,3 +975,39 @@ WHERE @Cedula = [Empleado].Cedula
 
 SET NOCOUNT OFF
 GO
+
+CREATE OR ALTER PROC [dbo].[getIdDepartamento]
+	@NombreD varchar(50)
+AS
+SET NOCOUNT ON
+
+SELECT [Departamento].IdDepartamento
+FROM Departamento
+WHERE @NombreD = [Departamento].Nombre
+
+SET NOCOUNT OFF
+GO
+
+CREATE OR ALTER PROC [dbo].[getIdPuesto]
+	@NombreP varchar(50)
+AS
+SET NOCOUNT ON
+
+SELECT [Puesto].IdPuesto
+FROM Puesto
+WHERE @NombreP = [Puesto].Nombre
+
+SET NOCOUNT OFF
+GO
+
+CREATE OR ALTER PROC [dbo].[getIdSede]
+	@NombreS varchar(50)
+AS
+SET NOCOUNT ON
+
+SELECT [Sede].IdSede
+FROM Sede
+WHERE @NombreS = [Sede].Nombre
+
+SET NOCOUNT OFF
+GO

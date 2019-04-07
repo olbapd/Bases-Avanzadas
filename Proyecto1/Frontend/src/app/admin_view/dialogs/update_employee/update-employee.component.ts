@@ -24,12 +24,12 @@ export class updateComponent implements OnInit {
         }
     ngOnInit(){
         this.form = new FormGroup({
-            Departamento: new FormControl('', Validators.required),
-            Puesto: new FormControl('', Validators.required),
-            FechaR: new FormControl('', Validators.required),
+            Departamento: new FormControl(this.data.Departamento, Validators.required),
+            Puesto: new FormControl(this.data.Puesto, Validators.required),
+            FechaR: new FormControl(this.data.FechaIn, Validators.required),
            /*  Sede: new FormControl('', Validators.required), */
-            CorreoP: new FormControl('', [Validators.required, Validators.email]),
-            ContrasenaP: new FormControl('', [Validators.required, Validators.minLength(8),Validators.maxLength(10)])
+            CorreoP: new FormControl(this.data.Correo, [Validators.required, Validators.email]),
+            ContrasenaP: new FormControl(this.data.Contrasena, [Validators.required,Validators.maxLength(10)])
          });
         this.dep_DropDown();
         this.puesto_DropDown();

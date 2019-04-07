@@ -336,6 +336,29 @@ export class RestApiService {
     }
     return this.http.post(this.apiURL + urls.sp_url + 'getIdEmpleado', body).pipe(retry(1), catchError(this.handleError));
   }
+  getIdDepartamento(Nombre) {
+    let body = {
+      "typesIn": ["varchar"],
+      "typesOut": [],
+      "parameters": ["NombreD"],
+      "values": [Nombre],
+      "ouputs": [],
+      "name": "getIdDepartamento"
+    }
+    return this.http.post(this.apiURL + urls.sp_url + 'getIdDepartamento', body).pipe(retry(1), catchError(this.handleError));
+  }
+
+  getIdPuesto(Nombre) {
+    let body = {
+      "typesIn": ["varchar"],
+      "typesOut": [],
+      "parameters": ["NombreP"],
+      "values": [Nombre],
+      "ouputs": [],
+      "name": "getIdPuesto"
+    }
+    return this.http.post(this.apiURL + urls.sp_url + 'getIdPuesto', body).pipe(retry(1), catchError(this.handleError));
+  }
 
   getQuitarActivo(Codigo, IdEstado) {
     let body = {
