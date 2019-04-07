@@ -6,8 +6,7 @@ import { RestApiService } from 'src/app/services/client_service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { asset } from './../../interfaces/assets_Structure';
 import { DecimalPipe } from '@angular/common';
-import { FormControl, FormGroup } from '@angular/forms';
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Depreciation } from 'src/app/services/depreciation';
@@ -42,21 +41,26 @@ export class DepreciationComponent implements OnInit {
         private router: Router) { }
 
     ngOnInit() {
+
+        this.form = new FormGroup({
+            Cantidad: new FormControl('', Validators.required),
+            Categoria: new FormControl('', Validators.required)
+        });
+
         this.CategoriaDropdown();
-        this.calculate();
         console.log("siiiiiiii");
     }
 
     calculate() {
         let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
         /*Tengo duda de si el valor del DropDown Categoria se tomará bien*/
-        // let categoria = this.form.get('Categoria').value;
+        let categoria = this.form.get('Categoria').value;
         this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
             const idSede = json.data[0].IdSede;
 
-            this.restApi.getCalculosXSede(1, 1).subscribe((res) => {
+            this.restApi.getCalculosXSede(categoria,idSede).subscribe((res) => {
                 const myObjStr = JSON.stringify(res)
                 const json = JSON.parse(myObjStr);
                 var count = Object.keys(json.data).length;
@@ -74,6 +78,7 @@ export class DepreciationComponent implements OnInit {
         });
     }
     firstMethod(T, B, VS) {
+
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(FirstMethodComponent, {
             data: [T, B, VS]
@@ -105,15 +110,8 @@ export class DepreciationComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-        let nombre = this.form.get('Nombre').value;
-        let apellido1 = this.form.get('Apellido1').value;
-        let apellido2 = this.form.get('Apellido1').value;
-        let cedula = this.form.get('Cedula').value;
-        let FechaN = this.form.get('FechaN').value;
-        let correo = this.form.get('Correo').value;
-        let contrasena = this.form.get('Contrasena').value;
-        let departamento = this.form.get('Departamento').value;
-        let puesto = this.form.get('Puesto').value;
+        let categoria = this.form.get('Categoria').value;
+        let anos = this.form.get('Cantidad').value;
 
         // stop here if form is invalid
         let btn = document.getElementById('registrar_btn');

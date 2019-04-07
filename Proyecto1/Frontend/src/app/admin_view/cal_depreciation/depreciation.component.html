@@ -16,8 +16,7 @@
 
               <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
               <div class="form-group">
-                <div class="input-group mb-3">
-                  <select id="categoria-Dropdown" name="categoria"
+                  <select id="categoria-Dropdown" name="Categoria"
                     formControlName="Categoria" class="form-control"
                     #select_categoria data-style="btn-primary"
                     data-live-search="true" data-selectpicker
@@ -31,7 +30,7 @@
                     <div *ngIf="f.Categoria.errors.required">Categoria
                       Requerida</div>
                   </div>
-                </div>
+                
               </div>
 
               <h6 class="card-subtitle mb-2 text-muted">Cantidad Años</h6>
@@ -40,7 +39,12 @@
                   class="form-control"
                   formControlName="Cantidad"
                   [ngClass]="{ 'is-invalid': submitted &&
-                  f.Nombre.errors }" />
+                  f.Cantidad.errors }" />
+                <div *ngIf="submitted && f.Cantidad.errors"
+                  class="invalid-feedback">
+                  <div *ngIf="f.Cantidad.errors.required">Cantidad de Años
+                    Requerido</div>
+                </div>
               </div>
 
               <div class="form-group">
