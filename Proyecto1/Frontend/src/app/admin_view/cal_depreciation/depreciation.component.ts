@@ -48,10 +48,24 @@ export class DepreciationComponent implements OnInit {
         });
 
         this.CategoriaDropdown();
-        console.log("siiiiiiii");
+        
     }
     get f() { return this.form.controls; }
 
+<<<<<<< HEAD
+=======
+    calculate() { 
+        let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
+        /*Tengo duda de si el valor del DropDown Categoria se tomará bien*/
+        let categoria = this.form.get('Categoria2').value;
+        console.log(categoria);
+
+        
+        this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
+            const myObjStr = JSON.stringify(res)
+            const json = JSON.parse(myObjStr);
+            const idSede = json.data[0].IdSede;
+>>>>>>> 2ae717c1d8ba2ea50b8a9ca31f3100648eab7536
 
     firstMethod(T, B, VS) {
         this.isPopupOpened = true;

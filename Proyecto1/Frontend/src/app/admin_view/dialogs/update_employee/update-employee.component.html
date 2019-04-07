@@ -49,13 +49,11 @@
         </div>
 
         <h6 class="card-subtitle mb-2 text-muted">Descripcion</h6>
-        <div class="form-group">
-          <span class="btn btn-rose btn-round btn-file">
-            <input type="file" class="form-control-file" id="exampleFormControlFile1" formControlName="Foto"
-              accept="image/png, image/jpeg, image/jpg, image/PNG, image/bmp" (change)="onPhotoChange($event)"
-              name="photo">
-          </span>
-        </div>
+        <span class="btn btn-rose btn-round btn-file">
+          <input type="file" class="form-control-file" id="exampleFormControlFile1"
+            accept="image/png, image/jpeg, image/jpg, image/PNG, image/bmp" (change)="onPhotoChange($event)"
+            name="photo">
+        </span>
       </div>
 
       <button mat-icon-button color="accent" style="margin-left: 15px" id="registrar1_btn" class="btn btn-success">

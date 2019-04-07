@@ -240,8 +240,6 @@ BEGIN
 		UPDATE Activo SET 
 		[IdEstado] = @IdEstado,
 		[IdEmpleado] = NULL,
-		[IdSede] = NULL,
-		[DetalleUbicacion]= NULL,
 		[FechaAsignacion] = NULL
 		WHERE @Codigo = [Activo].Codigo
 		COMMIT TRANSACTION
