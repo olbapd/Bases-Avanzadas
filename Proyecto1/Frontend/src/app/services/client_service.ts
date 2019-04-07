@@ -360,6 +360,18 @@ export class RestApiService {
     return this.http.post(this.apiURL + urls.sp_url + 'getIdPuesto', body).pipe(retry(1), catchError(this.handleError));
   }
 
+  getIdSede(Nombre) {
+    let body = {
+      "typesIn": ["varchar"],
+      "typesOut": [],
+      "parameters": ["NombreS"],
+      "values": [Nombre],
+      "ouputs": [],
+      "name": "getIdSede"
+    }
+    return this.http.post(this.apiURL + urls.sp_url + 'getIdSede', body).pipe(retry(1), catchError(this.handleError));
+  }
+
   getQuitarActivo(Codigo, IdEstado) {
     let body = {
       "typesIn": ["varchar", "int"],

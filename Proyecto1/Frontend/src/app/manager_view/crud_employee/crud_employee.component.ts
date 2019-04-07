@@ -15,7 +15,7 @@ import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from
 import { FotoService } from '../../services/foto.service';
 import { FilterPipe } from 'src/app/services/filter.pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import {formatDate} from '@angular/common';
+import { formatDate } from '@angular/common';
 
 @Component({
     selector: 'crud-employee',
@@ -36,9 +36,9 @@ export class EmployeeComponent implements OnInit {
     type = 1;
     page = 1;
     pageSize = 4;
-    
+
     empleados: Empleado[] = [];//debe de inicializarse de lo contrario muestra vacio
-    collectionSize:number=0;
+    collectionSize: number = 0;
 
     form: FormGroup;
     constructor(private fb: FormBuilder,
@@ -77,7 +77,7 @@ export class EmployeeComponent implements OnInit {
         this.dep_DropDown();
         this.puesto_DropDown();
         this.sedes_DropDown();
-        
+
 
 
     }
@@ -102,14 +102,14 @@ export class EmployeeComponent implements OnInit {
             return;
         }
         else {
-            
+
             //Se debe almacenar la imagen primero
             btn.setAttribute('class', 'btn btn-success');
             this.fotoService.uploadFile(this.photo)
                 .subscribe((data) => {
                     let photoHash = (data && data.hash) ? data.hash : null;
                     console.log(photoHash);
-                    this.restApi.setEmpleado(nombre, apellido1, apellido2, cedula, FechaN,correo, contrasena, departamento, puesto, photoHash,IdSede,formatDate(new Date(), 'yyyy-MM-dd', 'en')).subscribe(res => {
+                    this.restApi.setEmpleado(nombre, apellido1, apellido2, cedula, FechaN, correo, contrasena, departamento, puesto, photoHash, IdSede, formatDate(new Date(), 'yyyy-MM-dd', 'en')).subscribe(res => {
                         window.location.reload();
                     });
                 });
@@ -187,8 +187,10 @@ export class EmployeeComponent implements OnInit {
                         "nombre": json.data[_i].Nombre[0],
                         "departamento": json.data[_i].Nombre[1],
                         "puesto": json.data[_i].Nombre[2],
-                        "fechaIn": FechaIn.substring(0,10),
-                        "correo": json.data[_i].Correo
+                        "fechaIn": FechaIn.substring(0, 10),
+                        "correo": json.data[_i].Correo,
+                        "contrasena": json.data[_i].Contrasena,
+                        "foto": json.data[_i].Foto
 
                     });
                 }
@@ -221,17 +223,44 @@ export class EmployeeComponent implements OnInit {
     }
 
 
-    updateEmployee(cedula, departamento, puesto, correo) {
-        this.isPopupOpened = true;
-        const dialogRef = this.dialog.open(updateComponent, {
-            data: {
-                "Cedula": cedula,
-                "Departamento": departamento,
-                "Puesto": puesto,
-                "Correo": correo
+    updateEmployee(cedula, departamento, puesto, correo, contrasena, foto, fechaIn) {
+        this.restApi.getIdEmpleado(cedula).subscribe((resE) => {
+            const myObjStrE = JSON.stringify(resE)
+            const jsonE = JSON.parse(myObjStrE);
+            this.restApi.getSedeXEmpleado(jsonE.data[0].IdEmpleado).subscribe((resS) => {
+                const myObjStrS = JSON.stringify(resS)
+                const jsonS = JSON.parse(myObjStrS);
 
-            }
+
+                this.restApi.getIdDepartamento(departamento).subscribe((resD) => {
+                    this.restApi.getIdPuesto(puesto).subscribe((resP) => {
+                        const myObjStrD = JSON.stringify(resD)
+                        const jsonD = JSON.parse(myObjStrD);
+                        const myObjStrP = JSON.stringify(resP)
+                        const jsonP = JSON.parse(myObjStrP);
+                        this.isPopupOpened = true;
+                        const dialogRef = this.dialog.open(updateComponent, {
+                            data: {
+                                "Cedula": cedula,
+                                "Departamento":departamento,
+                                "IdDepartamento": jsonD.data[0].IdDepartamento,
+                                "Puesto": puesto,
+                                "IdPuesto":jsonP.data[0].IdPuesto,
+                                "Correo": correo,
+                                "Contrasena": contrasena,
+                                "Foto": foto,
+                                "IdSede": jsonS.data[0].IdSede
+                            }
+                        });
+
+                    });
+
+                });;
+            });
         });
+
+
+
     }
 
     onPhotoChange(event) {

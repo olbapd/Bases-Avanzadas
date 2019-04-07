@@ -17,6 +17,8 @@ export class updateComponent implements OnInit {
     isPopupOpened = false;
     submitted = false;
     form: FormGroup;
+    submitted2 = false;
+    form2: FormGroup;
     photo: any;
     constructor(private modalService: NgbModal, public restApi: RestApiService,
         private router: Router, private dialogRef: MatDialogRef<updateComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private fotoService: FotoService) {
@@ -24,13 +26,18 @@ export class updateComponent implements OnInit {
     }
     ngOnInit() {
         this.form = new FormGroup({
-            Departamento: new FormControl('', Validators.required),
-            Puesto: new FormControl('', Validators.required),
-            FechaR: new FormControl('', Validators.required),
-            Sede: new FormControl('', Validators.required),
-            CorreoP: new FormControl('', [Validators.required, Validators.email]),
-            ContrasenaP: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(10)])
+            CorreoP: new FormControl(this.data.Correo, [Validators.required, Validators.email]),
+            ContrasenaP: new FormControl(this.data.Contrasena, [Validators.required, Validators.maxLength(10)])
         });
+
+        this.form2=new FormGroup({
+            Departamento: new FormControl(this.data.IdDepartamento, Validators.required),
+            Puesto: new FormControl(this.data.IdPuesto, Validators.required),
+            Sede: new FormControl(this.data.IdSede, Validators.required), 
+
+
+        });
+
         this.dep_DropDown();
         this.puesto_DropDown();
         this.sedes_DropDown();
@@ -40,17 +47,16 @@ export class updateComponent implements OnInit {
         this.dialogRef.close();
     }
     get f() { return this.form.controls; }
+    get f2() { return this.form2.controls; }
     onSubmit() {
         this.submitted = true;
         let departamento = this.form.get('Departamento').value;
         let puesto = this.form.get('Puesto').value;
-        let fechar = this.form.get('FechaR').value;
         let correo = this.form.get('CorreoP').value;
         let contrasena = this.form.get('ContrasenaP').value;
         let IdSede = this.form.get('Sede').value;
         // stop here if form is invalid
         if (this.form.invalid) {
-            console.log(" C" + correo + " CC" + contrasena + " " + "DEP " + departamento + " P" + puesto + "IDS " + IdSede + " FR" + fechar);
             return;
         }
         else {
@@ -63,10 +69,41 @@ export class updateComponent implements OnInit {
                     let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
                     let Cedula = this.data.Cedula;
 
-                    this.restApi.updateEmpleado(Cedula, correo, contrasena, photoHash, departamento, puesto, IdSede, fechar).subscribe(res => {
+                    this.restApi.updateEmpleado(Cedula, correo, contrasena, photoHash, departamento, puesto, IdSede, '2017-02-05').subscribe(res => {
                         window.location.reload();
 
                     });
+
+                });
+
+        }
+    }
+
+
+    onSubmit2() {
+        console.log("siiiiiuuuuuuuuu");
+        this.submitted2 = true;
+        let departamento = this.form2.get('Departamento').value;
+        let puesto = this.form2.get('Puesto').value;
+        let IdSede = this.form2.get('Sede').value;
+        // stop here if form is invalid
+        if (this.form2.invalid) {
+            return;
+        }
+        else {
+
+            //Se debe almacenar la imagen primero
+            this.fotoService.uploadFile(this.photo)
+                .subscribe((data) => {
+                    let photoHash = (data && data.hash) ? data.hash : null;
+                    console.log(photoHash);
+                    let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
+                    let Cedula = this.data.Cedula;
+
+                    /* this.restApi.updateEmpleado(Cedula, correo, contrasena, photoHash, departamento, puesto, IdSede, '2017-02-05').subscribe(res => {
+                        window.location.reload();
+
+                    }); */
 
                 });
 
