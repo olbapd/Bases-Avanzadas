@@ -24,7 +24,7 @@ export class SecondMethodComponent implements OnInit{
         ngOnInit() {
             this.valores=this.calcular.digitSum(this.data[0],this.data[1],this.data[2]);
             console.log(this.valores);
-            for (var _i = 0; _i < this.data[0]+1; _i++) {
+            for (var _i = 0; _i < this.data[0]; _i++) {
             this.calculos.push({
                 "t": _i,   
                 "anual":this.valores[0][_i],

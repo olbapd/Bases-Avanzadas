@@ -31,7 +31,7 @@ export class FirstMethodComponent implements OnInit {
     }
     ngOnInit() {
         this.valores = this.calcular.straightLine(this.data[0], this.data[1], this.data[2]);
-        for (var _i = 0; _i < this.data[0]+1; _i++) {
+        for (var _i = 0; _i < this.data[0]; _i++) {
             this.calculos.push({
                 "t": _i,
                 "acumulada": (_i * this.calcular.getDep(this.data[0], this.data[1], this.data[2])),
