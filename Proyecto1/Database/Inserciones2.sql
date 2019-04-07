@@ -688,6 +688,7 @@ EXEC setPuesto 'Asistente de Servicios G'
 EXEC setPuesto 'Asistente Ejecutivo'
 EXEC setPuesto 'Chofer'
 EXEC setPuesto 'Operario de Limpieza'
+EXEC setPuesto 'Por Definir'
 
 --INSERTAR ESTADOS
 EXEC setEstado 'Activo'
@@ -709,6 +710,7 @@ EXEC setDepartamento 'Direccion General'
 EXEC setDepartamento 'Departamento de Informatica'
 EXEC setDepartamento 'Departamento de Ventas'
 EXEC setDepartamento 'Departamento de Control'
+EXEC setDepartamento 'Por Definir'
 
 EXEC setCategoria 'Laptop', 1
 EXEC setCategoria 'PC Escritorio', 1;
