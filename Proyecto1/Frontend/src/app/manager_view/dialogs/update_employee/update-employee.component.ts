@@ -21,6 +21,7 @@ export class updateComponent implements OnInit {
     submitted2 = false;
     form2: FormGroup;
     photo: any;
+    photoHash: string;
     constructor(private modalService: NgbModal, public restApi: RestApiService,
         private router: Router, private dialogRef: MatDialogRef<updateComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private fotoService: FotoService) {
         this.photo = "";
@@ -37,6 +38,7 @@ export class updateComponent implements OnInit {
             Sede: new FormControl(this.data.IdSede, Validators.required),
         });
         let img_load = document.getElementById('imgUPManager');
+        this.photoHash = this.data.Foto;
         let photo_load = this.fotoService.downloadFile(this.data.Foto);
         img_load.setAttribute('src', photo_load);
 
@@ -60,21 +62,10 @@ export class updateComponent implements OnInit {
             return;
         }
         else {
-
-            //Se debe almacenar la imagen primero
-            this.fotoService.uploadFile(this.photo)
-                .subscribe((data) => {
-                    let photoHash = (data && data.hash) ? data.hash : null;
-                    console.log(photoHash);
-                    let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
-                    let Cedula = this.data.Cedula;
-
-                    this.restApi.updateEmpleadoInfo(Cedula, correo, contrasena, photoHash).subscribe(res => {
-                        window.location.reload();
-
-                    });
-
-                });
+            let Cedula = this.data.Cedula;
+            this.restApi.updateEmpleadoInfo(Cedula, correo, contrasena, this.photoHash).subscribe(res => {
+                window.location.reload();
+            });
 
         }
     }
@@ -153,12 +144,11 @@ export class updateComponent implements OnInit {
         this.photo = event.target.files[0];
         this.fotoService.uploadFile(this.photo)
             .subscribe((data) => {
-                let photoHash = (data && data.hash) ? data.hash : null;
+                let photoHashN = (data && data.hash) ? data.hash : null;
                 let img_load = document.getElementById('imgUPManager');
-                let photo_load = this.fotoService.downloadFile(photoHash);
+                let photo_load = this.fotoService.downloadFile(photoHashN);
                 img_load.setAttribute('src', photo_load);
-
-
+                this.photoHash = photoHashN;
             });
 
 

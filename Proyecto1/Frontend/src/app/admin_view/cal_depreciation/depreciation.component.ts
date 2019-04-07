@@ -48,14 +48,17 @@ export class DepreciationComponent implements OnInit {
         });
 
         this.CategoriaDropdown();
-        console.log("siiiiiiii");
+        
     }
     get f() { return this.form.controls; }
 
-    calculate() {
+    calculate() { 
         let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
         /*Tengo duda de si el valor del DropDown Categoria se tomará bien*/
         let categoria = this.form.get('Categoria2').value;
+        console.log(categoria);
+
+        
         this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
