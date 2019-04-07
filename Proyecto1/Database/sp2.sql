@@ -689,7 +689,7 @@ BEGIN
 		ROLLBACK TRANSACTION
 	END CATCH
 END
-
+GO
 
 -- =============================================
 -- Descripcion:	<Actualiza la información de un empleado>
@@ -722,7 +722,8 @@ BEGIN
 		[IdPuesto] = @IdPuesto,
 		[Foto] = @Foto
 		WHERE @Cedula = [Empleado].Cedula
-	 
+		
+
 
 		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso, FechaSalida)
 		VALUES (@IdSede, @IdEmpleado, @FechaIngreso, NULL)
