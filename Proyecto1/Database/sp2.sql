@@ -635,12 +635,13 @@ AS
 SET NOCOUNT ON
 
 SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
-[Empleado].Cedula,[Empleado].Correo, [SedeXEmpleado].FechaIngreso, [Departamento].Nombre, [Puesto].Nombre
+[Empleado].Cedula,[Empleado].Correo, [Empleado].Contrasena, [Empleado].Foto, 
+[SedeXEmpleado].FechaIngreso, [Departamento].Nombre, [Puesto].Nombre
 FROM SedeXEmpleado
 INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
-WHERE [Empleado].IdEstado = 1
+WHERE [Empleado].IdEstado = 1 AND [SedeXEmpleado].FechaSalida = NULL
 
 SET NOCOUNT OFF
 GO
@@ -693,18 +694,14 @@ GO
 
 -- =============================================
 -- Descripcion:	<Actualiza la información de un empleado>
--- Parametro de Entrada: <Correo, Contrasena, IdDepartamento, IdPuesto, Foto>
+-- Parametro de Entrada: <Cedula, Correo, Contrasena, Foto>
 -- Parametro de Salida: <Ninguno>
 -- =============================================
-CREATE OR ALTER PROC [dbo].[updateEmpleado]
+CREATE OR ALTER PROC [dbo].[updateEmpleadoInfo]
 	@Cedula varchar(50),
 	@Correo varchar(50),
 	@Contrasena varchar(50),
-	@Foto varchar(50),
-	@IdDepartamento int,
-	@IdPuesto int,
-	@IdSede int,
-	@FechaIngreso date
+	@Foto varchar(50)
 	
 AS
 BEGIN
@@ -718,15 +715,8 @@ BEGIN
 		UPDATE Empleado SET 
 		[Correo] = @Correo,
 		[Contrasena]=  @Contrasena,
-		[IdDepartamento] = @IdDepartamento,
-		[IdPuesto] = @IdPuesto,
 		[Foto] = @Foto
 		WHERE @Cedula = [Empleado].Cedula
-		
-
-
-		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso, FechaSalida)
-		VALUES (@IdSede, @IdEmpleado, @FechaIngreso, NULL)
 
 		COMMIT TRANSACTION
 	END TRY
@@ -735,8 +725,51 @@ BEGIN
 		ROLLBACK TRANSACTION
 	END CATCH
 END
-
 GO
+
+-- =============================================
+-- Descripcion:	<Actualiza la información de la sede, del puesto y del departamento>
+-- Parametro de Entrada: <Cedula, IdDepartamento, IdSede, IdPuesto, FechaSalida, FechaIngreso>
+-- Parametro de Salida: <Ninguno>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[cambioEmpleado]
+	@Cedula varchar(50),
+	@IdDepartamento int,
+	@IdSede int,
+	@IdPuesto int,
+	@FechaSalida date,
+	@FechaIngreso date
+	
+AS
+BEGIN
+	DECLARE
+		@IdEmpleado int
+
+		SELECT @IdEmpleado = Empleado.IdEmpleado FROM Empleado WHERE @Cedula = Empleado.Cedula
+
+	BEGIN TRAN
+	BEGIN TRY
+		UPDATE SedeXEmpleado SET 
+		[FechaSalida] = @FechaSalida
+		WHERE @IdEmpleado = [SedeXEmpleado].IdEmpleado AND FechaSalida = NULL
+
+		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso, FechaSalida)
+		VALUES (@IdSede, @IdEmpleado, @FechaIngreso, NULL)
+
+		UPDATE Empleado SET 
+		[IdDepartamento] = @IdDepartamento,
+		[IdPuesto] = @IdPuesto
+		WHERE @IdEmpleado = [Empleado].IdEmpleado
+
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
+		ROLLBACK TRANSACTION
+	END CATCH
+END
+GO
+
 
 -- =============================================
 -- Descripcion:	<Inactivar la cuenta de un empleado>
@@ -763,12 +796,14 @@ BEGIN
 END
 GO
 
+
+
 -- =============================================
 -- Descripcion:	<Cambiar el administrado de una sede>
 -- Parametro de Entrada: <IdAdminViejo, IdAdminNuevo, IdSede>
 -- Parametro de Salida: <Ninguno>
 -- =============================================
-CREATE OR ALTER PROC [dbo].[updateAdmin]
+CREATE OR ALTER PROC [dbo].[updateAdmin]--AGREGAR FECHAS
 	@IdAdminV varchar(50),
 	@IdAdminN varchar(50),
 	@IdSede int
@@ -906,7 +941,7 @@ FROM SedeXEmpleado
 INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
-WHERE @IdSede = [SedeXEmpleado].IdSede AND [Empleado].IdEstado = 1
+WHERE @IdSede = [SedeXEmpleado].IdSede AND [Empleado].IdEstado = 1 AND [SedeXEmpleado].FechaSalida = NULL
 
 SET NOCOUNT OFF
 GO
