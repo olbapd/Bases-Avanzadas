@@ -1,13 +1,19 @@
 <app-admin></app-admin>
-<div>
-        <div>
-          <div>
-            <div style="display: block">
-              <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-                [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
-            </div>
-            <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button>
-          </div>
-        </div>
+<div clas="row">
+  
+      <p>Grafica Pastel de la cantidad de Activos segun su estado</p>
+
+    <div class="col-md-12">
+      <div class="chart">  
+        <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"
+          [options]="pieChartOptions"
+          [plugins]="pieChartPlugins"
+          [colors]="pieChartColors"
+          [legend]="pieChartLegend">
+        </canvas>
       </div>
+    </div>
+  </div>

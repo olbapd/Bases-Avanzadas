@@ -35,8 +35,7 @@ export class DepreciationComponent implements OnInit {
 
     isPopupOpened = false;
 
-    constructor(
-        private dialog: MatDialog, public calcular: Depreciation,
+    constructor(private dialog: MatDialog, public calcular: Depreciation,
         private modalService: NgbModal, public restApi: RestApiService,
         private router: Router) { }
 
