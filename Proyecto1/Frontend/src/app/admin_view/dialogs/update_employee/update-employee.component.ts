@@ -5,6 +5,7 @@ import { RestApiService } from 'src/app/services/client_service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from '@angular/forms';
 import { FotoService } from 'src/app/services/foto.service';
+import{formatDate} from '@angular/common';
 @Component({
     selector: 'update-employee',
     templateUrl: './update-employee.component.html',
@@ -48,66 +49,56 @@ export class updateComponent implements OnInit {
        get f() { return this.form.controls; }
        get f2() { return this.form2.controls; }
        onSubmit() {
-           this.submitted = true;
-           let departamento = this.form.get('Departamento').value;
-           let puesto = this.form.get('Puesto').value;
-           let correo = this.form.get('CorreoP').value;
-           let contrasena = this.form.get('ContrasenaP').value;
-           let IdSede = this.form.get('Sede').value;
-           // stop here if form is invalid
-           if (this.form.invalid) {
-               return;
-           }
-           else {
-   
-               //Se debe almacenar la imagen primero
-               this.fotoService.uploadFile(this.photo)
-                   .subscribe((data) => {
-                       let photoHash = (data && data.hash) ? data.hash : null;
-                       console.log(photoHash);
-                       let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
-                       let Cedula = this.data.Cedula;
-   
-                       this.restApi.updateEmpleadoInfo(Cedula, correo, contrasena, photoHash).subscribe(res => {
-                           window.location.reload();
-   
-                       });
-   
-                   });
-   
-           }
-       }
-   
-   
-       onSubmit2() {
-           console.log("siiiiiuuuuuuuuu");
-           this.submitted2 = true;
-           let departamento = this.form2.get('Departamento').value;
-           let puesto = this.form2.get('Puesto').value;
-           let IdSede = this.form2.get('Sede').value;
-           // stop here if form is invalid
-           if (this.form2.invalid) {
-               return;
-           }
-           else {
-   
-               //Se debe almacenar la imagen primero
-               this.fotoService.uploadFile(this.photo)
-                   .subscribe((data) => {
-                       let photoHash = (data && data.hash) ? data.hash : null;
-                       console.log(photoHash);
-                       let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
-                       let Cedula = this.data.Cedula;
-   
-                       /* this.restApi.updateEmpleado(Cedula, correo, contrasena, photoHash, departamento, puesto, IdSede, '2017-02-05').subscribe(res => {
-                           window.location.reload();
-   
-                       }); */
-   
-                   });
-   
-           }
-       }
+        this.submitted = true;
+        let correo = this.form.get('CorreoP').value;
+        let contrasena = this.form.get('ContrasenaP').value;
+
+        // stop here if form is invalid
+        if (this.form.invalid) {
+            return;
+        }
+        else {
+
+            //Se debe almacenar la imagen primero
+            this.fotoService.uploadFile(this.photo)
+                .subscribe((data) => {
+                    let photoHash = (data && data.hash) ? data.hash : null;
+                    console.log(photoHash);
+                    let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
+                    let Cedula = this.data.Cedula;
+
+                    this.restApi.updateEmpleadoInfo(Cedula, correo, contrasena, photoHash).subscribe(res => {
+                        window.location.reload();
+
+                    });
+
+                });
+
+        }
+    }
+
+
+    onSubmit2() {
+        this.submitted2 = true;
+        let departamento = this.form2.get('Departamento').value;
+        let puesto = this.form2.get('Puesto').value;
+        let IdSede = this.data.IdSede;
+        // stop here if form is invalid
+        if (this.form2.invalid) {
+            return;
+        }
+        else {
+
+            let Cedula = this.data.Cedula;
+            let FechaActual = formatDate(new Date(),'yyyy-MM-dd','en');
+
+            this.restApi.cambioEmpleado(Cedula,departamento, puesto, IdSede, FechaActual,FechaActual).subscribe(res => {
+                window.location.reload();
+
+            });
+
+        }
+    }
     dep_DropDown(){
         let option;
         let dropdowndep = document.getElementById('dep1-Dropdown');

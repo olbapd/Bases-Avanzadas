@@ -411,13 +411,13 @@ export class RestApiService {
     return this.http.post(this.apiURL + urls.sp_url + 'cerrarSede', body).pipe(retry(1), catchError(this.handleError));
   }
 
-  updateAdminSede(cedulaV, cedulaN, IdSede) {
+  updateAdminSede(cedulaV, cedulaN, IdSede,FechaS,FechaIn) {
 
     let body = {
-      "typesIn": ["varchar", "varchar", "int"],
+      "typesIn": ["varchar", "varchar", "date","date","int"],
       "typesOut": [],
-      "parameters": ["IdAdminV", "IdAdminN", "IdSede"],
-      "values": [cedulaV, cedulaN, IdSede],
+      "parameters": ["IdAdminV", "IdAdminN", "FechaSalida","FechaIngreso","IdSede"],
+      "values": [cedulaV, cedulaN,FechaS,FechaIn, IdSede],
       "ouputs": [],
       "name": "updateAdmin"
     }

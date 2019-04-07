@@ -70,8 +70,8 @@ export class EmployeeComponent implements OnInit {
             Contrasena: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(10)]),
             FechaN: new FormControl('', Validators.required),
             Departamento: new FormControl('', Validators.required),
-            Puesto: new FormControl('', Validators.required),
-            Sede: new FormControl('', Validators.required)
+            Puesto: new FormControl('', Validators.required)
+            /* Sede: new FormControl('', Validators.required) */
 
 
         });
@@ -96,11 +96,13 @@ export class EmployeeComponent implements OnInit {
         let puesto = this.form.get('Puesto').value;
 
         // stop here if form is invalid
+        let btn = document.getElementById('registrar_btn');
         if (this.form.invalid) {
+            btn.setAttribute('class', 'btn btn-danger');
             return;
         }
         else {
-            let btn = document.getElementById('registrar_btn');
+            btn.setAttribute('class', 'btn btn-success');
             //Se debe almacenar la imagen primero
             this.fotoService.uploadFile(this.photo)
                 .subscribe((data) => {
@@ -224,29 +226,41 @@ export class EmployeeComponent implements OnInit {
     }
 
 
-    updateEmployee(cedula, departamento, puesto, correo, contrasena, foto, fechaIn) {
-        this.restApi.getIdDepartamento(departamento).subscribe((resD) => {
-            this.restApi.getIdPuesto(puesto).subscribe((resP) => {
-                const myObjStrD = JSON.stringify(resD)
-                const jsonD = JSON.parse(myObjStrD);
-                const myObjStrP = JSON.stringify(resP)
-                const jsonP = JSON.parse(myObjStrP);
-                this.isPopupOpened = true;
-                const dialogRef = this.dialog.open(updateComponent, {
-                    data: {
-                        "Cedula": cedula,
-                        "Departamento": jsonD.data[0].IdDepartamento,
-                        "Puesto": jsonP.data[0].IdPuesto,
-                        "Correo": correo,
-                        "Contrasena": contrasena,
-                        "Foto": foto,
-                        "FechaIn": fechaIn
-                    }
-                });
+    updateEmployee(cedula, departamento, puesto, correo, contrasena, foto) {
+        this.restApi.getIdEmpleado(cedula).subscribe((resE) => {
+            const myObjStrE = JSON.stringify(resE)
+            const jsonE = JSON.parse(myObjStrE);
+            this.restApi.getSedeXEmpleado(jsonE.data[0].IdEmpleado).subscribe((resS) => {
+                const myObjStrS = JSON.stringify(resS)
+                const jsonS = JSON.parse(myObjStrS);
 
+
+                this.restApi.getIdDepartamento(departamento).subscribe((resD) => {
+                    this.restApi.getIdPuesto(puesto).subscribe((resP) => {
+                        const myObjStrD = JSON.stringify(resD)
+                        const jsonD = JSON.parse(myObjStrD);
+                        const myObjStrP = JSON.stringify(resP)
+                        const jsonP = JSON.parse(myObjStrP);
+                        this.isPopupOpened = true;
+                        const dialogRef = this.dialog.open(updateComponent, {
+                            data: {
+                                "Cedula": cedula,
+                                "Departamento":departamento,
+                                "IdDepartamento": jsonD.data[0].IdDepartamento,
+                                "Puesto": puesto,
+                                "IdPuesto":jsonP.data[0].IdPuesto,
+                                "Correo": correo,
+                                "Contrasena": contrasena,
+                                "Foto": foto,
+                                "IdSede": jsonS.data[0].IdSede
+                            }
+                        });
+
+                    });
+
+                });;
             });
-
-        });;
+        });
 
 
 

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { updateComponent } from '../update_employee/update-employee.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import{formatDate} from '@angular/common';
 
 @Component({
     selector: 'update-sede',
@@ -34,7 +35,8 @@ export class UpdateSedeComponent implements OnInit {
             return;
         }
         else {
-            this.restApi.updateAdminSede(this.data.cedula, cedula, this.data.IdSede).subscribe((res) => {
+            let FechaActual = formatDate(new Date(),'yyyy-MM-dd','en');
+            this.restApi.updateAdminSede(this.data.cedula, cedula, this.data.IdSede,FechaActual,FechaActual).subscribe((res) => {
                 btn.setAttribute('class', 'btn btn-success');
                 window.location.reload();
             });

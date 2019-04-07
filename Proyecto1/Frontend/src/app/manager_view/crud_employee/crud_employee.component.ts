@@ -223,7 +223,7 @@ export class EmployeeComponent implements OnInit {
     }
 
 
-    updateEmployee(cedula, departamento, puesto, correo, contrasena, foto, fechaIn) {
+    updateEmployee(cedula, departamento, puesto, correo, contrasena, foto) {
         this.restApi.getIdEmpleado(cedula).subscribe((resE) => {
             const myObjStrE = JSON.stringify(resE)
             const jsonE = JSON.parse(myObjStrE);
