@@ -641,7 +641,7 @@ FROM SedeXEmpleado
 INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
-WHERE [Empleado].IdEstado = 1 AND [SedeXEmpleado].FechaSalida = NULL
+WHERE [Empleado].IdEstado = 1 AND [SedeXEmpleado].FechaSalida IS NULL
 
 SET NOCOUNT OFF
 GO
@@ -941,7 +941,7 @@ FROM SedeXEmpleado
 INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
-WHERE @IdSede = [SedeXEmpleado].IdSede AND [Empleado].IdEstado = 1 AND [SedeXEmpleado].FechaSalida = NULL
+WHERE @IdSede = [SedeXEmpleado].IdSede AND [Empleado].IdEstado = 1 AND [SedeXEmpleado].FechaSalida IS NULL
 
 SET NOCOUNT OFF
 GO
