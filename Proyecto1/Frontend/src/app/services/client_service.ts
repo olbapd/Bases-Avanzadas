@@ -42,20 +42,20 @@ export class RestApiService {
     return this.http.post(this.apiURL + urls.sp_url + 'calculos', body).pipe(retry(1), catchError(this.handleError));
   }
 
-  getCalculosXSede(idCategoria,idSede) {
+  getCalculosXSede(idCategoria, idSede) {
     let body = {
-      "typesIn":["int","int"],
-      "typesOut":[],
-      "parameters":["IdCategoria","IdSede"],
-      "values":[idCategoria,idSede],
-      "ouputs":[],
-      "name":"[sp_calculosBySede]"
+      "typesIn": ["int", "int"],
+      "typesOut": [],
+      "parameters": ["IdCategoria", "IdSede"],
+      "values": [idCategoria, idSede],
+      "ouputs": [],
+      "name": "[sp_calculosBySede]"
     }
       ;
     return this.http.post(this.apiURL + urls.sp_url + 'sp_calculosBySede', body).pipe(retry(1), catchError(this.handleError));
   }
 
-  
+
 
   getSate(username, password) {
 
@@ -251,6 +251,20 @@ export class RestApiService {
     return this.http.post(this.apiURL + urls.sp_url + 'getCodigoDynamic', body).pipe(retry(1), catchError(this.handleError));
   }
 
+
+  getActivoStateBySede(IdEstado, IdSede) {
+    let body = {
+      "typesIn": ["int", "int"],
+      "typesOut": [],
+      "parameters": ["IdEstado", "IdSede"],
+      "values": [IdEstado, IdSede],
+      "ouputs": [],
+      "name": "getActivoStateBySede"
+    }
+
+    return this.http.post(this.apiURL + urls.sp_url + 'getActivoStateBySede', body).pipe(retry(1), catchError(this.handleError));
+  }
+
   getActivoXCodigo(Codigo) {
     let body = {
       "typesIn": ["varchar"],
@@ -411,13 +425,13 @@ export class RestApiService {
     return this.http.post(this.apiURL + urls.sp_url + 'cerrarSede', body).pipe(retry(1), catchError(this.handleError));
   }
 
-  updateAdminSede(cedulaV, cedulaN, IdSede,FechaS,FechaIn) {
+  updateAdminSede(cedulaV, cedulaN, IdSede, FechaS, FechaIn) {
 
     let body = {
-      "typesIn": ["varchar", "varchar", "date","date","int"],
+      "typesIn": ["varchar", "varchar", "date", "date", "int"],
       "typesOut": [],
-      "parameters": ["IdAdminV", "IdAdminN", "FechaSalida","FechaIngreso","IdSede"],
-      "values": [cedulaV, cedulaN,FechaS,FechaIn, IdSede],
+      "parameters": ["IdAdminV", "IdAdminN", "FechaSalida", "FechaIngreso", "IdSede"],
+      "values": [cedulaV, cedulaN, FechaS, FechaIn, IdSede],
       "ouputs": [],
       "name": "updateAdmin"
     }
@@ -452,10 +466,10 @@ export class RestApiService {
   }
   setEmpleado(Nombre, Apellido1, Apellido2, Cedula, FechaN, Correo, Contrasena, IdDepartamento, IdPuesto, Foto, IdSede, FechaActual) {
     let body = {
-      "typesIn": ["varchar", "varchar", "varchar", "varchar", "date", "date", "varchar", "varchar", "int", "int", "int" ,"varchar"],
+      "typesIn": ["varchar", "varchar", "varchar", "varchar", "date", "date", "varchar", "varchar", "int", "int", "int", "varchar"],
       "typesOut": [],
-      "parameters": ["Nombre", "Apellido1", "Apellido2", "Cedula", "FechaN","FechaActual" ,"Correo", "Contrasena", "IdDepartamento", "IdPuesto", "IdSede", "Foto"],
-      "values": [Nombre, Apellido1, Apellido2, Cedula, FechaN,FechaActual, Correo, Contrasena, IdDepartamento, IdPuesto, IdSede, Foto],
+      "parameters": ["Nombre", "Apellido1", "Apellido2", "Cedula", "FechaN", "FechaActual", "Correo", "Contrasena", "IdDepartamento", "IdPuesto", "IdSede", "Foto"],
+      "values": [Nombre, Apellido1, Apellido2, Cedula, FechaN, FechaActual, Correo, Contrasena, IdDepartamento, IdPuesto, IdSede, Foto],
       "ouputs": [],
       "name": "setEmpleado"
     }
@@ -545,12 +559,12 @@ export class RestApiService {
     return this.http.post(this.apiURL + urls.sp_url + 'updateEmpleadoInfo', body).pipe(retry(1), catchError(this.handleError));
   }
 
-  cambioEmpleado(Cedula, IdDepartamento, IdPuesto, IdSede,FechaS,FechaIn) {
+  cambioEmpleado(Cedula, IdDepartamento, IdPuesto, IdSede, FechaS, FechaIn) {
     let body = {
-      "typesIn": ["varchar", "int", "int", "int","date","date"],
+      "typesIn": ["varchar", "int", "int", "int", "date", "date"],
       "typesOut": [],
-      "parameters": ["Cedula", "IdDepartamento", "IdSede", "IdPuesto","FechaSalida","FechaIngreso"],
-      "values": [Cedula, IdDepartamento, IdSede, IdPuesto,FechaS,FechaIn],
+      "parameters": ["Cedula", "IdDepartamento", "IdSede", "IdPuesto", "FechaSalida", "FechaIngreso"],
+      "values": [Cedula, IdDepartamento, IdSede, IdPuesto, FechaS, FechaIn],
       "ouputs": [],
       "name": "cambioEmpleado"
     }

@@ -1064,3 +1064,15 @@ WHERE @NombreS = [Sede].Nombre
 
 SET NOCOUNT OFF
 GO
+
+CREATE OR ALTER PROC [dbo].[getActivoStateBySede]
+	@IdEstado int,
+	@IdSede int
+AS
+SET NOCOUNT ON
+
+SELECT [Activo].Codigo
+FROM Activo
+WHERE [IdEstado] = @IdEstado AND [IdSede] =@IdSede
+SET NOCOUNT OFF
+GO
