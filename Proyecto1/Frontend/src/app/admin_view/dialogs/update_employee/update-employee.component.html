@@ -27,7 +27,7 @@
         <!--Aqui Se Pondría la Imagen-->
 
         <div style="margin-top: 20px">
-          <img  src="assets/images/avatar.png" id="imgUP" alt="Avatar" class="avatar">
+          <img src="assets/images/avatar.png" id="imgUP" alt="Avatar" class="avatar">
         </div>
 
         <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Correo</h6>
@@ -65,19 +65,19 @@
 
       <div class="col-md-12">
 
-          <h5 class="card-title"style="margin-left: 200px">Información Actual:</h5>
-          <div mat-dialog-content style="margin-left: 175px">
-            Departamento: {{data.Departamento}}
-            <p></p>
-            Puesto: {{data.Puesto}}
-            <p></p>
-          </div>
+        <h5 class="card-title" style="margin-left: 200px">Información Actual:</h5>
+        <div mat-dialog-content style="margin-left: 175px">
+          Departamento: {{data.Departamento}}
+          <p></p>
+          Puesto: {{data.Puesto}}
+          <p></p>
+        </div>
         <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px; margin-left: 200px">Departamento</h6>
         <div class="form-group">
           <div class="input-group mb-3">
-            <select class="form-control" id="dep1-Dropdown" name="departamento"  style="margin-left: 200px" formControlName="Departamento"
-              #select_dep data-style="btn-primary" data-live-search="true" data-selectpicker
-              data-collection-name="items" ng-model="selected"
+            <select class="form-control" id="dep1-Dropdown" name="departamento" style="margin-left: 200px"
+              formControlName="Departamento" #select_dep data-style="btn-primary" data-live-search="true"
+              data-selectpicker data-collection-name="items" ng-model="selected"
               [ngClass]="{ 'is-invalid': submitted2 && f2.Departamento.errors }">
               <option [ngValue]="null">Seleccione un Departamento</option>
             </select>
@@ -90,9 +90,10 @@
         <h6 class="card-subtitle mb-2 text-muted" style=" margin-left: 200px">Puesto</h6>
         <div class="form-group">
           <div class="input-group mb-3">
-            <select class="form-control" id="puesto1-Dropdown" name="puesto" style=" margin-left: 200px" formControlName="Puesto" #select_puesto
-              data-style="btn-primary" data-live-search="true" data-selectpicker data-collection-name="items"
-              ng-model="selected" [ngClass]="{ 'is-invalid': submitted2 && f2.Puesto.errors }">
+            <select class="form-control" id="puesto1-Dropdown" name="puesto" style=" margin-left: 200px"
+              formControlName="Puesto" #select_puesto data-style="btn-primary" data-live-search="true" data-selectpicker
+              data-collection-name="items" ng-model="selected"
+              [ngClass]="{ 'is-invalid': submitted2 && f2.Puesto.errors }">
               <option [ngValue]="null">Seleccione un Puesto</option>
             </select>
             <div *ngIf="submitted2 && f2.Puesto.errors" class="invalid-feedback">
@@ -103,7 +104,8 @@
         <div>
 
         </div>
-        <button mat-icon-button color="accent" id="registrar2_btn" style="margin-left: 600px; margin-block-start: 70px " class="btn btn-success">
+        <button mat-icon-button color="accent" id="registrar2_btn" style="margin-left: 600px; margin-block-start: 70px "
+          class="btn btn-success">
           <mat-icon>save</mat-icon>
         </button>
       </div>
