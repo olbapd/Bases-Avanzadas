@@ -606,24 +606,6 @@ AS
     WHERE Correo= @CorreoEmp;
 GO  
 
-
--- =============================================
--- Descripcion:	<Seleccionar informacion del empleado a partir del login>
--- Parametro de Entrada: <CorreoEmpleado>
--- Parametro de Salida: <Ninguno>
--- =============================================
-CREATE OR ALTER PROC [dbo].[getEmpleado]
-	@CorreoEmp varchar
-AS
-SET NOCOUNT ON
-
-SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2, [Empleado].Foto
-FROM Empleado
-WHERE @CorreoEmp = [Empleado].Correo
-
-SET NOCOUNT OFF
-GO
-
 -- =============================================
 -- Descripcion:	<Seleccionar informacion de todos los empleados>
 -- Parametro de Entrada: <Ninguno>
@@ -806,6 +788,8 @@ GO
 CREATE OR ALTER PROC [dbo].[updateAdmin]--AGREGAR FECHAS
 	@IdAdminV varchar(50),
 	@IdAdminN varchar(50),
+	@FechaSalidaV date,
+	@FechaIngresoN date,
 	@IdSede int
 	
 AS
