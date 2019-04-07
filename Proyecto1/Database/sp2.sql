@@ -733,7 +733,7 @@ BEGIN
 	BEGIN TRY
 		UPDATE SedeXEmpleado SET 
 		[FechaSalida] = @FechaSalida
-		WHERE @IdEmpleado = [SedeXEmpleado].IdEmpleado AND FechaSalida = NULL
+		WHERE @IdEmpleado = [SedeXEmpleado].IdEmpleado AND FechaSalida IS NULL
 
 		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso, FechaSalida)
 		VALUES (@IdSede, @IdEmpleado, @FechaIngreso, NULL)
