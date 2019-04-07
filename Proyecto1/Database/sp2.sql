@@ -635,7 +635,7 @@ AS
 SET NOCOUNT ON
 
 SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
-[Empleado].Cedula,[Empleado].Correo, [SedeXEmpleado].FechaIngreso, [Departamento].Nombre, [Puesto].Nombre
+[Empleado].Cedula,[Empleado].Correo,[Empleado].Contrasena,[Empleado].Foto, [SedeXEmpleado].FechaIngreso, [Departamento].Nombre, [Puesto].Nombre
 FROM SedeXEmpleado
 INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
 INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
