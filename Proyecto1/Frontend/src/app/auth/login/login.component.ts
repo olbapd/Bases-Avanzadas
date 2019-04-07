@@ -36,11 +36,11 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('IdSede', json.data[0].IdSede);
                 });
                 if ((json.data.IdPuesto) == 2) {
-                    this.router.navigate(['./admin_view/admin']); //ruta a admin si el login es exitoso
+                    this.router.navigate(['./admin_view/admin-dashboard']); //ruta a admin si el login es exitoso
 
                 }
                 else if ((json.data.IdPuesto) == 7) {
-                    this.router.navigate(['./manager_view/admin']); //ruta a admin si el login es exitoso
+                    this.router.navigate(['./manager_view/manager-dashboard']); //ruta a admin si el login es exitoso
 
                 }
                 else {
