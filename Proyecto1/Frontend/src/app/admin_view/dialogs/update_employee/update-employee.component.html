@@ -24,6 +24,12 @@
           <p></p>
         </div>
 
+        <!--Aqui Se Pondría la Imagen-->
+
+        <div style="margin-top: 20px">
+          <img  src="assets/images/avatar.png" id="imgUP" alt="Avatar" class="avatar">
+        </div>
+
         <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Correo</h6>
         <div class="form-group">
           <input type="text" #txt_correo class="form-control" formControlName="CorreoP"
@@ -35,7 +41,7 @@
 
         <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Contraseña</h6>
         <div class="form-group">
-          <input type="text" #txt_contrasena class="form-control" formControlName="ContrasenaP"
+          <input type="password" #txt_contrasena class="form-control" formControlName="ContrasenaP"
             [ngClass]="{ 'is-invalid': submitted && f.ContrasenaP.errors }" />
           <div *ngIf="submitted && f.ContrasenaP.errors" class="invalid-feedback">
             <div *ngIf="f.ContrasenaP.errors.required">Contraseña Requerida</div>
@@ -94,7 +100,10 @@
             </div>
           </div>
         </div>
-        <button mat-icon-button color="accent" id="registrar2_btn" style="margin-left: 600px" class="btn btn-success">
+        <div>
+
+        </div>
+        <button mat-icon-button color="accent" id="registrar2_btn" style="margin-left: 600px; margin-block-start: 70px " class="btn btn-success">
           <mat-icon>save</mat-icon>
         </button>
       </div>

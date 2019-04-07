@@ -59,7 +59,7 @@ CREATE OR ALTER PROC [dbo].[setActivo]
 	@Codigo varchar(50),
 	@Nombre varchar(50),
 	@Descripcion varchar(50),
-	@Foto varchar(50),
+	@Foto varchar(500),
 	@Precio int,
 	@TiempoGar int,
 	@VidaU int,
@@ -102,7 +102,7 @@ CREATE OR ALTER PROC [dbo].[updateActivo]
 	@Codigo varchar(50),--PUEDE SER CON IDACTIVO
 	@Nombre varchar(50),
 	@Descripcion varchar(50),
-	@Foto varchar(50),
+	@Foto varchar(500),
 	@Precio int,
 	@TiempoGar int,
 	@VidaU int,
@@ -640,13 +640,15 @@ CREATE OR ALTER   PROCEDURE [dbo].[setEmpleado]
 	@Apellido2 varchar(25),
 	@Cedula varchar(10),
 	@FechaN date,
+	@FechaActual date,
 	@Correo varchar (50),
 	@Contrasena varchar(50),
 	@IdDepartamento int,
 	@IdPuesto int,
-	@Foto varchar(50),
 	@IdSede int,
-	@FechaActual date
+	@Foto varchar(500)
+	
+	
 	 
 AS
 BEGIN
@@ -683,7 +685,7 @@ CREATE OR ALTER PROC [dbo].[updateEmpleadoInfo]
 	@Cedula varchar(50),
 	@Correo varchar(50),
 	@Contrasena varchar(50),
-	@Foto varchar(50)
+	@Foto varchar(500)
 	
 AS
 BEGIN

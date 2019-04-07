@@ -38,6 +38,9 @@ export class updateComponent implements OnInit {
 
 
         });
+        let img_load = document.getElementById('imgUP');
+       let photo_load = this.fotoService.downloadFile(this.data.Foto);
+        img_load.setAttribute('src',photo_load);
         this.dep_DropDown();
         this.puesto_DropDown();
         this. sedes_DropDown();

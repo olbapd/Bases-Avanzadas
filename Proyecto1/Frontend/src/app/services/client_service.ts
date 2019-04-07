@@ -452,10 +452,10 @@ export class RestApiService {
   }
   setEmpleado(Nombre, Apellido1, Apellido2, Cedula, FechaN, Correo, Contrasena, IdDepartamento, IdPuesto, Foto, IdSede, FechaActual) {
     let body = {
-      "typesIn": ["varchar", "varchar", "varchar", "varchar", "date", "varchar", "varchar", "int", "int", "varchar", "int", "date"],
+      "typesIn": ["varchar", "varchar", "varchar", "varchar", "date", "date", "varchar", "varchar", "int", "int", "int" ,"varchar"],
       "typesOut": [],
-      "parameters": ["Nombre", "Apellido1", "Apellido2", "Cedula", "FechaN", "Correo", "Contrasena", "IdDepartamento", "IdPuesto", "Foto", "IdSede", "FechaActual"],
-      "values": [Nombre, Apellido1, Apellido2, Cedula, FechaN, Correo, Contrasena, IdDepartamento, IdPuesto, Foto, IdSede, FechaActual],
+      "parameters": ["Nombre", "Apellido1", "Apellido2", "Cedula", "FechaN","FechaActual" ,"Correo", "Contrasena", "IdDepartamento", "IdPuesto", "IdSede", "Foto"],
+      "values": [Nombre, Apellido1, Apellido2, Cedula, FechaN,FechaActual, Correo, Contrasena, IdDepartamento, IdPuesto, IdSede, Foto],
       "ouputs": [],
       "name": "setEmpleado"
     }
