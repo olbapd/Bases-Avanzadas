@@ -178,7 +178,7 @@ INNER JOIN
 	Provincia ON Canton.IdProvincia = Provincia.IdProvincia
 
 WHERE 
-	[Empleado].IdPuesto=2 AND [Empleado].IdEstado = 1 
+	[Empleado].IdPuesto=2 AND [Empleado].IdEstado = 1 AND [SedeXEmpleado].FechaSalida = NULL
 GO
 
 
