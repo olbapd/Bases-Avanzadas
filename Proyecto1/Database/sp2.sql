@@ -239,6 +239,8 @@ BEGIN
 	BEGIN TRY
 		UPDATE Activo SET 
 		[IdEstado] = @IdEstado,
+		[IdSede] = NULL,
+		[DetalleUbicacion] = NULL,
 		[IdEmpleado] = NULL,
 		[FechaAsignacion] = NULL
 		WHERE @Codigo = [Activo].Codigo
@@ -1076,3 +1078,29 @@ FROM Activo
 WHERE [IdEstado] = @IdEstado AND [IdSede] =@IdSede
 SET NOCOUNT OFF
 GO
+
+CREATE OR ALTER PROC [dbo].[cambiarEstadoActivo]
+	@Codigo varchar(50),
+	@IdEstado int
+	
+AS
+BEGIN
+
+	BEGIN TRAN
+	BEGIN TRY
+		UPDATE Activo SET 
+		[IdEstado] = @IdEstado,
+		[DetalleUbicacion] = NULL,
+		[IdEmpleado] = NULL,
+		[FechaAsignacion] = NULL
+		WHERE @Codigo = [Activo].Codigo
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
+		ROLLBACK TRANSACTION
+	END CATCH
+END
+GO
+
+

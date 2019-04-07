@@ -55,10 +55,6 @@ export class RestApiService {
     return this.http.post(this.apiURL + urls.sp_url + 'sp_calculosBySede', body).pipe(retry(1), catchError(this.handleError));
   }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 58b0d2a77cc48ace1b526dda4377b1853ef920ac
 
   getSate(username, password) {
 
@@ -397,6 +393,19 @@ export class RestApiService {
       "values": [Codigo, IdEstado],
       "ouputs": [],
       "name": "quitarActivo"
+    }
+
+    return this.http.post(this.apiURL + urls.sp_url + 'quitarActivo', body).pipe(retry(1), catchError(this.handleError));
+  }
+
+  getCambiarEstadoActivo(Codigo, IdEstado) {
+    let body = {
+      "typesIn": ["varchar", "int"],
+      "typesOut": [],
+      "parameters": ["Codigo", "IdEstado"],
+      "values": [Codigo, IdEstado],
+      "ouputs": [],
+      "name": "cambiarEstadoActivo"
     }
 
     return this.http.post(this.apiURL + urls.sp_url + 'quitarActivo', body).pipe(retry(1), catchError(this.handleError));

@@ -68,15 +68,15 @@ export class ManageAssetsComponent implements OnInit {
   onPhotoChange(event) {
     this.photo = event.target.files[0];
     this.fotoService.uploadFile(this.photo)
-    .subscribe((data) => {
+      .subscribe((data) => {
         let photoHash = (data && data.hash) ? data.hash : null;
         console.log(photoHash);
         let img_load = document.getElementById('imgActivo');
-       let photo_load = this.fotoService.downloadFile(photoHash);
-        img_load.setAttribute('src',photo_load)
-        
-            });
-}
+        let photo_load = this.fotoService.downloadFile(photoHash);
+        img_load.setAttribute('src', photo_load)
+
+      });
+  }
   onSubmit() {
     this.submitted = true;
     let nombre = this.form.get('Nombre').value;
@@ -145,16 +145,32 @@ export class ManageAssetsComponent implements OnInit {
       return;
     }
     else {
-      this.restApi.getQuitarActivo(Codigo, IdEstado).subscribe((res) => {
-        const myObjStr = JSON.stringify(res)
-        const json = JSON.parse(myObjStr);
 
-        if (json.success == true) {
-          btn.setAttribute('class', 'btn btn-success');
-          this.UpdateEstado(Codigo);
-          //window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
-        }
-      });;
+      if (IdEstado == 5) {
+        this.restApi.getQuitarActivo(Codigo, IdEstado).subscribe((res) => {
+          const myObjStr = JSON.stringify(res)
+          const json = JSON.parse(myObjStr);
+
+          if (json.success == true) {
+            btn.setAttribute('class', 'btn btn-success');
+            this.UpdateEstado(Codigo);
+            //window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
+          }
+        });;
+      }
+      else {
+        this.restApi.getCambiarEstadoActivo(Codigo, IdEstado).subscribe((res) => {
+          const myObjStr = JSON.stringify(res)
+          const json = JSON.parse(myObjStr);
+
+          if (json.success == true) {
+            btn.setAttribute('class', 'btn btn-success');
+            this.UpdateEstado(Codigo);
+            //window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
+          }
+        });;
+      }
+
     }
   }
   onSubmit3() {
