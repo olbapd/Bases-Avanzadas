@@ -14,31 +14,19 @@ import { Chart } from 'chart.js';
 
 })
 export class DashboardComponent implements OnInit {
-  public pieChartOptions: ChartOptions = {
+  public barChartOptions: ChartOptions = {
     responsive: true,
-    legend: {
-      position: 'top',
-    },
-    plugins: {
-      datalabels: {
-        formatter: (value, ctx) => {
-          const label = ctx.chart.data.labels[ctx.dataIndex];
-          return label;
-        },
-      },
-    }
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: { xAxes: [{}], yAxes: [{}] },
   };
-  public pieChartLabels: Label[] = [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'];
-  public pieChartData: number[] = [300, 500, 100];
-  public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  public pieChartPlugins = [pluginDataLabels];
-  public pieChartColors = [
-    {
-      backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)', 'rgba(0,0,255,0.3)'],
-    },
-  ];
+  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
 
+  public barChartData: ChartDataSets[] = [
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+  ];
 
 
   constructor(private router: Router) {
@@ -63,5 +51,10 @@ export class DashboardComponent implements OnInit {
     console.log(event, active);
   }
 
-
+  public randomize(): void {
+    this.barChartType = this.barChartType === 'bar' ? 'line' : 'bar';
+  }
 }
+
+
+

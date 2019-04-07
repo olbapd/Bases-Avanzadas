@@ -6,7 +6,7 @@ import { RestApiService } from 'src/app/services/client_service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { asset } from './../../interfaces/assets_Structure';
 import { DecimalPipe } from '@angular/common';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Depreciation } from 'src/app/services/depreciation';
 import { MatDialog } from '@angular/material';
 import { FirstMethodComponent } from '../dialogs/first_method/first-method.component';
@@ -21,14 +21,11 @@ import { SecondMethodComponent } from '../dialogs/second_method/second-method.co
 })
 export class DepreciationComponent implements OnInit {
 
-/*Comentariio */
     form: FormGroup;
-
     filter = new FormControl('');
-
-    calType = ["Lineal", "Suma de Digitos"];
     categoria;
 
+    submitted = false;
     calculos: asset[] = [];
 
     isPopupOpened = false;
@@ -40,36 +37,17 @@ export class DepreciationComponent implements OnInit {
 
     ngOnInit() {
 
+        this.form = new FormGroup({
+            Cantidad: new FormControl('', Validators.required),
+            Categoria2: new FormControl('', Validators.required)
+        });
+
         this.CategoriaDropdown();
-        this.calculate();
         console.log("siiiiiiii");
     }
+    get f() { return this.form.controls; }
 
-    calculate() {
-        let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
-        /*Tengo duda de si el valor del DropDown Categoria se tomará bien*/
-        this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
-            const myObjStr = JSON.stringify(res)
-            const json = JSON.parse(myObjStr);
-            const idSede = json.data[0].IdSede;
 
-            this.restApi.getCalculosXSede(1, idSede).subscribe((res) => {
-                const myObjStr = JSON.stringify(res)
-                const json = JSON.parse(myObjStr);
-                var count = Object.keys(json.data).length;
-                for (var _i = 0; _i < count; _i++) {
-                    this.calculos.push({
-                        "codigo": json.data[_i].Codigo,
-                        "PorcentajeDepreciacion": json.data[_i].PorcentajeDepreciacion,
-                        "precio": json.data[_i].Precio,
-                        "ValorResidual": json.data[_i].ValorResidual,
-                        "CentroCosto": json.data[_i].CentroCosto
-                    });
-                    console.log("this" + " " + this.calculos);
-                }
-            });
-        });
-    }
     firstMethod(T, B, VS) {
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(FirstMethodComponent, {
@@ -86,7 +64,7 @@ export class DepreciationComponent implements OnInit {
 
     CategoriaDropdown() {
         let option;
-        let dropdown = document.getElementById('categoria-Dropdown');
+        let dropdown = document.getElementById('Categoria2-Dropdown');
         this.restApi.getCategorias().subscribe((res) => {
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
@@ -100,4 +78,37 @@ export class DepreciationComponent implements OnInit {
         });;
     }
 
+    onSubmit() {
+        this.submitted = true;
+        let btn = document.getElementById('registrar_btnD');
+        if (this.form.invalid) {
+            btn.setAttribute('class', 'btn btn-danger');
+            return;
+        }
+        else {
+            btn.setAttribute('class', 'btn btn-success');
+            this.calculate();
+        }
+    }
+
+    calculate() {
+        
+        this.calculos=[];
+        let categoria = this.form.get('Categoria2').value;
+        this.restApi.getCalculos(categoria).subscribe((res) => {
+            const myObjStr = JSON.stringify(res)
+            const json = JSON.parse(myObjStr);
+            var count = Object.keys(json.data).length;
+            for (var _i = 0; _i < count; _i++) {
+                this.calculos.push({
+                    "codigo": json.data[_i].Codigo,
+                    "PorcentajeDepreciacion": json.data[_i].PorcentajeDepreciacion,
+                    "precio": json.data[_i].Precio,
+                    "ValorResidual": json.data[_i].ValorResidual,
+                    "CentroCosto": json.data[_i].CentroCosto
+                });
+                console.log("this" + " " + this.calculos);
+            }
+        });
+    }
 }

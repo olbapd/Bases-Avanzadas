@@ -1,20 +1,13 @@
 <app-admin></app-admin>
 <div>
-    <div>
-        <div class="chart">
-            <canvas baseChart
-                [data]="pieChartData"
-                [labels]="pieChartLabels"
-                [chartType]="pieChartType"
-                [options]="pieChartOptions"
-                [plugins]="pieChartPlugins"
-                [colors]="pieChartColors"
-                [legend]="pieChartLegend">
-            </canvas>
+        <div>
+          <div>
+            <div style="display: block">
+              <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+            </div>
+            <button mat-button mat-raised-button color="primary" (click)="randomize()">Update</button>
+          </div>
         </div>
-    </div>
-</div>
-<div>
-
-
-</div>
+      </div>

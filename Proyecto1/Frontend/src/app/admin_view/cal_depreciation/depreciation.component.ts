@@ -52,37 +52,8 @@ export class DepreciationComponent implements OnInit {
     }
     get f() { return this.form.controls; }
 
-    calculate() { 
-        let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
-        /*Tengo duda de si el valor del DropDown Categoria se tomará bien*/
-        let categoria = this.form.get('Categoria2').value;
-        console.log(categoria);
 
-        
-        this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
-            const myObjStr = JSON.stringify(res)
-            const json = JSON.parse(myObjStr);
-            const idSede = json.data[0].IdSede;
-
-            this.restApi.getCalculosXSede(categoria,idSede).subscribe((res) => {
-                const myObjStr = JSON.stringify(res)
-                const json = JSON.parse(myObjStr);
-                var count = Object.keys(json.data).length;
-                for (var _i = 0; _i < count; _i++) {
-                    this.calculos.push({
-                        "codigo": json.data[_i].Codigo,
-                        "PorcentajeDepreciacion": json.data[_i].PorcentajeDepreciacion,
-                        "precio": json.data[_i].Precio,
-                        "ValorResidual": json.data[_i].ValorResidual,
-                        "CentroCosto": json.data[_i].CentroCosto
-                    });
-                    console.log("this" + " " + this.calculos);
-                }
-            });
-        });
-    }
     firstMethod(T, B, VS) {
-
         this.isPopupOpened = true;
         const dialogRef = this.dialog.open(FirstMethodComponent, {
             data: [T, B, VS]
@@ -114,10 +85,6 @@ export class DepreciationComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-       /*  let categoria = this.form.get('Categoria').value;
-        let anos = this.form.get('Cantidad').value; */
-
-        // stop here if form is invalid
         let btn = document.getElementById('registrar_btnD');
         if (this.form.invalid) {
             btn.setAttribute('class', 'btn btn-danger');
@@ -127,6 +94,34 @@ export class DepreciationComponent implements OnInit {
             btn.setAttribute('class', 'btn btn-success');
             this.calculate() ;
         }
+    }
+
+    calculate() {
+        this.calculos=[];
+        let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
+        /*Tengo duda de si el valor del DropDown Categoria se tomará bien*/
+        let categoria = this.form.get('Categoria2').value;
+        this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
+            const myObjStr = JSON.stringify(res)
+            const json = JSON.parse(myObjStr);
+            const idSede = json.data[0].IdSede;
+
+            this.restApi.getCalculosXSede(categoria,idSede).subscribe((res) => {
+                const myObjStr = JSON.stringify(res)
+                const json = JSON.parse(myObjStr);
+                var count = Object.keys(json.data).length;
+                for (var _i = 0; _i < count; _i++) {
+                    this.calculos.push({
+                        "codigo": json.data[_i].Codigo,
+                        "PorcentajeDepreciacion": json.data[_i].PorcentajeDepreciacion,
+                        "precio": json.data[_i].Precio,
+                        "ValorResidual": json.data[_i].ValorResidual,
+                        "CentroCosto": json.data[_i].CentroCosto
+                    });
+                    console.log("this" + " " + this.calculos);
+                }
+            });
+        });
     }
 
 }
