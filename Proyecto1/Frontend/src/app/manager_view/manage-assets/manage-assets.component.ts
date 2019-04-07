@@ -142,16 +142,30 @@ export class ManageAssetsComponent implements OnInit {
       return;
     }
     else {
-      this.restApi.getQuitarActivo(Codigo, IdEstado).subscribe((res) => {
-        const myObjStr = JSON.stringify(res)
-        const json = JSON.parse(myObjStr);
+      if (IdEstado == 5) {
+        this.restApi.getQuitarActivo(Codigo, IdEstado).subscribe((res) => {
+          const myObjStr = JSON.stringify(res)
+          const json = JSON.parse(myObjStr);
 
-        if (json.success == true) {
-          btn.setAttribute('class', 'btn btn-success');
-          this.UpdateEstado(Codigo);
-          //window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
-        }
-      });;
+          if (json.success == true) {
+            btn.setAttribute('class', 'btn btn-success');
+            this.UpdateEstado(Codigo);
+            //window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
+          }
+        });;
+      }
+      else {
+        this.restApi.getCambiarEstadoActivo(Codigo, IdEstado).subscribe((res) => {
+          const myObjStr = JSON.stringify(res)
+          const json = JSON.parse(myObjStr);
+
+          if (json.success == true) {
+            btn.setAttribute('class', 'btn btn-success');
+            this.UpdateEstado(Codigo);
+            //window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
+          }
+        });;
+      }
     }
   }
   onSubmit3() {
