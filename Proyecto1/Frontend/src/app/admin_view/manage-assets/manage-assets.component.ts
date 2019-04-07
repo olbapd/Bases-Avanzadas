@@ -205,7 +205,7 @@ export class ManageAssetsComponent implements OnInit {
     let dropdown2 = document.getElementById('estado3-Dropdown');
     let defaulOption;
     defaulOption = document.createElement('option');
-    defaulOption.text = "Seleccione un Código";
+    defaulOption.text = "Seleccione un Estado";
     defaulOption.value = null;
     dropdown2.append(defaulOption);
     this.restApi.getEstados().subscribe((res) => {
@@ -271,7 +271,7 @@ export class ManageAssetsComponent implements OnInit {
     let dropdown = document.getElementById('codigo_modif_state-Dropdown');
     let defaulOption;
     defaulOption = document.createElement('option');
-    defaulOption.text = "Seleccione un Estado";
+    defaulOption.text = "Seleccione un Código";
     defaulOption.value = null;
     dropdown.append(defaulOption);
     let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
