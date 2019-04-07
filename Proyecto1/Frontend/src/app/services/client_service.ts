@@ -533,16 +533,28 @@ export class RestApiService {
     return this.http.post(this.apiURL + urls.sp_url + 'setPuesto', body).pipe(retry(1), catchError(this.handleError));
   }
 
-  updateEmpleado(Cedula, Correo, Contrasena, Foto, IdDepartamento, IdPuesto, IdSede, FechaR) {
+  updateEmpleadoInfo(Cedula, Correo, Contrasena, Foto) {
     let body = {
-      "typesIn": ["varchar", "varchar", "varchar", "varchar", "int", "int", "int", "date"],
+      "typesIn": ["varchar", "varchar", "varchar", "varchar"],
       "typesOut": [],
-      "parameters": ["Cedula", "Correo", "Contrasena", "Foto", "IdDepartamento", "IdPuesto", "IdSede", "FechaIngreso"],
-      "values": [Cedula, Correo, Contrasena, Foto, IdDepartamento, IdPuesto, IdSede, FechaR],
+      "parameters": ["Cedula", "Correo", "Contrasena", "Foto"],
+      "values": [Cedula, Correo, Contrasena, Foto],
       "ouputs": [],
-      "name": "updateEmpleado"
+      "name": "updateEmpleadoInfo"
     }
-    return this.http.post(this.apiURL + urls.sp_url + 'updateEmpleado', body).pipe(retry(1), catchError(this.handleError));
+    return this.http.post(this.apiURL + urls.sp_url + 'updateEmpleadoInfo', body).pipe(retry(1), catchError(this.handleError));
+  }
+
+  cambioEmpleado(Cedula, IdDepartamento, IdPuesto, IdSede,FechaS,FechaIn) {
+    let body = {
+      "typesIn": ["varchar", "int", "int", "int","date","date"],
+      "typesOut": [],
+      "parameters": ["Cedula", "IdDepartamento", "IdSede", "IdPuesto","FechaSalida","FechaIngreso"],
+      "values": [Cedula, IdDepartamento, IdSede, IdPuesto,FechaS,FechaIn],
+      "ouputs": [],
+      "name": "cambioEmpleado"
+    }
+    return this.http.post(this.apiURL + urls.sp_url + 'cambioEmpleado', body).pipe(retry(1), catchError(this.handleError));
   }
   //--------------------------------------
   // Error handling 

@@ -5,6 +5,7 @@ import { RestApiService } from 'src/app/services/client_service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from '@angular/forms';
 import { FotoService } from 'src/app/services/foto.service';
+import{formatDate} from '@angular/common';
 @Component({
     selector: 'update-employee',
     templateUrl: './update-employee.component.html',
@@ -30,10 +31,10 @@ export class updateComponent implements OnInit {
             ContrasenaP: new FormControl(this.data.Contrasena, [Validators.required, Validators.maxLength(10)])
         });
 
-        this.form2=new FormGroup({
+        this.form2 = new FormGroup({
             Departamento: new FormControl(this.data.IdDepartamento, Validators.required),
             Puesto: new FormControl(this.data.IdPuesto, Validators.required),
-            Sede: new FormControl(this.data.IdSede, Validators.required), 
+            Sede: new FormControl(this.data.IdSede, Validators.required),
 
 
         });
@@ -50,11 +51,9 @@ export class updateComponent implements OnInit {
     get f2() { return this.form2.controls; }
     onSubmit() {
         this.submitted = true;
-        let departamento = this.form.get('Departamento').value;
-        let puesto = this.form.get('Puesto').value;
         let correo = this.form.get('CorreoP').value;
         let contrasena = this.form.get('ContrasenaP').value;
-        let IdSede = this.form.get('Sede').value;
+
         // stop here if form is invalid
         if (this.form.invalid) {
             return;
@@ -69,7 +68,7 @@ export class updateComponent implements OnInit {
                     let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
                     let Cedula = this.data.Cedula;
 
-                    this.restApi.updateEmpleado(Cedula, correo, contrasena, photoHash, departamento, puesto, IdSede, '2017-02-05').subscribe(res => {
+                    this.restApi.updateEmpleadoInfo(Cedula, correo, contrasena, photoHash).subscribe(res => {
                         window.location.reload();
 
                     });
@@ -81,7 +80,6 @@ export class updateComponent implements OnInit {
 
 
     onSubmit2() {
-        console.log("siiiiiuuuuuuuuu");
         this.submitted2 = true;
         let departamento = this.form2.get('Departamento').value;
         let puesto = this.form2.get('Puesto').value;
@@ -92,20 +90,13 @@ export class updateComponent implements OnInit {
         }
         else {
 
-            //Se debe almacenar la imagen primero
-            this.fotoService.uploadFile(this.photo)
-                .subscribe((data) => {
-                    let photoHash = (data && data.hash) ? data.hash : null;
-                    console.log(photoHash);
-                    let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
-                    let Cedula = this.data.Cedula;
+            let Cedula = this.data.Cedula;
+            let FechaActual = formatDate(new Date(),'yyyy-MM-dd','en');
 
-                    /* this.restApi.updateEmpleado(Cedula, correo, contrasena, photoHash, departamento, puesto, IdSede, '2017-02-05').subscribe(res => {
-                        window.location.reload();
+            this.restApi.cambioEmpleado(Cedula,departamento, puesto, IdSede, FechaActual,FechaActual).subscribe(res => {
+                window.location.reload();
 
-                    }); */
-
-                });
+            });
 
         }
     }

@@ -55,9 +55,6 @@
       </button>
     </form>
 
-
-
-
     <form name="form2" [formGroup]="form2" (ngSubmit)="onSubmit2()">
 
       <div class="col-md-12">
@@ -87,7 +84,7 @@
         <h6 class="card-subtitle mb-2 text-muted" style=" margin-left: 200px">Puesto</h6>
         <div class="form-group">
           <div class="input-group mb-3">
-            <select class="form-control" id="puesto1-Dropdown" name="puesto" style=" margin-left: 200px, " formControlName="Puesto" #select_puesto
+            <select class="form-control" id="puesto1-Dropdown" name="puesto" style=" margin-left: 200px" formControlName="Puesto" #select_puesto
               data-style="btn-primary" data-live-search="true" data-selectpicker data-collection-name="items"
               ng-model="selected" [ngClass]="{ 'is-invalid': submitted2 && f2.Puesto.errors }">
               <option [ngValue]="null">Seleccione un Puesto</option>
