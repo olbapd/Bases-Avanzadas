@@ -1,0 +1,71 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="card border-info" style="max-width: 50rem;
+                margin-bottom: 20px">
+            <div class="card-body text-center">
+                <h5 class="card-title"> Insertar Empleado</h5>
+                <div class="col-md-6">
+
+                    <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">VidaUtil</h6>
+                    <input type="text" #txt_VidaUtil class="form-control">
+
+
+
+                    <h6 class="card-subtitle mb-2 text-muted" style="margin-top: 20px">Años</h6>
+
+                    <input type="text" #txt_ano class="form-control" />
+                    <button id="registrar_btn" class="btn btn-primary" (click)=onsubmit(txt_VidaUtil.value,txt_ano.value)>Registrar</button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!--TABLA-->
+    <div class="col-md-8 col-sm-12">
+
+        <form>
+            <div class="form-group form-inline">
+                <input class="form-control ml-2" type="text" [ngModelOptions]="{standalone:true}"
+                    [(ngModel)]="searchText" />
+            </div>
+        </form>
+
+        <table id="table_empleado_Table" name="table_empleado" class="table
+                table-striped">
+            <thead>
+                <tr>
+                     
+                    <th scope="col">Codigo</th>
+                    <th scope="col">NombreActivo</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">ValorResidual</th>
+                    <th scope="col">NombreCategoria</th>
+                    <th scope="col">FechaCompra</th>
+                    <th scope="col">VidaUtil</th>
+                    <th scope="col">NombreEmpleado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let calculos of calc| filter:searchText">
+                    <th scope="row">{{ calculos.Codigo }}</th>
+                    <td>{{ calculos.NombreActivo }}</td>
+                    <td>{{ calculos.Precio}}</td>
+                    <td>{{ calculos.ValorResidual}}</td>
+                    <td>{{ calculos.NombreCategoria}}</td>
+                    <td>{{ calculos.FechaCompra}}</td>
+                    <td>{{ calculos.VidaUtil}}</td>
+                    <td>{{ calculos.NombreEmpleado}}</td>
+                    <td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="d-flex justify-content-between p-2">
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+            </ngb-pagination>
+        </div>
+    </div>
+
+</div>

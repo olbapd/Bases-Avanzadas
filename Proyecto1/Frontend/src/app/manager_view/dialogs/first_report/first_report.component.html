@@ -1,0 +1,26 @@
+<table id="table_empleado_Table" name="table_empleado" class="table
+    table-striped">
+    <thead>
+        <tr>
+            
+            <th scope="col">Cantidad Activos</th>
+            <th scope="col">Total Costo Inicial</th>
+            <th scope="col">Total Valor Residual</th>
+            <th scope="col">Total Valor Libros</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let calculo of calculos| filter:searchText">
+            <th scope="row">{{ calculo.CantidadActivos }}</th>
+            <td>{{ calculo.TotalCostoInicial}}</td>
+            <td>{{ calculo.TotalValorResidual}}</td>            
+            <td>{{ calculo.TotalValorLibros}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page"
+        [pageSize]="pageSize">
+    </ngb-pagination>
+</div>

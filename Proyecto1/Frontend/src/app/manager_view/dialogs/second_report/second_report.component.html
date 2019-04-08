@@ -1,0 +1,35 @@
+
+<h6 style="margin-top: 20px">IdEmpleado</h6>
+
+<input type="text" #txt_idEmpleado class="form-control" />
+<div>
+    <button type="button" (click)="generarTabla(txt_idEmpleado)"
+        class="btn btn-primary">Reporte 3</button>
+</div>
+
+
+<table id="table_empleado_Table" name="table_empleado" class="table
+    table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Año</th>
+            <th scope="col">Depreciacion Anual</th>
+            <th scope="col">Depreciacion Acumulada</th>
+            <th scope="col">Valor Neto</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let calculo of calculos| filter:searchText">
+            <th scope="row">{{ calculo.t }}</th>
+            <td>{{ calculo.anual}}</td>
+            <td>{{ calculo.acumulada}}</td>
+            <td>{{ calculo.valor}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page"
+        [pageSize]="pageSize">
+    </ngb-pagination>
+</div>

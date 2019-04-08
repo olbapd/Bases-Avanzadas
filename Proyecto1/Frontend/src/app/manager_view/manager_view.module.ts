@@ -28,6 +28,10 @@ import { SecondMethodComponent } from './dialogs/second_method/second-method.com
 import { Depreciation } from 'src/app/services/depreciation';
 import { ChartsModule } from 'ng2-charts';
 import { DashboardComponent } from './Dashboard/dashboard.component';
+import { FirstReportComponent } from './dialogs/first_report/first_report.component';
+import { SecondReportComponent } from './dialogs/second_report/second_report.component';
+import { ThirdReportComponent } from './dialogs/third_report/third_report.component';
+import { ReportComponent } from './reports/report.component';
 
 @NgModule({
   imports: [
@@ -59,7 +63,11 @@ import { DashboardComponent } from './Dashboard/dashboard.component';
     CodeErrorComponent,
     FirstMethodComponent,
     SecondMethodComponent,
-    DashboardComponent
+    DashboardComponent,
+    FirstReportComponent,
+    SecondReportComponent,
+    ThirdReportComponent,
+    ReportComponent
     
 
 
@@ -68,7 +76,8 @@ import { DashboardComponent } from './Dashboard/dashboard.component';
     FotoService,Depreciation
   ],
   entryComponents:[updateComponent, DeleteComponent, 
-    DeleteSedeComponent,UpdateSedeComponent,CodeErrorComponent,FirstMethodComponent,SecondMethodComponent]
+    DeleteSedeComponent,UpdateSedeComponent,CodeErrorComponent,FirstMethodComponent,
+    SecondMethodComponent,   FirstReportComponent,  SecondReportComponent,  ThirdReportComponent]
 })
 
 export class Manager_ViewModule { }
