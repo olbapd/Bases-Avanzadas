@@ -113,13 +113,14 @@ BEGIN
 	FROM Activo
 	WHERE [IdEmpleado] = @IdEmpleado;
 
-	SELECT SumPrecio = SUM(Precio)
+	SELECT @SumPrecio = SUM(Precio)
 	FROM Activo
 	WHERE [IdEmpleado] = @IdEmpleado;
+
 	BEGIN TRAN
 	BEGIN TRY
-	SELECT 'CostoInicialProm' = @SumPrecio/@CantActivos
-COMMIT TRANSACTION
+	SELECT 'CostoInicialProm' = (@SumPrecio/@CantActivos)
+	COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
 		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
@@ -153,7 +154,7 @@ BEGIN
 	FROM Activo
 	WHERE [IdEmpleado] = @IdEmpleado;
 
-	SELECT SumValorR= SUM(ValorResidual)
+	SELECT @SumValorR= SUM(ValorResidual)
 	FROM Activo
 	WHERE [IdEmpleado] = @IdEmpleado;
 	BEGIN TRAN
@@ -325,13 +326,13 @@ BEGIN
 
 
 	SELECT @ValorResidualTotal = SUM(ValorResidual) FROM Activo 
-	GROUP BY [Activo].IdSede
+
 
 	SELECT @PrecioInicialTotal = SUM(Precio)  FROM Activo
-	GROUP BY [Activo].IdSede
+	
 
 	SELECT @AnoR =  year(FechaCompra)  FROM Activo
-	GROUP BY [Activo].IdSede
+	
 
 	SELECT @AnoA =  year(GETDATE());
 
@@ -351,7 +352,7 @@ END
 GO
 
 -----------------REPORTE#2-------------------------------------------
-CREATE OR ALTER PROC [dbo].[getAllDetalleActivoAsignXSede]
+CREATE OR ALTER PROC [dbo].[getAllDetalleActivoAsignXSedeGerente]
 	@Ano int,
 	@VidaUtil int
 	
@@ -363,4 +364,10 @@ AS
 	INNER JOIN Sede ON [Activo].IdSede = [Sede].IdSede
 	WHERE year([FechaCompra]) BETWEEN @Ano AND @Ano+@VidaUtil
 	GROUP BY [Sede].Nombre, [Activo].Codigo,[Activo].Nombre, [Activo].Precio, [Activo].ValorResidual, [Categoria].Nombre, [Activo].FechaCompra,[Activo].VidaUtil,[Empleado].Nombre
+GO
+---------------------------Reporte#3------------------------
+CREATE OR ALTER PROC [dbo].[getTo3assignAActive]
+
+AS
+	SELECT TOP(3) [Empleado]
 GO

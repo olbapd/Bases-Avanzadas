@@ -3,27 +3,32 @@
 
 <input type="text" #txt_idEmpleado class="form-control" />
 <div>
-    <button type="button" (click)="generarTabla(txt_idEmpleado)"
-        class="btn btn-primary">Reporte 3</button>
+    <button type="button" (click)="generarTabla(txt_idEmpleado.value)"
+        class="btn btn-primary">Reporte 2</button>
 </div>
-
 
 <table id="table_empleado_Table" name="table_empleado" class="table
     table-striped">
     <thead>
         <tr>
-            <th scope="col">Año</th>
-            <th scope="col">Depreciacion Anual</th>
-            <th scope="col">Depreciacion Acumulada</th>
-            <th scope="col">Valor Neto</th>
+            <th scope="col">activosAsignados</th>
+            <th scope="col">costoInicial</th>
+            <th scope="col">costoInicialProm</th>
+            <th scope="col">valorResidual</th>
+            <th scope="col">valorResidualProm</th>
+            <th scope="col">valorActual</th>
+            <th scope="col">valorActualProm</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let calculo of calculos| filter:searchText">
-            <th scope="row">{{ calculo.t }}</th>
-            <td>{{ calculo.anual}}</td>
-            <td>{{ calculo.acumulada}}</td>
-            <td>{{ calculo.valor}}</td>
+        <tr *ngFor="let calculo of calc| filter:searchText">
+            <th scope="row">{{ calculo.activosAsignados }}</th>
+            <td>{{ calculo.costoInicial}}</td>
+            <td>{{ calculo.costoInicialProm}}</td>
+            <td>{{ calculo.valorResidual}}</td>
+            <td>{{ calculo.valorResidualProm}}</td>
+            <td>{{ calculo.valorActual}}</td>
+            <td>{{ calculo.valorActualProm}}</td>
         </tr>
     </tbody>
 </table>

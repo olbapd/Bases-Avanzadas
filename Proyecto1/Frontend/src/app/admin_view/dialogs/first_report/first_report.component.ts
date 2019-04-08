@@ -27,6 +27,7 @@ export class FirstReportComponent implements OnInit {
 
     ngOnInit() {
         this.calculate();
+        console.log(this.calculos);
 
     }
 
@@ -47,7 +48,7 @@ export class FirstReportComponent implements OnInit {
                 this.restApi.getAllCostoInicialXSede(idSede).subscribe((res3) => {
                     const myObjStr3 = JSON.stringify(res3)
                     const json3 = JSON.parse(myObjStr3);
-                    this.calculos.push(json3.data[0]);
+                   
                     this.restApi.getAllValorResidualXSede(idSede).subscribe((res4) => {
                         const myObjStr4 = JSON.stringify(res4)
                         const json4 = JSON.parse(myObjStr4);
@@ -56,8 +57,7 @@ export class FirstReportComponent implements OnInit {
                         this.restApi.getAllValorActivoActualXSede(idSede).subscribe((res5) => {
                             const myObjStr5 = JSON.stringify(res5)
                             const json5 = JSON.parse(myObjStr5);
-                            this.calculos.push(json5.data[0]);
-
+                           
                             this.calculos = [{
                                 "CantidadActivos": json2.data[0].ActivosAsignados,
                                 "TotalCostoInicial": json3.data[0].SumaCostoInicial,
