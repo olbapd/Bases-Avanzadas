@@ -28,10 +28,10 @@ import { FirstMethodComponent } from './dialogs/first_method/first-method.compon
 import { SecondMethodComponent } from './dialogs/second_method/second-method.component';
 import { ChartsModule } from 'ng2-charts';
 import { DashboardComponent } from './Dashboard/dashboard.component';
-import { FirsReportComponent } from './dialogs/first_report/first_report.component';
 import { SecondReportComponent } from './dialogs/second_report/second_report.component';
 import { ThirdReportComponent } from './dialogs/third_report/third_report.component';
 import { ReportComponent } from './reports/report.component';
+import { FirstReportComponent } from './dialogs/first_report/first_report.component';
 
 @NgModule({
   imports: [
@@ -63,7 +63,10 @@ import { ReportComponent } from './reports/report.component';
     FirstMethodComponent,
     SecondMethodComponent,
     DashboardComponent,
-    ReportComponent
+    ReportComponent,
+    FirstReportComponent,
+    SecondReportComponent,
+    ThirdReportComponent
 
 
   ],
@@ -72,7 +75,7 @@ import { ReportComponent } from './reports/report.component';
   ],
   entryComponents:[updateComponent, DeleteComponent, UpdateSedeComponent,
     CodeErrorComponent,FirstMethodComponent,SecondMethodComponent,
-    FirsReportComponent, SecondReportComponent, ThirdReportComponent]
+    FirstReportComponent, SecondReportComponent, ThirdReportComponent]
 })
 
 export class Admin_ViewModule { }

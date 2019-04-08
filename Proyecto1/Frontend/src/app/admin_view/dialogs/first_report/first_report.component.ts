@@ -13,7 +13,7 @@ import { freporte } from 'src/app/interfaces/freporte';
     styleUrls: ['./first_report.component.css']
 })
 
-export class FirsReportComponent  implements OnInit {
+export class FirstReportComponent  implements OnInit {
 
     page = 1;
     pageSize = 4;

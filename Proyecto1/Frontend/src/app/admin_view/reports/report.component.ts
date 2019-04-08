@@ -4,6 +4,11 @@ import { ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { Router } from "@angular/router";
 import {Chart} from 'chart.js';
+import { FirstReportComponent } from '../dialogs/first_report/first_report.component';
+import { MatDialog } from '@angular/material';
+import { Depreciation } from 'src/app/services/depreciation';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RestApiService } from 'src/app/services/client_service';
 
 
 
@@ -14,13 +19,24 @@ import {Chart} from 'chart.js';
 
 })
 export class ReportComponent implements OnInit{
-    constructor(private router: Router){
+
+    
+
+    isPopupOpened = false;
+    constructor(private dialog: MatDialog, public calcular: Depreciation,
+        private modalService: NgbModal, public restApi: RestApiService,
+        private router: Router){
     }
 
     ngOnInit() {
  
     }
-    generarReporte1(){}
+    generarReporte1(){
+        this.isPopupOpened = true;
+        const dialogRef = this.dialog.open(FirstReportComponent, {
+            data: {}
+        });
+    }
     
     generarReporte2(){}
     
