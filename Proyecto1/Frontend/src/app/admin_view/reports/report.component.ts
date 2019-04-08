@@ -5,6 +5,8 @@ import { Label } from 'ng2-charts';
 import { Router } from "@angular/router";
 import {Chart} from 'chart.js';
 import { FirstReportComponent } from '../dialogs/first_report/first_report.component';
+
+import { ThirdReportComponent } from '../dialogs/third_report/third_report.component';
 import { MatDialog } from '@angular/material';
 import { Depreciation } from 'src/app/services/depreciation';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -40,6 +42,11 @@ export class ReportComponent implements OnInit{
     
     generarReporte2(){}
     
-    generarReporte3(){}
+    generarReporte3(){
+        this.isPopupOpened = true;
+        const dialogRef = this.dialog.open(ThirdReportComponent, {
+            data: {}
+        });
+    }
 
 }
