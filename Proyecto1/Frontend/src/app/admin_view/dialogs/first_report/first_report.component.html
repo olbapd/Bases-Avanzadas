@@ -11,10 +11,10 @@
     </thead>
     <tbody>
         <tr *ngFor="let calculo of calculos| filter:searchText">
-            <th scope="row">{{ calculo[0] }}</th>
-            <td>{{ calculo[1]}}</td>
-            <td>{{ calculo[2]}}</td>            
-            <td>{{ calculo[3]}}</td>
+            <th scope="row">{{ calculo.CantidadActivos }}</th>
+            <td>{{ calculo.TotalCostoInicial}}</td>
+            <td>{{ calculo.TotalValorResidual}}</td>            
+            <td>{{ calculo.TotalValorLibros}}</td>
         </tr>
     </tbody>
 </table>
