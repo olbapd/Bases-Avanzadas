@@ -25,6 +25,7 @@ export class FirstReportComponent  implements OnInit {
     }
 
     ngOnInit() {
+    this.calculate();
 
     }
 
