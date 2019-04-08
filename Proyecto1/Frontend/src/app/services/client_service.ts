@@ -570,7 +570,6 @@ export class RestApiService {
     }
     return this.http.post(this.apiURL + urls.sp_url + 'updateEmpleadoInfo', body).pipe(retry(1), catchError(this.handleError));
   }
-
   cambioEmpleado(Cedula, IdDepartamento, IdPuesto, IdSede, FechaS, FechaIn) {
     let body = {
       "typesIn": ["varchar", "int", "int", "int", "date", "date"],
@@ -582,7 +581,152 @@ export class RestApiService {
     }
     return this.http.post(this.apiURL + urls.sp_url + 'cambioEmpleado', body).pipe(retry(1), catchError(this.handleError));
   }
-  //--------------------------------------
+
+
+//--------------REPORT-------ADMIN-----------------//
+//--------------------REPORTE#1------------------------------//
+
+getAllActivoAsignXSede(IdSede) {
+  let body = {
+    "typesIn": ["int"],
+    "typesOut": [],
+    "parameters": ["IdSede"],
+    "values": [IdSede],
+    "ouputs": [],
+    "name": "getAllActivoAsignXSede"
+  }
+  return this.http.post(this.apiURL + urls.sp_url + 'getAllActivoAsignXSede', body).pipe(retry(1), catchError(this.handleError));
+}
+
+getAllCostoInicialXSede(IdSede) {
+  let body = {
+    "typesIn": ["int"],
+    "typesOut": [],
+    "parameters": ["IdSede"],
+    "values": [IdSede],
+    "ouputs": [],
+    "name": "getAllCostoInicialXSede"
+  }
+  return this.http.post(this.apiURL + urls.sp_url + 'getAllCostoInicialXSede', body).pipe(retry(1), catchError(this.handleError));
+}
+getAllValorResidualXSede(IdSede) {
+  let body = {
+    "typesIn": ["int"],
+    "typesOut": [],
+    "parameters": ["IdSede"],
+    "values": [IdSede],
+    "ouputs": [],
+    "name": "getAllValorResidualXSede"
+  }
+  return this.http.post(this.apiURL + urls.sp_url + 'getAllValorResidualXSede', body).pipe(retry(1), catchError(this.handleError));
+}
+getAllValorActivoActualXSede(IdSede) {
+  let body = {
+    "typesIn": ["int"],
+    "typesOut": [],
+    "parameters": ["IdSede"],
+    "values": [IdSede],
+    "ouputs": [],
+    "name": "getAllValorActivoActualXSede"
+  }
+  return this.http.post(this.apiURL + urls.sp_url + 'getAllValorActivoActualXSede', body).pipe(retry(1), catchError(this.handleError));
+}
+//--------------------------------------------REPORTE#2-------------------------------------------------------------
+getActivoAsignEmpleado(IdEmpleado) {
+  let body = {
+    "typesIn": ["int"],
+    "typesOut": [],
+    "parameters": ["IdEmpleado"],
+    "values": [IdEmpleado],
+    "ouputs": [],
+    "name": "getActivoAsignEmpleado"
+  }
+  return this.http.post(this.apiURL + urls.sp_url + 'getActivoAsignEmpleado', body).pipe(retry(1), catchError(this.handleError));
+}
+
+getAllCostoInicialXEmpleado(IdEmpleado) {
+  let body = {
+    "typesIn": ["int"],
+    "typesOut": [],
+    "parameters": ["IdEmpleado"],
+    "values": [IdEmpleado],
+    "ouputs": [],
+    "name": "getAllCostoInicialXEmpleado"
+  }
+  return this.http.post(this.apiURL + urls.sp_url + 'getAllCostoInicialXEmpleado', body).pipe(retry(1), catchError(this.handleError));
+}
+
+getAllCostoInicialXEmpleadoProm(IdEmpleado) {
+  let body = {
+    "typesIn": ["int"],
+    "typesOut": [],
+    "parameters": ["IdEmpleado"],
+    "values": [IdEmpleado],
+    "ouputs": [],
+    "name": "getAllCostoInicialXEmpleadoProm"
+  }
+  return this.http.post(this.apiURL + urls.sp_url + 'getAllCostoInicialXEmpleadoProm', body).pipe(retry(1), catchError(this.handleError));
+}
+
+getAllValorResidualXEmpleado(IdEmpleado) {
+  let body = {
+    "typesIn": ["int"],
+    "typesOut": [],
+    "parameters": ["IdEmpleado"],
+    "values": [IdEmpleado],
+    "ouputs": [],
+    "name": "getAllValorResidualXEmpleado"
+  }
+  return this.http.post(this.apiURL + urls.sp_url + 'getAllValorResidualXEmpleado', body).pipe(retry(1), catchError(this.handleError));
+}
+getAllValorResidualXEmpleadoProm(IdEmpleado) {
+  let body = {
+    "typesIn": ["int"],
+    "typesOut": [],
+    "parameters": ["IdEmpleado"],
+    "values": [IdEmpleado],
+    "ouputs": [],
+    "name": "getAllValorResidualXEmpleadoProm"
+  }
+  return this.http.post(this.apiURL + urls.sp_url + 'getAllValorResidualXEmpleadoProm', body).pipe(retry(1), catchError(this.handleError));
+}
+getAllValorActivoActualXEmpleado(IdEmpleado) {
+  let body = {
+    "typesIn": ["int"],
+    "typesOut": [],
+    "parameters": ["IdEmpleado"],
+    "values": [IdEmpleado],
+    "ouputs": [],
+    "name": "getAllValorActivoActualXEmpleado"
+  }
+  return this.http.post(this.apiURL + urls.sp_url + 'getAllValorActivoActualXEmpleado', body).pipe(retry(1), catchError(this.handleError));
+}
+
+getAllValorActivoActualXEmpleadoProm(IdEmpleado) {
+  let body = {
+    "typesIn": ["int"],
+    "typesOut": [],
+    "parameters": ["IdEmpleado"],
+    "values": [IdEmpleado],
+    "ouputs": [],
+    "name": "getAllValorActivoActualXEmpleadoProm"
+  }
+  return this.http.post(this.apiURL + urls.sp_url + 'getAllValorActivoActualXEmpleadoProm', body).pipe(retry(1), catchError(this.handleError));
+}
+//---------------------------------------------REPORTE#3---------------------------------------------------------
+getAllDetalleActivoAsignXSede(IdSede,Ano,VidaUtil) {
+  let body = {
+    "typesIn": ["int","int","int"],
+    "typesOut": [],
+    "parameters": ["IdSede","Ano","VidaUtil"],
+    "values": [IdSede,Ano,VidaUtil],
+    "ouputs": [],
+    "name": "getAllDetalleActivoAsignXSede"
+  }
+  return this.http.post(this.apiURL + urls.sp_url + 'getAllDetalleActivoAsignXSede', body).pipe(retry(1), catchError(this.handleError));
+}
+
+
   // Error handling 
   handleError(error) {
     let errorMessage = '';
