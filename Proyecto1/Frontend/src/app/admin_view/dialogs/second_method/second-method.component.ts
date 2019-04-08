@@ -41,3 +41,4 @@ export class SecondMethodComponent implements OnInit{
 
 
 }
+
