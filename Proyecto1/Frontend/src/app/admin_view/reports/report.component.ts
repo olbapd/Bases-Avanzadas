@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material';
 import { Depreciation } from 'src/app/services/depreciation';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RestApiService } from 'src/app/services/client_service';
+import { SecondReportComponent } from '../dialogs/second_report/second_report.component';
 
 
 
@@ -38,7 +39,13 @@ export class ReportComponent implements OnInit{
         });
     }
     
-    generarReporte2(){}
+    generarReporte2(){
+
+        this.isPopupOpened = true;
+        const dialogRef = this.dialog.open(SecondReportComponent, {
+            data: {}
+        });
+    }
     
     generarReporte3(){}
 
