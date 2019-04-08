@@ -9,14 +9,13 @@ import { Depreciation } from 'src/app/services/depreciation';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RestApiService } from 'src/app/services/client_service';
 
-
-
 @Component({
   selector: 'manager-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 
 })
+
 export class DashboardComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -29,6 +28,13 @@ export class DashboardComponent implements OnInit {
   public valores:number[]=[];
   public barChartData: ChartDataSets[] = [
     { data: this.valores, label: '' },
+  ];
+
+  public pieChartColors = [
+    {
+      backgroundColor: ['rgba(0,255,255,1.0)', 'rgba(0,0,255,1.0)',
+       'rgba(0,0,255,0.3)', 'rgba(0,128,128,1.0)', 'rgba(255,255,0,1.0)'],
+    },
   ];
 
   constructor(private dialog: MatDialog, public calcular: Depreciation,
