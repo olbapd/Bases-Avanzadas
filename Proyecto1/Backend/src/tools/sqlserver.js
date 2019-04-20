@@ -24,7 +24,7 @@ let instance = {
 }
 
 let initializePool = () => {
-  if(!pool){
+  if(!pool || !pool.connected){
     let i =0;
     while(i<servers.length){
     //for (let i = 0; i < servers.length; i++) {
@@ -60,9 +60,6 @@ instance.getPool = () => {
   return pool;  
 }
 
-instance.getCurrentPool = () => {
-   console.log(pool.connected);
-}
 instance.getServers= () =>{
   return servers;
 }  

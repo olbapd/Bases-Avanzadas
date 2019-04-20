@@ -18,91 +18,97 @@ let express = require('express'),
 
 let db = require('../repository/db');
 let sqltool = require('../tools/sqlserver');
-const sqlserver = require('mssql');
+const sql = require('mssql');
 
 let router = module.exports = express.Router();
 
 let currentConfig = config.get('sqlserver');
+let servers = config.get('sqlservers');
 
 /*
 let getSp = (req,res) => {
-     
-    let servers = sqltool.getServers();
-        let i =0;
-
-    while(i<servers.length){
-      try{
-        if(sqltool.getPool().connected){
-          sqltool.getPool().close();
+  let typesIn = req.body.typesIn;
+  let typesOut = req.body.typesOut;
+  let inputs = req.body.parameters;
+  let values = req.body.values;
+  let outputs = req.body.ouputs;
+  let spName = req.body.name;
+  let i =0;
+  while(i<servers.length){
+    sql.connect(servers[i]).then(pool => {
+      
+      console.log(pool);
+      let request =  new sql.Request(pool);
+      for(let i =0;i<inputs.length;i++){
+        if(typesIn[i]=="int"){
+          request.input(inputs[i],sql.Int,values[i]);
         }
-        sqlserver.connect(servers[i]).then(pool => {
-    
-        //let request =  new sqlserver.Request(sqltool.getPool());
-        let request =  new pool.Request();
-        let typesIn = req.body.typesIn;
-        let typesOut = req.body.typesOut;
-        let inputs = req.body.parameters;
-        let values = req.body.values;
-        let outputs = req.body.ouputs;
-        let spName = req.body.name;
-        for(let i =0;i<inputs.length;i++){
-          if(typesIn[i]=="int"){
-            request.input(inputs[i],sqlserver.Int,values[i]);
-          }
-          else if(typesIn[i]=="varchar"){
-            request.input(inputs[i],sqlserver.NVarChar,values[i]);
-          }
-          else if(typesIn[i]=="float"){
-            request.input(inputs[i],sqlserver.Float,values[i]);
-          }
-          else if(typesIn[i]=="date"){
-            let yourDate = new Date(values[i]);
-            request.input(inputs[i],sqlserver.DateTime,values[i]);
-          }
-          else{
-            global.log4us.error('Error on building sp: '+spName);
-          }
+        else if(typesIn[i]=="varchar"){
+          request.input(inputs[i],sql.NVarChar,values[i]);
         }
-
-        for(let i =0;i<outputs.length;i++){
-          if(typesOut[i]=="int"){
-            request.input(outputs[i],sqlserver.Int,null);
-          }
-          else if(typesOut[i]=="varchar"){
-            request.input(outputs[i],sqlserver.NVarChar,null);
-          }
-          else if(typesOut[i]=="float"){
-            request.input(inputs[i],sqlserver.Float);
-          }
-          else if(typesOut[i]=="date"){
-            request.input(outputs[i],sqlserver.DateTime,null);
-          }
-          else{
-            global.log4us.error('Error on building sp: '+spName);
-          }
+        else if(typesIn[i]=="float"){
+          request.input(inputs[i],sql.Float,values[i]);
         }
-        request.execute(spName, (err, recordset) => {
-          if (err) {
-            global.log4us.error(`Error getting ${spName}: ${err}`);
-            res.json({
-                success : false,
-                error: err
-            });
-            return;
-          }
-          res.status(200).json({
-            success : true,
-            data: recordset.recordset
+        else if(typesIn[i]=="date"){
+          let yourDate = new Date(values[i]);
+          request.input(inputs[i],sql.DateTime,yourDate);
+        }
+        else{
+          global.log4us.error('Error on building sp: '+spName);
+        }
+      }
+      for(let i =0;i<outputs.length;i++){
+        if(typesOut[i]=="int"){
+          request.input(outputs[i],sql.Int,null);
+        }
+        else if(typesOut[i]=="float"){
+          request.input(outputs[i],sql.Float);
+        }
+        else if(typesOut[i]=="varchar"){
+          request.input(outputs[i],sql.NVarChar,null);
+        }
+        else if(typesOut[i]=="date"){
+          request.input(outputs[i],sql.DateTime,null);
+        }
+        else{
+          global.log4us.error('Error on building sp: '+spName);
+        }
+      }
+      request.execute(spName, (err, recordset) => {
+        if (err) {
+          global.log4us.error(`Error getting ${spName}: ${err}`);
+          res.status(500).json({
+              success : false,
+              error: err
           });
-        });
-        });
-      }
-      catch(err){
-         console.log(err);
-         i++;
-      }
-    }  
+          return false;
+        }
+        return recordset.recordset;
+        /*res.status(200).json({
+          success : true,
+          data: recordset.recordset
+        }); //
+      });
+      
+        return pool.request()
+        .input('input_parameter', sql.Int, value)
+        .output('output_parameter', sql.VarChar(50))
+        .execute('procedure_name')
+    }).then(result => {
+
+        console.dir(result)
+        
+    }).catch(err => {
+        console.log(err);
+    })
+     
+    sql.on('error', err => {
+        i++;
+        console.log(err);
+    })
+  }
 }*/
+
 
 let getSp = (req,res) => {
      
@@ -112,10 +118,15 @@ let getSp = (req,res) => {
       sqltool.getPool().connect(err=>{
         global.log4us.error(`Error creating connection to database server (${currentConfig.server}), retrying conection...`);
         console.log(err); 
+        res.status(500).json({
+            success : false,
+            error: err
+        });
+        return 
       }) 
     }
     
-    let request =  new sqlserver.Request(sqltool.getPool());
+    let request =  new sql.Request(sqltool.getPool());
     let typesIn = req.body.typesIn;
     let typesOut = req.body.typesOut;
     let inputs = req.body.parameters;
@@ -124,17 +135,17 @@ let getSp = (req,res) => {
     let spName = req.body.name;
     for(let i =0;i<inputs.length;i++){
       if(typesIn[i]=="int"){
-        request.input(inputs[i],sqlserver.Int,values[i]);
+        request.input(inputs[i],sql.Int,values[i]);
       }
       else if(typesIn[i]=="varchar"){
-        request.input(inputs[i],sqlserver.NVarChar,values[i]);
+        request.input(inputs[i],sql.NVarChar,values[i]);
       }
       else if(typesIn[i]=="float"){
-        request.input(inputs[i],sqlserver.Float,values[i]);
+        request.input(inputs[i],sql.Float,values[i]);
       }
       else if(typesIn[i]=="date"){
         let yourDate = new Date(values[i]);
-        request.input(inputs[i],sqlserver.DateTime,yourDate);
+        request.input(inputs[i],sql.DateTime,yourDate);
       }
       else{
         global.log4us.error('Error on building sp: '+spName);
@@ -142,16 +153,16 @@ let getSp = (req,res) => {
     }
     for(let i =0;i<outputs.length;i++){
       if(typesOut[i]=="int"){
-        request.input(outputs[i],sqlserver.Int,null);
+        request.input(outputs[i],sql.Int,null);
       }
       else if(typesOut[i]=="float"){
-        request.input(outputs[i],sqlserver.Float);
+        request.input(outputs[i],sql.Float);
       }
       else if(typesOut[i]=="varchar"){
-        request.input(outputs[i],sqlserver.NVarChar,null);
+        request.input(outputs[i],sql.NVarChar,null);
       }
       else if(typesOut[i]=="date"){
-        request.input(outputs[i],sqlserver.DateTime,null);
+        request.input(outputs[i],sql.DateTime,null);
       }
       else{
         global.log4us.error('Error on building sp: '+spName);

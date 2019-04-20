@@ -23,11 +23,16 @@
 			"user"    : "api",
 	      	"password": "admin",
 	      	"server"  : "localhost", 
-	      	"database": "Proyecto1BDA" 
+	      	"database": "Proyecto1BDA",
+	      	"pool": {
+		        "max": 10,
+		        "min": 0,
+		        "idleTimeoutMillis": 30000
+		    }
 		},{
 			"user"    : "api",
 	      	"password": "admin",
-	      	"server"  : "172.20.10.5", 
+	      	"server"  : "34.73.146.94", 
 	      	"database": "Proyecto1BDA" 
 		}
 		

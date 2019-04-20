@@ -19,10 +19,12 @@ let activo = require('./activo');
 let dynamic = require('./dynamic');
 let authentication = require('./authentication');
 let banco = require('./banco');
+let reporting = require('./reporting');
 let storage = require('./storage');
 
 router.use('/activo',activo);
 router.use('/storage',storage);
+router.use('/reporting',reporting);
 router.use('/banco',banco);
 router.use('/authentication',authentication);
 router.use('/dynamic',dynamic);
