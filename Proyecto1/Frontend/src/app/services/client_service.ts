@@ -741,4 +741,22 @@ getAllDetalleActivoAsignXSede(IdSede,Ano,VidaUtil) {
     return throwError(errorMessage);
   }
 
+
+  
+
+
+ //---------------------------------------------BANCO API---------------------------------------------------------
+
+ postBanco(Fecha) {
+  let body = {
+    "typesIn": ["date"],
+    "typesOut": [],
+    "parameters": ["date"],
+    "values": [Fecha],
+    "ouputs": [],
+    "name": "getBanco"
+  }
+  return this.http.post(this.apiURL + 'banco/tipoCambio', body).pipe(retry(1), catchError(this.handleError));
+}
+
 }

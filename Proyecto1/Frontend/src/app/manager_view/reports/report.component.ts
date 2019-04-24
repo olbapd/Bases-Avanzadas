@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
@@ -13,7 +13,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RestApiService } from 'src/app/services/client_service';
 import { SecondReportComponent } from '../dialogs/second_report/second_report.component';
 
-
+import { DOCUMENT } from '@angular/common';
 
 @Component({
     selector:'report',
@@ -26,7 +26,7 @@ export class ReportComponent implements OnInit{
     
 
     isPopupOpened = false;
-    constructor(private dialog: MatDialog, public calcular: Depreciation,
+    constructor(@Inject(DOCUMENT) private document: any,private dialog: MatDialog, public calcular: Depreciation,
         private modalService: NgbModal, public restApi: RestApiService,
         private router: Router){
     }
@@ -35,10 +35,9 @@ export class ReportComponent implements OnInit{
  
     }
     generarReporte1(){
-        this.isPopupOpened = true;
-        const dialogRef = this.dialog.open(FirstReportComponent, {
-            data: {}
-        });
+        
+        this.restApi.postBanco("23/04/2019");   
+        this.document.location.href = 'https://stackoverflow.com';
     }
     
     generarReporte2(){
