@@ -77,6 +77,9 @@ export class ManageAssetsComponent implements OnInit {
 
       });
   }
+
+
+
   onSubmit() {
     this.submitted = true;
     let nombre = this.form.get('Nombre').value;
@@ -94,87 +97,78 @@ export class ManageAssetsComponent implements OnInit {
     let FechaR = this.form.get('FechaR').value;
     let btn = document.getElementById('registrar_btn');
 
+
+
     // stop here if form is invalid
     if (this.form.invalid) {
       btn.setAttribute('class', 'btn btn-danger');
       return;
     }
     else {
-      //Se debe almacenar la imagen primero
-      this.fotoService.uploadFile(this.photo)
-        .subscribe((data) => {
-          let photoHash = (data && data.hash) ? data.hash : null;
-          console.log(photoHash);
-          this.restApi.getActivoXCodigo(codigo).subscribe((res) => {
-            const myObjStr = JSON.stringify(res)
-            const json = JSON.parse(myObjStr);
-            if (json.data[0] == null) {
-              let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
-              this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
-                const myObjStr = JSON.stringify(res)
-                const json = JSON.parse(myObjStr);
-                let IdSede = json.data[0].IdSede;
-                this.restApi.setActivo(codigo, nombre, descripcion, photoHash, precio_compre, tiempo_garantia, vida_util, depreciacion, fecha_compra, FechaR, centro_costo, valor_residual, categoria, moneda, IdSede).subscribe((res) => { });;
-                btn.setAttribute('class', 'btn btn-success');
-              });
-
-            }
-
-            else {
-              btn.setAttribute('class', 'btn btn-danger');
-              this.isPopupOpened = true;
-              const dialogRef = this.dialog.open(CodeErrorComponent);
-
-            }
-          });;
-        });
-
-
-
-    }
-  }
-  onSubmit2() {
-    this.submitted2 = true;
-    let btn = document.getElementById('modifstate_btn');
-    let Codigo = this.formModif.get('codigo_modif_state').value;
-    let IdEstado = this.formModif.get('estado3').value;
-
-    // stop here if form is invalid
-    if (this.formModif.invalid) {
-      btn.setAttribute('class', 'btn btn-danger');
-      return;
-    }
-    else {
-
-      if (IdEstado == 5) {
-        this.restApi.getQuitarActivo(Codigo, IdEstado).subscribe((res) => {
+      if (this.photo == undefined) {
+        this.restApi.getActivoXCodigo(codigo).subscribe((res) => {
           const myObjStr = JSON.stringify(res)
           const json = JSON.parse(myObjStr);
+          if (json.data[0] == null) {
+            let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
+            this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
+              const myObjStr = JSON.stringify(res)
+              const json = JSON.parse(myObjStr);
+              let IdSede = json.data[0].IdSede;
+              this.restApi.setActivo(codigo, nombre, descripcion, null, precio_compre, tiempo_garantia, vida_util, depreciacion, fecha_compra, FechaR, centro_costo, valor_residual, categoria, moneda, IdSede).subscribe((res) => { });;
+              btn.setAttribute('class', 'btn btn-success');
+            });
 
-          if (json.success == true) {
-            btn.setAttribute('class', 'btn btn-success');
-            this.UpdateEstado(Codigo);
-            //window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
+          }
+
+          else {
+            btn.setAttribute('class', 'btn btn-danger');
+            this.isPopupOpened = true;
+            const dialogRef = this.dialog.open(CodeErrorComponent);
+
           }
         });;
+
+
       }
       else {
-        this.restApi.getCambiarEstadoActivo(Codigo, IdEstado).subscribe((res) => {
-          const myObjStr = JSON.stringify(res)
-          const json = JSON.parse(myObjStr);
+        //Se debe almacenar la imagen primero
+        this.fotoService.uploadFile(this.photo)
+          .subscribe((data) => {
+            let photoHash = (data && data.hash) ? data.hash : null;
+            console.log(photoHash);
+            this.restApi.getActivoXCodigo(codigo).subscribe((res) => {
+              const myObjStr = JSON.stringify(res)
+              const json = JSON.parse(myObjStr);
+              if (json.data[0] == null) {
+                let idEmpleado: number = parseInt(localStorage.getItem('IdEmpleado'));
+                this.restApi.getSedeXEmpleado(idEmpleado).subscribe((res) => {
+                  const myObjStr = JSON.stringify(res)
+                  const json = JSON.parse(myObjStr);
+                  let IdSede = json.data[0].IdSede;
+                  this.restApi.setActivo(codigo, nombre, descripcion, photoHash, precio_compre, tiempo_garantia, vida_util, depreciacion, fecha_compra, FechaR, centro_costo, valor_residual, categoria, moneda, IdSede).subscribe((res) => { });;
+                  btn.setAttribute('class', 'btn btn-success');
+                });
 
-          if (json.success == true) {
-            btn.setAttribute('class', 'btn btn-success');
-            this.UpdateEstado(Codigo);
-            //window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
-          }
-        });;
+              }
+
+              else {
+                btn.setAttribute('class', 'btn btn-danger');
+                this.isPopupOpened = true;
+                const dialogRef = this.dialog.open(CodeErrorComponent);
+
+              }
+            });;
+          });
+
+
       }
 
     }
   }
-  onSubmit3() {
-    this.submitted3 = false;
+  
+   onSubmit3() {
+    this.submitted3 = true;
     let btn = document.getElementById('asig_btn');
     let Codigo = this.formAsig.get('CodigoaAsig').value;
     let Cedula = this.formAsig.get('CedulaAsig').value;
@@ -216,6 +210,49 @@ export class ManageAssetsComponent implements OnInit {
       });;
     }
   }
+
+
+  onSubmit2() {
+    this.submitted2 = true;
+    let btn = document.getElementById('modifstate_btn');
+    let Codigo = this.formModif.get('codigo_modif_state').value;
+    let IdEstado = this.formModif.get('estado3').value;
+
+    // stop here if form is invalid
+    if (this.formModif.invalid) {
+      btn.setAttribute('class', 'btn btn-danger');
+      return;
+    }
+    else {
+
+      if (IdEstado == 5) {
+        this.restApi.getQuitarActivo(Codigo, IdEstado).subscribe((res) => {
+          const myObjStr = JSON.stringify(res)
+          const json = JSON.parse(myObjStr);
+
+          if (json.success == true) {
+            btn.setAttribute('class', 'btn btn-success');
+            this.UpdateEstado(Codigo);
+            //window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
+          }
+        });;
+      }
+      else {
+        this.restApi.getCambiarEstadoActivo(Codigo, IdEstado).subscribe((res) => {
+          const myObjStr = JSON.stringify(res)
+          const json = JSON.parse(myObjStr);
+
+          if (json.success == true) {
+            btn.setAttribute('class', 'btn btn-success');
+            this.UpdateEstado(Codigo);
+            //window.alert("Estado del Activo Código:"+" "+Codigo+" "+"modificado de forma exitosa");
+          }
+        });;
+      }
+
+    }
+  }
+
   EstadoDropdown() {
     let option;
     let dropdown2 = document.getElementById('estado3-Dropdown');

@@ -79,6 +79,8 @@ export class ManageAssetsComponent implements OnInit {
 
     //this.pictures[idNumber-1].name = photoName;
   }
+
+
   onSubmit() {
     this.submitted = true;
     let nombre = this.form.get('Nombre').value;
@@ -103,33 +105,53 @@ export class ManageAssetsComponent implements OnInit {
       return;
     }
     else {
-      //Se debe almacenar la imagen primero
+      if (this.photo == undefined) {
+        this.restApi.getActivoXCodigo(codigo).subscribe((res) => {
+          const myObjStr = JSON.stringify(res)
+          const json = JSON.parse(myObjStr);
+          if (json.data[0] == null) {
+            btn.setAttribute('class', 'btn btn-success');
+            this.restApi.setActivo(codigo, nombre, descripcion, null, precio_compre, tiempo_garantia, vida_util, depreciacion, fecha_compra, FechaR, centro_costo, valor_residual, categoria, moneda, idSede).subscribe((res) => { });;
+
+          }
+
+          else {
+            btn.setAttribute('class', 'btn btn-danger');
+            this.isPopupOpened = true;
+            const dialogRef = this.dialog.open(CodeErrorComponent);
+
+          }
+        });;
+      }
+      else{
+        //Se debe almacenar la imagen primero
       this.fotoService.uploadFile(this.photo)
-        .subscribe((data) => {
-          let photoHash = (data && data.hash) ? data.hash : null;
-          console.log(photoHash);
-          this.restApi.getActivoXCodigo(codigo).subscribe((res) => {
-            const myObjStr = JSON.stringify(res)
-            const json = JSON.parse(myObjStr);
-            if (json.data[0] == null) {
-              btn.setAttribute('class', 'btn btn-success');
-              this.restApi.setActivo(codigo, nombre, descripcion, photoHash, precio_compre, tiempo_garantia, vida_util, depreciacion, fecha_compra, FechaR, centro_costo, valor_residual, categoria, moneda, idSede).subscribe((res) => { });;
+      .subscribe((data) => {
+        let photoHash = (data && data.hash) ? data.hash : null;
+        console.log(photoHash);
+        this.restApi.getActivoXCodigo(codigo).subscribe((res) => {
+          const myObjStr = JSON.stringify(res)
+          const json = JSON.parse(myObjStr);
+          if (json.data[0] == null) {
+            btn.setAttribute('class', 'btn btn-success');
+            this.restApi.setActivo(codigo, nombre, descripcion, photoHash, precio_compre, tiempo_garantia, vida_util, depreciacion, fecha_compra, FechaR, centro_costo, valor_residual, categoria, moneda, idSede).subscribe((res) => { });;
 
-            }
+          }
 
-            else {
-              btn.setAttribute('class', 'btn btn-danger');
-              this.isPopupOpened = true;
-              const dialogRef = this.dialog.open(CodeErrorComponent);
+          else {
+            btn.setAttribute('class', 'btn btn-danger');
+            this.isPopupOpened = true;
+            const dialogRef = this.dialog.open(CodeErrorComponent);
 
-            }
-          });;
-        });
+          }
+        });;
+      });
 
-
-
+      }
     }
   }
+
+
   onSubmit2() {
     this.submitted2 = true;
     let btn = document.getElementById('modifstate_btn');

@@ -1,17 +1,21 @@
 <div>
 
-    <button type="button" (click)="generarReporte1()" class="btn btn-primary">Reporte 1</button>
+    <button type="button" (click)="generarReporte1(searchValue)" class="btn btn-primary">Reporte 1</button>
 </div>
 
 <div>
-    <button type="button" (click)="generarReporte2()"class="btn btn-primary">Reporte 2</button>
+    <button type="button" (click)="generarReporte2(searchValue)"class="btn btn-primary">Reporte 2</button>
 </div>
 
 <div>
-    <button type="button" (click)="generarReporte3()"class="btn btn-primary">Reporte 3</button>
+    <button type="button" (click)="generarReporte3(searchValue)"class="btn btn-primary">Reporte 3</button>
+</div>
+
+<div>
+    <button type="button" (click)="generarReporte4(searchValue)"class="btn btn-primary">Reporte 4</button>
 </div>
 
 
 <div>
-    <input type="text" #txt_name>
+    <input type="text" #txt_name  [(ngModel)]='searchValue'>
 </div>
