@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['./admin_view/admin-dashboard']); //ruta a admin si el login es exitoso
 
                 }
-                else if ((json.data.IdPuesto) == 7) {
+                else if ((json.data.IdPuesto) == 1) {
                     this.router.navigate(['./manager_view/manager-dashboard']); //ruta a admin si el login es exitoso
 
                 }
@@ -61,15 +61,4 @@ export class LoginComponent implements OnInit {
         });;
 
     }
-
-    /*  showPassword(){
-         let input = document.getElementById('passwordtype');
-         input.toggleAttribute('type');
-     }
- 
-     hidePassword(){
-         let input = document.getElementById('passwordtype');
-         input.setAttribute('type','password');
-     } */
-
 }

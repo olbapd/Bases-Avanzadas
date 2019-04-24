@@ -174,7 +174,7 @@ export class ManageAssetsComponent implements OnInit {
     }
   }
   onSubmit3() {
-    this.submitted3 = true;
+    this.submitted3 = false;
     let btn = document.getElementById('asig_btn');
     let Codigo = this.formAsig.get('CodigoaAsig').value;
     let Cedula = this.formAsig.get('CedulaAsig').value;
@@ -189,8 +189,8 @@ export class ManageAssetsComponent implements OnInit {
       this.restApi.getIdEmpleado(Cedula).subscribe((res) => {
         const myObjStr = JSON.stringify(res)
         const json = JSON.parse(myObjStr);
-        if (json.success == true) {
-          window.alert("El usuario código:" + " " + Cedula + "," + " " + "no pertenece a esta sede");
+        if (json.success == false) {
+          window.alert("El usuario código:" + " " + Cedula + "," + " " + "no existe");
           btn.setAttribute('class', 'btn btn-danger');
         }
         else {
