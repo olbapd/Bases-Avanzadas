@@ -255,3 +255,18 @@ INNER JOIN
 WHERE IdSede = @IdSede
 SET NOCOUNT OFF
 GO
+
+-- =============================================
+-- Descripcion:	<>
+-- Parametro de Entrada: <>
+-- Parametro de Salida: <>
+-- ============================================= 
+CREATE OR ALTER PROC [dbo].[sp_setTipoCambio]
+	@TipoCambio float
+AS
+SET NOCOUNT ON
+UPDATE Activo
+SET [TipoCambio] = @TipoCambio
+WHERE NOT IdActivo = -1
+SET NOCOUNT OFF
+GO
