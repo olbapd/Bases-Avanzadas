@@ -70,21 +70,12 @@ CREATE OR ALTER PROC [dbo].[Reporte3]
 AS
 SET NOCOUNT ON
 
-SELECT 
-	[Activo].Codigo,
-	[Activo].Nombre,
-	[Activo].Precio,
-	[Activo].ValorResidual,
-	[Categoria].Nombre,
-	[Activo].FechaCompra,
-	[Activo].VidaUtil,
- 	CONCAT([Empleado].Nombre,' ',[Empleado].Apellido1, ' ', [Empleado].Apellido2)
+SELECT [Activo].Codigo, [Activo].Nombre, [Activo].Precio, [Activo].ValorResidual, [Categoria].Nombre, [Activo].FechaCompra,
+[Activo].VidaUtil, CONCAT([Empleado].Nombre,' ',[Empleado].Apellido1, ' ',[Empleado].Apellido2) NombreCompleto
 FROM Activo
 INNER JOIN Empleado ON Activo.IdEmpleado = Empleado.IdEmpleado
 INNER JOIN Categoria ON Activo.IdCategoria = Categoria.IdCategoria
-WHERE (Activo.FechaCompra BETWEEN @FechaInicio AND @FechaFin) 
-	AND (DATEADD(year, Activo.VidaUtil, Activo.FechaCompra) 
-	BETWEEN @FechaInicio AND @FechaFin)
+WHERE (Activo.FechaCompra BETWEEN @FechaInicio AND @FechaFin) AND (DATEADD(YEAR, Activo.VidaUtil, Activo.FechaCompra) > @FechaFin)
 AND Activo.IdSede = @IdSede
 SET NOCOUNT OFF
 GO
@@ -96,20 +87,12 @@ CREATE OR ALTER PROC [dbo].[Reporte3-2]
 AS
 SET NOCOUNT ON
 
-SELECT 
-	[Activo].Codigo,
-	[Activo].Nombre,
-	[Activo].Precio,
-	[Activo].ValorResidual,
-	[Categoria].Nombre,
-	[Activo].FechaCompra,
-	[Activo].VidaUtil,
-	CONCAT([Empleado].Nombre,' ',[Empleado].Apellido1, ' ',[Empleado].Apellido2)
-
+SELECT [Activo].Codigo, [Activo].Nombre, [Activo].Precio, [Activo].ValorResidual, [Categoria].Nombre, [Activo].FechaCompra,
+[Activo].VidaUtil, CONCAT([Empleado].Nombre,' ',[Empleado].Apellido1, ' ',[Empleado].Apellido2)
 FROM Activo
 INNER JOIN Empleado ON Activo.IdEmpleado = Empleado.IdEmpleado
 INNER JOIN Categoria ON Activo.IdCategoria = Categoria.IdCategoria
-WHERE (Activo.FechaCompra BETWEEN @FechaInicio AND @FechaFin) AND (DATEADD(year, Activo.VidaUtil, Activo.FechaCompra) BETWEEN @FechaInicio AND @FechaFin)
+WHERE (Activo.FechaCompra BETWEEN @FechaInicio AND @FechaFin) AND (DATEADD(year, Activo.VidaUtil, Activo.FechaCompra) > @FechaFin)
 AND Activo.IdCategoria = @IdCategoria
 SET NOCOUNT OFF
 GO
@@ -143,27 +126,68 @@ GO
 EXEC ReporteG1
 GO
 
-CREATE OR ALTER PROC [dbo].[Reporteg2]
+CREATE OR ALTER PROC [dbo].[ReporteG2]
 	@FechaInicio date,
 	@FechaFin date,
 	@IdSede int
 AS
 SET NOCOUNT ON
 
-SELECT 
-	[Activo].Codigo,
-	[Activo].Nombre,
-	[Activo].Precio,
-	[Activo].ValorResidual,
-	[Categoria].Nombre, [Activo].FechaCompra,
-	[Activo].VidaUtil,
-	CONCAT([Empleado].Nombre,' ',[Empleado].Apellido1, ' ',[Empleado].Apellido2)
+SELECT [Activo].Codigo, [Activo].Nombre, [Activo].Precio, [Activo].ValorResidual, [Categoria].Nombre, [Activo].FechaCompra,
+[Activo].VidaUtil, CONCAT([Empleado].Nombre,' ',[Empleado].Apellido1, ' ',[Empleado].Apellido2)
 FROM Activo
 INNER JOIN Empleado ON Activo.IdEmpleado = Empleado.IdEmpleado
 INNER JOIN Categoria ON Activo.IdCategoria = Categoria.IdCategoria
-WHERE (Activo.FechaCompra BETWEEN @FechaInicio AND @FechaFin) AND (DATEADD(year, Activo.VidaUtil, Activo.FechaCompra) BETWEEN @FechaInicio AND @FechaFin)
+WHERE (Activo.FechaCompra BETWEEN @FechaInicio AND @FechaFin) AND (DATEADD(year, Activo.VidaUtil, Activo.FechaCompra) > @FechaFin)
 ORDER BY Activo.IdSede
 SET NOCOUNT OFF
 GO
-
 EXEC ReporteG1
+
+--Reporte G3
+CREATE OR ALTER PROCEDURE [dbo].[ReporteG3]
+AS
+SET NOCOUNT ON
+SELECT CONCAT (Empleado.Nombre, ' ', Empleado.Apellido1,' ', Empleado.Apellido1) AS NombreCompleto,
+	Sede.Nombre AS Sede, Departamento.Nombre AS Departamento, Puesto.Nombre AS Puesto,
+	Activo.Codigo , Activo.Nombre, Activo.Descripcion, Activo.Precio, Activo.TiempoGarantia--, T.Cantidad
+FROM Activo
+	INNER JOIN Empleado ON Empleado.IdEmpleado = Activo.IdEmpleado
+	INNER JOIN SedeXEmpleado ON Empleado.IdEmpleado = SedeXEmpleado.IdEmpleado
+	INNER JOIN Sede ON SedeXEmpleado.IdSede = Sede.IdSede
+	INNER JOIN Departamento ON SedeXEmpleado.IdDepartamento =  Departamento.IdDepartamento
+	INNER JOIN Puesto ON SedeXEmpleado.IdPuesto = Puesto.IdPuesto
+	--INNER JOIN (
+		--SELECT TOP 3 IdEmpleado, COUNT(IdEmpleado) AS Cantidad
+		--FROM Activo
+		--GROUP BY IdEmpleado
+		--ORDER BY (COUNT(IdEmpleado)) DESC) AS T ON T.IdEmpleado = Activo.IdEmpleado
+	WHERE Activo.IdEmpleado IN
+		(SELECT TOP 3 IdEmpleado
+		FROM Activo
+		GROUP BY IdEmpleado
+		ORDER BY (COUNT(IdEmpleado)) DESC);
+
+SET NOCOUNT OFF
+GO
+
+CREATE OR ALTER PROCEDURE [dbo].[ReporteG4]
+AS
+SET NOCOUNT ON
+SELECT CONCAT (Empleado.Nombre, ' ', Empleado.Apellido1,' ', Empleado.Apellido1) AS NombreCompleto,
+	Sede.Nombre AS Sede, Departamento.Nombre AS Departamento, Puesto.Nombre AS Puesto,
+	Activo.Codigo , Activo.Nombre, Activo.Descripcion, Activo.Precio, Activo.TiempoGarantia--, T.Cantidad
+FROM Activo
+	INNER JOIN Empleado ON Empleado.IdEmpleado = Activo.IdEmpleado
+	INNER JOIN SedeXEmpleado ON Empleado.IdEmpleado = SedeXEmpleado.IdEmpleado
+	INNER JOIN Sede ON SedeXEmpleado.IdSede = Sede.IdSede
+	INNER JOIN Departamento ON SedeXEmpleado.IdDepartamento =  Departamento.IdDepartamento
+	INNER JOIN Puesto ON SedeXEmpleado.IdPuesto = Puesto.IdPuesto
+	WHERE Activo.IdEmpleado IN
+		(SELECT TOP 3 IdEmpleado
+	FROM Activo
+	GROUP BY IdEmpleado
+	ORDER BY (SUM(ValorLibro)) DESC);
+
+SET NOCOUNT OFF
+GO
