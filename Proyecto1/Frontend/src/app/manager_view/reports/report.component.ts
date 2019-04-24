@@ -12,7 +12,7 @@ import { Depreciation } from 'src/app/services/depreciation';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RestApiService } from 'src/app/services/client_service';
 import { SecondReportComponent } from '../dialogs/second_report/second_report.component';
-
+import { urls } from '../../config/constants';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
@@ -24,6 +24,7 @@ import { DOCUMENT } from '@angular/common';
 export class ReportComponent implements OnInit{
 
     
+    apiReportes = urls.reportUrl;
 
     isPopupOpened = false;
     constructor(@Inject(DOCUMENT) private document: any,private dialog: MatDialog, public calcular: Depreciation,
@@ -37,18 +38,23 @@ export class ReportComponent implements OnInit{
     generarReporte1(Fecha){
         
         this.restApi.postBanco(Fecha);   
-        this.document.location.href = 'https://stackoverflow.com';
+        this.document.location.href =this.apiReportes + '/Reports/report/Reporte1-Gerente';
     }
     
     generarReporte2(Fecha){
 
         this.restApi.postBanco(Fecha);   
-        this.document.location.href = 'https://stackoverflow.com';
+        this.document.location.href = this.apiReportes + '/Reports/report/Reporte2-Gerente';
     }
     
     generarReporte3(Fecha){
         this.restApi.postBanco(Fecha);   
-        this.document.location.href = 'https://stackoverflow.com';
+        this.document.location.href = this.apiReportes + '/Reports/report/Reporte3-Gerente';
+    }
+
+    generarReporte4(Fecha){
+        this.restApi.postBanco(Fecha);   
+        this.document.location.href = this.apiReportes + '/Reports/report/Reporte4-Gerente';
     }
 
 }
