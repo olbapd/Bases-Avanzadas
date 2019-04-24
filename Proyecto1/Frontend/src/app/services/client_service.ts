@@ -749,13 +749,10 @@ getAllDetalleActivoAsignXSede(IdSede,Ano,VidaUtil) {
 
  postBanco(Fecha) {
   let body = {
-    "typesIn": ["date"],
-    "typesOut": [],
-    "parameters": ["date"],
-    "values": [Fecha],
-    "ouputs": [],
-    "name": "getBanco"
+    "date": Fecha,
   }
+  console.log(body);
+  console.log(this.apiURL+ 'banco/tipoCambio')
   return this.http.post(this.apiURL + 'banco/tipoCambio', body).pipe(retry(1), catchError(this.handleError));
 }
 
