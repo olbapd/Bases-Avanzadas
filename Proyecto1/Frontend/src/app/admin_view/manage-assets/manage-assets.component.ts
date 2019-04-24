@@ -79,7 +79,6 @@ export class ManageAssetsComponent implements OnInit {
   }
 
 
-
   onSubmit() {
     this.submitted = true;
     let nombre = this.form.get('Nombre').value;

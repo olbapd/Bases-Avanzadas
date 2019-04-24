@@ -46,17 +46,23 @@ export class ReportComponent implements OnInit{
     
     generarReporte2(Fecha){
 
-        this.restApi.postBanco(Fecha);   
+        this.restApi.postBanco(Fecha).subscribe((res)=>{
+            console.log(res);
+    });   ;   
         this.document.location.href = this.apiReportes + '/Reports/report/Reporte2-Gerente';
     }
     
     generarReporte3(Fecha){
-        this.restApi.postBanco(Fecha);   
+        this.restApi.postBanco(Fecha).subscribe((res)=>{
+            console.log(res);
+    });   ;   
         this.document.location.href = this.apiReportes + '/Reports/report/Reporte3-Gerente';
     }
 
     generarReporte4(Fecha){
-        this.restApi.postBanco(Fecha);   
+        this.restApi.postBanco(Fecha).subscribe((res)=>{
+            console.log(res);
+    });      
         this.document.location.href = this.apiReportes + '/Reports/report/Reporte4-Gerente';
     }
 
