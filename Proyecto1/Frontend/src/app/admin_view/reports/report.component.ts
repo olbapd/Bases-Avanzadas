@@ -5,7 +5,6 @@ import { Label } from 'ng2-charts';
 import { Router } from "@angular/router";
 import {Chart} from 'chart.js';
 import { FirstReportComponent } from '../dialogs/first_report/first_report.component';
-
 import { ThirdReportComponent } from '../dialogs/third_report/third_report.component';
 import { MatDialog } from '@angular/material';
 import { Depreciation } from 'src/app/services/depreciation';

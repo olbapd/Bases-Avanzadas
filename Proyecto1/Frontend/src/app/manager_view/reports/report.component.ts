@@ -12,7 +12,7 @@ import { Depreciation } from 'src/app/services/depreciation';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RestApiService } from 'src/app/services/client_service';
 import { SecondReportComponent } from '../dialogs/second_report/second_report.component';
-
+import { DOCUMENT } from '@angular/common';
 
 
 @Component({
@@ -26,7 +26,7 @@ export class ReportComponent implements OnInit{
     
 
     isPopupOpened = false;
-    constructor(private dialog: MatDialog, public calcular: Depreciation,
+    constructor( private document: any,private dialog: MatDialog, public calcular: Depreciation,
         private modalService: NgbModal, public restApi: RestApiService,
         private router: Router){
     }
@@ -35,10 +35,11 @@ export class ReportComponent implements OnInit{
  
     }
     generarReporte1(){
-        this.isPopupOpened = true;
-        const dialogRef = this.dialog.open(FirstReportComponent, {
-            data: {}
-        });
+        this.restApi.postBanco("23/04/2019");     
+        this.document.location.href = 'https://stackoverflow.com';
+
+        
+
     }
     
     generarReporte2(){
