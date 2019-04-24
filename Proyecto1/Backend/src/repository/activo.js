@@ -68,7 +68,7 @@ expose.assignActive = (data,cb) =>{
         return;
       }
       let name = result.output.Nombre + " "+result.output.Apellido;
-      emailAssignActive(result.output.Correo,name);
+      emailAssignActive(result.output.Correo,name,data.codigo);
       to_return.success=true;
       to_return.data=true;
       cb(to_return);
@@ -92,3 +92,4 @@ let emailAssignActive = (email,name) => {
 
 // expose this file as a module based on the expose object
 module.exports = expose;
+

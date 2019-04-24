@@ -26,11 +26,11 @@ export class LoginComponent implements OnInit {
             const myObjStr = JSON.stringify(res)
             const json = JSON.parse(myObjStr);
 
-
             if (json.success == true) {
                 localStorage.setItem('IdEmpleado', json.data.IdEmpleado);
                 localStorage.setItem('IdPuesto', json.data.IdPuesto);
                 this.restApi.getSedeXEmpleado(json.data.IdEmpleado).subscribe((res) => {
+                    console.log(res);
                     const myObjStr = JSON.stringify(res)
                     const json = JSON.parse(myObjStr);
                     localStorage.setItem('IdSede', json.data[0].IdSede);
@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
 
                 }
                 else if ((json.data.IdPuesto) == 1) {
+                    
                     this.router.navigate(['./manager_view/manager-dashboard']); //ruta a admin si el login es exitoso
 
                 }

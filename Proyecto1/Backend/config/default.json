@@ -10,20 +10,20 @@
 		"user"    : "api",
       	"password": "admin",
       	"server"  : "localhost", 
-      	"database": "Proyecto1BDA" 
+      	"database": "BDAProyecto1" 
 	},
 	"sqlserver2" :{
 		"user"    : "api",
       	"password": "admin",
-      	"server"  : "172.18.197.211", 
-      	"database": "Proyecto1BDA" 
+      	"server"  : "192.168.1.7", 
+      	"database": "BDAProyecto1" 
 	},
 	"sqlservers":[
 		{
 			"user"    : "api",
 	      	"password": "admin",
 	      	"server"  : "localhost", 
-	      	"database": "Proyecto1BDA",
+	      	"database": "BDAProyecto1",
 	      	"pool": {
 		        "max": 10,
 		        "min": 0,
@@ -33,7 +33,7 @@
 			"user"    : "api",
 	      	"password": "admin",
 	      	"server"  : "34.73.146.94", 
-	      	"database": "Proyecto1BDA" 
+	      	"database": "BDAProyecto1" 
 		}
 		
 	],
