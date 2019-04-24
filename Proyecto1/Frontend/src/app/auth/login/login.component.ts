@@ -61,15 +61,4 @@ export class LoginComponent implements OnInit {
         });;
 
     }
-
-    /*  showPassword(){
-         let input = document.getElementById('passwordtype');
-         input.toggleAttribute('type');
-     }
- 
-     hidePassword(){
-         let input = document.getElementById('passwordtype');
-         input.setAttribute('type','password');
-     } */
-
 }

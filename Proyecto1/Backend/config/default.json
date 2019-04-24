@@ -15,7 +15,7 @@
 	"sqlserver2" :{
 		"user"    : "api",
       	"password": "admin",
-      	"server"  : "192.168.1.7", 
+      	"server"  : "172.18.197.211", 
       	"database": "Proyecto1BDA" 
 	},
 	"sqlservers":[

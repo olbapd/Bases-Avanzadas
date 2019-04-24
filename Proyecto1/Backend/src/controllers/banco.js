@@ -10,7 +10,7 @@ let config = require('config');
 
 let banco = require('../business/banco');
 
-router.get("/tipoCambio", function(req,res){
+router.post("/tipoCambio", function(req,res){
 	banco.getCambio({
 	 	date : req.body.date
 	 },(result)=>{

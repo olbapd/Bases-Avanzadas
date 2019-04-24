@@ -34,25 +34,21 @@ export class ReportComponent implements OnInit{
     ngOnInit() {
  
     }
-    generarReporte1(){
+    generarReporte1(Fecha){
         
-        this.restApi.postBanco("23/04/2019");   
+        this.restApi.postBanco(Fecha);   
         this.document.location.href = 'https://stackoverflow.com';
     }
     
-    generarReporte2(){
+    generarReporte2(Fecha){
 
-        this.isPopupOpened = true;
-        const dialogRef = this.dialog.open(SecondReportComponent, {
-            data: {}
-        });
+        this.restApi.postBanco(Fecha);   
+        this.document.location.href = 'https://stackoverflow.com';
     }
     
-    generarReporte3(){
-        this.isPopupOpened = true;
-        const dialogRef = this.dialog.open(ThirdReportComponent, {
-            data: {}
-        });
+    generarReporte3(Fecha){
+        this.restApi.postBanco(Fecha);   
+        this.document.location.href = 'https://stackoverflow.com';
     }
 
 }
