@@ -44,7 +44,7 @@ SET NOCOUNT ON
 
 SELECT [Activo].Codigo, [Activo].IdEmpleado, [Activo].FechaAsignacion, [Activo].DetalleUbicacion
 FROM Activo
-WHERE [IdEstado] = @IdEstado AND [IdCategoria] =@IdCategoria
+WHERE [IdEstado] = @IdEstado AND [IdCategoria] = @IdCategoria
 SET NOCOUNT OFF
 GO
 
@@ -79,9 +79,9 @@ BEGIN
 	BEGIN TRAN
 	BEGIN TRY
 		INSERT INTO Activo (Codigo, Nombre, Descripcion, Foto, Precio, TiempoGarantia, VidaUtil, PorcentajeDepreciacion, FechaCompra,
-		FechaRegistro, FechaAsignacion, CentroCosto, ValorResidual, DetalleUbicacion, IdEmpleado,IdCategoria, IdSede, IdMoneda, IdEstado) 
+		FechaRegistro, FechaAsignacion, CentroCosto, ValorResidual, DetalleUbicacion, IdEmpleado,IdCategoria, IdSede, IdMoneda, IdEstado,ValorLibro,TipoCambio) 
 		VALUES (@Codigo, @Nombre, @Descripcion, @Foto, @Precio, @TiempoGar, @VidaU, @PorcentajeD, @FechaCompra,
-		@FechaAsig, NULL, @CentroCosto, @ValorResidual, NULL, NULL,@IdCategoria, @IdSede, @IdMoneda, @IdEstado) 
+		@FechaAsig, NULL, @CentroCosto, @ValorResidual, NULL, NULL,@IdCategoria, @IdSede, @IdMoneda, @IdEstado,0,0) 
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -111,7 +111,6 @@ CREATE OR ALTER PROC [dbo].[updateActivo]
 	@FechaRegistro date,
 	@CentroCosto int,
 	@ValorResidual int,
-	@DetalleUb varchar(50),
 	@IdSede int,
 	@IdMoneda int
 	
@@ -132,7 +131,6 @@ BEGIN
 		[FechaRegistro] = @FechaRegistro, 
 		[CentroCosto] = @CentroCosto, 
 		[ValorResidual] = @ValorResidual, 
-		[DetalleUbicacion] = @DetalleUb, 
 		[IdSede] = @IdSede, 
 		[IdMoneda] = @IdMoneda 
 		WHERE @Codigo = [Activo].Codigo
@@ -414,15 +412,18 @@ SET NOCOUNT ON
 	WHERE @IdSede = [Sede].IdSede
 
 	UPDATE SedeXEmpleado
-	SET [SedeXEmpleado].FechaSalida = @FechaSalida
+	SET [SedeXEmpleado].FechaSalida = @FechaSalida,
+	[SedeXEmpleado].IdDepartamento = 11,
+	[SedeXEmpleado].IdPuesto = 25
 	WHERE @IdSede = SedeXEmpleado.IdSede
 
-	UPDATE Empleado 
-	SET [Empleado].IdDepartamento = 11,
-	[Empleado].IdPuesto = 25 
-	FROM SedeXEmpleado
-	INNER JOIN Empleado ON SedeXEmpleado.IdEmpleado = Empleado.IdEmpleado
-	WHERE @IdSede = SedeXEmpleado.IdSede
+	UPDATE Activo SET 
+	[IdEstado] = 4,
+	[DetalleUbicacion] = NULL,
+	[IdEmpleado] = NULL,
+	[FechaAsignacion] = NULL
+	WHERE Activo.IdSede = @IdSede
+
 
 SET NOCOUNT OFF
 GO
@@ -489,7 +490,7 @@ SELECT [SedeXEmpleado].IdSede, [Sede].Nombre, [Empleado].Nombre, [Empleado].Apel
 FROM SedeXEmpleado
 INNER JOIN Sede ON [SedeXEmpleado].IdSede = [Sede].IdSede
 INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
-WHERE [Empleado].IdPuesto = 1 OR [Empleado].IdPuesto = 2
+WHERE [SedeXEmpleado].IdPuesto = 1 OR [SedeXEmpleado].IdPuesto = 2 AND [SedeXEmpleado].FechaSalida IS NULL
 SET NOCOUNT OFF
 GO
 
@@ -627,8 +628,8 @@ SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
 	[SedeXEmpleado].FechaIngreso, [Departamento].Nombre, [Puesto].Nombre
 FROM SedeXEmpleado
 INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
-INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
-INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
+INNER JOIN Departamento ON [SedeXEmpleado].IdDepartamento = [Departamento].IdDepartamento
+INNER JOIN Puesto ON [SedeXEmpleado].IdPuesto = [Puesto].IdPuesto
 WHERE [Empleado].IdEstado = 1 AND [SedeXEmpleado].FechaSalida IS NULL
 
 SET NOCOUNT OFF
@@ -664,14 +665,13 @@ BEGIN
 	BEGIN TRAN
 	BEGIN TRY
 		INSERT INTO Empleado (Nombre, Apellido1, Apellido2, Cedula,FechaNacimiento, Correo,
-		Contrasena, IdDepartamento, IdPuesto, Foto)
-		VALUES (@Nombre, @Apellido1, @Apellido2, @Cedula, @FechaN ,
-		 @Correo, @Contrasena,@IdDepartamento, @IdPuesto, @Foto)
+		Contrasena, Foto)
+		VALUES (@Nombre, @Apellido1, @Apellido2, @Cedula, @FechaN , @Correo, @Contrasena, @Foto)
 		
-		SELECT @IdEmpleado = Empleado.IdEmpleado FROM Empleado WHERE @Cedula = Empleado.Cedula
+		SELECT @IdEmpleado = Empleado.IdEmpleado FROM Empleado WHERE @Cedula = Empleado.Cedula--ARREGLAR
 		
-		INSERT INTO [SedeXEmpleado] (IdSede,IdEmpleado,FechaIngreso,FechaSalida)
-		VALUES (@IdSede,@IdEmpleado,@FechaActual,null)
+		INSERT INTO [SedeXEmpleado] (IdSede,IdEmpleado,IdPuesto,IdDepartamento,FechaIngreso,FechaSalida)
+		VALUES (@IdSede,@IdEmpleado,@IdPuesto,@IdDepartamento,@FechaActual,null)
 
 		COMMIT TRANSACTION
 	END TRY
@@ -743,13 +743,8 @@ BEGIN
 		[FechaSalida] = @FechaSalida
 		WHERE @IdEmpleado = [SedeXEmpleado].IdEmpleado AND FechaSalida IS NULL
 
-		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso, FechaSalida)
-		VALUES (@IdSede, @IdEmpleado, @FechaIngreso, NULL)
-
-		UPDATE Empleado SET 
-		[IdDepartamento] = @IdDepartamento,
-		[IdPuesto] = @IdPuesto
-		WHERE @IdEmpleado = [Empleado].IdEmpleado
+		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, IdPuesto,IdDepartamento,FechaIngreso, FechaSalida)
+		VALUES (@IdSede, @IdEmpleado, @IdPuesto, @IdDepartamento, @FechaIngreso, NULL)
 
 		COMMIT TRANSACTION
 	END TRY
@@ -830,22 +825,11 @@ BEGIN
 		WHERE @IdEmpleadoV = [SedeXEmpleado].IdEmpleado AND FechaSalida IS NULL
 
 		--CREA EL NUEVO REGISTRO DE HISTORIAL DE LOS NUEVOS DEPARTAMENTOS ASIGNADOS
-		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso, FechaSalida)
-		VALUES (@IdSede, @IdEmpleadoN, @FechaIngreso, NULL)
+		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, IdPuesto, IdDepartamento,FechaIngreso, FechaSalida)
+		VALUES (@IdSede, @IdEmpleadoN, 2, 6, @FechaIngreso, NULL)
 
-		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso, FechaSalida)
-		VALUES (@IdSede, @IdEmpleadoV, @FechaIngreso, NULL)
-
-		--ACTUALIZA 
-		UPDATE Empleado SET 
-		[IdDepartamento] = 6,
-		[IdPuesto] = 2
-		WHERE @IdEmpleadoN = [Empleado].IdEmpleado
-
-		UPDATE Empleado SET 
-		[IdDepartamento] = 11,
-		[IdPuesto] = 25
-		WHERE @IdEmpleadoV = [Empleado].IdEmpleado
+		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, IdPuesto,IdDepartamento,FechaIngreso, FechaSalida)
+		VALUES (@IdSede, @IdEmpleadoV, 25, 11, @FechaIngreso, NULL)
 
 		COMMIT TRANSACTION
 	END TRY
@@ -864,6 +848,8 @@ GO
 CREATE OR ALTER PROCEDURE [dbo].[Contrato]
 	@IdSede int,
 	@IdEmpleado int,
+	@IdPuesto int,
+	@IdDepartamento int,
 	@FechaIngreso date,
 	@FechaSalida date
 	 
@@ -872,8 +858,8 @@ BEGIN
 
 	BEGIN TRAN
 	BEGIN TRY
-		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, FechaIngreso, FechaSalida)
-		VALUES (@IdSede, @IdEmpleado, @FechaIngreso, NULL)
+		INSERT INTO SedeXEmpleado(IdSede, IdEmpleado, IdPuesto, IdDepartamento ,FechaIngreso, FechaSalida)
+		VALUES (@IdSede, @IdEmpleado, @IdPuesto, @IdDepartamento, @FechaIngreso, NULL)
 		COMMIT TRANSACTION
 	END TRY
 	BEGIN CATCH
@@ -916,9 +902,9 @@ SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
 [Empleado].Cedula, [Puesto].Nombre, [Sede].Nombre
 FROM SedeXEmpleado
 INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
-INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
+INNER JOIN Puesto ON [SedeXEmpleado].IdPuesto = [Puesto].IdPuesto
 INNER JOIN Sede ON [SedeXEmpleado].IdSede = [Sede].IdSede
-WHERE @IdDepartamento = [Empleado].IdDepartamento
+WHERE @IdDepartamento = [SedeXEmpleado].IdDepartamento AND [SedeXEmpleado].FechaSalida IS NULL
 
 SET NOCOUNT OFF
 GO
@@ -937,9 +923,9 @@ SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
 [Empleado].Cedula, [Departamento].Nombre, [Sede].Nombre
 FROM SedeXEmpleado
 INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
-INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
+INNER JOIN Departamento ON [SedeXEmpleado].IdDepartamento = [Departamento].IdDepartamento
 INNER JOIN Sede ON [SedeXEmpleado].IdSede = [Sede].IdSede
-WHERE @IdPuesto = [Empleado].IdPuesto
+WHERE @IdPuesto = [SedeXEmpleado].IdPuesto AND [SedeXEmpleado].FechaSalida IS NULL
 
 SET NOCOUNT OFF
 GO
@@ -958,8 +944,8 @@ SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
 [Empleado].Cedula,[Empleado].Correo,[Empleado].Contrasena,[Empleado].Foto, [SedeXEmpleado].FechaIngreso, [Departamento].Nombre, [Puesto].Nombre
 FROM SedeXEmpleado
 INNER JOIN Empleado ON [SedeXEmpleado].IdEmpleado = [Empleado].IdEmpleado
-INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
-INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
+INNER JOIN Departamento ON [SedeXEmpleado].IdDepartamento = [Departamento].IdDepartamento
+INNER JOIN Puesto ON [SedeXEmpleado].IdPuesto = [Puesto].IdPuesto
 WHERE @IdSede = [SedeXEmpleado].IdSede AND [Empleado].IdEstado = 1 AND [SedeXEmpleado].FechaSalida IS NULL
 
 SET NOCOUNT OFF
@@ -970,7 +956,7 @@ GO
 -- Parametro de Salida: <Ninguno>
 -- =============================================
 CREATE OR ALTER PROC [dbo].[getEmpleadoXActivo]
-	@CodigoActivo int
+	@CodigoActivo varchar(50)
 AS
 SET NOCOUNT ON
 
@@ -978,10 +964,10 @@ SELECT [Empleado].Nombre, [Empleado].Apellido1, [Empleado].Apellido2,
 [Departamento].Nombre, [Puesto].Nombre, [Sede].Nombre
 FROM Activo
 INNER JOIN Empleado ON [Activo].IdEmpleado = [Empleado].IdEmpleado
-INNER JOIN Departamento ON [Empleado].IdDepartamento = [Departamento].IdDepartamento
-INNER JOIN Puesto ON [Empleado].IdPuesto = [Puesto].IdPuesto
 INNER JOIN SedeXEmpleado ON [Empleado].IdEmpleado = [SedeXEmpleado].IdEmpleado
-INNER JOIN Sede ON [SedeXEmpleado].IdSede = [Sede].Nombre
+INNER JOIN Departamento ON [SedeXEmpleado].IdDepartamento = [Departamento].IdDepartamento
+INNER JOIN Puesto ON [SedeXEmpleado].IdPuesto = [Puesto].IdPuesto
+INNER JOIN Sede ON [SedeXEmpleado].IdSede = [Sede].IdSede
 WHERE @CodigoActivo = [Activo].Codigo
 
 SET NOCOUNT OFF
@@ -1007,18 +993,55 @@ WHERE @CodigoActivo = [Activo].Codigo
 SET NOCOUNT OFF
 GO
 
-CREATE OR ALTER PROC sp_assignActive   
-    @IdEmpleado int,   
-    @IdActivo int   
-AS   
+-- =============================================
+-- Descripcion:	<>
+-- Parametro de Entrada: <>
+-- Parametro de Salida: <>
+-- =============================================
+CREATE OR ALTER PROC [dbo].[sp_assignActive]
+	@Codigo varchar(50),
+	@Cedula varchar(50),
+	@IdEstado int,
+	@DetalleUbi varchar(100),
+	@Correo varchar(50) OUTPUT,
+	@Nombre varchar(50) OUTPUT,
+	@Apellido varchar(50) OUTPUT
+AS
+BEGIN
+	DECLARE
+	@IdSede int,
+	@IdEmpleado int
 
-    UPDATE Proyecto1BDA.dbo.Activo 
-	SET IdEmpleado= @IdEmpleado, FechaAsignacion = GETDATE()
-	WHERE IdActivo = @IdActivo;
-GO 
+	SELECT @IdEmpleado = Empleado.IdEmpleado, @Correo=Empleado.Correo,
+			@Nombre=Empleado.Nombre, @Apellido=Empleado.Apellido1 FROM Empleado
+	WHERE @Cedula = [Empleado].Cedula;
+
+	SELECT @IdSede = SedeXEmpleado.IdSede FROM SedeXEmpleado
+	WHERE @IdEmpleado = [SedeXEmpleado].IdEmpleado;
+
+	BEGIN TRAN
+	BEGIN TRY
+		UPDATE Activo SET 
+		[IdEstado] = @IdEstado,
+		[IdEmpleado] = @IdEmpleado,
+		[IdSede] = @IdSede,
+		[DetalleUbicacion]= @DetalleUbi,
+		[FechaAsignacion] = GETDATE()
+		WHERE @Codigo = [Activo].Codigo
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		SELECT ERROR_PROCEDURE() AS ErrorProcedimiento, ERROR_MESSAGE() AS TipoError
+		ROLLBACK TRANSACTION
+	END CATCH
+	SELECT	@Correo as N'@Correo',
+		@Nombre as N'@Nombre',
+		@Apellido as N'@Apellido'
+END
+GO
 
 
-
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getIdEmpleado]
 	@Cedula varchar(50)
 AS
@@ -1031,6 +1054,7 @@ WHERE @Cedula = [Empleado].Cedula
 SET NOCOUNT OFF
 GO
 
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getIdDepartamento]
 	@NombreD varchar(50)
 AS
@@ -1043,6 +1067,7 @@ WHERE @NombreD = [Departamento].Nombre
 SET NOCOUNT OFF
 GO
 
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getIdPuesto]
 	@NombreP varchar(50)
 AS
@@ -1055,6 +1080,7 @@ WHERE @NombreP = [Puesto].Nombre
 SET NOCOUNT OFF
 GO
 
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getIdSede]
 	@NombreS varchar(50)
 AS
@@ -1067,6 +1093,7 @@ WHERE @NombreS = [Sede].Nombre
 SET NOCOUNT OFF
 GO
 
+-- =============================================
 CREATE OR ALTER PROC [dbo].[getActivoStateBySede]
 	@IdEstado int,
 	@IdSede int
@@ -1079,6 +1106,7 @@ WHERE [IdEstado] = @IdEstado AND [IdSede] =@IdSede
 SET NOCOUNT OFF
 GO
 
+-- =============================================
 CREATE OR ALTER PROC [dbo].[cambiarEstadoActivo]
 	@Codigo varchar(50),
 	@IdEstado int

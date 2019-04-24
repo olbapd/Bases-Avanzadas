@@ -1,0 +1,169 @@
+GO
+--REPORTE #1 ADMINISTRADOR
+-----------------------------------------
+--Monto total de los activos asignados a la sede
+CREATE OR ALTER PROC [dbo].[Reporte1]
+	@IdSede int
+AS
+SET NOCOUNT ON
+
+DECLARE
+	@TipoCambio float
+
+	SELECT @TipoCambio = Activo.TipoCambio FROM Activo WHERE IdActivo=1
+
+SELECT  COUNT(*) ActivosAsignados,
+		SUM([Activo].Precio) SumaCostoInicial,
+		SUM([Activo].ValorResidual) SumaValorResidual,
+		SUM([Activo].ValorLibro) SumaValorLibro,
+		COUNT(*) * @TipoCambio AS ActivosAsignadosDollar,
+		SUM([Activo].Precio) * @TipoCambio AS SumaCostoInicialDollar,
+		SUM([Activo].ValorResidual) * @TipoCambio AS SumaValorResidualDollar,
+		SUM([Activo].ValorLibro) * @TipoCambio AS SumaValorLibroDollar
+FROM Activo
+WHERE [IdSede] = @IdSede AND [IdEstado] = 3
+SET NOCOUNT OFF
+GO
+
+EXEC Reporte1 1
+GO
+
+CREATE OR ALTER PROC [dbo].[Reporte2]
+	@IdSede int
+AS
+SET NOCOUNT ON
+
+DECLARE
+	@TipoCambio float
+
+	SELECT @TipoCambio = Activo.TipoCambio FROM Activo WHERE IdActivo=1
+
+SELECT  COUNT(*) ActivosAsignados,
+		SUM([Activo].Precio) SumaCostoInicial,
+		AVG([Activo].Precio) PromedioCostoInicial,
+		SUM([Activo].ValorResidual) SumaValorResidual, 
+		AVG([Activo].ValorResidual) PromedioValorResidual,
+		SUM([Activo].ValorLibro) SumaValorLibro, 
+		AVG([Activo].ValorLibro) PromedioValorLibro,
+		
+		COUNT(*) * @TipoCambio AS ActivosAsignadosDollares,
+		SUM([Activo].Precio) * @TipoCambio AS SumaCostoInicialDollares,
+		AVG([Activo].Precio) * @TipoCambio AS PromedioCostoInicialDollares,
+		SUM([Activo].ValorResidual) * @TipoCambio AS SumaValorResidualDollares,
+		AVG([Activo].ValorResidual) * @TipoCambio AS PromedioValorResidualDollares,
+		SUM([Activo].ValorLibro) * @TipoCambio AS SumaValorLibroDollares,
+		AVG([Activo].ValorLibro) * @TipoCambio AS PromedioValorLibroDollares
+FROM Activo
+INNER JOIN Empleado ON Activo.IdEmpleado = Empleado.IdEmpleado
+WHERE [Activo].IdSede = @IdSede AND Empleado.IdEstado = 1
+GROUP BY Activo.IdEmpleado
+SET NOCOUNT OFF
+GO
+
+EXEC Reporte2 2
+
+GO
+CREATE OR ALTER PROC [dbo].[Reporte3]
+	@FechaInicio date,
+	@FechaFin date,
+	@IdSede int
+AS
+SET NOCOUNT ON
+
+SELECT 
+	[Activo].Codigo,
+	[Activo].Nombre,
+	[Activo].Precio,
+	[Activo].ValorResidual,
+	[Categoria].Nombre,
+	[Activo].FechaCompra,
+	[Activo].VidaUtil,
+ 	CONCAT([Empleado].Nombre,' ',[Empleado].Apellido1, ' ', [Empleado].Apellido2)
+FROM Activo
+INNER JOIN Empleado ON Activo.IdEmpleado = Empleado.IdEmpleado
+INNER JOIN Categoria ON Activo.IdCategoria = Categoria.IdCategoria
+WHERE (Activo.FechaCompra BETWEEN @FechaInicio AND @FechaFin) 
+	AND (DATEADD(year, Activo.VidaUtil, Activo.FechaCompra) 
+	BETWEEN @FechaInicio AND @FechaFin)
+AND Activo.IdSede = @IdSede
+SET NOCOUNT OFF
+GO
+
+CREATE OR ALTER PROC [dbo].[Reporte3-2]
+	@FechaInicio date,
+	@FechaFin date,
+	@IdCategoria int
+AS
+SET NOCOUNT ON
+
+SELECT 
+	[Activo].Codigo,
+	[Activo].Nombre,
+	[Activo].Precio,
+	[Activo].ValorResidual,
+	[Categoria].Nombre,
+	[Activo].FechaCompra,
+	[Activo].VidaUtil,
+	CONCAT([Empleado].Nombre,' ',[Empleado].Apellido1, ' ',[Empleado].Apellido2)
+
+FROM Activo
+INNER JOIN Empleado ON Activo.IdEmpleado = Empleado.IdEmpleado
+INNER JOIN Categoria ON Activo.IdCategoria = Categoria.IdCategoria
+WHERE (Activo.FechaCompra BETWEEN @FechaInicio AND @FechaFin) AND (DATEADD(year, Activo.VidaUtil, Activo.FechaCompra) BETWEEN @FechaInicio AND @FechaFin)
+AND Activo.IdCategoria = @IdCategoria
+SET NOCOUNT OFF
+GO
+
+--Gerente -------------------
+CREATE OR ALTER PROC [dbo].[ReporteG1]
+
+AS
+SET NOCOUNT ON
+
+DECLARE
+	@TipoCambio float
+
+	SELECT @TipoCambio = Activo.TipoCambio FROM Activo WHERE IdActivo=1
+
+SELECT 
+	COUNT(*) ActivosAsignados,
+	SUM([Activo].Precio) SumaCostoInicial,
+	SUM([Activo].ValorResidual) SumaValorResidual,
+	SUM([Activo].ValorLibro) SumaValorLibro,
+
+	COUNT(*) * @TipoCambio AS ActivosAsignadosDollares,
+	SUM([Activo].Precio) * @TipoCambio AS SumaCostoInicialDollares,
+	SUM([Activo].ValorResidual) * @TipoCambio AS SumaValorResidualDollares,
+	SUM([Activo].ValorLibro) * @TipoCambio AS SumaValorLibroDollares
+FROM Activo
+GROUP BY Activo.IdSede
+SET NOCOUNT OFF
+GO
+
+EXEC ReporteG1
+GO
+
+CREATE OR ALTER PROC [dbo].[Reporteg2]
+	@FechaInicio date,
+	@FechaFin date,
+	@IdSede int
+AS
+SET NOCOUNT ON
+
+SELECT 
+	[Activo].Codigo,
+	[Activo].Nombre,
+	[Activo].Precio,
+	[Activo].ValorResidual,
+	[Categoria].Nombre, [Activo].FechaCompra,
+	[Activo].VidaUtil,
+	CONCAT([Empleado].Nombre,' ',[Empleado].Apellido1, ' ',[Empleado].Apellido2)
+FROM Activo
+INNER JOIN Empleado ON Activo.IdEmpleado = Empleado.IdEmpleado
+INNER JOIN Categoria ON Activo.IdCategoria = Categoria.IdCategoria
+WHERE (Activo.FechaCompra BETWEEN @FechaInicio AND @FechaFin) AND (DATEADD(year, Activo.VidaUtil, Activo.FechaCompra) BETWEEN @FechaInicio AND @FechaFin)
+ORDER BY Activo.IdSede
+SET NOCOUNT OFF
+GO
+
+EXEC ReporteG1

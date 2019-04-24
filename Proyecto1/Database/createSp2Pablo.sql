@@ -1,13 +1,26 @@
-USE Proyecto1BDA
+USE [Proyecto1BDA]
 
-GO  
-CREATE OR ALTER PROCEDURE sp_login
+GO
+-- =============================================
+-- Descripcion:	<>
+-- Parametro de Entrada: <>
+-- Parametro de Salida: <>
+-- ============================================= 
+CREATE OR ALTER PROCEDURE [dbo].[sp_login]
     @CorreoEmp nvarchar(50)   
 AS   
-	SELECT *
-	FROM Empleado
-    WHERE Correo= @CorreoEmp;
-GO  
+
+ SELECT 
+	[Empleado].Nombre,
+	[Empleado].Apellido1,
+	[Empleado].Apellido2,
+	[Empleado].IdEmpleado,
+	[Empleado].Contrasena,
+	[SedeXEmpleado].IdPuesto
+ From Empleado
+ INNER JOIN SedeXEmpleado ON [Empleado].idEmpleado = [SedeXEmpleado].idEmpleado
+ WHERE [Empleado].correo =@CorreoEmp
+GO
 
 
 /*GO  
@@ -19,8 +32,14 @@ AS
     UPDATE Proyecto1BDA.dbo.Activo 
 	SET IdEmpleado= @IdEmpleado, FechaAsignacion = GETDATE()
 	WHERE IdActivo = @IdActivo;
-GO*/ 
+GO*/
 
+ 
+-- =============================================
+-- Descripcion:	<>
+-- Parametro de Entrada: <>
+-- Parametro de Salida: <>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[sp_assignActive]
 	@Codigo varchar(50),
 	@Cedula varchar(50),
@@ -63,9 +82,11 @@ BEGIN
 END
 GO
 
-
-
-GO
+-- =============================================
+-- Descripcion:	<>
+-- Parametro de Entrada: <>
+-- Parametro de Salida: <>
+-- =============================================
 CREATE OR ALTER   PROC [dbo].[sp_calculos]
 	@IdCategoria int
 AS
@@ -84,7 +105,11 @@ WHERE @IdCategoria = [Activo].IdCategoria
 GO
 
 
-GO
+-- =============================================
+-- Descripcion:	<>
+-- Parametro de Entrada: <>
+-- Parametro de Salida: <>
+-- =============================================
 CREATE OR ALTER   PROC [dbo].[sp_calculosBySede]
 	@IdCategoria int,
 	@IdSede int
@@ -103,7 +128,11 @@ WHERE @IdCategoria = [Activo].IdCategoria AND @IdSede = [Activo].IdSede
 
 GO
 
-GO
+-- =============================================
+-- Descripcion:	<>
+-- Parametro de Entrada: <>
+-- Parametro de Salida: <>
+-- =============================================
 CREATE OR ALTER PROC [dbo].[sp_getActivoByCategory]
 	@IdCategoria int,
 	@IdSede int
@@ -118,7 +147,11 @@ SELECT	[Activo].Codigo,
 	WHERE [IdCategoria] = @IdCategoria AND @IdSede = Activo.IdSede
 GO
 
-GO
+-- =============================================
+-- Descripcion:	<>
+-- Parametro de Entrada: <>
+-- Parametro de Salida: <>
+-- =============================================
 CREATE OR ALTER   PROC [dbo].[sp_getActivoLi]
 	@IdEstado int,
 	@IdCategoria int,
@@ -131,11 +164,15 @@ SELECT  [Activo].Codigo,
 	
 	FROM Activo
 	
-	WHERE [IdEstado] = @IdEstado AND [IdCategoria] =@IdCategoria AND Activo.IdSede = @IdSede
+	WHERE [IdEstado] = @IdEstado AND [IdCategoria] = @IdCategoria AND Activo.IdSede = @IdSede;
 
 GO
 
-GO
+-- =============================================
+-- Descripcion:	<>
+-- Parametro de Entrada: <>
+-- Parametro de Salida: <>
+-- =============================================
 CREATE OR ALTER  PROC [dbo].[sp_getActivoBySede]
 	@IdSede int 
 AS 
@@ -148,8 +185,12 @@ AS
 GO
 
 
-GO
-CREATE OR ALTER   PROC [dbo].[sp_getAdministrators]
+-- =============================================
+-- Descripcion:	<>
+-- Parametro de Entrada: <>
+-- Parametro de Salida: <>
+-- =============================================
+CREATE OR ALTER  PROC [dbo].[sp_getAdministrators]
 	
 AS
 
@@ -178,11 +219,15 @@ INNER JOIN
 	Provincia ON Canton.IdProvincia = Provincia.IdProvincia
 
 WHERE 
-	[Empleado].IdPuesto=2 AND [Empleado].IdEstado = 1 AND [SedeXEmpleado].FechaSalida IS NULL
+	[SedeXEmpleado].IdPuesto=2 AND [Empleado].IdEstado = 1 AND [SedeXEmpleado].FechaSalida IS NULL
 GO
 
 
-GO 
+-- =============================================
+-- Descripcion:	<>
+-- Parametro de Entrada: <>
+-- Parametro de Salida: <>
+-- ============================================= 
 CREATE OR ALTER PROC [dbo].[sp_getAllActivobySede]
 	@IdSede int
 AS
