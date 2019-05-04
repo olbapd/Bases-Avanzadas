@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
+//import { AdminModule } from './admin/admin.module';
 /*import { DashboardModule } from './dashboard/dashboard.module';
 import { InicioModule } from './inicio/inicio.module';
 
@@ -15,6 +16,7 @@ const PAGES_COMPONENTS = [
 @NgModule({
   imports: [
     PagesRoutingModule,
+    //AdminModule
     /*ThemeModule,
     DashboardModule,
     InicioModule,
