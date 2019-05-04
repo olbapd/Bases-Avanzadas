@@ -1,12 +1,43 @@
-<h1>MAIN PAGE ADMIN</h1>
-<!--<nb-card>
-  <nb-card-header>
-  	<h1>Lista de Contactos de Clientes</h1>
-  </nb-card-header>
+<div class="wrapper wrapper-full-page" style="background-color: rgba(94, 94, 94, 0.86);">
+<br><br>
+<div class="container-fluid">
+  <!--<div class="row">
+    <div class="col-4 col-sm-4 col-md-4 col-lg-2 col-xl-2">
+      <div class="dropdown">
+        <button mat-raised-button class="dropdown-toggle btn btn-primary btn-round btn-block" data-toggle="dropdown">{{filterString}}
+          <b class="caret"></b>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-left">
+          <li class="dropdown-header">{{'vehicle-manager.filter-type' }}</li>
+          <li>
+            <a  (click)="changeFilter(1)">{{'vehicle-manager.all' }}</a>
+          </li>
+          <li>
+            <a (click)="changeFilter(2)">{{'vehicle-manager.available' }}</a>
+          </li>
+          <li>
+            <a (click)="changeFilter(3)">{{'vehicle-manager.unavailable' }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>-->
 
-  <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="contactSource" (editConfirm)="onEditRow($event)" >
-    </ng2-smart-table>
-  </nb-card-body>
-</nb-card>
--->
+  <div class="card-columns">
+    <ng-container *ngFor="let library of libraries; let i = index" >
+    <div class="card">
+      <img class="card-img-top" src={{library.Photo}} alt="Card image cap">
+      <div class="card-body">
+        <h3 class="card-title">{{library.code}} - {{library.name}}</h3>
+        <p class="card-text" ><strong>Pais: </strong> {{library.country}} </p>
+        <p class="card-text" ><strong>Ubicacion Detallada: </strong> {{library.location}}</p>
+        <p class="card-text" ><strong>Telefono: </strong> {{library.number}}</p>
+        <p class="card-text" ><strong>Horario: </strong> {{library.schedule}}</p>
+        
+        <button (click)="editLibrary(library.Code)" class="btn btn-primary">Edit</button>
+        <button (click)="deleteLibrary(library.Code)" class="btn btn-primary">Delete</button>
+      </div>
+    </div>
+    </ng-container>
+  </div>
+</div>
