@@ -2,6 +2,7 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { AuthService } from '../../services/login.service'; 
 
 @Component({
   selector: 'login',
@@ -14,25 +15,26 @@ export class LoginComponent implements OnInit {
   
   constructor(
   	  private router: Router,
-      private fb: FormBuilder){
-  	this.createForm();
-  }
+      private fb: FormBuilder,
+      private authService : AuthService){
 
-  createForm() {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
-  }
 
+  }
+  
   ngOnInit() {
   }
 
-  tryLogin(value){
-    
-  }
-
-  doLogin(value){
+  login(){
+    let email = this.loginForm.value.email;
+    let password = this.loginForm.value.password;
+    this.authService.login(email,password)
+      .subscribe((result)=>{
+        console.log(result);
+      }); 
   }
 }
 
