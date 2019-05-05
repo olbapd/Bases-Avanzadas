@@ -18,7 +18,8 @@ export class MainComponent {
         country : "Costa Rica",
         location: "Cartago",
         number: 3331324354,
-        schedule: "L-V"
+        schedule: "L-V",
+        photo: '../../../../assets/bookstore.png'
 
       },
     ]
