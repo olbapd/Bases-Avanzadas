@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AdminService } from '../../../services/admin.service';
+import { PromoService } from '../../../services/promo.service';
 
 @Component({
   selector: 'main',
@@ -10,7 +10,7 @@ import { AdminService } from '../../../services/admin.service';
 export class MainComponent {
   
   libraries:any;
-  constructor(private adminServices:AdminService) {
+  constructor(private promoServices:PromoService) {
     this.libraries=[
       {
         code: "ABCDEF",
