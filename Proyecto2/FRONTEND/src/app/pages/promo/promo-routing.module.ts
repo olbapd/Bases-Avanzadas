@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AdminComponent } from './admin.component';
+import { PromoComponent } from './promo.component';
 import { MainComponent } from './main/main.component';
 import { AgregarComponent } from './agregar/agregar.component';
 
 const routes: Routes = [{
   path: '',
-  component: AdminComponent,
+  component: PromoComponent,
   children: [
     {
       path: 'main',
@@ -32,10 +32,10 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class PromoRoutingModule { }
 
 export const routedComponents = [
-  AdminComponent,
+  PromoComponent,
   MainComponent,
   AgregarComponent
 ];

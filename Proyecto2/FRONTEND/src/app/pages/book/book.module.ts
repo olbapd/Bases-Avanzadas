@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AdminRoutingModule, routedComponents } from './admin-routing.module';
-import { AdminService } from '../../services/admin.service';
+import { BookRoutingModule, routedComponents } from './book-routing.module';
+import { BookService } from '../../services/book.service';
 import { MaterialModule } from '../../app.module';
 import { FieldErrorDisplayComponent }  from './field-error-display/field-error-display.component';
 
@@ -14,16 +14,15 @@ import { FieldErrorDisplayComponent }  from './field-error-display/field-error-d
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AdminRoutingModule,
-    MaterialModule,
-    
+    BookRoutingModule,
+    MaterialModule
   ],
   declarations: [
     ...routedComponents,
     FieldErrorDisplayComponent
   ],
   providers: [
-    AdminService
+    BookService
   ],
 })
-export class AdminModule { }
+export class BookModule { }
