@@ -2,23 +2,23 @@
 <br><br>
 <div class="container-fluid">
   <div class="card-columns">
-    <ng-container *ngFor="let library of libraries; let i = index" >
+    <ng-container *ngFor="let promo of promos; let i = index" >
     <div class="card">
-      <img class="card-img-top" src={{library.photo}} alt="Card image cap">
+      <img class="card-img-top" src={{promo.photo}} alt="Card image cap">
       <div class="card-body">
-        <h3 class="card-title">{{library.code}} - {{library.name}}</h3>
-        <p class="card-text" ><strong>Pais: </strong> {{library.country}} </p>
-        <p class="card-text" ><strong>Ubicacion Detallada: </strong> {{library.location}}</p>
-        <p class="card-text" ><strong>Telefono: </strong> {{library.number}}</p>
-        <p class="card-text" ><strong>Horario: </strong> {{library.schedule}}</p>
+        <h3 class="card-title">{{promo.code}} - {{promo.name}}</h3>
+        <p class="card-text" ><strong>Description: </strong> {{promo.description}} </p>
+        <p class="card-text" ><strong>Percent: </strong> {{promo.percent}}</p>
+        <p class="card-text" ><strong>Fecha Inicio: </strong> {{promo.begin}}</p>
+        <p class="card-text" ><strong>Fecha Fin: </strong> {{promo.end}}</p>
         <div class="row">
         	<div class="col">
-        		<button (click)="editLibrary(library.Code)" class="btn btn-primary">
+        		<button (click)="editPromo(promo.Code)" class="btn btn-primary">
         			<i class="fas fa-edit"></i> Modificar
         		</button>		
         	</div>
         	<div class="col">
-        		<button (click)="deleteLibrary(library.Code)" class="btn btn-primary">
+        		<button (click)="deletePromo(promo.Code)" class="btn btn-primary">
         			<i class="fas fa-trash"></i> Borrar
         		</button>		
         	</div>
