@@ -9,16 +9,16 @@ import { PromoService } from '../../../services/promo.service';
 })
 export class MainComponent {
   
-  libraries:any;
+  promos:any;
   constructor(private promoServices:PromoService) {
-    this.libraries=[
+    this.promos=[
       {
         code: "ABCDEF",
-        name: "Pancho Library",
-        country : "Costa Rica",
-        location: "Cartago",
-        number: 3331324354,
-        schedule: "L-V",
+        name: "Pancho Promocion",
+        description : "Descripcion Promocion",
+        percent: "10%",
+        begin: "01/01/19",
+        end: "02/02/19",
         photo: '../../../../assets/bookstore.png'
 
       },
