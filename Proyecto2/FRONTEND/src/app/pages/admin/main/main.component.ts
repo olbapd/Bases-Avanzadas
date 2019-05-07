@@ -26,7 +26,9 @@ export class MainComponent {
   }
 
   editLibrary(code){
-    
+    console.log(code);
+    localStorage.setItem("Store",JSON.stringify(code));
+    this.router.navigate(['/pages/admin/edit']);
   }
   deleteLibrary(code){
     Swal({
