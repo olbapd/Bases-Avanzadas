@@ -9,27 +9,28 @@ import { BookService } from '../../../services/book.service';
 })
 export class MainComponent {
   
-  libraries:any;
+  books:any;
   
   constructor(private bookServices:BookService) {
-    this.libraries=[
+    this.books=[
       {
-        code: "ABCDEF",
-        name: "Pancho Library",
-        country : "Costa Rica",
-        location: "Cartago",
-        number: 3331324354,
-        schedule: "L-V",
+        issn: "ABCDEF",
+        name: "Libro X",
+        category : "Terror",
+        description: "Descripcion Libro",
+        sales: 3331324354,
+        amount: 3331324354,
+        price: 456546,
         photo: '../../../../assets/bookstore.png'
 
       },
     ]
   }
 
-  editLibrary(code){
+  editBook(code){
 
   }
-  deleteLibrary(code){
+  deleteBook(code){
 
   }
 }
