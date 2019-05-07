@@ -5,7 +5,7 @@
     <form [formGroup]="type" class="form-horizontal">
       <div class="card-header card-header-rose card-header-text">
         <div class="card-text">
-          <h4 class="card-title">Edit Bookstore - {{code}}</h4>
+          <h4 class="card-title">Edit Book - {{issn}}</h4>
         </div>
       </div>
       <div class="card-body">
@@ -20,42 +20,42 @@
             </mat-form-field>
           </div>
           <div class="col-sm-4">
-            <label>Country: </label>
+            <label>Category: </label>
             <mat-form-field>
-              <mat-select [(ngModel)]="country" [ngModelOptions]="{standalone: true}" placeholder="Coutnry" name="country">
-                <mat-option *ngFor="let country of countries" [value]="country.Id">
-                  {{ country.Name }}
+              <mat-select [(ngModel)]="category" [ngModelOptions]="{standalone: true}" placeholder="Category" name="category">
+                <mat-option *ngFor="let category of countries" [value]="category.Id">
+                  {{ category.Name }}
                 </mat-option>
               </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-4">
-            <label>Address: </label>
-            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'text')">
-              <input type="text" matInput id="address"
-              (ngModelChange)="textValidationType($event)"
-              formControlName="address">
-              <app-field-error-display [displayError]="isFieldValid(type, 'address')" errorMsg="Must add a address."></app-field-error-display>
             </mat-form-field>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-4">
-            <label>Phone Number: </label>
-            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validNumberType===true}" [ngClass]="displayFieldCss(type, 'number')">
-              <input type="number" matInput id="phone"
+            <label>Description: </label>
+            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'text')">
+              <input type="text" matInput id="description"
               (ngModelChange)="textValidationType($event)"
-              formControlName="phone">
-              <app-field-error-display [displayError]="isFieldValid(type, 'phone')" errorMsg="Must add a phone."></app-field-error-display>
+              formControlName="description">
+              <app-field-error-display [displayError]="isFieldValid(type, 'description')" errorMsg="Must add a description."></app-field-error-display>
             </mat-form-field>
           </div>
           <div class="col-sm-4">
-            <label>Open Hours: </label>
-            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'text')">
-              <input type="text" matInput id="openHours"
+            <label>Price: </label>
+            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validNumberType===true}" [ngClass]="displayFieldCss(type, 'number')">
+              <input type="number" matInput id="price"
               (ngModelChange)="textValidationType($event)"
-              formControlName="openHours">
-              <app-field-error-display [displayError]="isFieldValid(type, 'openHours')" errorMsg="Must add a openHours."></app-field-error-display>
+              formControlName="price">
+              <app-field-error-display [displayError]="isFieldValid(type, 'price')" errorMsg="Must add a price."></app-field-error-display>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-4">
+            <label>Amount: </label>
+            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'number')">
+              <input type="number" matInput id="amount"
+              (ngModelChange)="textValidationType($event)"
+              formControlName="amount">
+              <app-field-error-display [displayError]="isFieldValid(type, 'amount')" errorMsg="Must add a amount."></app-field-error-display>
             </mat-form-field>
           </div>
         </div>
@@ -67,7 +67,7 @@
         </div>
       </div>
       <div class="card-footer text-center">
-        <button mat-raised-button type="submit" class="btn btn-rose btn-fill" (click)="addNewVehicle()">Add Bookstore</button>
+        <button mat-raised-button type="submit" class="btn btn-rose btn-fill" (click)="addNewVehicle()">Update Book</button>
       </div>
     </form>
   </div>
