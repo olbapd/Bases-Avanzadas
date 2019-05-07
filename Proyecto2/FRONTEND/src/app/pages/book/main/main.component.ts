@@ -23,7 +23,7 @@ export class MainComponent {
         sales: 3331324354,
         amount: 3331324354,
         price: 456546,
-        photo: '../../../../assets/bookstore.png'
+        photo: '../../../../assets/book.png'
 
       },
     ]

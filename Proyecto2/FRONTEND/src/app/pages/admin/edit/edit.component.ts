@@ -13,7 +13,7 @@ export class EditComponent {
   type : FormGroup;
   validTextType: boolean = false;
   validNumberType: boolean = false;
-  code="asdfasd";
+  code="";
 
   constructor(private formBuilder: FormBuilder) {
     this.type = this.formBuilder.group({
@@ -23,8 +23,8 @@ export class EditComponent {
       phone: [null, Validators.required],
       address: [null, Validators.required],
       openHours: [null, Validators.required],
-      
-      });
+    });
+    this.code= JSON.parse(localStorage.getItem('Store'));
   }
   validateAllFormFields(formGroup: FormGroup) {
       Object.keys(formGroup.controls).forEach(field => {

@@ -8,17 +8,17 @@
       <div class="card-body">
         <h3 class="card-title">{{library.code}} - {{library.name}}</h3>
         <p class="card-text" ><strong>Pais: </strong> {{library.country}} </p>
+        <p class="card-text" ><strong>Telefono: </strong> {{library.number}} <strong>Horario: </strong> {{library.schedule}}</p>
         <p class="card-text" ><strong>Ubicacion Detallada: </strong> {{library.location}}</p>
-        <p class="card-text" ><strong>Telefono: </strong> {{library.number}}</p>
-        <p class="card-text" ><strong>Horario: </strong> {{library.schedule}}</p>
+        
         <div class="row">
         	<div class="col">
-        		<button (click)="editLibrary(library.Code)" class="btn btn-primary">
+        		<button (click)="editLibrary(library.code)" class="btn btn-primary">
         			<i class="fas fa-edit"></i> Modificar
         		</button>		
         	</div>
         	<div class="col">
-        		<button (click)="deleteLibrary(library.Code)" class="btn btn-primary">
+        		<button (click)="deleteLibrary(library.code)" class="btn btn-primary">
         			<i class="fas fa-trash"></i> Borrar
         		</button>		
         	</div>
