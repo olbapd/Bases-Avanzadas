@@ -2,23 +2,25 @@
 <br><br>
 <div class="container-fluid">
   <div class="card-columns">
-    <ng-container *ngFor="let library of libraries; let i = index" >
+    <ng-container *ngFor="let client of clients; let i = index" >
     <div class="card">
-      <img class="card-img-top" src={{library.photo}} alt="Card image cap">
+      <img class="card-img-top" src={{client.photo}} alt="Card image cap">
       <div class="card-body">
-        <h3 class="card-title">{{library.code}} - {{library.name}}</h3>
-        <p class="card-text" ><strong>Pais: </strong> {{library.country}} </p>
-        <p class="card-text" ><strong>Ubicacion Detallada: </strong> {{library.location}}</p>
-        <p class="card-text" ><strong>Telefono: </strong> {{library.number}}</p>
-        <p class="card-text" ><strong>Horario: </strong> {{library.schedule}}</p>
+        <h3 class="card-title">{{client.idCard}} - {{client.name}}</h3>
+        <p class="card-text" ><strong>Birthdate: </strong> {{client.birthdate}}</p>
+        <p class="card-text" ><strong>Address: </strong> {{client.address}}</p>
+        <p class="card-text" ><strong>Telefono: </strong> {{client.number}}</p>
+        <p class="card-text" ><strong>Email: </strong> {{client.email}}</p>
+        <p class="card-text" ><strong>Type: </strong> {{client.type}}</p>
+        <p class="card-text" ><strong>User Name: </strong> {{client.user}}</p>
         <div class="row">
         	<div class="col">
-        		<button (click)="editLibrary(library.Code)" class="btn btn-primary">
+        		<button (click)="editClient(client.Code)" class="btn btn-primary">
         			<i class="fas fa-edit"></i> Modificar
         		</button>		
         	</div>
         	<div class="col">
-        		<button (click)="deleteLibrary(library.Code)" class="btn btn-primary">
+        		<button (click)="deleteClient(client.Code)" class="btn btn-primary">
         			<i class="fas fa-trash"></i> Borrar
         		</button>		
         	</div>
