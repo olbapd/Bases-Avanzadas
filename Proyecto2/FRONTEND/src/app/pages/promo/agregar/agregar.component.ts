@@ -19,10 +19,10 @@ export class AgregarComponent {
     this.type = this.formBuilder.group({
       code: [null, Validators.required],
       name: [null, Validators.required],
-      country: [null, Validators.required],
-      phone: [null, Validators.required],
-      address: [null, Validators.required],
-      openHours: [null, Validators.required],
+      percent: [null, Validators.required],
+      begin: [null, Validators.required],
+      description: [null, Validators.required],
+      end: [null, Validators.required],
       
       });
   }
