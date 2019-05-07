@@ -1,0 +1,30 @@
+<div class="wrapper wrapper-full-page" style="background-color: rgba(94, 94, 94, 0.86);">
+<br><br>
+<div class="container-fluid">
+  <div class="card-columns">
+    <ng-container *ngFor="let library of libraries; let i = index" >
+    <div class="card">
+      <img class="card-img-top" src={{library.photo}} alt="Card image cap">
+      <div class="card-body">
+        <h3 class="card-title">{{library.code}} - {{library.name}}</h3>
+        <p class="card-text" ><strong>Pais: </strong> {{library.country}} </p>
+        <p class="card-text" ><strong>Ubicacion Detallada: </strong> {{library.location}}</p>
+        <p class="card-text" ><strong>Telefono: </strong> {{library.number}}</p>
+        <p class="card-text" ><strong>Horario: </strong> {{library.schedule}}</p>
+        <div class="row">
+        	<div class="col">
+        		<button (click)="editLibrary(library.Code)" class="btn btn-primary">
+        			<i class="fas fa-edit"></i> Modificar
+        		</button>		
+        	</div>
+        	<div class="col">
+        		<button (click)="deleteLibrary(library.Code)" class="btn btn-primary">
+        			<i class="fas fa-trash"></i> Borrar
+        		</button>		
+        	</div>
+        </div>
+      </div>
+    </div>
+    </ng-container>
+  </div>
+</div>

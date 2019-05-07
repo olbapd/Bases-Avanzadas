@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ClientRoutingModule, routedComponents } from './client-routing.module';
-import { ClientService } from '../../services/client.service';
+import { OrderRoutingModule, routedComponents } from './order-routing.module';
+import { OrderService } from '../../services/order.service';
 import { MaterialModule } from '../../app.module';
 import { FieldErrorDisplayComponent }  from './field-error-display/field-error-display.component';
 
@@ -14,7 +14,7 @@ import { FieldErrorDisplayComponent }  from './field-error-display/field-error-d
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ClientRoutingModule,
+    OrderRoutingModule,
     MaterialModule
   ],
   declarations: [
@@ -22,7 +22,7 @@ import { FieldErrorDisplayComponent }  from './field-error-display/field-error-d
     FieldErrorDisplayComponent
   ],
   providers: [
-    ClientService
+    OrderService
   ],
 })
-export class ClientModule { }
+export class OrderModule { }
