@@ -21,9 +21,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 // Connect to Mongoose and set connection variable
-mongoose.connect('mongodb://localhost/nombreDB', {useNewUrlParser: true});//nombreDB---nombre de la DB
+const uri = 'mongodb+srv://adminUser_bda:adminUserbda01@bases-avanzadas-proyecto2-lmauc.mongodb.net/';
+mongoose.connect(uri,{dbName: 'Proyecto2',useNewUrlParser: true});//nombreDB---nombre de la DB
 mongoose.set('useCreateIndex', true);
-
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
