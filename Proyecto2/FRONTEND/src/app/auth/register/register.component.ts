@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  loginForm: FormGroup;
+  registerForm: FormGroup;
   errorMessage: string = '';
   
   constructor(
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   }
 
   createForm() {
-    this.loginForm = this.fb.group({
+    this.registerForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
