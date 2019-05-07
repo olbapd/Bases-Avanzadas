@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { BookService } from '../../../services/book.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'main',
@@ -11,7 +12,8 @@ export class MainComponent {
   
   books:any;
   
-  constructor(private bookServices:BookService) {
+  constructor(private bookServices:BookService,
+              private router: Router) {
     this.books=[
       {
         issn: "ABCDEF",
@@ -31,6 +33,23 @@ export class MainComponent {
 
   }
   deleteBook(code){
-
+    Swal({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+        //Meter codigo para borrar
+        Swal(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      }
+    })
   }
 }

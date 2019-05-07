@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { OrderComponent } from './Order.component';
+import { OrderComponent } from './order.component';
 import { MainComponent } from './main/main.component';
 import { EditComponent } from './edit/edit.component';
 import { AgregarComponent } from './agregar/agregar.component';
@@ -40,5 +40,7 @@ export class OrderRoutingModule { }
 
 export const routedComponents = [
   OrderComponent,
-  EditComponent
+  EditComponent,
+  MainComponent,
+  AgregarComponent
 ];

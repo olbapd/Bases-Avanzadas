@@ -21,7 +21,6 @@ export class MainComponent {
         number: 3331324354,
         schedule: "L-V",
         photo: '../../../../assets/bookstore.png'
-
       }
     ]
   }
@@ -48,6 +47,5 @@ export class MainComponent {
         )
       }
     })
-
   }
 }

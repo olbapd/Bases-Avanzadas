@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { AdminComponent } from './admin/admin.component';
+import { OrderComponent } from './order/order.component';
 import { BookComponent } from './book/book.component';
 import { PromoComponent } from './promo/promo.component';
 import { ClientComponent } from './client/client.component';
@@ -20,6 +21,9 @@ const routes: Routes = [{
   },{
     path: 'book',
     loadChildren: './book/book.module#BookModule',
+  },{
+    path: 'order',
+    loadChildren: './order/order.module#OrderModule',
   },{
     path: 'admin',
     loadChildren: './admin/admin.module#AdminModule',

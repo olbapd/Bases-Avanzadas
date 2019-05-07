@@ -13,12 +13,12 @@
         <p class="card-text" ><strong>Horario: </strong> {{library.schedule}}</p>
         <div class="row">
         	<div class="col">
-        		<button (click)="editLibrary(library.Code)" class="btn btn-primary">
+        		<button (click)="editOrder(library.Code)" class="btn btn-primary">
         			<i class="fas fa-edit"></i> Modificar
         		</button>		
         	</div>
         	<div class="col">
-        		<button (click)="deleteLibrary(library.Code)" class="btn btn-primary">
+        		<button (click)="deleteOrder(library.Code)" class="btn btn-primary">
         			<i class="fas fa-trash"></i> Borrar
         		</button>		
         	</div>
@@ -28,3 +28,6 @@
     </ng-container>
   </div>
 </div>
+<a [routerLink]="['/pages/order/agregar']" class="float">
+    <i class="fa fa-plus my-float"></i>
+</a>
