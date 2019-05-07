@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { AdminService } from '../../../services/admin.service';
 
 @Component({
@@ -10,7 +10,8 @@ import { AdminService } from '../../../services/admin.service';
 export class MainComponent {
   
   libraries:any;
-  constructor(private adminServices:AdminService) {
+  constructor(private adminServices:AdminService,
+              private router: Router) {
     this.libraries=[
       {
         code: "ABCDEF",
@@ -21,7 +22,7 @@ export class MainComponent {
         schedule: "L-V",
         photo: '../../../../assets/bookstore.png'
 
-      },
+      }
     ]
   }
 
