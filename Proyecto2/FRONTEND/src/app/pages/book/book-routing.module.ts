@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { BookComponent } from './book.component';
 import { MainComponent } from './main/main.component';
+import { EditComponent } from './edit/edit.component';
 import { AgregarComponent } from './agregar/agregar.component';
 
 const routes: Routes = [{
@@ -10,6 +11,9 @@ const routes: Routes = [{
   component: BookComponent,
   children: [
     {
+      path: 'edit',
+      component: EditComponent,
+    },{
       path: 'main',
       component: MainComponent,
     },
@@ -37,5 +41,6 @@ export class BookRoutingModule { }
 export const routedComponents = [
   BookComponent,
   MainComponent,
-  AgregarComponent
+  AgregarComponent,
+  EditComponent
 ];

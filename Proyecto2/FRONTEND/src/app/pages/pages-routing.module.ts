@@ -5,12 +5,16 @@ import { PagesComponent } from './pages.component';
 import { AdminComponent } from './admin/admin.component';
 import { BookComponent } from './book/book.component';
 import { PromoComponent } from './promo/promo.component';
+import { ClientComponent } from './client/client.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
   {
+    path: 'client',
+    loadChildren: './client/client.module#ClientModule',
+  },{
     path: 'promo',
     loadChildren: './promo/promo.module#PromoModule',
   },{

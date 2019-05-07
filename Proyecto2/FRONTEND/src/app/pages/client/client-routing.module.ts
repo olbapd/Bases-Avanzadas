@@ -1,32 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AdminComponent } from './admin.component';
-import { MainComponent } from './main/main.component';
+import { ClientComponent } from './client.component';
 import { EditComponent } from './edit/edit.component';
-import { AgregarComponent } from './agregar/agregar.component';
 
 const routes: Routes = [{
   path: '',
-  component: AdminComponent,
+  component: ClientComponent,
   children: [
     {
       path: 'edit',
       component: EditComponent,
     },{
-      path: 'main',
-      component: MainComponent,
-    },
-    {
-      path: 'agregar',
-      component: AgregarComponent,
-    },{
       path: '',
-      redirectTo: 'agregar',
+      redirectTo: 'edit',
       pathMatch: 'full',
     }, {
       path: '**',
-      redirectTo: 'agregar',
+      redirectTo: 'edit',
       pathMatch: 'full',
     }    
   ],
@@ -36,11 +27,9 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class ClientRoutingModule { }
 
 export const routedComponents = [
-  AdminComponent,
-  MainComponent,
-  AgregarComponent,
+  ClientComponent,
   EditComponent
 ];
