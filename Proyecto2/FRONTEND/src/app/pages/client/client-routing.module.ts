@@ -3,12 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ClientComponent } from './client.component';
 import { EditComponent } from './edit/edit.component';
+import { MainComponent } from './main/main.component';
 
 const routes: Routes = [{
   path: '',
   component: ClientComponent,
   children: [
     {
+      path: 'main',
+      component: MainComponent,
+    },{
       path: 'edit',
       component: EditComponent,
     },{
@@ -31,5 +35,6 @@ export class ClientRoutingModule { }
 
 export const routedComponents = [
   ClientComponent,
-  EditComponent
+  EditComponent,
+  MainComponent
 ];
