@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AdminService } from '../../../services/admin.service';
+import { ClientService } from '../../../services/client.service';
 
 @Component({
   selector: 'main',
@@ -9,26 +9,28 @@ import { AdminService } from '../../../services/admin.service';
 })
 export class MainComponent {
   
-  libraries:any;
-  constructor(private adminServices:AdminService) {
-    this.libraries=[
+  clients:any;
+  constructor(private clientServices:ClientService) {
+    this.clients=[
       {
-        code: "ABCDEF",
-        name: "Pancho Library",
-        country : "Costa Rica",
-        location: "Cartago",
+        idCard: "ABCDEF",
+        name: "der Name",
+        birthdate : "21/03/1990",
+        address: "Cartago",
         number: 3331324354,
-        schedule: "L-V",
+        email: "user@gmail.com",
+        type: "Regular",
+        user: "UserName",
         photo: '../../../../assets/bookstore.png'
 
       },
     ]
   }
 
-  editLibrary(code){
+  editClient(code){
 
   }
-  deleteLibrary(code){
+  deleteClient(code){
 
   }
 }
