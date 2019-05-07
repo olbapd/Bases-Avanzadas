@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { FormBuilder, AbstractControl,Validators, FormGroup } from '@angular/forms';
@@ -17,13 +18,13 @@ export class AgregarComponent {
 
   constructor(private formBuilder: FormBuilder) {
     this.type = this.formBuilder.group({
-      code: [null, Validators.required],
+      issn: [null, Validators.required],
       name: [null, Validators.required],
       country: [null, Validators.required],
-      phone: [null, Validators.required],
-      address: [null, Validators.required],
-      openHours: [null, Validators.required],
-      
+      price: [null, Validators.required],
+      description: [null, Validators.required],
+      amount: [null, Validators.required],
+
       });
   }
   validateAllFormFields(formGroup: FormGroup) {
