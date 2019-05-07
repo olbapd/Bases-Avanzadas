@@ -1,6 +1,25 @@
 <h1>REGISTRO</h1>
 <img src='../../../assets/login-bg.jpeg'>
-  <div class="message">
-    <h1>Responsive background</h1>    
-    <p>With thanks to http://sixrevisions.com/css/responsive-background-image/ and 500px</p>
-  </div>
+<div class="container">
+    <div class="card card-container center">
+      <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+      <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+      <p id="profile-name" class="profile-name-card"></p>
+      <form [formGroup]="loginForm">
+        <div class="form-group">
+        <label>Name</label>
+          <input type="text" formControlName="form-group" class="form-control">
+          <label>Email address</label>
+          <input type="email" formControlName="email" class="form-control" placeholder="example@domain.com">
+          <label>User Name</label>
+          <input type="text" formControlName="form-group" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" formControlName="password" placeholder="******">
+          <label class="error">{{errorMessage}}</label>
+        </div>
+        <button (click)="login(loginForm.value)" class="btn-join"><span>Join</span></button>
+      </form>
+    </div><!-- /card-container -->
+</div><!-- /container -->
