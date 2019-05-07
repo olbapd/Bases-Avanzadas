@@ -13,17 +13,20 @@ export class EditComponent {
   type : FormGroup;
   validTextType: boolean = false;
   validNumberType: boolean = false;
-  code="asdfasd";
+  idCard="asdfasd";
 
   constructor(private formBuilder: FormBuilder) {
     this.type = this.formBuilder.group({
-      code: [null, Validators.required],
+      idCard: [null, Validators.required],
       name: [null, Validators.required],
-      country: [null, Validators.required],
       phone: [null, Validators.required],
+      birthdate: [null, Validators.required],
       address: [null, Validators.required],
-      openHours: [null, Validators.required],
-      
+      type: [null, Validators.required],
+      email: [null, Validators.required],
+      user: [null, Validators.required],
+      pass: [null, Validators.required],
+
       });
   }
   validateAllFormFields(formGroup: FormGroup) {
