@@ -1,25 +1,48 @@
-<h1>REGISTRO</h1>
+
 <img src='../../../assets/login-bg.jpeg'>
+<div class="jumbotron">
 <div class="container">
     <div class="card card-container center">
-      <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
-      <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-      <p id="profile-name" class="profile-name-card"></p>
-      <form [formGroup]="loginForm">
+      <form [formGroup]="registerForm">
         <div class="form-group">
-        <label>Name</label>
-          <input type="text" formControlName="form-group" class="form-control">
-          <label>Email address</label>
-          <input type="email" formControlName="email" class="form-control" placeholder="example@domain.com">
-          <label>User Name</label>
-          <input type="text" formControlName="form-group" class="form-control">
+        	<div class="row">
+        		<div class="col-6">
+        			<label>Full Name</label>
+          			<input type="text" formControlName="name" class="form-control">
+          			<label>idCard</label>
+          			<input type="text" formControlName="idcard" class="form-control">
+        		</div>
+        	</div>
+        	<div class="row">
+        		<div class="col-6">
+        			<label>Birthdate</label>
+          			<input type="text" formControlName="birthdate" class="form-control">
+		  			<label>Address</label>
+          			<input type="text" formControlName="address" class="form-control">
+        		</div>
+        	</div>
+        	<div claa="row">
+        		<div class="col-6">
+        			<label>Phone</label>
+          			<input type="text" formControlName="phone" class="form-control">
+          			<label>Email Address</label>
+          			<input type="text" formControlName="email" class="form-control" placeholder="example@domain.com">
+        		</div>
+        	</div>  
         </div>
         <div class="form-group">
-          <label>Password</label>
-          <input type="password" class="form-control" formControlName="password" placeholder="******">
-          <label class="error">{{errorMessage}}</label>
+       		<div class="row">
+       			<div class="col-6">
+       				<label>User Name</label>	
+          			<input type="text" formControlName="user" class="form-control">
+          			<label>Password</label>
+          			<input type="password" class="form-control" formControlName="password" placeholder="******">
+          			<label class="error">{{errorMessage}}</label>
+       			</div>
+       		</div>
         </div>
         <button (click)="login(loginForm.value)" class="btn-join"><span>Join</span></button>
       </form>
     </div><!-- /card-container -->
 </div><!-- /container -->
+</div>
