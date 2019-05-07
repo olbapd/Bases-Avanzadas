@@ -51,7 +51,7 @@
           <div class="col-sm-4">
             <label>Email: </label>
             <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'text')">
-              <input type="text" matInput id="email"
+              <input type="email" matInput id="email"
               (ngModelChange)="textValidationType($event)"
               formControlName="email">
               <app-field-error-display [displayError]="isFieldValid(type, 'email')" errorMsg="Must add a email."></app-field-error-display>
