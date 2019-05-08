@@ -27,11 +27,11 @@ mongoose.set('useCreateIndex', true);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-    console.log("Connected to mongoServe");
+    console.log("Connected to ATLAS-Remote-MongoServe");
   // we're connected!
 });
 // Setup server port
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3001;
 // Send message for default URL
 app.get('/', (req, res) => res.send('Welcome to MongoDB micro-Service'));
 // Use Api routes in the App
