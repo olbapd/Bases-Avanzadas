@@ -9,13 +9,34 @@ router.get('/', function (req, res) {
     });
 });
 
+// Import cliente controller
+var cliente = require('./controllers/cliente');
+// cliente routes
+router.route('/clientes')
+    .get(cliente.index)
+    .post(cliente.new);
+router.route('/cliente/:cliente_id')
+    .get(cliente.view)
+    .put(cliente.update)
+    .delete(cliente.delete);
+
+// Import libreria controller
+var libreria = require('./controllers/libreria');
+// libreria routes
+router.route('/librerias')
+    .get(libreria.index)
+    .post(libreria.new);
+router.route('/libreria/:libreria_id')
+    .get(libreria.view)
+    .put(libreria.update)
+    .delete(libreria.delete);
+
 // Import Pais controller
 var pais = require('./controllers/pais');
 // Pais routes
-router.route('/pais')
+router.route('/paises')
     .get(pais.index)
     .post(pais.new);
-
 
 
 // Export API routes
