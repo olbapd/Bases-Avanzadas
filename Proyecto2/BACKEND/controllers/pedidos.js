@@ -28,7 +28,7 @@ exports.new = function (req, res) {
 
 // Handle update vehiculo info
 exports.update = function (req, res) {
-    Pedido.findById(req.params._id, function (err, pedidos) {
+    Pedido.findById(req.params.pedido_id, function (err, pedidos) {
         if (err) {
             res.json({
                 status: "error",
@@ -60,7 +60,7 @@ exports.update = function (req, res) {
 };
 
 
-exports.getAllPedidos = function (req, res) {
+exports.index = function (req, res) {
     Pedido.get(function (err, pedidos) {
         if (err) {
             res.json({
@@ -98,7 +98,7 @@ exports.view = function (req, res) {
 
 exports.delete = function (req, res) {
     Pedido.deleteOne({
-        _id: req.params._id
+        _id: req.params.pedido_id
     }, function (err, pedidos) {
         if (err) {
             res.json({

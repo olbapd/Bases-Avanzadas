@@ -31,7 +31,6 @@ router.route('/libreria/:libreria_id')
     .put(libreria.update)
     .delete(libreria.delete);
 
-
 // Import libro controller
 var libro = require('./controllers/libro');
 // libro routes
@@ -50,6 +49,17 @@ router.route('/paises')
     .get(pais.index)
     .post(pais.new);
 
+// Import pedido controller
+var pedido = require('./controllers/pedido');
+// pedido routes
+router.route('/pedidos')
+    .get(pedido.index)
+    .post(pedido.new);
+router.route('/pedido/:pedido_id')
+    .get(pedido.view)
+    .put(pedido.update)
+    .delete(pedido.delete);
+    
 
 // Export API routes
 module.exports = router;
