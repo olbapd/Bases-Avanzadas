@@ -1,6 +1,6 @@
 Tipocliente = require('../models/tipoCliente');
 
-exports.getAllTipos = function (req, res) {
+exports.index = function (req, res) {
     Tipocliente.get(function (err, tipoCliente) {
         if (err) {
             res.json({

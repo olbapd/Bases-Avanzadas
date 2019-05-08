@@ -92,6 +92,15 @@ router.route('/tema/:tema_id')
     .get(tema.view)
     .delete(tema.delete);
 
+// Import tipocliente controller
+var tipocliente = require('./controllers/tipocliente');
+// tipocliente routes
+router.route('/tiposcliente')
+    .get(tipocliente.index)
+    //.post(tipocliente.new); //falta
+router.route('/tipocliente/:tipocliente_id')
+    .get(tipocliente.view)
+    //.delete(tipocliente.delete);
 
 // Export API routes
 module.exports = router;
