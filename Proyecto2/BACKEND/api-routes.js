@@ -31,6 +31,18 @@ router.route('/libreria/:libreria_id')
     .put(libreria.update)
     .delete(libreria.delete);
 
+
+// Import libro controller
+var libro = require('./controllers/libro');
+// libro routes
+router.route('/libros')
+    .get(libro.index)
+    .post(libro.new);
+router.route('/libro/:libro_id')
+    .get(libro.view)
+    .put(libro.update)
+    .delete(libro.delete);
+
 // Import Pais controller
 var pais = require('./controllers/pais');
 // Pais routes
