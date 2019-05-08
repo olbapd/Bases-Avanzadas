@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 // Connect to Mongoose and set connection variable
-const uri = 'mongodb+srv://adminUser_bda:adminUserbda01@bases-avanzadas-proyecto2-lmauc.mongodb.net/';
+const uri = 'mongodb+srv://admin:vt6xAFToIofyxyCS@cluster0-uhlxe.mongodb.net/';
 mongoose.connect(uri,{dbName: 'Proyecto2',useNewUrlParser: true});//ANTES DE CONECTAR RECORDAR AGREGAR IP A IPWHITELIST EN ATLAS
 mongoose.set('useCreateIndex', true);
 var db = mongoose.connection;
@@ -31,7 +31,7 @@ db.once('open', function() {
   // we're connected!
 });
 // Setup server port
-var port = process.env.PORT || 3001;
+var port = process.env.PORT || 3000;
 // Send message for default URL
 app.get('/', (req, res) => res.send('Welcome to MongoDB micro-Service'));
 // Use Api routes in the App
