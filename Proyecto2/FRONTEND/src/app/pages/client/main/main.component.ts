@@ -11,7 +11,8 @@ import Swal from 'sweetalert2';
 export class MainComponent {
   
   clients:any;
-  constructor(private clientServices:ClientService) {
+  constructor(private clientServices:ClientService, 
+    private router: Router) {
     this.clients=[
       {
         idCard: "ABCDEF",
@@ -28,10 +29,12 @@ export class MainComponent {
     ]
   }
 
-  editClient(code){
-
+  editClient(user){
+    console.log(user);
+    localStorage.setItem("Client",JSON.stringify(user));
+    this.router.navigate(['/pages/client/edit']);
   }
-  deleteClient(code){
+  deleteClient(user){
     Swal({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
