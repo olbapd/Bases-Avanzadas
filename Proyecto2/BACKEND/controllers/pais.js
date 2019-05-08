@@ -19,11 +19,11 @@ exports.index = function (req, res) {
 
 // Handle create libro actions
 exports.new = function (req, res) {
-    var pais = new Libro();
+    var pais = new Pais();
     pais.nombre= req.body.nombre;
 
     // save the libro and check for errors
-    libro.save(function (err) {
+    pais.save(function (err) {
         if (err) {
             res.json({
                 status: "error",

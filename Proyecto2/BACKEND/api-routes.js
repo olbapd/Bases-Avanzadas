@@ -9,6 +9,12 @@ router.get('/', function (req, res) {
     });
 });
 
+// Import Pais controller
+var pais = require('./controllers/pais');
+// Pais routes
+router.route('/pais')
+    .get(pais.index)
+    .post(pais.new);
 
 
 
