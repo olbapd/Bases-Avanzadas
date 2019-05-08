@@ -29,10 +29,12 @@ export class MainComponent {
     ]
   }
 
-  editBook(code){
-
+  editBook(issn){
+    console.log(issn);
+    localStorage.setItem("Book",JSON.stringify(issn));
+    this.router.navigate(['/pages/book/edit']);
   }
-  deleteBook(code){
+  deleteBook(issn){
     Swal({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
