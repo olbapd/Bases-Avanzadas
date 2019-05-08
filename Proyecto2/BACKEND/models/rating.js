@@ -1,10 +1,13 @@
 var mongoose = require('mongoose');
 // Setup schema
 var ratingSchema = mongoose.Schema({
-    nombre: {
+    puntuacion: {
         type: String,
-        required: true,
-        unique: true
+        required: true
+    },
+    comentario: {
+        type: String,
+        required: true
     }
 });
 // Export Rating model
