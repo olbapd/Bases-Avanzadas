@@ -18,7 +18,6 @@ exports.getlibroXtema = function (req, res) {
     });
 };
 
-
 // Handle view libro info by Nombre
 exports.getlibroXnombre = function (req, res) {
     Libro.find({ 'nombre': req.params.nombre }, function (err, libros) {
@@ -35,7 +34,6 @@ exports.getlibroXnombre = function (req, res) {
         });
     });
 };
-
 
 // Handle view libro info by Libreria
 exports.getlibroXlibreria = function (req, res) {
@@ -54,29 +52,9 @@ exports.getlibroXlibreria = function (req, res) {
     });
 };
 
-
 //Cantidad de libros pedidos by tema 
-
 //$proyect -> elimina el dato _id y deja solo total, 0 quite, 1 deje. el simbolo $ antes de suma es para indicar que es un operando 
 //aggregate -> para hacer operaciones comlejas con columnas, group para hacer suma, para divisiones y multi van dentro de proyect, dentro de group no funcionan
-exports.getCantLibroXTema = function (req, res) {
-    Libro.find({ 'tema': req.params.tema }).countDocuments(function (err, cuenta) {
-        Libro.aggregate([{ $match: { 'tema': req.params.tema } }, { $group: { _id: null, 'suma': { $sum: '1' } } }], function (err, result) {
-            if (err) {
-                res.json({
-                    status: "error",
-                    message: err,
-                });
-                return
-            }
-            res.json({
-                status: "success",
-                data: result
-            });
-        });
-    });
-}
-
 
 exports.getCantLibroXTema = function (req, res) {
     Libro.find({ 'tema': req.params.tema }).countDocuments(function (err, cuenta) {
@@ -94,8 +72,7 @@ exports.getCantLibroXTema = function (req, res) {
     });
 }
 
-
-exports.getCantLibroXTema = function (req, res) {
+exports.getPromLibroPedidoXTema = function (req, res) {
     Libro.find({ 'tema': req.params.tema }).countDocuments(function (err, cuenta) {
         Libro.aggregate([{ $match: { 'tema': req.params.tema } }, { $group: { _id: null, 'suma': { $avg: 'cuenta' } } }], function (err, result) {
             if (err) {
@@ -112,7 +89,6 @@ exports.getCantLibroXTema = function (req, res) {
         });
     });
 }
-
 
 // Hay que hacer el sort respecto a cantidad, que no tenemos
 exports.getTopLibrosVendidos = function (req, res) {
