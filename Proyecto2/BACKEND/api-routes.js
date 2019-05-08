@@ -59,7 +59,17 @@ router.route('/pedido/:pedido_id')
     .get(pedido.view)
     .put(pedido.update)
     .delete(pedido.delete);
-    
+
+// Import promocion controller
+var promocion = require('./controllers/promocion');
+// promocion routes
+router.route('/promociones')
+    .get(promocion.index)
+    .post(promocion.new);
+router.route('/promocion/:promocion_id')
+    .get(promocion.view)
+    .put(promocion.update)
+    .delete(promocion.delete);
 
 // Export API routes
 module.exports = router;

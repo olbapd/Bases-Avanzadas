@@ -29,7 +29,7 @@ exports.new = function (req, res) {
 
 // Handle update vehiculo info
 exports.update = function (req, res) {
-    Promocion.findById(req.params._id, function (err, promociones) {
+    Promocion.findById(req.params.promocion_id, function (err, promociones) {
         if (err) {
             res.json({
                 status: "error",
@@ -62,7 +62,7 @@ exports.update = function (req, res) {
 };
 
 // Handle update vehiculo info
-exports.getAllpromociones = function (req, res) {
+exports.index = function (req, res) {
     Promocion.get(function (err, promociones) {
         if (err) {
             res.json({
@@ -98,7 +98,7 @@ exports.view = function (req, res) {
 
 exports.delete = function (req, res) {
     Promocion.deleteOne({
-        _id: req.params._id
+        _id: req.params.promocion_id
     }, function (err, promociones) {
         if (err) {
             res.json({
