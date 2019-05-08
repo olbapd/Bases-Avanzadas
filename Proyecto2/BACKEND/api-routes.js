@@ -76,11 +76,11 @@ var rating = require('./controllers/rating');
 // rating routes
 router.route('/ratings')
     .get(rating.index)
-    //.post(rating.new); falta
+    .post(rating.new);
 router.route('/rating/:rating_id')
     .get(rating.view)
-    //.put(rating.update)
-    //.delete(rating.delete);
+    .put(rating.update)
+    .delete(rating.delete);
 
 // Import tema controller
 var tema = require('./controllers/tema');
@@ -97,10 +97,10 @@ var tipocliente = require('./controllers/tipocliente');
 // tipocliente routes
 router.route('/tiposcliente')
     .get(tipocliente.index)
-    //.post(tipocliente.new); //falta
+    .post(tipocliente.new);
 router.route('/tipocliente/:tipocliente_id')
     .get(tipocliente.view)
-    //.delete(tipocliente.delete);
+    .delete(tipocliente.delete);
 
 // Export API routes
 module.exports = router;
