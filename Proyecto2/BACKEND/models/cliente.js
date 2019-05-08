@@ -41,9 +41,10 @@ var clienteSchema = mongoose.Schema({
         type: Array[string],
         required: false
     },
-    tipoCliente: {
+    usuario: {
         type: String,
         required: true,
+        unique: true
     },
     contrasena: {
         type: String,
