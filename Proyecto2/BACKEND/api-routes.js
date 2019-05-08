@@ -71,5 +71,16 @@ router.route('/promocion/:promocion_id')
     .put(promocion.update)
     .delete(promocion.delete);
 
+// Import rating controller
+var rating = require('./controllers/rating');
+// rating routes
+router.route('/ratings')
+    .get(rating.index)
+    //.post(rating.new); falta
+router.route('/rating/:rating_id')
+    .get(rating.view)
+    //.put(rating.update)
+    //.delete(rating.delete);
+
 // Export API routes
 module.exports = router;
