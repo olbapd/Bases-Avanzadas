@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 var paisSchema = mongoose.Schema({
     nombre: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     }
 });
 // Export Pais model

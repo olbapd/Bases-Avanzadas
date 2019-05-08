@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 var libreriaSchema = mongoose.Schema({
     nombre: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     pais: {
         type: Number,
@@ -15,7 +16,8 @@ var libreriaSchema = mongoose.Schema({
     },
     telefono:{
         type: Number,
-        required: true
+        required: true,
+        unique: true
     },
     horario:{
         type: String,
