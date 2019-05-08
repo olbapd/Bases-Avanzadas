@@ -14,6 +14,7 @@ export class EditComponent {
   validTextType: boolean = false;
   validNumberType: boolean = false;
   idCard="asdfasd";
+  user = "Juan"
 
   constructor(private formBuilder: FormBuilder) {
     this.type = this.formBuilder.group({
@@ -28,6 +29,7 @@ export class EditComponent {
       pass: [null, Validators.required],
 
       });
+    this.user= JSON.parse(localStorage.getItem('Client'));
   }
   validateAllFormFields(formGroup: FormGroup) {
       Object.keys(formGroup.controls).forEach(field => {
