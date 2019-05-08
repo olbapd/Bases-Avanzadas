@@ -82,5 +82,16 @@ router.route('/rating/:rating_id')
     //.put(rating.update)
     //.delete(rating.delete);
 
+// Import tema controller
+var tema = require('./controllers/tema');
+// tema routes
+router.route('/temas')
+    .get(tema.index)
+    .post(tema.new);
+router.route('/tema/:tema_id')
+    .get(tema.view)
+    .delete(tema.delete);
+
+
 // Export API routes
 module.exports = router;

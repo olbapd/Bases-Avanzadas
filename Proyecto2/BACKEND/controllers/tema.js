@@ -1,6 +1,6 @@
 Tema = require('../models/tema');
 
-exports.getAllTemas = function (req, res) {
+exports.index = function (req, res) {
     Tema.get(function (err, temas) {
         if (err) {
             res.json({
@@ -37,8 +37,8 @@ exports.view = function (req, res) {
 
 // Handle create marcas actions
 exports.new = function (req, res) {
-    var nombre = new Tema();
-    nombre.nombre = req.body.nombre;
+    var tema = new Tema();
+    tema.nombre = req.body.nombre;
     // save the contact and check for errors
     tema.save(function (err) {
         if (err) {
