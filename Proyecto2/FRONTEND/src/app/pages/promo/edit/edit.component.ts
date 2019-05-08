@@ -25,6 +25,7 @@ export class EditComponent {
       end: [null, Validators.required],
       
       });
+    this.code= JSON.parse(localStorage.getItem('Promo'))
   }
   validateAllFormFields(formGroup: FormGroup) {
       Object.keys(formGroup.controls).forEach(field => {
