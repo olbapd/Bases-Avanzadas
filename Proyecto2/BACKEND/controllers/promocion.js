@@ -61,7 +61,7 @@ exports.update = function (req, res) {
     });
 };
 
-// Handle update vehiculo info
+// Handle update promocion info
 exports.index = function (req, res) {
     Promocion.get(function (err, promociones) {
         if (err) {
