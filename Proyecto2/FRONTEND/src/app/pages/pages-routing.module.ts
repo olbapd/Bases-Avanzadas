@@ -7,12 +7,16 @@ import { OrderComponent } from './order/order.component';
 import { BookComponent } from './book/book.component';
 import { PromoComponent } from './promo/promo.component';
 import { ClientComponent } from './client/client.component';
+import { ReportComponent } from './report/report.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
   {
+    path: 'report',
+    loadChildren: './report/report.module#ReportModule',
+  },{
     path: 'client',
     loadChildren: './client/client.module#ClientModule',
   },{
@@ -32,11 +36,11 @@ const routes: Routes = [{
     loadChildren: '../auth/auth.module#AuthModule',
   }, {
     path: '',
-    redirectTo: 'admin',
+    redirectTo: 'report',
     pathMatch: 'full',
   }, {
     path: '**',
-    redirectTo: 'admin',
+    redirectTo: 'report',
     pathMatch: 'full',
   }],
 }];
