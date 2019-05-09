@@ -11,7 +11,8 @@ import Swal from 'sweetalert2';
 export class MainComponent {
   
   promos:any;
-  constructor(private promoServices:PromoService) {
+  constructor(private promoServices:PromoService, 
+    private router: Router) {
     this.promos=[
       {
         code: "ABCDEF",
@@ -27,7 +28,9 @@ export class MainComponent {
   }
 
   editPromo(code){
-
+    console.log(code);
+    localStorage.setItem("Promo",JSON.stringify(code));
+    this.router.navigate(['/pages/promo/edit']);  
   }
   deletePromo(code){
     Swal({

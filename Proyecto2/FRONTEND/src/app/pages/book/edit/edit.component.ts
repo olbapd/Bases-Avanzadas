@@ -25,6 +25,7 @@ export class EditComponent {
       amount: [null, Validators.required],
 
       });
+    this.issn= JSON.parse(localStorage.getItem('Book'));
   }
   validateAllFormFields(formGroup: FormGroup) {
       Object.keys(formGroup.controls).forEach(field => {

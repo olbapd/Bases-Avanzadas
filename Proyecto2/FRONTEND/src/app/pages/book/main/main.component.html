@@ -14,12 +14,12 @@
         <p class="card-text" ><strong>Precio: </strong> {{book.price}}</p>
         <div class="row">
         	<div class="col">
-        		<button (click)="editBook(book.Code)" class="btn btn-primary">
+        		<button (click)="editBook(book.issn)" class="btn btn-primary">
         			<i class="fas fa-edit"></i> Modificar
         		</button>		
         	</div>
         	<div class="col">
-        		<button (click)="deleteBook(book.Code)" class="btn btn-primary">
+        		<button (click)="deleteBook(book.issn)" class="btn btn-primary">
         			<i class="fas fa-trash"></i> Borrar
         		</button>		
         	</div>
