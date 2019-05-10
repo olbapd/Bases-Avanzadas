@@ -17,14 +17,19 @@ export class EditComponent {
 
   constructor(private formBuilder: FormBuilder) {
     this.type = this.formBuilder.group({
-      code: [null, Validators.required],
       name: [null, Validators.required],
       country: [null, Validators.required],
       phone: [null, Validators.required],
       address: [null, Validators.required],
       openHours: [null, Validators.required],
     });
-    this.code= JSON.parse(localStorage.getItem('Store'));
+    let temp = JSON.parse(localStorage.getItem('Store'));
+    this.type.value.name = temp.name;
+    this.type.value.country = temp.country;
+    this.type.value.phone = temp.phone;
+    this.type.value.address = temp.address;
+    this.type.value.openHours = temp.openHours;
+
   }
   validateAllFormFields(formGroup: FormGroup) {
       Object.keys(formGroup.controls).forEach(field => {
