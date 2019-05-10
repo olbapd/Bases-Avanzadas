@@ -12,7 +12,15 @@ export class AuthService {
 	headers : {headers : HttpHeaders}
 	
 	constructor(private http : HttpClient, private router : Router) {}
-
+	
+	public Testlogin(email, password){
+		let body = {
+			Email:email,
+			Password: password
+		}
+		return true;
+	    
+	}
 	public login(email, password) : Observable<any[]>{
 		let body = {
 			Email:email,

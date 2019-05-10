@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-
+import { CommonModule } from '@angular/common';  
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { MaterialModule } from '../app.module';
@@ -11,7 +11,8 @@ const PAGES_COMPONENTS = [
 @NgModule({
   imports: [
     PagesRoutingModule,
-    MaterialModule
+    MaterialModule,
+    CommonModule
   ],
   declarations: [
     ...PAGES_COMPONENTS

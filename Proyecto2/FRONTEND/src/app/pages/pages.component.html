@@ -6,26 +6,36 @@
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/pages/admin/main']"><i class="fas fa-store-alt"></i> Libraries</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/pages/book/main']"><i class="fas fa-book"></i> Books</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/pages/promo/main']"><i class="fas fa-tags"></i> Promotions</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/pages/order/main']"><i class="fas fa-file-invoice"></i> Orders</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/pages/report/admin']"><i class="fas fa-chart-bar"></i> Reports</a>s
-      </li>
-      <li class="nav-item"  (click)="logout()" routerLinkActive="active">
-      	<a class="nav-link" [routerLink]="['/auth/login']">
-          <i class="fas fa-sign-out-alt"></i> Logout
-        </a>
-      </li>
+      
+        <li  *ngIf="showAdmin" class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/pages/admin/main']"><i class="fas fa-store-alt"></i> Bookstores</a>
+        </li>
+      
+        <li  *ngIf="showBook" class="nav-item">
+          <a class="nav-link" [routerLink]="['/pages/book/main']"><i class="fas fa-book"></i> Books</a>
+        </li>
+      
+        <li  *ngIf="showPromo" class="nav-item">
+          <a class="nav-link" [routerLink]="['/pages/promo/main']"><i class="fas fa-tags"></i> Promotions</a>
+        </li>
+      
+        <li  *ngIf="showOrder" class="nav-item">
+          <a class="nav-link" [routerLink]="['/pages/order/main']"><i class="fas fa-file-invoice"></i> Orders</a>
+        </li>
+      
+        <li  *ngIf="showReport" class="nav-item" >
+          <a class="nav-link" [routerLink]="['/pages/report/admin']" ><i class="fas fa-chart-bar"></i> Reports</a>
+        </li>
+      
+        <li  *ngIf="showClient" class="nav-item" >
+          <a class="nav-link" [routerLink]="['/pages/client/admin']" ><i class="fas fa-users"></i>Clients</a>
+        </li>
+      
+        <li  *ngIf="showAuth" class="nav-item" (click)="logout()" routerLinkActive="active">
+        	<a  class="nav-link" [routerLink]="['/auth/login']">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
+        </li>
     </ul>
   </div>
 </nav>

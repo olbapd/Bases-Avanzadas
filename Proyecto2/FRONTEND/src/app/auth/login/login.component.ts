@@ -30,10 +30,30 @@ export class LoginComponent implements OnInit {
   login(){
     let email = this.loginForm.value.email;
     let password = this.loginForm.value.password;
-    this.authService.login(email,password)
+    /*this.authService.login(email,password)
       .subscribe((result)=>{
         console.log(result);
-      }); 
+      }); */
+    this.authService.Testlogin(email,password);
+    let userType=1;
+    let user= {
+      email:email,
+      userType: userType
+    }
+    
+    localStorage.setItem('user',JSON.stringify(user));
+    if(userType==1){
+      this.router.navigate(['/pages/admin/main']);  
+    }
+    else if(userType==2){
+      this.router.navigate(['/pages/book/main']);  
+    }
+    else if(userType==3){
+      this.router.navigate(['/pages/order/agregar']);  
+    }
+    else if(userType==4){
+      this.router.navigate(['/pages/book/main']);  
+    }
   }
 }
 
