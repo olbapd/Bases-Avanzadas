@@ -12,22 +12,51 @@ export class MainComponent {
   libraries:any;
   constructor(private adminServices:AdminService,
               private router: Router) {
-    this.libraries=[
+    this.libraries=[];
+    /*this.libraries=this.adminServices.getLibraries()
+      .subscribe((result)=>{
+        if(result.status){
+          for (var i = 0; i < result.data.length; ++i) {
+            let temp =
+            {
+              code: result.data[i]._id,
+              name: result.data[i].nombre,
+              country : result.data[i].pais,
+              location: result.data[i].ubicacion,
+              number: result.data[i].telefono,
+              schedule: result.data[i].horario,
+              photo: result.data[i].foto
+            }
+            this.libraries.push(temp);
+          }
+        }
+      })*/
+    let librerias= this.adminServices.testGetLibraries();
+    console.log(librerias);
+    for (let i = 0; i < librerias.length; ++i) {
+      let temp =
       {
-        code: "ABCDEF",
-        name: "Pancho Library",
-        country : "Costa Rica",
-        location: "Cartago",
-        number: 3331324354,
-        schedule: "L-V",
-        photo: '../../../../assets/bookstore.png'
+        code: librerias[i]._id,
+        name: librerias[i].nombre,
+        country : librerias[i].pais,
+        location: librerias[i].ubicacion,
+        number: librerias[i].telefono,
+        schedule: librerias[i].horario,
+        photo: librerias[i].foto
       }
-    ]
+      this.libraries.push(temp);
+    }
   }
 
   editLibrary(code){
     console.log(code);
-    localStorage.setItem("Store",JSON.stringify(code));
+    let store={};
+    for (let i = 0; i <this.libraries.length; ++i) {
+      if(this.libraries[i].code==code){
+        store=this.libraries[i];
+      }
+    }
+    localStorage.setItem("Store",JSON.stringify(store));
     this.router.navigate(['/pages/admin/edit']);
   }
   deleteLibrary(code){
