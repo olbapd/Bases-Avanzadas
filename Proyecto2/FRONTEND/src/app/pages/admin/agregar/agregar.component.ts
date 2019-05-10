@@ -77,5 +77,14 @@ export class AgregarComponent {
     console.log(this.type.value.phone);
     console.log(this.type.value.address);
     console.log(this.type.value.openHours);
+    
+    let body={
+        codigo: this.type.value.code,
+        nombre: this.type.value.name,
+        pais: this.country,
+        ubicacion: this.type.value.address,
+        telefono: this.type.value.phone,
+        horario: this.type.value.openHours      
+    }
   }
 }
