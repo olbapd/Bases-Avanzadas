@@ -76,8 +76,8 @@ export class EditComponent {
   upBook(){
     console.log(this.type.value.category);
     console.log(this.type.value.name);
-    console.log(this.type.value.description);
     console.log(this.type.value.price);
+    console.log(this.type.value.description);
     console.log(this.type.value.amount);
   }
 }
