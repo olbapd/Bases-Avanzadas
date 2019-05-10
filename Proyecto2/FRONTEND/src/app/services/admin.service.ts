@@ -9,6 +9,7 @@ import { Urls } from '../config/constants';
 export class AdminService {
 	
 	headers : {headers : HttpHeaders}
+	urlibrary= 'librerias';
 
 	libraries=[
       {
@@ -35,5 +36,15 @@ export class AdminService {
 	}
 	public testGetLibraries() {
 		return this.libraries;
+	}
+
+	public addLibrary(library): Observable<any>{
+		const url = Urls.baseUrl +this.urlibrary;
+		return this.http.post<any>(url,library, this.headers);
+	}
+
+	public editLibrary(library):Observable<any>{
+		const url = Urls.baseUrl+this.urlibrary;
+		return this.http.put<any>(url,library,this.headers);
 	}
 }

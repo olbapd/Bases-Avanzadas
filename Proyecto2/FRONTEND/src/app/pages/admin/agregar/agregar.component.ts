@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { FormBuilder, AbstractControl,Validators, FormGroup } from '@angular/forms';
+import { AdminService } from '../../../services/admin.service';
 
 @Component({
   selector: 'agregar',
@@ -16,7 +17,8 @@ export class AgregarComponent {
   countries:any;
   country:any;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private adminService: AdminService) {
     this.type = this.formBuilder.group({
       code: [null, Validators.required],
       name: [null, Validators.required],
@@ -86,5 +88,10 @@ export class AgregarComponent {
         telefono: this.type.value.phone,
         horario: this.type.value.openHours      
     }
+    /*this.adminService.addLibrary(body)
+      .subscribe( (result)=>{
+         console.log(result.status);
+      });*/
+      console.log(body);
   }
 }
