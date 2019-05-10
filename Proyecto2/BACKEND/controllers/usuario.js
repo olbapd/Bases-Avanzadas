@@ -1,8 +1,8 @@
 // Import Modelo model
-Cliente = require('../models/cliente');
+Usuario = require('../models/usuario');
 // Handle index actions
 exports.index = function (req, res) {
-    Cliente.get(function (err, clientes) {
+    Usuario.get(function (err, usuarios) {
         if (err) {
             res.json({
                 status: "error",
@@ -12,29 +12,29 @@ exports.index = function (req, res) {
         }
         res.json({
             status: "success",
-            data: clientes
+            data: usuarios
         });
     });
 };
 
 // Handle create marcas actions
 exports.new = function (req, res) {
-    var cliente = new Cliente();
-    cliente._id = req.body.cedula;
-    cliente.nombre = req.body.nombre;
-    cliente.apellido1 = req.body.apellido1;
-    cliente.apellido2 = req.body.apellido2;
-    cliente.fechaNacimiento = req.body.fechaNacimiento;
-    cliente.tipoCliente = req.body.tipoCliente;
-    cliente.lugar = req.body.lugar;
-    cliente.correo = req.body.correo;
-    cliente.telPrincipal = req.body.telPrincipal;
-    cliente.telSecundario = req.body.telSecundario;
-    cliente.usuario = req.body.usuario;
-    cliente.contrasena = req.body.contrasena;
+    var usuario = new Usuario();
+    usuario._id = req.body.cedula;
+    usuario.nombre = req.body.nombre;
+    usuario.apellido1 = req.body.apellido1;
+    usuario.apellido2 = req.body.apellido2;
+    usuario.fechaNacimiento = req.body.fechaNacimiento;
+    usuario.tipoUsuario = req.body.tipoUsuario;
+    usuario.lugar = req.body.lugar;
+    usuario.correo = req.body.correo;
+    usuario.telPrincipal = req.body.telPrincipal;
+    usuario.telSecundario = req.body.telSecundario;
+    usuario.usuario = req.body.usuario;
+    usuario.contrasena = req.body.contrasena;
 
     // save the contact and check for errors
-    cliente.save(function (err) {
+    usuario.save(function (err) {
         if (err) {
             res.json({
                 status: "error",
@@ -49,7 +49,7 @@ exports.new = function (req, res) {
 };
 // Handle view vehicule info by id
 exports.view = function (req, res) {
-        Cliente.find({ '_id': req.params.cliente_id }, function (err, cliente) {
+        Usuario.find({ '_id': req.params.cliente_id }, function (err, usuario) {
 
             if (err) {
                 res.json({
@@ -60,14 +60,14 @@ exports.view = function (req, res) {
             }
             res.json({
                 status: "success",
-                data: cliente
+                data: usuario
             });
         });
 };
 
 // Handle update cliente info
 exports.update = function (req, res) {
-    Cliente.findById(req.params.cliente_id, function (err, cliente) {
+    Usuario.findById(req.params.usuario_id, function (err, usuario) {
         if (err) {
             res.json({
                 status: "error",
@@ -75,13 +75,13 @@ exports.update = function (req, res) {
             });
             return
         }
-        cliente.lugar = req.body.lugar;
-        cliente.correo = req.body.correo;
-        cliente.contrasena = req.body.contrasena;
-        cliente.telPrincipal = req.body.telPrincipal;
-        cliente.telSecundario = req.body.telSecundario;
+        usuario.lugar = req.body.lugar;
+        usuario.correo = req.body.correo;
+        usuario.contrasena = req.body.contrasena;
+        usuario.telPrincipal = req.body.telPrincipal;
+        usuario.telSecundario = req.body.telSecundario;
         // save the model and check for errors
-        cliente.save(function (err) {
+        usuario.save(function (err) {
             if (err) {
                 res.json({
                     status: "error",
@@ -95,11 +95,11 @@ exports.update = function (req, res) {
         });
     });
 };
-// Handle delete cliente
+// Handle delete usuario
 exports.delete = function (req, res) {
-    Cliente.deleteOne({
-        _id: req.params.cliente_id
-    }, function (err, cliente) {
+    Usuario.deleteOne({
+        _id: req.params.usuario_id
+    }, function (err, usuario) {
         if (err) {
             res.json({
                 status: "error",

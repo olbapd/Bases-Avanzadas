@@ -1,12 +1,13 @@
-Tipocliente = require('../models/tipoCliente');
+TipoUsuario = require('../models/tipoUsuario');
 
 
 exports.new = function (req, res) {
-    var tipocliente = new Tipocliente();
-    tipocliente.nombre = req.body.nombre;
+    var tipousuario = new TipoUsuario();
+    tipousuario._id = req.body.id;
+    tipousuario.nombre = req.body.nombre;
 
     // save the contact and check for errors
-    tipocliente.save(function (err) {
+    tipousuario.save(function (err) {
         if (err) {
             res.json({
                 status: "error",
@@ -16,7 +17,7 @@ exports.new = function (req, res) {
         }
         res.json({
             status: "success",
-            data: tipocliente
+            data: tipousuario
         });
     });
 };

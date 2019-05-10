@@ -18,11 +18,11 @@ var promocionSchema = mongoose.Schema({
         required: true
     },
     porcenDescuento: {
-        type: int,
+        type: Number,
         required: true
     },
     libreria: {
-        type: string,
+        type: String,
         required: true
     },
 });

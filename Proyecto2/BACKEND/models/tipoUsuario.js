@@ -1,14 +1,15 @@
 var mongoose = require('mongoose');
 // Setup schema
-var tipoclienteSchema = mongoose.Schema({
+var tipousuarioSchema = mongoose.Schema({
+    _id:Number,
     nombre: {
         type: String,
         required: true,
         unique:true
     }
-});
+},{ _id: false });
 // Export Estilo model
-var Tipocliente = module.exports = mongoose.model('Tipocliente', tipoclienteSchema);
+var TipoUsuario = module.exports = mongoose.model('TipoUsuario', tipousuarioSchema);
 module.exports.get = function (callback, limit) {
-    Tipocliente.find(callback).limit(limit);
+    TipoUsuario.find(callback).limit(limit);
 }

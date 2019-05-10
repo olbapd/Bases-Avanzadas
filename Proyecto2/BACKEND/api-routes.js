@@ -10,15 +10,15 @@ router.get('/', function (req, res) {
 });
 
 // Import cliente controller
-var cliente = require('./controllers/cliente');
-// cliente routes
-router.route('/clientes')
-    .get(cliente.index)
-    .post(cliente.new);
-router.route('/cliente/:cliente_id')
-    .get(cliente.view)
-    .put(cliente.update)
-    .delete(cliente.delete);
+var usuario = require('./controllers/usuario');
+// usuario routes
+router.route('/usuarios')
+    .get(usuario.index)
+    .post(usuario.new);
+router.route('/usuario/:usuario_id')
+    .get(usuario.view)
+    .put(usuario.update)
+    .delete(usuario.delete);
 
 // Import libreria controller
 var libreria = require('./controllers/libreria');
@@ -93,14 +93,18 @@ router.route('/tema/:tema_id')
     .delete(tema.delete);
 
 // Import tipocliente controller
-var tipocliente = require('./controllers/tipocliente');
+var tipocliente = require('./controllers/tipoUsuario');
 // tipocliente routes
-router.route('/tiposcliente')
+router.route('/tiposUsuario')
     .get(tipocliente.index)
     .post(tipocliente.new);
-router.route('/tipocliente/:tipocliente_id')
+router.route('/tipoUsuario/:tipoUsuario_id')
     .get(tipocliente.view)
     .delete(tipocliente.delete);
-
+// Import auth controller
+var auth = require('./controllers/auth');
+//aut route
+router.route('/login')
+    .post(auth.view);
 // Export API routes
 module.exports = router;

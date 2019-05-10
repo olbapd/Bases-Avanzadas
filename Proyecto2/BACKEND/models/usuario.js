@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 // Setup schema
-var clienteSchema = mongoose.Schema({
+var usuarioSchema = mongoose.Schema({
     _id: Number,
     nombre: {
         type: String,
@@ -19,7 +19,7 @@ var clienteSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    tipoCliente: {
+    tipoUsuario: {
         type: String,
         required: true
     },
@@ -38,7 +38,7 @@ var clienteSchema = mongoose.Schema({
         unique: true
     },
     telSecundario: {
-        type: Array[string],
+        type:[String],
         required: false
     },
     usuario: {
@@ -55,7 +55,7 @@ var clienteSchema = mongoose.Schema({
 
 }, { _id: false });
 // Export Estado model
-var Cliente = module.exports = mongoose.model('Cliente', clienteSchema);
+var Usuario = module.exports = mongoose.model('Usuario', usuarioSchema);
 module.exports.get = function (callback, limit) {
-    Cliente.find(callback).limit(limit);
+    Usuario.find(callback).limit(limit);
 }

@@ -7,7 +7,7 @@ var pedidoSchema = mongoose.Schema({
         unique:true
     },
     libros: {
-        type: Array[String],
+        type: [String],
         required: true
     },
     fechaPedido: {
