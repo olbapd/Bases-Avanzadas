@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { ReportRoutingModule, routedComponents } from './report-routing.module';
 import { ReportService } from '../../services/report.service';
@@ -16,7 +17,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ReactiveFormsModule,
     ReportRoutingModule,
     MaterialModule,
-    NgxChartsModule
+    NgxChartsModule,
+    Ng2SmartTableModule
   ],
   declarations: [
     ...routedComponents

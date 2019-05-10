@@ -1,11 +1,72 @@
+<div class="card">
+	<div class="card-body">
+		<h5 class="card-title"> Reporte 1</h5>
+		<ngx-charts-bar-vertical
+      [scheme]="colorScheme"
+      [results]="results1"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel">
+    </ngx-charts-bar-vertical>
+	</div>	
+</div>
+
 <div class="row">
 	<div class="col-lg-6">
 		<div class="card">
 			<div class="card-body">
-				<h5 class="card-title"> Reporte 1</h5>
+				<h5 class="card-title">Reporte2</h5>
+	    		<ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+	    		</ng2-smart-table>
+	  		</div>
+		</div>
+	</div>
+	<div class="col-lg-6">
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title"> Reporte 3</h5>
 				<ngx-charts-bar-vertical
 		      [scheme]="colorScheme"
-		      [results]="results"
+		      [results]="results3"
+		      [xAxis]="showXAxis"
+		      [yAxis]="showYAxis"
+		      [legend]="showLegend"
+		      [xAxisLabel]="xAxisLabel"
+		      [yAxisLabel]="yAxisLabel">
+		    </ngx-charts-bar-vertical>
+			</div>
+					
+		</div>
+	</div>	
+</div>
+
+<div class="row">
+	<div class="col-lg-6">
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title"> Reporte 4b</h5>
+				<ngx-charts-bar-vertical
+		      [scheme]="colorScheme"
+		      [results]="results4b"
+		      [xAxis]="showXAxis"
+		      [yAxis]="showYAxis"
+		      [legend]="showLegend"
+		      [xAxisLabel]="xAxisLabel"
+		      [yAxisLabel]="yAxisLabel">
+		    </ngx-charts-bar-vertical>
+			</div>
+					
+		</div>
+	</div>
+	<div class="col-lg-6">
+		<div class="card">
+			<div class="card-body">
+				<h5 class="card-title"> Reporte 4b</h5>
+				<ngx-charts-bar-vertical
+		      [scheme]="colorScheme"
+		      [results]="results4b"
 		      [xAxis]="showXAxis"
 		      [yAxis]="showYAxis"
 		      [legend]="showLegend"
