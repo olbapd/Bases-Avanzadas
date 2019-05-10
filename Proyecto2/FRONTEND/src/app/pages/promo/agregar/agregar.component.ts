@@ -55,4 +55,15 @@ export class AgregarComponent {
       this.validNumberType = false;
     }
   }
+  addNewPromo(){
+    console.log(this.type.value.code);
+    console.log(this.type.value.name);
+    console.log(this.type.value.percent);
+    console.log(this.type.value.description);
+    console.log(this.type.value.begin);
+    console.log(this.type.value.end);
+
+  }
+
+
 }
