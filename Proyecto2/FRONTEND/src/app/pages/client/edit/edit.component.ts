@@ -60,4 +60,15 @@ export class EditComponent {
       this.validNumberType = false;
     }
   }
+
+  upInfo(){
+    console.log(this.type.value.name);
+    console.log(this.type.value.birthdate);
+    console.log(this.type.value.address);
+    console.log(this.type.value.phone);
+    console.log(this.type.value.email);
+    console.log(this.type.value.user);
+    console.log(this.type.value.pass);
+    
+  }
 }
