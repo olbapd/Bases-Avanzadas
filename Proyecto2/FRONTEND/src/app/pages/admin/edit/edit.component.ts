@@ -55,4 +55,14 @@ export class EditComponent {
       this.validNumberType = false;
     }
   }
+
+  upBookStore(){
+    console.log(this.type.value.name);
+    console.log(this.type.value.country);
+    console.log(this.type.value.phone);
+    console.log(this.type.value.address);
+    console.log(this.type.value.openHours);
+
+  }
+
 }
