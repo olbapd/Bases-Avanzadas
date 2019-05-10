@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { FormBuilder, AbstractControl,Validators, FormGroup } from '@angular/forms';
 import { LocalDataSource } from 'ng2-smart-table';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 
 @Component({
   selector: 'admin',
@@ -11,6 +12,10 @@ import { LocalDataSource } from 'ng2-smart-table';
 
 
 export class AdminComponent {
+  startDate :any;
+  endDate : any;
+
+
   results3 = [
     { name: 'Germany', value: 8940 },
     { name: 'USA', value: 5000 },
@@ -69,12 +74,40 @@ export class AdminComponent {
     },
   };
 
+  settingReport4 = {
+    actions: {
+      add: false,
+      edit:false,
+      delete:false
+    },
+    columns: {
+      order: {
+        title: 'Total Orders',
+        type: 'number',
+      },
+      client: {
+        title: 'Client',
+        type: 'string',
+      },
+      state: {
+        title: 'Order State',
+        type: 'string',
+      },
+      category: {
+        title: 'Category',
+        type: 'string',
+      }
+    },
+  };
+
   source: LocalDataSource = new LocalDataSource();
 
   constructor() {
     this.colorScheme={
       domain: ['#917aff','#ff5f87', '#33e092','#339fff', '#ffb333']
     };
+    this.startDate="";
+    this.endDate="";
   }
   
   onDeleteConfirm(event): void {
@@ -82,6 +115,20 @@ export class AdminComponent {
       event.confirm.resolve();
     } else {
       event.confirm.reject();
+    }
+  }
+
+  updateTable(type: number, event: MatDatepickerInputEvent<Date>){
+    if(type ==1){
+      this.startDate=event.value;
+    }
+    else if(type ==2){
+      this.endDate=event.value;
+    }
+
+    if(this.startDate!="" && this.endDate!=""){
+      console.log(this.startDate);
+      console.log(this.endDate);
     }
   }
 

@@ -40,7 +40,6 @@ export class PagesComponent {
 			this.showAdmin =false;
 			this.showReport=false;
 		}
-
 		console.log(type);
 	}
 
