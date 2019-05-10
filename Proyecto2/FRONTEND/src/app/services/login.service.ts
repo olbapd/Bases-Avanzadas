@@ -3,8 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Urls } from '../config/constants';
-
-
+import { LoginResponse } from '../models/login';
 
 @Injectable()
 export class AuthService {
@@ -21,14 +20,15 @@ export class AuthService {
 		return true;
 	    
 	}
-	public login(email, password) : Observable<any[]>{
+	public login(email, password) : Observable<LoginResponse>{
 		let body = {
-			Email:email,
-			Password: password
+			usuario:email,
+			contrasena: password
 		}
-	    const url = "http://localhost:3000/api/vehiculo/insert"
-	    return this.http.post<any[]>(url,body, this.headers);
+	    const url = Urls.baseUrl+ "login"
+	    return this.http.post<LoginResponse>(url,body, this.headers);
 	}
+
 	public register(body) : Observable<any[]>{
 	    const url = "http://localhost:3000/api/vehiculo/update"
 	    return this.http.post<any[]>(url,body, this.headers);

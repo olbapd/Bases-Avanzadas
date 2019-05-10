@@ -16,7 +16,7 @@ export class PagesComponent {
 	showAuth : any;
 	
 	constructor(private router: Router){
-		let type= JSON.parse( localStorage.getItem('user'));
+		let user= JSON.parse( localStorage.getItem('user'));
 		this.showAdmin =true;
 		this.showBook =true;
 		this.showPromo =true;
@@ -24,23 +24,23 @@ export class PagesComponent {
 		this.showReport =true;
 		this.showAuth =true;
 		this.showClient=true;
-		if( type.userType == 1){ //Gerente
+		if( user.tipoUsuario == 0){ //Gerente
 			this.showClient=false;
 			this.showOrder=false;
 		}
-		else if( type.userType == 2){ //Administrator
+		else if( user.tipoUsuario == 1){ //Administrator
 			this.showAdmin =false;
 			this.showOrder=false;
 		}
-		else if( type.userType == 3){ //Agent
+		else if( user.tipoUsuario == 2){ //Client
 			this.showAdmin =false;
 			this.showReport=false;
 		}
-		else if( type.userType == 4){ //Client
+		else if( user.tipoUsuario == 3){ //Agent
 			this.showAdmin =false;
 			this.showReport=false;
 		}
-		console.log(type);
+		console.log(user);
 	}
 
 	logout(){

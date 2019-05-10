@@ -3,7 +3,7 @@ import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { FormBuilder, AbstractControl,Validators, FormGroup } from '@angular/forms';
 import { LocalDataSource } from 'ng2-smart-table';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
-
+import { ReportService }  from '../../../services/report.service';
 @Component({
   selector: 'admin',
   styleUrls: ['./admin.component.scss'],
@@ -15,14 +15,6 @@ export class AdminComponent {
   startDate :any;
   endDate : any;
 
-
-  results3 = [
-    { name: 'Germany', value: 8940 },
-    { name: 'USA', value: 5000 },
-    { name: 'Greace', value: 7200 },
-    { name: 'Spain', value: 7200 },
-    { name: 'France', value: 7200 },
-  ];
   showLegend = true;
   colorScheme:any;
   showXAxis = true;
@@ -30,22 +22,12 @@ export class AdminComponent {
   xAxisLabel = 'Country';
   yAxisLabel = 'Population';
   
-  results1 = [
-    { name: 'Germany1', value: 8940 },
-    { name: 'USA1', value: 5000 },
-    { name: 'France1', value: 7200 },
-    { name: 'Germany2', value: 8940 },
-    { name: 'USA2', value: 5000 },
-    { name: 'France2', value: 7200 },
-    { name: 'Germany3', value: 8940 },
-    { name: 'USA3', value: 5000 },
-    { name: 'France3', value: 7200 },
-  ];
-  results4b = [
-    { name: 'Germany1', value: 8940 },
-    { name: 'USA1', value: 5000 },
-    { name: 'France1', value: 7200 }
-  ];
+  
+  
+  results1a :any;
+  results1b :any;
+  results3:any;
+  results4b :any;
 
   settings = {
     add: {
@@ -102,12 +84,18 @@ export class AdminComponent {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor() {
+  constructor(private reportService : ReportService) {
     this.colorScheme={
       domain: ['#917aff','#ff5f87', '#33e092','#339fff', '#ffb333']
     };
     this.startDate="";
     this.endDate="";
+
+    this.results1a= this.reportService.testGetCategories();
+    this.results1b= this.reportService.testGetCategories();
+    
+    this.results3 = this.reportService.testGetBooks();
+    this.results4b = this.reportService.testGetClients();
   }
   
   onDeleteConfirm(event): void {
