@@ -49,7 +49,7 @@ exports.new = function (req, res) {
 };
 // Handle view vehicule info by id
 exports.view = function (req, res) {
-        Usuario.find({ '_id': req.params.cliente_id }, function (err, usuario) {
+        Usuario.find({ '_id': req.params.usuario_id }, function (err, usuario) {
 
             if (err) {
                 res.json({

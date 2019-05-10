@@ -20,6 +20,7 @@ exports.index = function (req, res) {
 // Handle create libreria actions
 exports.new = function (req, res) {
     var libreria = new Libreria();
+    libreria._id = req.body.codigo;
     libreria.nombre = req.body.nombre;
     libreria.pais = req.body.pais;
     libreria.ubicacion = req.body.ubicacion;

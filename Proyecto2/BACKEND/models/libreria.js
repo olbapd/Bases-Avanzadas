@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 // Setup schema
 var libreriaSchema = mongoose.Schema({
+    _id:String,
     nombre: {
         type: String,
         required: true,
@@ -15,7 +16,7 @@ var libreriaSchema = mongoose.Schema({
         required: true
     },
     telefono:{
-        type: Number,
+        type: String,
         required: true,
         unique: true
     },
@@ -23,7 +24,7 @@ var libreriaSchema = mongoose.Schema({
         type: String,
         required: true
     }
-});
+},{ _id: false });
 // Export Libreria model
 var Libreria = module.exports = mongoose.model('Libreria', libreriaSchema);
 module.exports.get = function (callback, limit) {
