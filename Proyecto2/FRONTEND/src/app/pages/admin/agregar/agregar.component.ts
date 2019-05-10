@@ -13,7 +13,8 @@ export class AgregarComponent {
   type : FormGroup;
   validTextType: boolean = false;
   validNumberType: boolean = false;
-
+  countries:any;
+  country:any;
 
   constructor(private formBuilder: FormBuilder) {
     this.type = this.formBuilder.group({
@@ -24,7 +25,19 @@ export class AgregarComponent {
       address: [null, Validators.required],
       openHours: [null, Validators.required],
       
-      });
+    });
+    this.countries= [
+      {
+        Id:1,
+        Name:"USA"
+      },{
+        Id:2,
+        Name:"Spain"
+      },{
+        Id:3,
+        Name:"France"
+      }
+    ]
   }
   validateAllFormFields(formGroup: FormGroup) {
       Object.keys(formGroup.controls).forEach(field => {
@@ -40,6 +53,7 @@ export class AgregarComponent {
   isFieldValid(form: FormGroup, field: string) {
     return !form.get(field).valid && form.get(field).touched;
   }
+
   textValidationType(e){
     if (e) {
       this.validTextType = true;
@@ -54,5 +68,14 @@ export class AgregarComponent {
     }else{
       this.validNumberType = false;
     }
+  }
+  addBookStore(){
+    console.log(this.country);
+    console.log(this.type.value.code);
+    console.log(this.type.value.name);
+    console.log(this.type.value.country);
+    console.log(this.type.value.phone);
+    console.log(this.type.value.address);
+    console.log(this.type.value.openHours);
   }
 }
