@@ -11,6 +11,14 @@ exports.view = function (req, res) {
             });
             return
         }
+        else if (usuario[0]==null){
+            res.json({
+                status:false,
+                data:usuario
+            });
+            return
+
+        }
         else if(req.body.contrasena == usuario[0].contrasena) {
             res.json({
                 status: true,
@@ -19,7 +27,10 @@ exports.view = function (req, res) {
             return
         }
         else {
-            res.json({});
+            res.json({
+                status:false,
+                data:[]
+            });
             return
         }
         
