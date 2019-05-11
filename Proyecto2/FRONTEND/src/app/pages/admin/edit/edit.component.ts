@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { FormBuilder, AbstractControl,Validators, FormGroup } from '@angular/forms';
-
+import { AdminService } from '../../../services/admin.service';
 @Component({
   selector: 'edit',
   styleUrls: ['./edit.component.scss'],
@@ -14,8 +14,11 @@ export class EditComponent {
   validTextType: boolean = false;
   validNumberType: boolean = false;
   code="";
+  countries:any;
+  country:any;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private adminServices: AdminService) {
     this.type = this.formBuilder.group({
       name: [null, Validators.required],
       country: [null, Validators.required],
@@ -23,12 +26,25 @@ export class EditComponent {
       address: [null, Validators.required],
       openHours: [null, Validators.required],
     });
+    this.countries= [
+      {
+        Id:1,
+        Name:"USA"
+      },{
+        Id:2,
+        Name:"Spain"
+      },{
+        Id:3,
+        Name:"France"
+      }
+    ]
+
     let temp = JSON.parse(localStorage.getItem('Store'));
-    this.type.value.name = temp.name;
-    this.type.value.country = temp.country;
-    this.type.value.phone = temp.phone;
-    this.type.value.address = temp.address;
-    this.type.value.openHours = temp.openHours;
+    this.type.value.name = temp.nombre;
+    this.type.value.country = temp.pais;
+    this.type.value.phone = temp.telefono;
+    this.type.value.address = temp.ubicacion;
+    this.type.value.openHours = temp.horario;
 
   }
   validateAllFormFields(formGroup: FormGroup) {
@@ -63,10 +79,24 @@ export class EditComponent {
 
   upBookStore(){
     console.log(this.type.value.name);
-    console.log(this.type.value.country);
+    console.log(this.country);
     console.log(this.type.value.phone);
     console.log(this.type.value.address);
     console.log(this.type.value.openHours);
+
+    let body={
+      nombre: this.type.value.name,
+      pais: this.country,
+      telefono: this.type.value.phone,
+      ubicacion: this.type.value.address,
+      horario: this.type.value.openHours,
+    }
+
+    /*this.adminServices.editBookstore(body)
+      .subscribe((result)=>{
+        console.log(result);
+      });*/
+      console.log(body);
 
   }
 
