@@ -9,11 +9,11 @@ import Swal from 'sweetalert2';
 })
 export class MainComponent {
   
-  libraries:any;
+  bookstores:any;
   constructor(private adminServices:AdminService,
               private router: Router) {
-    this.libraries=[];
-    /*this.libraries=this.adminServices.getLibraries()
+    this.bookstores=[];
+    /*this.bookstores=this.adminServices.getBookstores()
       .subscribe((result)=>{
         if(result.status){
           for (var i = 0; i < result.data.length; ++i) {
@@ -27,11 +27,11 @@ export class MainComponent {
               schedule: result.data[i].horario,
               photo: result.data[i].foto
             }
-            this.libraries.push(temp);
+            this.bookstores.push(temp);
           }
         }
       })*/
-    let librerias= this.adminServices.testGetLibraries();
+    let librerias= this.adminServices.testGetBookstores();
     console.log(librerias);
     for (let i = 0; i < librerias.length; ++i) {
       let temp =
@@ -44,22 +44,22 @@ export class MainComponent {
         schedule: librerias[i].horario,
         photo: librerias[i].foto
       }
-      this.libraries.push(temp);
+      this.bookstores.push(temp);
     }
   }
 
-  editLibrary(code){
+  editBookstore(code){
     console.log(code);
     let store={};
-    for (let i = 0; i <this.libraries.length; ++i) {
-      if(this.libraries[i].code==code){
-        store=this.libraries[i];
+    for (let i = 0; i <this.bookstores.length; ++i) {
+      if(this.bookstores[i].code==code){
+        store=this.bookstores[i];
       }
     }
     localStorage.setItem("Store",JSON.stringify(store));
     this.router.navigate(['/pages/admin/edit']);
   }
-  deleteLibrary(code){
+  deleteBookstore(code){
     Swal({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",

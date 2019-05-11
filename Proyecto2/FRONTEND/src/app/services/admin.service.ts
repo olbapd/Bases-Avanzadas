@@ -9,9 +9,9 @@ import { Urls } from '../config/constants';
 export class AdminService {
 	
 	headers : {headers : HttpHeaders}
-	urlibrary= 'librerias';
+	urlBookstore= 'librerias';
 
-	libraries=[
+	bookstores=[
       {
             _id: "JF0001",
             nombre: "Jose FIgueres Ferrer",
@@ -26,7 +26,7 @@ export class AdminService {
 
 	constructor(private http : HttpClient, private router : Router) {}
 
-	public getLibraries() : Observable<any[]>{
+	public getBookstores() : Observable<any[]>{
 		let body = {
 			Email:"email",
 			Password: "password"
@@ -34,17 +34,17 @@ export class AdminService {
 	    const url = "http://localhost:3000/api/vehiculo/insert"
 	    return this.http.post<any[]>(url,body, this.headers);
 	}
-	public testGetLibraries() {
-		return this.libraries;
+	public testGetBookstores() {
+		return this.bookstores;
 	}
 
-	public addLibrary(library): Observable<any>{
-		const url = Urls.baseUrl +this.urlibrary;
-		return this.http.post<any>(url,library, this.headers);
+	public addBookstore(bookstore): Observable<any>{
+		const url = Urls.baseUrl +this.urlBookstore;
+		return this.http.post<any>(url,bookstore, this.headers);
 	}
 
-	public editLibrary(library):Observable<any>{
-		const url = Urls.baseUrl+this.urlibrary;
-		return this.http.put<any>(url,library,this.headers);
+	public editBookstore(bookstore):Observable<any>{
+		const url = Urls.baseUrl+this.urlBookstore;
+		return this.http.put<any>(url,bookstore,this.headers);
 	}
 }

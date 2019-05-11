@@ -88,7 +88,7 @@ export class AgregarComponent {
         telefono: this.type.value.phone,
         horario: this.type.value.openHours      
     }
-    /*this.adminService.addLibrary(body)
+    /*this.adminService.addBookstore(body)
       .subscribe( (result)=>{
          console.log(result.status);
       });*/
