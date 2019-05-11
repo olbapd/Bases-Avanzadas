@@ -5,13 +5,13 @@ exports.index = function (req, res) {
     Libreria.get(function (err, librerias) {
         if (err) {
             res.json({
-                status: "error",
+                error:true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
+            status: true,
             data: librerias
         });
     });
@@ -31,13 +31,13 @@ exports.new = function (req, res) {
     libreria.save(function (err) {
         if (err) {
             res.json({
-                status: "error",
+                error:true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success"
+            status: true
         });
     });
 };
@@ -47,13 +47,13 @@ exports.view = function (req, res) {
 
             if (err) {
                 res.json({
-                    status: "error",
+                    error:true,
                     message: err,
                 });
                 return
             }
             res.json({
-                status: "success",
+                status: true,
                 data: libreria
             });
         });
@@ -64,7 +64,7 @@ exports.update = function (req, res) {
     Libreria.findById(req.params.libreria_id, function (err, libreria) {
         if (err) {
             res.json({
-                status: "error",
+                error:true,
                 message: err,
             });
             return
@@ -78,13 +78,13 @@ exports.update = function (req, res) {
         libreria.save(function (err) {
             if (err) {
                 res.json({
-                    status: "error",
+                    error:true,
                     message: err,
                 });
                 return
             }
             res.json({
-                status: "success"
+                status: true
             });
         });
     });
@@ -96,13 +96,13 @@ exports.delete = function (req, res) {
     }, function (err, libreria) {
         if (err) {
             res.json({
-                status: "error",
+                error:true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
+            status: true,
         });
     });
 };
