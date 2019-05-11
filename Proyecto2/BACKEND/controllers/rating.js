@@ -9,13 +9,13 @@ exports.new = function (req, res) {
     rating.save(function (err) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
+            status: true,
             data: rating
         });
     });
@@ -26,13 +26,13 @@ exports.view = function (req, res) {
 
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
+            status: true,
             data: rating
         });
     });
@@ -42,13 +42,13 @@ exports.index = function (req, res) {
     Rating.get(function (err, rates) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
+            status: true,
             data: rates
         });
     });
@@ -58,7 +58,7 @@ exports.update = function (req, res) {
     Rating.findById(req.params.rating_id, function (err, rates) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
@@ -68,13 +68,13 @@ exports.update = function (req, res) {
         rates.save(function (err) {
             if (err) {
                 res.json({
-                    status: "error",
+                    error: true,
                     message: err,
                 });
                 return
             }
             res.json({
-                status: "success",
+                status: true,
                 data: rates
             });
         });
@@ -87,13 +87,13 @@ exports.delete = function (req, res) {
     }, function (err, rates) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
+            status: true,
         });
     });
 };

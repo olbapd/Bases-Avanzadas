@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 // Setup schema
 var pedidoSchema = mongoose.Schema({
     cliente: {
-        type: String,
+        type: Number,
         required: true,
         unique:true
     },
@@ -15,7 +15,7 @@ var pedidoSchema = mongoose.Schema({
         required: true
     },
     montoTotal: {
-        type: String,
+        type: Number,
         required: true
     },
     estado: {

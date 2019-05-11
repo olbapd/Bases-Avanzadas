@@ -1,18 +1,21 @@
 // Import Modelo model
 Libreria = require('../models/libreria');
+Pais = require('../models/pais');
 // Handle index actions
 exports.index = function (req, res) {
     Libreria.get(function (err, librerias) {
-        if (err) {
+        Pais.populate(librerias, { path: "pais" }, function (err, librerias) {
+            if (err) {
+                res.json({
+                    error:true,
+                    message: err,
+                });
+                return
+            }
             res.json({
-                error:true,
-                message: err,
+                status: true,
+                data: librerias
             });
-            return
-        }
-        res.json({
-            status: true,
-            data: librerias
         });
     });
 };
@@ -44,6 +47,7 @@ exports.new = function (req, res) {
 // Handle view libreria info by id
 exports.view = function (req, res) {
     Libreria.find({ '_id': req.params.libreria_id }, function (err, libreria) {
+        Pais.populate(librerias, { path: "pais" }, function (err, librerias) {
 
             if (err) {
                 res.json({
@@ -57,6 +61,7 @@ exports.view = function (req, res) {
                 data: libreria
             });
         });
+    });
 };
 
 // Handle update libreria info
@@ -70,7 +75,7 @@ exports.update = function (req, res) {
             return
         }
         libreria.nombre = req.body.nombre;
-        libreria.pais = req.body.pais;
+        libreria.pais = req.body.pais_id;
         libreria.ubicacion = req.body.ubicacion;
         libreria.telefono = req.body.telefono;
         libreria.horario = req.body.horario;

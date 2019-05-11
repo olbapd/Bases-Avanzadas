@@ -15,13 +15,13 @@ exports.new = function (req, res) {
     promocion.save(function (err) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
+            status: true,
             data: promocion
         });
     });
@@ -32,7 +32,7 @@ exports.update = function (req, res) {
     Promocion.findById(req.params.promocion_id, function (err, promociones) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
@@ -48,13 +48,13 @@ exports.update = function (req, res) {
         promociones.save(function (err) {
             if (err) {
                 res.json({
-                    status: "error",
+                    error: true,
                     message: err,
                 });
                 return
             }
             res.json({
-                status: "success",
+                status: true,
                 data: promociones
             });
         });
@@ -66,13 +66,13 @@ exports.index = function (req, res) {
     Promocion.get(function (err, promociones) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
+            status: true,
             data: promociones
         });
     });
@@ -84,13 +84,13 @@ exports.view = function (req, res) {
 
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
+            status: true,
             data: promocion
         });
     });
@@ -102,13 +102,13 @@ exports.delete = function (req, res) {
     }, function (err, promociones) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
+            status: true,
         });
     });
 };

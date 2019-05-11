@@ -5,13 +5,13 @@ exports.index = function (req, res) {
     Usuario.get(function (err, usuarios) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
+            status: true,
             data: usuarios
         });
     });
@@ -37,13 +37,13 @@ exports.new = function (req, res) {
     usuario.save(function (err) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success"
+            status: true
         });
     });
 };
@@ -53,13 +53,13 @@ exports.view = function (req, res) {
 
             if (err) {
                 res.json({
-                    status: "error",
+                    error: true,
                     message: err,
                 });
                 return
             }
             res.json({
-                status: "success",
+                status: true,
                 data: usuario
             });
         });
@@ -70,7 +70,7 @@ exports.update = function (req, res) {
     Usuario.findById(req.params.usuario_id, function (err, usuario) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
@@ -84,13 +84,13 @@ exports.update = function (req, res) {
         usuario.save(function (err) {
             if (err) {
                 res.json({
-                    status: "error",
+                    status: true,
                     message: err,
                 });
                 return
             }
             res.json({
-                status: "success"
+                status: true
             });
         });
     });
@@ -102,13 +102,13 @@ exports.delete = function (req, res) {
     }, function (err, usuario) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
+            status: true,
         });
     });
 };

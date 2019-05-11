@@ -7,11 +7,11 @@ var libroSchema = mongoose.Schema({
         required: true,
     },
     libreria: {
-        type: Number,
+        type: String,
         required: true
     },
     tema:{
-        type: Number,
+        type: String,
         required: true
     },
     descripcion:{
@@ -21,6 +21,14 @@ var libroSchema = mongoose.Schema({
         type: String
     },
     precio:{
+        type: Number,
+        required: true
+    },
+    cantidadVendida:{
+        type: Number,
+        required: true
+    },
+    cantidadDisponible:{
         type: Number,
         required: true
     },

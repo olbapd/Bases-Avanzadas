@@ -8,7 +8,7 @@ var libreriaSchema = mongoose.Schema({
         unique: true
     },
     pais: {
-        type: Number,
+        type: String,
         required: true
     },
     ubicacion:{

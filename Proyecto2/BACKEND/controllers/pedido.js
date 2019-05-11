@@ -4,7 +4,7 @@ Pedido = require('../models/pedidos');
 // Handle create pedido
 exports.new = function (req, res) {
     var pedido = new Pedido();
-    pedido.pedido = req.body.pedido;
+    pedido.cliente = req.body.cliente;
     pedido.libros = req.body.libros;
     pedido.fechaPedido = req.body.fechaPedido;
     pedido.montoTotal = req.body.montoTotal;
@@ -14,14 +14,13 @@ exports.new = function (req, res) {
     pedido.save(function (err) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
-            data: pedido
+            status: true
         });
     });
 };
@@ -31,12 +30,11 @@ exports.update = function (req, res) {
     Pedido.findById(req.params.pedido_id, function (err, pedidos) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
-        pedidos.pedido = req.body.pedido;
         pedidos.libros = req.body.libros;
         pedidos.fechaPedido = req.body.fechaPedido;
         pedidos.montoTotal = req.body.montoTotal;
@@ -46,14 +44,13 @@ exports.update = function (req, res) {
         pedidos.save(function (err) {
             if (err) {
                 res.json({
-                    status: "error",
+                    error: true,
                     message: err,
                 });
                 return
             }
             res.json({
-                status: "success",
-                data: pedidos
+                status: true
             });
         });
     });
@@ -64,13 +61,13 @@ exports.index = function (req, res) {
     Pedido.get(function (err, pedidos) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
+            status: true,
             data: pedidos
         });
     });
@@ -84,13 +81,13 @@ exports.view = function (req, res) {
 
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
+            status: true,
             data: pedido
         });
     });
@@ -102,13 +99,13 @@ exports.delete = function (req, res) {
     }, function (err, pedidos) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
+            status: true,
         });
     });
 };

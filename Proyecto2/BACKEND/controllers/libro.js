@@ -1,18 +1,24 @@
 // Import Modelo model
 Libro = require('../models/libro');
+Libreria = require('../models/libreria');
+Tema = require('../models/tema');
 // Handle index actions
 exports.index = function (req, res) {
     Libro.get(function (err, libros) {
-        if (err) {
-            res.json({
-                status: "error",
-                message: err,
+        Libreria.populate(libros, { path: "libreria" }, function (err, libros) {
+            Tema.populate(libros, { path: "tema" }, function (err, libros) {
+                if (err) {
+                    res.json({
+                        error: true,
+                        message: err,
+                    });
+                    return
+                }
+                res.json({
+                    status: true,
+                    data: libros
+                });
             });
-            return
-        }
-        res.json({
-            status: "success",
-            data: libros
         });
     });
 };
@@ -27,38 +33,43 @@ exports.new = function (req, res) {
     libro.descripcion = req.body.descripcion;
     libro.foto = req.body.foto;
     libro.precio = req.body.precio;
+    libro.cantidadVendida = req.body.cantidadVendida;
+    libro.cantidadDisponible = req.body.cantidadDisponible;
     libro.estado = req.body.estado;
 
     // save the libro and check for errors
     libro.save(function (err) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success"
+            status: true
         });
     });
 };
 // Handle view libro info by id
 exports.view = function (req, res) {
     Libro.find({ '_id': req.params.libro_id }, function (err, libro) {
-
-            if (err) {
+        Libreria.populate(libros, { path: "libreria" }, function (err, libros) {
+            Tema.populate(libros, { path: "tema" }, function (err, libros) {
+                if (err) {
+                    res.json({
+                        error: true,
+                        message: err,
+                    });
+                    return
+                }
                 res.json({
-                    status: "error",
-                    message: err,
+                    status: true,
+                    data: libro
                 });
-                return
-            }
-            res.json({
-                status: "success",
-                data: libro
             });
         });
+    });
 };
 
 // Handle update libro info
@@ -66,7 +77,7 @@ exports.update = function (req, res) {
     Libro.findById(req.params.libro_id, function (err, libro) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
@@ -75,18 +86,20 @@ exports.update = function (req, res) {
         libro.descripcion = req.body.descripcion;
         libro.foto = req.body.foto;
         libro.precio = req.body.precio;
+        libro.cantidadVendida = req.body.cantidadVendida;
+        libro.cantidadDisponible = req.body.cantidadDisponible;
         libro.estado = req.body.estado;
         // save the model and check for errors
         libro.save(function (err) {
             if (err) {
                 res.json({
-                    status: "error",
+                    error: true,
                     message: err,
                 });
                 return
             }
             res.json({
-                status: "success"
+                status: true
             });
         });
     });
@@ -98,13 +111,13 @@ exports.delete = function (req, res) {
     }, function (err, libro) {
         if (err) {
             res.json({
-                status: "error",
+                error: true,
                 message: err,
             });
             return
         }
         res.json({
-            status: "success",
+            status: true,
         });
     });
 };
