@@ -109,14 +109,9 @@ var auth = require('./controllers/auth');
 router.route('/login')
     .post(auth.view);
 
-// Import consulta-cliente controller
-var cliente = require('./controllers/consultas/cliente');
-// consulta-cliente routes
-router.route('/consultas/cliente')
-    .get(cliente.index)
-    .post(cliente.new);
-router.route('/consultas/cliente/libroXtema/:tema_id')
-    .get(cliente.view)
-    .delete(cliente.delete);
+
+//Storage
+var storage = require('./controllers/storage');
+router.use('/storage',storage);
 // Export API routes
 module.exports = router;
