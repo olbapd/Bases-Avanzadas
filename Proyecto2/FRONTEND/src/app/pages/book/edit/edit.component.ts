@@ -102,7 +102,6 @@ export class EditComponent {
     }
     this.bookService.editBook(body,this.issn)
       .subscribe((result)=>{
-        console.log(result);
         if(result.status){
           Swal(
             'Modified Succesfully!',

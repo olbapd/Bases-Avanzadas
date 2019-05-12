@@ -3,6 +3,10 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { FormBuilder, AbstractControl,Validators, FormGroup } from '@angular/forms';
 
+import { CatalogService } from '../../../services/catalog.service';
+import { BookService } from '../../../services/book.service';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'agregar',
   styleUrls: ['./agregar.component.scss'],
@@ -16,9 +20,12 @@ export class AgregarComponent {
   validNumberType: boolean = false;
   categories:any;
   category:any;
+  bookstoreCode:any;
 
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private bookService: BookService,
+              private catalogService: CatalogService) {
     this.type = this.formBuilder.group({
       issn: [null, Validators.required],
       name: [null, Validators.required],
@@ -26,20 +33,17 @@ export class AgregarComponent {
       price: [null, Validators.required],
       description: [null, Validators.required],
       amount: [null, Validators.required],
+      photo: [null, Validators.required],
 
       });
-      this.categories =[
-        {
-          Id:1,
-          Name:"Accion"
-        },{
-          Id:2,
-          Name:"Terror"
-        },{
-          Id:3,
-          Name:"Novela Policiaca"
-        }
-      ]
+    this.bookstoreCode = JSON.parse(localStorage.getItem('StoreCode'));
+     this.catalogService.getCategories()
+       .subscribe((result)=>{
+         if(result.status){
+           this.categories=result.data;
+         }
+       })
+      
   }
   validateAllFormFields(formGroup: FormGroup) {
       Object.keys(formGroup.controls).forEach(field => {
@@ -72,12 +76,28 @@ export class AgregarComponent {
   }
 
   addNewBook(){
-    console.log(this.category);
-    console.log(this.type.value.issn);
-    console.log(this.type.value.name);
-    console.log(this.type.value.price);
-    console.log(this.type.value.description);
-    console.log(this.type.value.amount);
+    let body={
+      libro_id:this.type.value.issn,
+      nombre:this.type.value.name,
+      libreria_id:this.bookstoreCode,
+      tema_id:this.category,
+      descripcion:this.type.value.description,
+      foto:"",
+      precio:this.type.value.price,
+      cantidadVendida:0,
+      cantidadDisponible:this.type.value.amount,
+      estado:"bueno",
+    }
 
+    this.bookService.addBook(body)
+      .subscribe((result)=>{
+        if(result.status){
+          Swal(
+            'Created Succesfully!',
+            '',
+            'success'
+          )
+        }
+      })
   }
 }

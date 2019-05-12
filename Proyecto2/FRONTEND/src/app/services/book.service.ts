@@ -29,4 +29,8 @@ export class BookService {
 		const url = Urls.baseUrl+'libro/'+issn;
 		return this.http.put<GeneralResponse>(url,book,this.headers);	
 	}
+	public addBook(book):Observable<GeneralResponse>{
+		const url = Urls.baseUrl+'libros';
+		return this.http.post<GeneralResponse>(url,book,this.headers);	
+	}
 }
