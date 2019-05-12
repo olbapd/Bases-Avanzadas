@@ -75,18 +75,22 @@ exports.view = function (req, res) {
 // Handle view libro info by Libreria
 exports.getlibroXlibreria = function (req, res) {
     Libro.find({ 'libreria': req.params.libreria_id }, function (err, libros) {
-        if (err) {
-            res.json({
-                error: true,
-                message: err,
+        Libreria.populate(libros, { path: "libreria" }, function (err, libros) {
+            Tema.populate(libros, { path: "tema" }, function (err, libros) {
+                if (err) {
+                        res.json({
+                            error: true,
+                            message: err,
+                        });
+                        return
+                    }
+                    res.json({
+                        status: true,
+                        data: libros
+                    });
+                });
             });
-            return
-        }
-        res.json({
-            status: true,
-            data: libros
         });
-    });
 };
 
 // Handle update libro info
