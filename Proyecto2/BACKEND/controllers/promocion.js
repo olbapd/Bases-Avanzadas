@@ -10,7 +10,7 @@ exports.new = function (req, res) {
     promocion.fechaFin = req.body.fechaFin;
     promocion.porcenDescuento = req.body.porcenDescuento;   
     promocion.libro = req.body.libro;
-
+    promocion.libreria = req.body.libreria;
     // save the contact and check for errors
     promocion.save(function (err) {
         if (err) {

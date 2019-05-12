@@ -25,6 +25,10 @@ var promocionSchema = mongoose.Schema({
         type: [String],
         required: true
     },
+    libreria: {
+        type: String,
+        required: true
+    }
 });
 // Export Estilo model
 var Promocion = module.exports = mongoose.model('Promocion', promocionSchema);
