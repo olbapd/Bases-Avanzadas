@@ -9,7 +9,7 @@ exports.new = function (req, res) {
     promocion.fechaInicio = req.body.fechaInicio;
     promocion.fechaFin = req.body.fechaFin;
     promocion.porcenDescuento = req.body.porcenDescuento;   
-    promocion.libreria = req.body.libreria;
+    promocion.libro = req.body.libro;
 
     // save the contact and check for errors
     promocion.save(function (err) {
@@ -41,7 +41,7 @@ exports.update = function (req, res) {
         promociones.fechaInicio = req.body.fechaInicio;
         promociones.fechaFin = req.body.fechaFin;
         promociones.porcenDescuento = req.body.porcenDescuento;   
-        promociones.libreria = req.body.libreria;
+        promociones.libro = req.body.libro;
 
         // save the model and check for errors
         promociones.save(function (err) {

@@ -21,8 +21,8 @@ var promocionSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    libreria: {
-        type: String,
+    libro: {
+        type: [String],
         required: true
     },
 });
