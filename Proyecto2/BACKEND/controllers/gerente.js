@@ -1,5 +1,5 @@
-Promociones = require('../../models/promociones');
-Libro = require('../../models/libro');
+Promociones = require('../models/promociones');
+Libro = require('../models/libro');
 
 // Handle view Promociones info by fecha
 

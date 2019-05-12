@@ -21,8 +21,7 @@ exports.new = function (req, res) {
             return
         }
         res.json({
-            status: true,
-            data: promocion
+            status: true
         });
     });
 };
@@ -54,8 +53,7 @@ exports.update = function (req, res) {
                 return
             }
             res.json({
-                status: true,
-                data: promociones
+                status: true
             });
         });
     });

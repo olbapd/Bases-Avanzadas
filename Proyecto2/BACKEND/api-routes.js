@@ -41,6 +41,8 @@ router.route('/libro/:libro_id')
     .get(libro.view)
     .put(libro.update)
     .delete(libro.delete);
+router.route('/libroXlibreria/:libreria_id')
+    .get(libro.getlibroXlibreria);
 
 // Import Pais controller
 var pais = require('./controllers/pais');
@@ -106,5 +108,10 @@ var auth = require('./controllers/auth');
 //aut route
 router.route('/login')
     .post(auth.view);
+
+
+//Storage
+var storage = require('./controllers/storage');
+router.use('/storage',storage);
 // Export API routes
 module.exports = router;

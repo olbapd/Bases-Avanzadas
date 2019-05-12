@@ -72,6 +72,23 @@ exports.view = function (req, res) {
     });
 };
 
+// Handle view libro info by Libreria
+exports.getlibroXlibreria = function (req, res) {
+    Libro.find({ 'libreria': req.params.libreria_id }, function (err, libros) {
+        if (err) {
+            res.json({
+                error: true,
+                message: err,
+            });
+            return
+        }
+        res.json({
+            status: true,
+            data: libros
+        });
+    });
+};
+
 // Handle update libro info
 exports.update = function (req, res) {
     Libro.findById(req.params.libro_id, function (err, libro) {
