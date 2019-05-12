@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Urls } from '../config/constants';
 
+import { GeneralResponse } from '../models/response';
+
 
 
 @Injectable()
@@ -13,16 +15,18 @@ export class BookService {
 	
 	constructor(private http : HttpClient, private router : Router) {}
 
-	public login(email, password) : Observable<any[]>{
-		let body = {
-			Email:email,
-			Password: password
-		}
-	    const url = "http://localhost:3000/api/vehiculo/insert"
-	    return this.http.post<any[]>(url,body, this.headers);
+	public getBooks(code):Observable<GeneralResponse>{
+		const url = Urls.baseUrl+ 'libroXlibreria/'+code;
+	    return this.http.get<GeneralResponse>(url, this.headers);
 	}
-	public register(body) : Observable<any[]>{
-	    const url = "http://localhost:3000/api/vehiculo/update"
-	    return this.http.post<any[]>(url,body, this.headers);
+
+	public deleteBook(code):Observable<GeneralResponse>{
+		const url = Urls.baseUrl+'libro/'+code;
+		return this.http.delete<GeneralResponse>(url,this.headers);
+	}
+
+	public editBook(book,issn):Observable<GeneralResponse>{
+		const url = Urls.baseUrl+'libro/'+issn;
+		return this.http.put<GeneralResponse>(url,book,this.headers);	
 	}
 }

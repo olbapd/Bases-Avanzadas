@@ -22,11 +22,20 @@
           <div class="col-sm-4">
             <label>Category: </label>
             <mat-form-field>
-              <mat-select [(ngModel)]="category" [ngModelOptions]="{standalone: true}" placeholder="Category" name="category">
-                <mat-option *ngFor="let category of categories" [value]="category.Id">
-                  {{ category.Name }}
+              <mat-select [(ngModel)]="categorySelect"  [(value)]="categorySelect"[ngModelOptions]="{standalone: true}" placeholder="Category" name="category">
+                <mat-option *ngFor="let category of categories" [value]="category._id">
+                  {{ category.nombre }}
                 </mat-option>
               </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-4">
+            <label>Sold Amount: </label>
+            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validNumberType===true}" [ngClass]="displayFieldCss(type, 'number')">
+              <input type="number" matInput id="sold"
+              (ngModelChange)="textValidationType($event)"
+              formControlName="sold">
+              <app-field-error-display [displayError]="isFieldValid(type, 'sold')" errorMsg="Must add a sold amount."></app-field-error-display>
             </mat-form-field>
           </div>
         </div>

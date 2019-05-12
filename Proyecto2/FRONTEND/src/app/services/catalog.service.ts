@@ -35,4 +35,8 @@ export class CatalogService {
 		return this.countries;
 	}
 	
+	public getCategories():Observable<GeneralResponse>{
+	    const url = Urls.baseUrl+"temas"
+	    return this.http.get<GeneralResponse>(url, this.headers);
+	}
 }

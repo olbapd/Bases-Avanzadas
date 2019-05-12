@@ -5,9 +5,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BookRoutingModule, routedComponents } from './book-routing.module';
-import { BookService } from '../../services/book.service';
 import { MaterialModule } from '../../app.module';
 import { FieldErrorDisplayComponent }  from './field-error-display/field-error-display.component';
+
+import { BookService } from '../../services/book.service';
+import { AdminService } from '../../services/admin.service';
+import { CatalogService } from '../../services/catalog.service';
 
 @NgModule({
   imports: [
@@ -22,7 +25,9 @@ import { FieldErrorDisplayComponent }  from './field-error-display/field-error-d
     FieldErrorDisplayComponent
   ],
   providers: [
-    BookService
+    BookService,
+    AdminService,
+    CatalogService
   ],
 })
 export class BookModule { }

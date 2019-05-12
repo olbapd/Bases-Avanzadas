@@ -18,7 +18,7 @@ export class MainComponent {
     this.adminServices.getBookstores()
       .subscribe((result)=>{
         if(result.status){
-          for (var i = 0; i < result.data.length; ++i) {
+          for (let i = 0; i < result.data.length; ++i) {
             if(result.data[i].foto==undefined){
               result.data[i].foto=this.defaultPhoto;
             }
@@ -49,6 +49,10 @@ export class MainComponent {
     console.log(store);
     localStorage.setItem("Store",JSON.stringify(store));
     this.router.navigate(['/pages/admin/edit']);
+  }
+  viewBook(code){
+    localStorage.setItem("StoreCode",JSON.stringify(code));
+    this.router.navigate(['/pages/book/main']);
   }
   deleteBookstore(code,index){
     Swal({

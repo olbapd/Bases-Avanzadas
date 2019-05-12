@@ -1,26 +1,36 @@
 <div class="wrapper wrapper-full-page" style="background-color: rgba(94, 94, 94, 0.86);">
 <br><br>
 <div class="container-fluid">
+  <div class="row">
+    <label>Search Bookstore</label>
+    <div class="col-4 col-sm-4 col-md-4 col-lg-2 col-xl-2" *ngIf="showSearch">
+      <mat-form-field>
+        <mat-select [(ngModel)]="bookstoreCode" [ngModelOptions]="{standalone: true}" placeholder="Bookstore" name="bookstore" (selectionChange)="searchBookstore($event.value)">
+          <mat-option *ngFor="let bookstore of bookstores; let i = index" [value]="bookstore.code">
+            {{ bookstore.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
   <div class="card-columns">
     <ng-container *ngFor="let book of books; let i = index" >
     <div class="card">
       <img class="card-img-top" src={{book.photo}} alt="Card image cap">
       <div class="card-body">
-        <h3 class="card-title">{{book.issn}} - {{book.name}}</h3>
-        <p class="card-text" ><strong>Category: </strong> {{book.category}} </p>
+        <h5 class="card-title">{{book.issn}} - {{book.name}}</h5>
+        <p class="card-text" ><strong>Category: </strong> {{book.category}} <strong>Price: </strong> {{book.price}}</p>
         <p class="card-text" ><strong>Description: </strong> {{book.description}}</p>
-        <p class="card-text" ><strong>Sales: </strong> {{book.sales}}</p>
-        <p class="card-text" ><strong>Amount: </strong> {{book.amount}}</p>
-        <p class="card-text" ><strong>Precio: </strong> {{book.price}}</p>
+        <p class="card-text" ><strong>Sold: </strong> {{book.sales}} <strong>Available: </strong> {{book.amount}}</p>
         <div class="row">
         	<div class="col">
         		<button (click)="editBook(book.issn)" class="btn btn-primary">
-        			<i class="fas fa-edit"></i> Modificar
+        			<i class="fas fa-edit"></i> Edit
         		</button>		
         	</div>
         	<div class="col">
-        		<button (click)="deleteBook(book.issn)" class="btn btn-primary">
-        			<i class="fas fa-trash"></i> Borrar
+        		<button (click)="deleteBook(book.issn,i)" class="btn btn-primary">
+        			<i class="fas fa-trash"></i> Delete
         		</button>		
         	</div>
         </div>
