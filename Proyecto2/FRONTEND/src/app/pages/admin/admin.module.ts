@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
-//import { Ng2SmartTableModule } from 'ng2-smart-table';
-
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AdminRoutingModule, routedComponents } from './admin-routing.module';
-import { AdminService } from '../../services/admin.service';
 import { MaterialModule } from '../../app.module';
 import { FieldErrorDisplayComponent }  from './field-error-display/field-error-display.component';
+
+import { AdminService } from '../../services/admin.service';
+import { CatalogService } from '../../services/catalog.service';
 
 @NgModule({
   imports: [
@@ -23,7 +23,8 @@ import { FieldErrorDisplayComponent }  from './field-error-display/field-error-d
     FieldErrorDisplayComponent
   ],
   providers: [
-    AdminService
+    AdminService,
+    CatalogService
   ],
 })
 export class AdminModule { }

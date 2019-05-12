@@ -1,4 +1,4 @@
-export interface LoginResponse{
+export interface GeneralResponse{
    status:boolean,
    error: boolean, 
    message: string,

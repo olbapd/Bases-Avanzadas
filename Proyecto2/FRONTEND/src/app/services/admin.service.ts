@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Urls } from '../config/constants';
 
+import { GeneralResponse } from '../models/response';
 
 @Injectable()
 export class AdminService {
@@ -26,13 +27,9 @@ export class AdminService {
 
 	constructor(private http : HttpClient, private router : Router) {}
 
-	public getBookstores() : Observable<any[]>{
-		let body = {
-			Email:"email",
-			Password: "password"
-		}
-	    const url = "http://localhost:3000/api/vehiculo/insert"
-	    return this.http.post<any[]>(url,body, this.headers);
+	public getBookstores() : Observable<GeneralResponse>{
+		const url = Urls.baseUrl+ 'librerias';
+	    return this.http.get<GeneralResponse>(url, this.headers);
 	}
 	public testGetBookstores() {
 		return this.bookstores;
@@ -43,8 +40,15 @@ export class AdminService {
 		return this.http.post<any>(url,bookstore, this.headers);
 	}
 
-	public editBookstore(bookstore):Observable<any>{
-		const url = Urls.baseUrl+this.urlBookstore;
+	public editBookstore(bookstore,param):Observable<any>{
+		const url = Urls.baseUrl+"libreria/"+param;
+		console.log(url);
+		console.log(bookstore);
 		return this.http.put<any>(url,bookstore,this.headers);
+	}
+
+	public deleteBookstore(param):Observable<GeneralResponse>{
+		const url = Urls.baseUrl+"libreria/"+param;
+	    return	this.http.delete<GeneralResponse>(url,this.headers);
 	}
 }

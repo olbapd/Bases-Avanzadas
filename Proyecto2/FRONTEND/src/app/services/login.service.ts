@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Urls } from '../config/constants';
-import { LoginResponse } from '../models/login';
+import { GeneralResponse } from '../models/response';
 
 @Injectable()
 export class AuthService {
@@ -20,13 +20,13 @@ export class AuthService {
 		return true;
 	    
 	}
-	public login(email, password) : Observable<LoginResponse>{
+	public login(email, password) : Observable<GeneralResponse>{
 		let body = {
 			usuario:email,
 			contrasena: password
 		}
 	    const url = Urls.baseUrl+ "login"
-	    return this.http.post<LoginResponse>(url,body, this.headers);
+	    return this.http.post<GeneralResponse>(url,body, this.headers);
 	}
 
 	public register(body) : Observable<any[]>{

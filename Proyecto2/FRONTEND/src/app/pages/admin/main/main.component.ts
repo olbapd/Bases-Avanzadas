@@ -10,18 +10,24 @@ import Swal from 'sweetalert2';
 export class MainComponent {
   
   bookstores:any;
+  defaultPhoto:any;
   constructor(private adminServices:AdminService,
               private router: Router) {
     this.bookstores=[];
-    /*this.bookstores=this.adminServices.getBookstores()
+    this.defaultPhoto="../../../../assets/bookstore.png";
+    this.adminServices.getBookstores()
       .subscribe((result)=>{
         if(result.status){
           for (var i = 0; i < result.data.length; ++i) {
+            if(result.data[i].foto==undefined){
+              result.data[i].foto=this.defaultPhoto;
+            }
             let temp =
             {
               code: result.data[i]._id,
               name: result.data[i].nombre,
-              country : result.data[i].pais,
+              country : result.data[i].pais.nombre,
+              countryId : result.data[i].pais._id,
               location: result.data[i].ubicacion,
               number: result.data[i].telefono,
               schedule: result.data[i].horario,
@@ -30,36 +36,21 @@ export class MainComponent {
             this.bookstores.push(temp);
           }
         }
-      })*/
-    let librerias= this.adminServices.testGetBookstores();
-    console.log(librerias);
-    for (let i = 0; i < librerias.length; ++i) {
-      let temp =
-      {
-        code: librerias[i]._id,
-        name: librerias[i].nombre,
-        country : librerias[i].pais,
-        location: librerias[i].ubicacion,
-        number: librerias[i].telefono,
-        schedule: librerias[i].horario,
-        photo: librerias[i].foto
-      }
-      this.bookstores.push(temp);
-    }
+    })
   }
 
   editBookstore(code){
-    console.log(code);
     let store={};
     for (let i = 0; i <this.bookstores.length; ++i) {
       if(this.bookstores[i].code==code){
         store=this.bookstores[i];
       }
     }
+    console.log(store);
     localStorage.setItem("Store",JSON.stringify(store));
     this.router.navigate(['/pages/admin/edit']);
   }
-  deleteBookstore(code){
+  deleteBookstore(code,index){
     Swal({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -70,12 +61,17 @@ export class MainComponent {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.value) {
-        //Meter codigo para borrar
-        Swal(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+        this.adminServices.deleteBookstore(code)
+          .subscribe((res)=>{
+            if(res.status){
+              this.bookstores.splice(index,1);
+              Swal(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )      
+            }
+          })
       }
     })
   }

@@ -32,8 +32,8 @@
             <label>Country: </label>
             <mat-form-field>
               <mat-select [(ngModel)]="country" [ngModelOptions]="{standalone: true}" placeholder="Coutnry" name="country">
-                <mat-option *ngFor="let country of countries" [value]="country.Id">
-                  {{ country.Name }}
+                <mat-option *ngFor="let country of countries" [value]="country._id">
+                  {{ country.nombre }}
                 </mat-option>
               </mat-select>
             </mat-form-field>

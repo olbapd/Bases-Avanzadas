@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { FormBuilder, AbstractControl,Validators, FormGroup } from '@angular/forms';
 import { AdminService } from '../../../services/admin.service';
+import { CatalogService } from '../../../services/catalog.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'agregar',
@@ -18,7 +20,8 @@ export class AgregarComponent {
   country:any;
 
   constructor(private formBuilder: FormBuilder,
-              private adminService: AdminService) {
+              private adminService: AdminService,
+              private catalogService: CatalogService) {
     this.type = this.formBuilder.group({
       code: [null, Validators.required],
       name: [null, Validators.required],
@@ -28,18 +31,12 @@ export class AgregarComponent {
       openHours: [null, Validators.required],
       
     });
-    this.countries= [
-      {
-        Id:1,
-        Name:"USA"
-      },{
-        Id:2,
-        Name:"Spain"
-      },{
-        Id:3,
-        Name:"France"
-      }
-    ]
+    this.catalogService.getCountries()
+      .subscribe((result)=>{
+          if(result.status){
+            this.countries = result.data;
+          }
+      })
   }
   validateAllFormFields(formGroup: FormGroup) {
       Object.keys(formGroup.controls).forEach(field => {
@@ -72,13 +69,7 @@ export class AgregarComponent {
     }
   }
   addBookStore(){
-    console.log(this.country);
-    console.log(this.type.value.code);
-    console.log(this.type.value.name);
-    console.log(this.type.value.country);
-    console.log(this.type.value.phone);
-    console.log(this.type.value.address);
-    console.log(this.type.value.openHours);
+    
     
     let body={
         codigo: this.type.value.code,
@@ -88,10 +79,15 @@ export class AgregarComponent {
         telefono: this.type.value.phone,
         horario: this.type.value.openHours      
     }
-    /*this.adminService.addBookstore(body)
+    this.adminService.addBookstore(body)
       .subscribe( (result)=>{
-         console.log(result.status);
-      });*/
-      console.log(body);
+        if(result.status){
+          Swal(
+            'Added Succesfully!',
+            '',
+            'success'
+          )
+        }
+      });
   }
 }

@@ -22,9 +22,9 @@
           <div class="col-sm-4">
             <label>Country: </label>
             <mat-form-field>
-              <mat-select [(ngModel)]="country" [ngModelOptions]="{standalone: true}" placeholder="Coutry" name="country">
-                <mat-option *ngFor="let country of countries" [value]="country.Id">
-                  {{ country.Name }}
+              <mat-select [(ngModel)]="countrySelect" [(value)]="countrySelect" [ngModelOptions]="{standalone: true}" placeholder="Coutry" name="country">
+                <mat-option *ngFor="let country of countries" [value]="country._id" >
+                  {{ country.nombre }}
                 </mat-option>
               </mat-select>
             </mat-form-field>

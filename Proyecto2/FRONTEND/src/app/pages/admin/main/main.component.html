@@ -6,9 +6,9 @@
     <div class="card">
       <img class="card-img-top" src={{bookstore.photo}} alt="Card image cap">
       <div class="card-body">
-        <h3 class="card-title">{{bookstore.code}} - {{bookstore.name}}</h3>
-        <p class="card-text" ><strong>Pais: </strong> {{bookstore.country}} </p>
-        <p class="card-text" ><strong>Telefono: </strong> {{bookstore.number}} <strong>Horario: </strong> {{bookstore.schedule}}</p>
+        <h5 class="card-title">{{bookstore.code}} - {{bookstore.name}}</h5>
+        <p class="card-text" ><strong>Pais: </strong> {{bookstore.country}} <strong>Telefono: </strong> {{bookstore.number}}</p>
+        <p class="card-text" > <strong>Horario: </strong> {{bookstore.schedule}}</p>
         <p class="card-text" ><strong>Ubicacion Detallada: </strong> {{bookstore.location}}</p>
         
         <div class="row">
@@ -18,7 +18,7 @@
         		</button>		
         	</div>
         	<div class="col">
-        		<button (click)="deleteBookstore(bookstore.code)" class="btn btn-primary">
+        		<button (click)="deleteBookstore(bookstore.code,i)" class="btn btn-primary">
         			<i class="fas fa-trash"></i> Borrar
         		</button>		
         	</div>
