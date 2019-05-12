@@ -41,6 +41,8 @@ router.route('/libro/:libro_id')
     .get(libro.view)
     .put(libro.update)
     .delete(libro.delete);
+router.route('/libroXlibreria/:libreria_id')
+    .get(libro.getlibroXlibreria);
 
 // Import Pais controller
 var pais = require('./controllers/pais');
@@ -106,5 +108,15 @@ var auth = require('./controllers/auth');
 //aut route
 router.route('/login')
     .post(auth.view);
+
+// Import consulta-cliente controller
+var cliente = require('./controllers/consultas/cliente');
+// consulta-cliente routes
+router.route('/consultas/cliente')
+    .get(cliente.index)
+    .post(cliente.new);
+router.route('/consultas/cliente/libroXtema/:tema_id')
+    .get(cliente.view)
+    .delete(cliente.delete);
 // Export API routes
 module.exports = router;
