@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Urls } from '../config/constants';
+import { GeneralResponse } from '../models/response';
 
 @Injectable()
 export class ClientService {
@@ -11,16 +12,14 @@ export class ClientService {
 	
 	constructor(private http : HttpClient, private router : Router) {}
 
-	public login(email, password) : Observable<any[]>{
-		let body = {
-			Email:email,
-			Password: password
-		}
-	    const url = "http://localhost:3000/api/vehiculo/insert"
-	    return this.http.post<any[]>(url,body, this.headers);
-	}
+	
 	public register(body) : Observable<any[]>{
 	    const url = "http://localhost:3000/api/vehiculo/update"
 	    return this.http.post<any[]>(url,body, this.headers);
+	}
+
+	public editClient(client,code):Observable<GeneralResponse>{
+		const url = Urls.baseUrl+'usuario/'+code;
+	    return this.http.put<GeneralResponse>(url,client, this.headers);
 	}
 }
