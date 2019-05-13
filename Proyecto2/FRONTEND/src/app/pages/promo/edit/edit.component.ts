@@ -64,6 +64,14 @@ export class EditComponent {
   upPromo(){
     let percentage = parseInt(this.type.value.percent)/100;
     let books = this.type.value.books.split(";");
+
+     let startDate = this.type.value.begin.getFullYear()+ "-" +
+                    (this.type.value.begin.getMonth() + 1) + "-" +
+                    this.type.value.begin.getDate() 
+    let endDate = this.type.value.end.getFullYear()+ "-" +
+                    (this.type.value.end.getMonth() + 1) + "-" +
+                    this.type.value.end.getDate() 
+    
     let body={
       nombre:this.code,
       descripcion:this.type.value.description,
