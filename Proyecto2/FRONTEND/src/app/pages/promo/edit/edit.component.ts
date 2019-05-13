@@ -75,8 +75,8 @@ export class EditComponent {
     let body={
       nombre:this.code,
       descripcion:this.type.value.description,
-      fechaInicio:this.type.value.begin,
-      fechaFin:this.type.value.end,
+      fechaInicio:startDate,
+      fechaFin:endDate,
       porcenDescuento:percentage,
       libro: books,
       libreria: this.bookstoreCode,
