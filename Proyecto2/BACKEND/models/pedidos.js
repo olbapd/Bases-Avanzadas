@@ -22,6 +22,11 @@ var pedidoSchema = mongoose.Schema({
         type: Boolean,
         required: true
     },
+    libreria:
+    {
+        type: String,
+        required: true
+    }
 });
 // Export Estilo model
 var Pedido = module.exports = mongoose.model('Pedido', pedidoSchema);

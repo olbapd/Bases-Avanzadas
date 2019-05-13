@@ -9,6 +9,7 @@ exports.new = function (req, res) {
     pedido.fechaPedido = req.body.fechaPedido;
     pedido.montoTotal = req.body.montoTotal;
     pedido.estado = req.body.estado;
+    pedido.libreria = req.body.libreria;
 
     // save the contact and check for errors
     pedido.save(function (err) {
@@ -89,6 +90,22 @@ exports.view = function (req, res) {
         res.json({
             status: true,
             data: pedido
+        });
+    });
+};
+
+exports.getPedidoXlibreria= function (req, res) {
+    Pedido.find({ 'libreria': req.params.libreria_id }, function (err, estados) {
+        if (err) {
+            res.json({
+                status: "error",
+                message: err,
+            });
+            return
+        }
+        res.json({
+            status: "success",
+            data: estados
         });
     });
 };

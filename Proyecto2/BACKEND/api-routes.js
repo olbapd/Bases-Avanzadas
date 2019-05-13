@@ -61,6 +61,8 @@ router.route('/pedido/:pedido_id')
     .get(pedido.view)
     .put(pedido.update)
     .delete(pedido.delete);
+router.route('/pedido/libreria/:libreria_id')
+    .get(pedido.getPedidoXlibreria);
 
 // Import promocion controller
 var promocion = require('./controllers/promocion');
