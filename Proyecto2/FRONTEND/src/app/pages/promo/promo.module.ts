@@ -5,10 +5,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PromoRoutingModule, routedComponents } from './promo-routing.module';
-import { PromoService } from '../../services/promo.service';
 import { MaterialModule } from '../../app.module';
 import { FieldErrorDisplayComponent }  from './field-error-display/field-error-display.component';
-
+import { PromoService } from '../../services/promo.service';
+import { AdminService } from '../../services/admin.service';
 
 @NgModule({
   imports: [
@@ -23,7 +23,8 @@ import { FieldErrorDisplayComponent }  from './field-error-display/field-error-d
     FieldErrorDisplayComponent
   ],
   providers: [
-    PromoService
+    PromoService,
+    AdminService
   ],
 })
 export class PromoModule { }

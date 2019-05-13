@@ -1,25 +1,35 @@
 <div class="wrapper wrapper-full-page" style="background-color: rgba(94, 94, 94, 0.86);">
 <br><br>
 <div class="container-fluid">
+  <div class="row">
+    <label>Search Bookstore</label>
+    <div class="col-4 col-sm-4 col-md-4 col-lg-2 col-xl-2" *ngIf="showSearch">
+      <mat-form-field>
+        <mat-select [(ngModel)]="bookstoreCode" [ngModelOptions]="{standalone: true}" placeholder="Bookstore" name="bookstore" (selectionChange)="searchBookstore($event.value)">
+          <mat-option *ngFor="let bookstore of bookstores; let i = index" [value]="bookstore.code">
+            {{ bookstore.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>  
   <div class="card-columns">
     <ng-container *ngFor="let promo of promos; let i = index" >
     <div class="card">
-      <img class="card-img-top" src={{promo.photo}} alt="Card image cap">
       <div class="card-body">
-        <h3 class="card-title">{{promo.code}} - {{promo.name}}</h3>
+        <h4 class="card-title">Discount - {{promo.name}}</h4>
         <p class="card-text" ><strong>Description: </strong> {{promo.description}} </p>
+        <p class="card-text" ><strong>Start Date: </strong> {{promo.begin}}  <strong>End Date: </strong> {{promo.end}}</p>
         <p class="card-text" ><strong>Percent: </strong> {{promo.percent}}</p>
-        <p class="card-text" ><strong>Fecha Inicio: </strong> {{promo.begin}}</p>
-        <p class="card-text" ><strong>Fecha Fin: </strong> {{promo.end}}</p>
         <div class="row">
         	<div class="col">
         		<button (click)="editPromo(promo.code)" class="btn btn-primary">
-        			<i class="fas fa-edit"></i> Modificar
+        			<i class="fas fa-edit"></i> Edit
         		</button>		
         	</div>
         	<div class="col">
-        		<button (click)="deletePromo(promo.code)" class="btn btn-primary">
-        			<i class="fas fa-trash"></i> Borrar
+        		<button (click)="deletePromo(promo.code,i)" class="btn btn-primary">
+        			<i class="fas fa-trash"></i> Delete
         		</button>		
         	</div>
         </div>

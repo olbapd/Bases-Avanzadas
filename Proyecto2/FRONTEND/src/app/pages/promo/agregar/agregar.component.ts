@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { FormBuilder, AbstractControl,Validators, FormGroup } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { PromoService } from '../../../services/promo.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'agregar',
@@ -13,11 +16,12 @@ export class AgregarComponent {
   type : FormGroup;
   validTextType: boolean = false;
   validNumberType: boolean = false;
+  bookstoreCode:any;
 
-
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private promoService:PromoService) {
     this.type = this.formBuilder.group({
-      code: [null, Validators.required],
+      books: [null, Validators.required],
       name: [null, Validators.required],
       percent: [null, Validators.required],
       begin: [null, Validators.required],
@@ -25,6 +29,7 @@ export class AgregarComponent {
       end: [null, Validators.required],
       
       });
+    this.bookstoreCode = JSON.parse(localStorage.getItem('StoreCode'));
   }
   validateAllFormFields(formGroup: FormGroup) {
       Object.keys(formGroup.controls).forEach(field => {
@@ -55,14 +60,29 @@ export class AgregarComponent {
       this.validNumberType = false;
     }
   }
+ 
   addNewPromo(){
-    console.log(this.type.value.code);
-    console.log(this.type.value.name);
-    console.log(this.type.value.percent);
-    console.log(this.type.value.description);
-    console.log(this.type.value.begin);
-    console.log(this.type.value.end);
-
+    let percentage = parseInt(this.type.value.percent)/100;
+    let books = this.type.value.books.split(";");
+    let body={
+      nombre:this.type.value.name ,
+      descripcion:this.type.value.description,
+      fechaInicio:this.type.value.begin,
+      fechaFin:this.type.value.end,
+      porcenDescuento:percentage,
+      libro: books,
+      libreria: this.bookstoreCode,
+    }
+    this.promoService.addPromo(body)
+      .subscribe((result)=>{
+         if(result.status){
+           Swal(
+             'Created Succesfully!',
+             '',
+             'success'
+           )
+         }
+      })
   }
 
 

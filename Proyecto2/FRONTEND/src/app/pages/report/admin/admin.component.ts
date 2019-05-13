@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { FormBuilder, AbstractControl,Validators, FormGroup } from '@angular/forms';
 import { LocalDataSource } from 'ng2-smart-table';
-import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { ReportService }  from '../../../services/report.service';
 @Component({
   selector: 'admin',

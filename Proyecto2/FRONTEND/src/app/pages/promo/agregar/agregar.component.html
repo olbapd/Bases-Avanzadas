@@ -5,18 +5,18 @@
     <form [formGroup]="type" class="form-horizontal">
       <div class="card-header card-header-rose card-header-text">
         <div class="card-text">
-          <h4 class="card-title">Add Promo</h4>
+          <h4 class="card-title">Add Discount</h4>
         </div>
       </div>
       <div class="card-body">
         <div class="row">
           <div class="col-sm-4">
-            <label>Code: </label>
+            <label>Books: </label>
             <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'text')">
-              <input type="text" matInput id="code"
+              <input type="text" matInput id="books"
               (ngModelChange)="textValidationType($event)"
-              formControlName="code">
-              <app-field-error-display [displayError]="isFieldValid(type, 'code')" errorMsg="Must add a code."></app-field-error-display>
+              formControlName="books">
+              <app-field-error-display [displayError]="isFieldValid(type, 'books')" errorMsg="Must add books."></app-field-error-display>
             </mat-form-field>
           </div>
           <div class="col-sm-4">
@@ -33,7 +33,7 @@
             <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'text')">
               <input type="number" matInput id="percent"
               (ngModelChange)="textValidationType($event)"
-              formControlName="percent">
+              formControlName="percent" max="100" min="0">
               <app-field-error-display [displayError]="isFieldValid(type, 'percent')" errorMsg="Must add a percent."></app-field-error-display>
             </mat-form-field>
           </div>
@@ -49,27 +49,27 @@
             </mat-form-field>
           </div>
           <div class="col-sm-4">
-            <label>Fecha Inicio: </label>
-            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validNumberType===true}" [ngClass]="displayFieldCss(type, 'number')">
-              <input type="text" matInput id="begin"
-              (ngModelChange)="textValidationType($event)"
-              formControlName="begin">
+            <label>Start Date: </label>
+            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'text')">
+              <input matInput [matDatepicker]="picker"placeholder="Date" id="begin" (ngModelChange)="textValidationType($event)" formControlName="begin">
               <app-field-error-display [displayError]="isFieldValid(type, 'begin')" errorMsg="Must add a begin."></app-field-error-display>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker ></mat-datepicker>
             </mat-form-field>
           </div>
           <div class="col-sm-4">
-            <label>Fecha Fin: </label>
+            <label>End Date: </label>
             <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'text')">
-              <input type="text" matInput id="end"
-              (ngModelChange)="textValidationType($event)"
-              formControlName="end">
+              <input matInput [matDatepicker]="picker1" placeholder="Date" id="end" (ngModelChange)="textValidationType($event)" formControlName="end">
               <app-field-error-display [displayError]="isFieldValid(type, 'end')" errorMsg="Must add a end."></app-field-error-display>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1 ></mat-datepicker>
             </mat-form-field>
           </div>
         </div>
       </div>
       <div class="card-footer text-center">
-        <button mat-raised-button type="submit" class="btn btn-rose btn-fill" (click)="addNewPromo">Add Promo</button>
+        <button mat-raised-button type="submit" class="btn btn-rose btn-fill" (click)="addNewPromo()">Add Discount</button>
       </div>
     </form>
   </div>
