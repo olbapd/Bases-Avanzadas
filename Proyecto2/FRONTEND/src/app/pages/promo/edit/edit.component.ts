@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { FormBuilder, AbstractControl,Validators, FormGroup } from '@angular/forms';
+import { PromoService } from '../../../services/promo.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'edit',
@@ -13,18 +15,21 @@ export class EditComponent {
   type : FormGroup;
   validTextType: boolean = false;
   validNumberType: boolean = false;
-  code="asdfasd";
+  code:any;
+  bookstoreCode:any;
+  
+  constructor(private formBuilder: FormBuilder,
+              private promoService:PromoService) {
 
-  constructor(private formBuilder: FormBuilder) {
     this.type = this.formBuilder.group({
-      code: [null, Validators.required],
-      name: [null, Validators.required],
+      books: [null, Validators.required],
       percent: [null, Validators.required],
       begin: [null, Validators.required],
       description: [null, Validators.required],
       end: [null, Validators.required],
       
       });
+    this.bookstoreCode = JSON.parse(localStorage.getItem('StoreCode'));
     this.code= JSON.parse(localStorage.getItem('Promo'))
   }
   validateAllFormFields(formGroup: FormGroup) {
@@ -57,11 +62,26 @@ export class EditComponent {
     }
   }
   upPromo(){
-    console.log(this.type.value.name);
-    console.log(this.type.value.percent);
-    console.log(this.type.value.description);
-    console.log(this.type.value.begin);
-    console.log(this.type.value.end);
-
+    let percentage = parseInt(this.type.value.percent)/100;
+    let books = this.type.value.books.split(";");
+    let body={
+      nombre:this.code,
+      descripcion:this.type.value.description,
+      fechaInicio:this.type.value.begin,
+      fechaFin:this.type.value.end,
+      porcenDescuento:percentage,
+      libro: books,
+      libreria: this.bookstoreCode,
+    }
+    this.promoService.editPromo(body,this.code)
+      .subscribe((result)=>{
+        if(result.status){
+          Swal(
+            'Modified Succesfully!',
+            '',
+            'success'
+          )
+        }
+      })
   }
 }
