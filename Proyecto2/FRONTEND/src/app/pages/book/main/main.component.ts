@@ -17,6 +17,7 @@ export class MainComponent {
   bookstoreCode:any;
   showSearch:any;
   defaultPhoto:any;
+  show
   
   constructor(private bookService:BookService,
               private adminService:AdminService,
@@ -28,6 +29,9 @@ export class MainComponent {
     this.books=[];
     let user= JSON.parse( localStorage.getItem('user'));
     if(user.tipoUsuario==0){
+      this.showSearch=true;
+    }
+    if(user.tipoUsuario==2){
       this.showSearch=true;
     }
     this.adminService.getBookstores()
