@@ -30,7 +30,7 @@ export class AuthService {
 	}
 
 	public register(body) : Observable<any[]>{
-	    const url = "http://localhost:3000/api/vehiculo/update"
+	    const url = Urls.baseUrl+'usuarios';
 	    return this.http.post<any[]>(url,body, this.headers);
 	}
 }
