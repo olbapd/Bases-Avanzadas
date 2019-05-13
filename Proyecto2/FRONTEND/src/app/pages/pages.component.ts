@@ -28,7 +28,6 @@ export class PagesComponent {
 		this.showAllClient=false;
 		if( user.tipoUsuario == 0){ //Gerente
 			this.showClient=false;
-			this.showOrder=false;
 			this.showAllClient=true;
 		}
 		else if( user.tipoUsuario == 1){ //Administrator

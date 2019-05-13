@@ -29,8 +29,8 @@ export class AuthService {
 	    return this.http.post<GeneralResponse>(url,body, this.headers);
 	}
 
-	public register(body) : Observable<any[]>{
+	public register(body) : Observable<GeneralResponse>{
 	    const url = Urls.baseUrl+'usuarios';
-	    return this.http.post<any[]>(url,body, this.headers);
+	    return this.http.post<GeneralResponse>(url,body, this.headers);
 	}
 }
