@@ -22,4 +22,8 @@ export class ClientService {
 		const url = Urls.baseUrl+'usuario/'+code;
 	    return this.http.put<GeneralResponse>(url,client, this.headers);
 	}
+	public getClients():Observable<GeneralResponse>{
+		const url = Urls.baseUrl+'usuarios';
+	    return this.http.get<GeneralResponse>(url, this.headers);
+	}
 }

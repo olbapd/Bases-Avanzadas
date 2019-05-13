@@ -14,6 +14,7 @@ export class PagesComponent {
 	showReport : any;
 	showClient : any;
 	showAuth : any;
+	showAllClient:any;
 	
 	constructor(private router: Router){
 		let user= JSON.parse( localStorage.getItem('user'));
@@ -24,13 +25,16 @@ export class PagesComponent {
 		this.showReport =true;
 		this.showAuth =true;
 		this.showClient=true;
+		this.showAllClient=false;
 		if( user.tipoUsuario == 0){ //Gerente
 			this.showClient=false;
 			this.showOrder=false;
+			this.showAllClient=true;
 		}
 		else if( user.tipoUsuario == 1){ //Administrator
 			this.showAdmin =false;
 			this.showOrder=false;
+			this.showClient=true;
 		}
 		else if( user.tipoUsuario == 2){ //Client
 			this.showAdmin =false;
@@ -40,6 +44,7 @@ export class PagesComponent {
 			this.showAdmin =false;
 			this.showReport=false;
 		}
+		console.log(user.tipoUsuario);
 	}
 
 	logout(){

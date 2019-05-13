@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
+
 import { ClientService } from '../../../services/client.service';
 import Swal from 'sweetalert2';
 
@@ -11,47 +12,33 @@ import Swal from 'sweetalert2';
 export class MainComponent {
   
   clients:any;
-  constructor(private clientServices:ClientService, 
-    private router: Router) {
-    this.clients=[
-      {
-        idCard: "ABCDEF",
-        name: "der Name",
-        birthdate : "21/03/1990",
-        address: "Cartago",
-        number: 3331324354,
-        email: "user@gmail.com",
-        type: "Regular",
-        user: "UserName",
-        photo: '../../../../assets/bookstore.png'
-
-      },
-    ]
-  }
-
-  editClient(user){
-    console.log(user);
-    localStorage.setItem("Client",JSON.stringify(user));
-    this.router.navigate(['/pages/client/edit']);
-  }
-  deleteClient(user){
-    Swal({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.value) {
-        //Meter codigo para borrar
-        Swal(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
-      }
-    })
+  constructor(private clientService:ClientService, 
+              private router: Router) {
+    this.clients=[];
+    this.clientService.getClients()
+      .subscribe((result)=>{
+        if(result.status){
+          console.log(result.data);
+          for (let i = 0; i < result.data.length; ++i) {
+            if(result.data[i].tipoUsuario==2){
+              let date = new Date(result.data[i].fechaNacimiento);
+              let date2 = date.getFullYear()+ "-" +
+                    (date.getMonth() + 1) + "-" +
+                    date.getDate() 
+              let temp={
+                idCard: result.data[i]._id, 
+                name: result.data[i].nombre , 
+                birthdate : date2, 
+                address: result.data[i].lugar , 
+                number: result.data[i].telPrincipal , 
+                email: result.data[i].correo , 
+                type: result.data[i].tipoUsuario , 
+                user: result.data[i].usuario,
+              }
+              this.clients.push(temp);
+            }
+          }
+        }
+      })
   }
 }

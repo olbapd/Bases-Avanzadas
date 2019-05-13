@@ -28,7 +28,10 @@
         </li>
       
         <li  *ngIf="showClient" class="nav-item" >
-          <a class="nav-link" [routerLink]="['/pages/client/admin']" ><i class="fas fa-users"></i>Clients</a>
+          <a class="nav-link" [routerLink]="['/pages/client/edit']" ><i class="fas fa-users"></i>Clients</a>
+        </li>
+        <li  *ngIf="showAllClient" class="nav-item" >
+          <a class="nav-link" [routerLink]="['/pages/client/main']" ><i class="fas fa-users"></i>Clients</a>
         </li>
       
         <li  *ngIf="showAuth" class="nav-item" (click)="logout()" routerLinkActive="active">
