@@ -64,16 +64,25 @@ export class AgregarComponent {
   addNewPromo(){
     let percentage = parseInt(this.type.value.percent)/100;
     let books = this.type.value.books.split(";");
+    let startDate = this.type.value.begin.getFullYear()+ "-" +
+                    (this.type.value.begin.getMonth() + 1) + "-" +
+                    this.type.value.begin.getDate() 
+    let endDate = this.type.value.end.getFullYear()+ "-" +
+                    (this.type.value.end.getMonth() + 1) + "-" +
+                    this.type.value.end.getDate()  
+                     
+
     let body={
       nombre:this.type.value.name ,
       descripcion:this.type.value.description,
-      fechaInicio:this.type.value.begin,
-      fechaFin:this.type.value.end,
+      fechaInicio:startDate,
+      fechaFin:endDate,
       porcenDescuento:percentage,
       libro: books,
       libreria: this.bookstoreCode,
     }
-    this.promoService.addPromo(body)
+    console.log(body);
+    /*this.promoService.addPromo(body)
       .subscribe((result)=>{
          if(result.status){
            Swal(
@@ -82,7 +91,7 @@ export class AgregarComponent {
              'success'
            )
          }
-      })
+      })*/
   }
 
 
