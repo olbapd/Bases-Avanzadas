@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'pages',
   templateUrl: './pages.component.html',
@@ -45,8 +45,22 @@ export class PagesComponent {
 		}
 		console.log(user.tipoUsuario);
 	}
+	comment(){
+		Swal({
+		  input: 'textarea',
+		  title:  'Leave a Comment About Our Service.',
+		  confirmButtonText: 'Yes, submit!',
+		  inputPlaceholder: 'I liked ...',
+		  showCancelButton: true
+		}).then((result) => {
+	      if (result.value) {
+	       	console.log(result.value)
+	      }
+	    })
+	}
 
 	logout(){
 	  this.router.navigate(['/auth/login']);
 	}
+
 }

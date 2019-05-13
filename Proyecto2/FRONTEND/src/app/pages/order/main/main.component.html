@@ -1,33 +1,28 @@
 <div class="wrapper wrapper-full-page" style="background-color: rgba(94, 94, 94, 0.86);">
 <br><br>
 <div class="container-fluid">
+  <div class="row">
+    <label>Search Bookstore</label>
+    <div class="col-4 col-sm-4 col-md-4 col-lg-2 col-xl-2" *ngIf="showSearch">
+      <mat-form-field>
+        <mat-select [(ngModel)]="bookstoreCode" [ngModelOptions]="{standalone: true}" placeholder="Bookstore" name="bookstore" (selectionChange)="searchBookstore($event.value)">
+          <mat-option *ngFor="let bookstore of bookstores; let i = index" [value]="bookstore.code">
+            {{ bookstore.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
   <div class="card-columns">
-    <ng-container *ngFor="let library of libraries; let i = index" >
+    <ng-container *ngFor="let order of orders; let i = index" >
     <div class="card">
-      <img class="card-img-top" src={{library.photo}} alt="Card image cap">
       <div class="card-body">
-        <h3 class="card-title">{{library.code}} - {{library.name}}</h3>
-        <p class="card-text" ><strong>Pais: </strong> {{library.country}} </p>
-        <p class="card-text" ><strong>Ubicacion Detallada: </strong> {{library.location}}</p>
-        <p class="card-text" ><strong>Telefono: </strong> {{library.number}}</p>
-        <p class="card-text" ><strong>Horario: </strong> {{library.schedule}}</p>
-        <div class="row">
-        	<div class="col">
-        		<button (click)="editOrder(library.Code)" class="btn btn-primary">
-        			<i class="fas fa-edit"></i> Modificar
-        		</button>		
-        	</div>
-        	<div class="col">
-        		<button (click)="deleteOrder(library.Code)" class="btn btn-danger">
-        			<i class="fas fa-trash"></i> Borrar
-        		</button>		
-        	</div>
-        </div>
+        <h5 class="card-title">{{order._id}} - {{order.cliente}}</h5>
+        <p class="card-text" ><strong>Date Requested: </strong> {{order.fechaPedido}} </p>
+        <p class="card-text" ><strong>Total Amount: </strong> {{order.montoTotal}} <strong>Delivered: </strong> {{order.estado}}</p>
+        <p class="card-text" ><strong>Books: </strong> {{order.libros}}
       </div>
     </div>
     </ng-container>
   </div>
 </div>
-<a [routerLink]="['/pages/order/agregar']" class="float">
-    <i class="fa fa-plus my-float"></i>
-</a>

@@ -23,15 +23,20 @@
           <a class="nav-link" [routerLink]="['/pages/order/main']"><i class="fas fa-file-invoice"></i> Orders</a>
         </li>
       
-        <li  *ngIf="showReport" class="nav-item" >
-          <a class="nav-link" [routerLink]="['/pages/report/admin']" ><i class="fas fa-chart-bar"></i> Reports</a>
-        </li>
       
         <li  *ngIf="showClient" class="nav-item" >
           <a class="nav-link" [routerLink]="['/pages/client/edit']" ><i class="fas fa-users"></i>Clients</a>
         </li>
         <li  *ngIf="showAllClient" class="nav-item" >
           <a class="nav-link" [routerLink]="['/pages/client/main']" ><i class="fas fa-users"></i>Clients</a>
+        </li>
+
+        <li  *ngIf="showReport" class="nav-item" >
+          <a class="nav-link" [routerLink]="['/pages/report/admin']" ><i class="fas fa-chart-bar"></i> Reports</a>
+        </li>
+
+        <li  *ngIf="showClient" class="nav-item" (click)="comment()" >
+          <a class="nav-link"  ><i class="fas fa-comments"></i> Leave a Comment</a>
         </li>
       
         <li  *ngIf="showAuth" class="nav-item" (click)="logout()" routerLinkActive="active">

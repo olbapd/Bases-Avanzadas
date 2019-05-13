@@ -5,9 +5,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { OrderRoutingModule, routedComponents } from './order-routing.module';
-import { OrderService } from '../../services/order.service';
 import { MaterialModule } from '../../app.module';
 import { FieldErrorDisplayComponent }  from './field-error-display/field-error-display.component';
+import { OrderService } from '../../services/order.service';
+import { AdminService } from '../../services/admin.service';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { FieldErrorDisplayComponent }  from './field-error-display/field-error-d
     FieldErrorDisplayComponent
   ],
   providers: [
-    OrderService
+    OrderService,
+    AdminService
   ],
 })
 export class OrderModule { }
