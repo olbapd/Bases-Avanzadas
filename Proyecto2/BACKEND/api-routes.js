@@ -129,5 +129,12 @@ router.route('/agente/pedidoXtema/:tema_id')
     .get(agente.getpedidoXTema);
 router.route('/agente/pedidoXfecha')
     .post(agente.getpedidoXfecha);
+
+//admin
+var admin = require('./controllers/admin');
+router.route('/admin/consulta1')
+    .get(admin.getConsulta1);
+router.route('/admin/consulta2/:cliente_id')
+    .get(admin.getConsulta2);
 // Export API routes
 module.exports = router;
