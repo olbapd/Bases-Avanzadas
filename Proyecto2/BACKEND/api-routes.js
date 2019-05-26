@@ -117,7 +117,7 @@ router.route('/login')
 
 //Storage
 var storage = require('./controllers/storage');
-router.use('/storage',storage);
+router.use('/storage', storage);
 
 //agente
 var agente = require('./controllers/agente');
@@ -130,4 +130,9 @@ router.route('/agente/pedidoXtema/:tema_id')
 router.route('/agente/pedidoXfecha')
     .post(agente.getpedidoXfecha);
 // Export API routes
+
+//Translate Text
+var translate = require('./controllers/translate');
+router.route('/translate/:fromLang/:toLang/:text')
+    .get(translate.translateTo);
 module.exports = router;
