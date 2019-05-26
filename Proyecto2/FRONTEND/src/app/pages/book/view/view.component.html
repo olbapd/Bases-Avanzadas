@@ -1,0 +1,18 @@
+
+<div class="row">
+  <div class="col">
+  <label>Price:   </label>
+  <mat-form-field>
+    <input type="number"(change)="filter(1, $event)" matInput placeholder="Minimum">
+  </mat-form-field>
+  </div>
+  <div class="col"> 
+  <mat-form-field>
+    <input type="number"(change)="filter(2, $event)" matInput placeholder="Maximum">
+  </mat-form-field>
+  </div>
+</div>
+<div class="table">
+<ng2-smart-table [settings]="settings" [source]="source" (custom)="viewDetail($event)">
+</ng2-smart-table>
+</div>

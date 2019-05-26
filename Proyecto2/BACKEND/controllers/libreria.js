@@ -47,7 +47,7 @@ exports.new = function (req, res) {
 // Handle view libreria info by id
 exports.view = function (req, res) {
     Libreria.find({ '_id': req.params.libreria_id }, function (err, libreria) {
-        Pais.populate(librerias, { path: "pais" }, function (err, librerias) {
+        Pais.populate(libreria, { path: "pais" }, function (err, librerias) {
 
             if (err) {
                 res.json({

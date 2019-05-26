@@ -63,6 +63,8 @@ router.route('/pedido/:pedido_id')
     .delete(pedido.delete);
 router.route('/pedido/libreria/:libreria_id')
     .get(pedido.getPedidoXlibreria);
+    router.route('/pedido/cliente/:cliente_id')
+    .get(pedido.getPedidoXcliente);
 
 router.route('/pedido/estado/:pedido_id')
     .put(pedido.updateEstado);
@@ -117,7 +119,7 @@ router.route('/login')
 
 //Storage
 var storage = require('./controllers/storage');
-router.use('/storage',storage);
+router.use('/storage', storage);
 
 //agente
 var agente = require('./controllers/agente');
@@ -129,5 +131,21 @@ router.route('/agente/pedidoXtema/:tema_id')
     .get(agente.getpedidoXTema);
 router.route('/agente/pedidoXfecha')
     .post(agente.getpedidoXfecha);
+
+//admin
+var admin = require('./controllers/admin');
+router.route('/admin/consulta1')
+    .get(admin.getConsulta1);
+router.route('/admin/consulta2')
+    .get(admin.getConsulta2);
+router.route('/admin/consulta3')
+    .get(admin.getConsulta3);
+router.route('/admin/consulta4')
+    .get(admin.getConsulta4);
 // Export API routes
+
+//Translate Text
+var translate = require('./controllers/translate');
+router.route('/translate/:fromLang/:toLang/:text')
+    .get(translate.translateTo);
 module.exports = router;

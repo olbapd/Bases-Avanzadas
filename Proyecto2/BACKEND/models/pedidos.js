@@ -3,8 +3,7 @@ var mongoose = require('mongoose');
 var pedidoSchema = mongoose.Schema({
     cliente: {
         type: Number,
-        required: true,
-        unique:true
+        required: true
     },
     tema: {
         type: [String],

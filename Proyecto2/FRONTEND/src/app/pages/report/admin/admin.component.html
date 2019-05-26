@@ -1,5 +1,5 @@
 <div class="card">
-	<div class="card-body">
+	<div class="card-body" *ngIf="showReport1a">
 		<h5 class="card-title">TOTAL AMOUNT OF BOOKS ORDERED BY CATEGORY</h5>
 		<ngx-charts-bar-vertical
       [scheme]="colorScheme"
@@ -13,7 +13,7 @@
 	</div>	
 </div>
 <div class="card">
-	<div class="card-body">
+	<div class="card-body" *ngIf="showReport1b">
 		<h5 class="card-title">AVERAGE AMOUNT OF BOOKS ORDERED BY CATEGORY</h5>
 		<ngx-charts-bar-vertical
       [scheme]="colorScheme"

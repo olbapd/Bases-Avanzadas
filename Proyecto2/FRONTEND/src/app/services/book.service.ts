@@ -19,6 +19,10 @@ export class BookService {
 		const url = Urls.baseUrl+ 'libroXlibreria/'+code;
 	    return this.http.get<GeneralResponse>(url, this.headers);
 	}
+	public getAllBooks():Observable<GeneralResponse>{
+		const url = Urls.baseUrl+ 'libros';
+	    return this.http.get<GeneralResponse>(url, this.headers);
+	}
 
 	public deleteBook(code):Observable<GeneralResponse>{
 		const url = Urls.baseUrl+'libro/'+code;

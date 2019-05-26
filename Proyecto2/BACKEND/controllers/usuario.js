@@ -1,5 +1,7 @@
 // Import Modelo model
 Usuario = require('../models/usuario');
+Crypth = require('../sec/crypth');
+
 // Handle index actions
 exports.index = function (req, res) {
     Usuario.get(function (err, usuarios) {
@@ -31,7 +33,7 @@ exports.new = function (req, res) {
     usuario.telPrincipal = req.body.telPrincipal;
     usuario.telSecundario = req.body.telSecundario;
     usuario.usuario = req.body.usuario;
-    usuario.contrasena = req.body.contrasena;
+    usuario.contrasena = Crypth.encode(req.body.contrasena);
 
     // save the contact and check for errors
     usuario.save(function (err) {

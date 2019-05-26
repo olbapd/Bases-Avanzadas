@@ -19,4 +19,9 @@ export class OrderService {
 	    console.log(code);
 	    return this.http.get<GeneralResponse>(url,this.headers);
 	}
+
+	public deliverOrder(code,body): Observable<GeneralResponse>{
+	    const url = Urls.baseUrl+'pedido/estado/'+code;
+	    return this.http.put<GeneralResponse>(url,body,this.headers);
+	}
 }
