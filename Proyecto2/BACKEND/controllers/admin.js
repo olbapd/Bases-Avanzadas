@@ -122,10 +122,12 @@ exports.getConsulta3 = async function (req, res) {
                     }
                     list.push({"nombre":libros[e].nombre,"cantidad":cant});
         }
+        var top5 = list.sort(function(a, b) { return a.cantidad < b.cantidad ? 1 : -1; })
+                .slice(0, 5);
 
         res.json({
             status: true,
-            data:list
+            data:top5
         });
 
     });
