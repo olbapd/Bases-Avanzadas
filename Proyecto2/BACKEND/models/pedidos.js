@@ -6,6 +6,10 @@ var pedidoSchema = mongoose.Schema({
         required: true,
         unique:true
     },
+    tema: {
+        type: [String],
+        required: true
+    },
     libros: {
         type: [String],
         required: true

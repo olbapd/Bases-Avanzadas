@@ -18,8 +18,8 @@ exports.getPedidoXEstado= function (req, res) {
 };
 
 // Handle view libro info by Nombre
-exports.getlibroXCliente = function (req, res) {
-    Libro.find({ 'cliente': req.params.cliente }, function (err, estados) {
+exports.getpedidoXCliente = function (req, res) {
+    Pedidos.find({ 'cliente': req.params.cliente_id }, function (err, estados) {
         if (err) {
             res.json({
                 status: "error",
@@ -33,3 +33,39 @@ exports.getlibroXCliente = function (req, res) {
         });
     });
 };
+
+// Handle view libro info by Nombre
+exports.getpedidoXTema = function (req, res) {
+    Pedidos.find({ 'tema': req.params.tema_id }, function (err, estados) {
+        if (err) {
+            res.json({
+                status: "error",
+                message: err,
+            });
+            return
+        }
+        res.json({
+            status: "success",
+            data: estados
+        });
+    });
+};
+
+
+// Handle view libro info by Nombre
+exports.getpedidoXfecha = function (req, res) {
+    Pedidos.find({ fechaPedido : { $gt: new Date(req.body.start), $lt: new Date(req.body.end) }}, function (err, estados) {
+        if (err) {
+            res.json({
+                status: "error",
+                message: err,
+            });
+            return
+        }
+        res.json({
+            status: "success",
+            data: estados
+        });
+    });
+};
+

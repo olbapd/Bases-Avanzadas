@@ -118,5 +118,16 @@ router.route('/login')
 //Storage
 var storage = require('./controllers/storage');
 router.use('/storage',storage);
+
+//agente
+var agente = require('./controllers/agente');
+router.route('/agente/pedidoXestado/:estado')
+    .get(agente.getPedidoXEstado);
+router.route('/agente/pedidoXcliente/:cliente_id')
+    .get(agente.getpedidoXCliente);
+router.route('/agente/pedidoXtema/:tema_id')
+    .get(agente.getpedidoXTema);
+router.route('/agente/pedidoXfecha')
+    .post(agente.getpedidoXfecha);
 // Export API routes
 module.exports = router;

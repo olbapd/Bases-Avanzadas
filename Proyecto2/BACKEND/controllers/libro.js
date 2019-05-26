@@ -2,6 +2,9 @@
 Libro = require('../models/libro');
 Libreria = require('../models/libreria');
 Tema = require('../models/tema');
+
+
+
 // Handle index actions
 exports.index = function (req, res) {
     Libro.get(function (err, libros) {
@@ -14,6 +17,34 @@ exports.index = function (req, res) {
                     });
                     return
                 }
+               /*                  // Imports the Google Cloud client library
+                const {Translate} = require('@google-cloud/translate');
+
+                // Your Google Cloud Platform project ID
+                const projectId = "confident-trail-106904";
+
+                // Instantiates a client
+                const translate = new Translate({
+                projectId: projectId,
+                });
+
+                // The text to translate
+                const text = "libros";
+                // The target language
+                const target = 'ru';
+
+                // Translates some text into Russian
+                translate
+                .translate(text, target)
+                .then(results => {
+                    const translation = results[0];
+
+                    console.log(`Text: ${text}`);
+                    console.log(`Translation: ${translation}`);
+                })
+                .catch(err => {
+                    console.error('ERROR:', err);
+                }); */
                 res.json({
                     status: true,
                     data: libros

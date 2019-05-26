@@ -6,6 +6,7 @@ Pedido = require('../models/pedidos');
 exports.new = function (req, res) {
     var pedido = new Pedido();
     pedido.cliente = req.body.cliente;
+    pedido.tema = req.body.tema;
     pedido.libros = req.body.libros;
     pedido.fechaPedido = req.body.fechaPedido;
     pedido.montoTotal = req.body.montoTotal;
