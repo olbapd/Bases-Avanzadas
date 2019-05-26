@@ -143,6 +143,16 @@ router.route('/admin/consulta3')
 router.route('/admin/consulta4')
     .get(admin.getConsulta4);
 
+//gerente
+var gerente = require('./controllers/gerente');
+router.route('/gerente/consulta1/:libreria_id')
+    .get(gerente.getConsulta1);
+router.route('/gerente/consulta2/:libreria_id')
+    .get(gerente.getConsulta2);
+router.route('/gerente/consulta3/:libreria_id')
+    .get(gerente.getConsulta3);
+router.route('/gerente/consulta4/:libreria_id')
+    .get(gerente.getConsulta4);
 //rating
 var rating = require('./controllers/rating');
 router.route('/rating')

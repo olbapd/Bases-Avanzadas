@@ -1,6 +1,7 @@
 Promociones = require('../models/promociones');
 Libro = require('../models/libro');
 Tema = require('../models/tema');
+Pedido = require('../models/pedidos');
 
 // Handle view Promociones info by fecha
 
