@@ -142,6 +142,17 @@ router.route('/admin/consulta3')
     .get(admin.getConsulta3);
 router.route('/admin/consulta4')
     .get(admin.getConsulta4);
+
+//rating
+var rating = require('./controllers/rating');
+router.route('/rating')
+    .post(rating.new)
+    .get(rating.index);
+
+//sentiment
+var sentiment = require('./controllers/sentiment');
+router.route('/sentiment')
+    .get(sentiment.index);
 // Export API routes
 
 //Translate Text

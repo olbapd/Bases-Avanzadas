@@ -1,10 +1,6 @@
 var mongoose = require('mongoose');
 // Setup schema
 var ratingSchema = mongoose.Schema({
-    puntuacion: {
-        type: Number,
-        required: true
-    },
     comentario: {
         type: String,
         required: true

@@ -2,9 +2,11 @@ Rating = require('../models/rating');
 
 
 exports.new = function (req, res) {
-    var rating = new Ratin();
-    rating.nombre = req.body.nombre;
+    var rating = new Rating();
     rating.comentario = req.body.comentario;
+    rating.libreria = req.body.libreria_id;
+    
+
 
     rating.save(function (err) {
         if (err) {
@@ -15,14 +17,13 @@ exports.new = function (req, res) {
             return
         }
         res.json({
-            status: true,
-            data: rating
+            status: true
         });
     });
 };
 
 exports.view = function (req, res) {
-    Rating.find({ '_id': req.params.rating_id }, function (err, rating) {
+    Rating.find({ '_id': req.params.libreria_id }, function (err, rating) {
 
         if (err) {
             res.json({
