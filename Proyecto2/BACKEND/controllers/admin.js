@@ -85,11 +85,20 @@ exports.getConsulta2 = async function (req, res) {
             status: true,
             data:[Math.min(...list),Math.max(...list)]
         });
+    });
+};
 
-        
-
-
-
+exports.getConsulta2 = async function (req, res) {
+    Pedido.find({ 'cliente': req.params.cliente_id }, function (err, pedido) {
+        var cantpedidos = pedido.length;
+        var list = new Array();
+        for (var i = 0; i < cantpedidos; i++) {
+            list.push(pedido[i].libros.length);
+        }
+        res.json({
+            status: true,
+            data:[Math.min(...list),Math.max(...list)]
+        });
     });
 };
 // Handle update libro info
