@@ -14,6 +14,9 @@
         <li  *ngIf="showBook" class="nav-item">
           <a class="nav-link" [routerLink]="['/pages/book/main']"><i class="fas fa-book"></i> Books</a>
         </li>
+        <li  *ngIf="showClientBook" class="nav-item">
+          <a class="nav-link" [routerLink]="['/pages/book/view']"><i class="fas fa-book"></i> Books</a>
+        </li>
       
         <li  *ngIf="showPromo" class="nav-item">
           <a class="nav-link" [routerLink]="['/pages/promo/main']"><i class="fas fa-tags"></i> Discounts</a>
@@ -25,7 +28,7 @@
       
       
         <li  *ngIf="showClient" class="nav-item" >
-          <a class="nav-link" [routerLink]="['/pages/client/edit']" ><i class="fas fa-users"></i>Clients</a>
+          <a class="nav-link" [routerLink]="['/pages/client/edit']" ><i class="fas fa-user"></i> Edit Profile</a>
         </li>
         <li  *ngIf="showAllClient" class="nav-item" >
           <a class="nav-link" [routerLink]="['/pages/client/main']" ><i class="fas fa-users"></i>Clients</a>

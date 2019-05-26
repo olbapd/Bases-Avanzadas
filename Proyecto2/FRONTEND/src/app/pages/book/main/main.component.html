@@ -1,9 +1,9 @@
 <div class="wrapper wrapper-full-page" style="background-color: rgba(94, 94, 94, 0.86);">
 <br><br>
 <div class="container-fluid">
-  <div class="row">
+  <div class="row" *ngIf="showSearch">
     <label>Search Bookstore</label>
-    <div class="col-4 col-sm-4 col-md-4 col-lg-2 col-xl-2" *ngIf="showSearch">
+    <div class="col-4 col-sm-4 col-md-4 col-lg-2 col-xl-2" >
       <mat-form-field>
         <mat-select [(ngModel)]="bookstoreCode" [ngModelOptions]="{standalone: true}" placeholder="Bookstore" name="bookstore" (selectionChange)="searchBookstore($event.value)">
           <mat-option *ngFor="let bookstore of bookstores; let i = index" [value]="bookstore.code">
