@@ -64,6 +64,9 @@ router.route('/pedido/:pedido_id')
 router.route('/pedido/libreria/:libreria_id')
     .get(pedido.getPedidoXlibreria);
 
+router.route('/pedido/estado/:libreria_id')
+    .put(pedido.updateEstado);
+
 // Import promocion controller
 var promocion = require('./controllers/promocion');
 // promocion routes

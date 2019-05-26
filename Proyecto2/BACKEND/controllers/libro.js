@@ -54,8 +54,8 @@ exports.new = function (req, res) {
 // Handle view libro info by id
 exports.view = function (req, res) {
     Libro.find({ '_id': req.params.libro_id }, function (err, libro) {
-        Libreria.populate(libros, { path: "libreria" }, function (err, libros) {
-            Tema.populate(libros, { path: "tema" }, function (err, libros) {
+        Libreria.populate(libro, { path: "libreria" }, function (err, libro) {
+            Tema.populate(libro, { path: "tema" }, function (err, libro) {
                 if (err) {
                     res.json({
                         error: true,

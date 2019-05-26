@@ -1,6 +1,7 @@
 Pedido = require('../models/pedidos');
 
 
+
 // Handle create pedido
 exports.new = function (req, res) {
     var pedido = new Pedido();
@@ -39,6 +40,33 @@ exports.update = function (req, res) {
         pedidos.libros = req.body.libros;
         pedidos.fechaPedido = req.body.fechaPedido;
         pedidos.montoTotal = req.body.montoTotal;
+        pedidos.estado = req.body.estado;
+
+        // save the model and check for errors
+        pedidos.save(function (err) {
+            if (err) {
+                res.json({
+                    error: true,
+                    message: err,
+                });
+                return
+            }
+            res.json({
+                status: true
+            });
+        });
+    });
+};
+
+exports.updateEstado = function (req, res) {
+    Pedido.findById(req.params.pedido_id, function (err, pedidos) {
+        if (err) {
+            res.json({
+                error: true,
+                message: err,
+            });
+            return
+        }
         pedidos.estado = req.body.estado;
 
         // save the model and check for errors
