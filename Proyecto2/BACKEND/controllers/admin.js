@@ -74,31 +74,29 @@ exports.getConsulta1 = async function (req, res) {
 };
 
 
-exports.getConsulta2 = async function (req, res) {
-    Pedido.find({ 'cliente': req.params.cliente_id }, function (err, pedido) {
-        var cantpedidos = pedido.length;
-        var list = new Array();
-        for (var i = 0; i < cantpedidos; i++) {
-            list.push(pedido[i].libros.length);
-        }
-        res.json({
-            status: true,
-            data:[Math.min(...list),Math.max(...list)]
-        });
-    });
-};
 
 exports.getConsulta2 = async function (req, res) {
-    Pedido.find({ 'cliente': req.params.cliente_id }, function (err, pedido) {
-        var cantpedidos = pedido.length;
-        var list = new Array();
-        for (var i = 0; i < cantpedidos; i++) {
-            list.push(pedido[i].libros.length);
+    var lista = new Array();
+    var list = new Array();
+    Usuario.find({ 'tipoUsuario': 2 },async function (err, usuarios) {
+        var cantusuarios =  usuarios.length;
+        for (let e = 0; e < cantusuarios; e++) {
+            
+            Pedido.find({ 'cliente': usuarios[e]._id }, async function (err, pedido) {
+                list.length=0;
+                var cantpedidos = pedido.length;
+                for (let i = 0; i < cantpedidos; i++) {
+                    list.push(pedido[i].libros.length);
+                }
+                lista.push({"nombre":usuarios[e]._id,"rango":[Math.min(...list),Math.max(...list)]});
+            });
+            
         }
-        res.json({
+        setTimeout(function(){ 
+            res.json({
             status: true,
-            data:[Math.min(...list),Math.max(...list)]
-        });
+            data:lista
+        });}, 1000);
     });
 };
 

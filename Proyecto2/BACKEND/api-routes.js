@@ -136,7 +136,7 @@ router.route('/agente/pedidoXfecha')
 var admin = require('./controllers/admin');
 router.route('/admin/consulta1')
     .get(admin.getConsulta1);
-router.route('/admin/consulta2/:cliente_id')
+router.route('/admin/consulta2')
     .get(admin.getConsulta2);
 router.route('/admin/consulta3')
     .get(admin.getConsulta3);
