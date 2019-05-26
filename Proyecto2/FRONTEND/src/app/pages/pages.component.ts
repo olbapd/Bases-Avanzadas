@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { CatalogService} from '../services/catalog.service';
+
 import Swal from 'sweetalert2';
+
 @Component({
   selector: 'pages',
   templateUrl: './pages.component.html',
@@ -18,7 +21,9 @@ export class PagesComponent {
 	showClientBook:any;
 	showOrderHistory:any;
 	showReportGerente:any;
-	constructor(private router: Router){
+
+	constructor(private router: Router,
+				private catalogService: CatalogService){
 		let user= JSON.parse(localStorage.getItem('user'));
 		this.showAdmin =true;
 		this.showBook =true;
@@ -69,7 +74,16 @@ export class PagesComponent {
 		  showCancelButton: true
 		}).then((result) => {
 	      if (result.value) {
-	       	console.log(result.value)
+	      	let body={
+	      		libreria_id:'JF0001',
+	      		comentario:  result.value
+	      	}
+	      	this.catalogService.addComment(body)
+	      		.subscribe((res)=>{
+	      			if(res.status){
+	      				console.log("succes");
+	      			}
+	      		})
 	      }
 	    })
 	}

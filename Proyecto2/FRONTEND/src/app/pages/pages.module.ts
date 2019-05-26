@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { MaterialModule } from '../app.module';
+import { CatalogService} from '../services/catalog.service';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -17,6 +18,9 @@ const PAGES_COMPONENTS = [
   declarations: [
     ...PAGES_COMPONENTS
   ],
+  providers: [
+  	CatalogService
+  ]
 })
 export class PagesModule {
 }

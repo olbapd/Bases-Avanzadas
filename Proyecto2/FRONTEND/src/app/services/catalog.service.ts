@@ -39,4 +39,9 @@ export class CatalogService {
 	    const url = Urls.baseUrl+"temas"
 	    return this.http.get<GeneralResponse>(url, this.headers);
 	}
+
+	public addComment(body):Observable<GeneralResponse>{
+	    const url = Urls.baseUrl+"rating"
+	    return this.http.post<GeneralResponse>(url,body, this.headers);
+	}
 }
