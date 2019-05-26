@@ -16,23 +16,21 @@ export class EditComponent {
   validTextType: boolean = false;
   validNumberType: boolean = false;
   idCard="asdfasd";
-  user = "Juan"
+  user :any;
 
   constructor(private formBuilder: FormBuilder,
               private clientService: ClientService) {
     this.type = this.formBuilder.group({
-      idCard: [null, Validators.required],
-      name: [null, Validators.required],
       phone: [null, Validators.required],
-      birthdate: [null, Validators.required],
+      phone2: [null, Validators.required],
       address: [null, Validators.required],
-      type: [null, Validators.required],
       email: [null, Validators.required],
-      user: [null, Validators.required],
       pass: [null, Validators.required],
 
       });
-    this.user= JSON.parse(localStorage.getItem('Client'));
+    this.user= JSON.parse(localStorage.getItem('user'));
+    this.idCard=this.user._id;
+    console.log(this.user);
   }
   validateAllFormFields(formGroup: FormGroup) {
       Object.keys(formGroup.controls).forEach(field => {
@@ -65,20 +63,12 @@ export class EditComponent {
   }
 
   upInfo(){
-    /*console.log(this.type.value.name);
-    console.log(this.type.value.birthdate);
-    console.log(this.type.value.address);
-    console.log(this.type.value.phone);
-    console.log(this.type.value.email);
-    console.log(this.type.value.user);
-    console.log(this.type.value.pass);*/
-    
     let body={
        lugar:this.type.value.address,
        correo:this.type.value.email,
        contrasena:this.type.value.pass,
        telPrincipal:this.type.value.phone,
-       telSecundario:this.type.value.phone
+       telSecundario:this.type.value.phone2
     }
     this.clientService.editClient(body,this.idCard)
       .subscribe((result)=>{

@@ -11,24 +11,6 @@
       <div class="card-body">
         <div class="row">
           <div class="col-sm-4">
-            <label>Name: </label>
-            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'text')">
-              <input type="text" matInput id="name"
-              (ngModelChange)="textValidationType($event)"
-              formControlName="name">
-              <app-field-error-display [displayError]="isFieldValid(type, 'name')" errorMsg="Must add a name."></app-field-error-display>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-4">
-            <label>Birthdate: </label>
-            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'text')">
-              <input type="text" matInput id="birthdate"
-              (ngModelChange)="textValidationType($event)"
-              formControlName="birthdate">
-              <app-field-error-display [displayError]="isFieldValid(type, 'birthdate')" errorMsg="Must add a birthdate."></app-field-error-display>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-4">
             <label>Address: </label>
             <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'text')">
               <input type="text" matInput id="address"
@@ -37,8 +19,6 @@
               <app-field-error-display [displayError]="isFieldValid(type, 'address')" errorMsg="Must add a address."></app-field-error-display>
             </mat-form-field>
           </div>
-        </div>
-        <div class="row">
           <div class="col-sm-4">
             <label>Phone Number: </label>
             <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validNumberType===true}" [ngClass]="displayFieldCss(type, 'number')">
@@ -49,32 +29,22 @@
             </mat-form-field>
           </div>
           <div class="col-sm-4">
+            <label> Secondary Phone Number: </label>
+            <mat-form-field class="example-full-width has-label">
+              <input type="number" matInput id="phone2"
+              formControlName="phone2">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          
+          <div class="col-sm-4">
             <label>Email: </label>
             <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'text')">
               <input type="email" matInput id="email"
               (ngModelChange)="textValidationType($event)"
               formControlName="email">
               <app-field-error-display [displayError]="isFieldValid(type, 'email')" errorMsg="Must add a email."></app-field-error-display>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-4">
-            <label>Type: </label>
-            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'text')">
-              <input type="text" matInput id="type"
-              (ngModelChange)="textValidationType($event)"
-              formControlName="type">
-              <app-field-error-display [displayError]="isFieldValid(type, 'type')" errorMsg="Must add a type."></app-field-error-display>
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <label>User Name: </label>
-            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validNumberType===true}" [ngClass]="displayFieldCss(type, 'number')">
-              <input type="text" matInput id="user"
-              (ngModelChange)="textValidationType($event)"
-              formControlName="user">
-              <app-field-error-display [displayError]="isFieldValid(type, 'user')" errorMsg="Must add a user."></app-field-error-display>
             </mat-form-field>
           </div>
           <div class="col-sm-4">

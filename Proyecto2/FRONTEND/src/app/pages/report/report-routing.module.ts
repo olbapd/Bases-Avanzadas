@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ReportComponent } from './report.component';
 import { AdminComponent } from './admin/admin.component';
+import { GerenteComponent } from './gerente/gerente.component';
+
 
 const routes: Routes = [{
   path: '',
@@ -11,6 +13,9 @@ const routes: Routes = [{
     {
       path: 'admin',
       component: AdminComponent,
+    },{
+      path: 'gerente',
+      component: GerenteComponent,
     },{
       path: '',
       redirectTo: 'admin',
@@ -31,5 +36,6 @@ export class ReportRoutingModule { }
 
 export const routedComponents = [
   ReportComponent,
-  AdminComponent
+  AdminComponent,
+  GerenteComponent
 ];

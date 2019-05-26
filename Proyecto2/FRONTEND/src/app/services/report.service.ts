@@ -33,4 +33,25 @@ export class ReportService {
 	    return this.http.get<GeneralResponse>(url, this.headers);
 	}
 
+
+	public reportGerente1(code) : Observable<GeneralResponse>{
+	    const url = Urls.baseUrl+"gerente/consulta1/"+code;
+	    return this.http.get<GeneralResponse>(url, this.headers);
+	}
+
+	public reportGerente2(code) : Observable<GeneralResponse>{
+	    const url = Urls.baseUrl+"gerente/consulta2/"+code;
+	    return this.http.get<GeneralResponse>(url, this.headers);
+	}
+	
+	public reportGerente3(code) : Observable<GeneralResponse>{
+	    const url = Urls.baseUrl+"gerente/consulta3/"+code;
+	    return this.http.get<GeneralResponse>(url, this.headers);
+	}
+
+	public reportGerente4(code) : Observable<GeneralResponse>{
+	    const url = Urls.baseUrl+"gerente/consulta4/"+code;
+	    return this.http.get<GeneralResponse>(url, this.headers);
+	}
+
 }

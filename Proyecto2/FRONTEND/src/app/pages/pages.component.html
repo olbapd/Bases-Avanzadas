@@ -25,6 +25,10 @@
         <li  *ngIf="showOrder" class="nav-item">
           <a class="nav-link" [routerLink]="['/pages/order/main']"><i class="fas fa-file-invoice"></i> Orders</a>
         </li>
+
+        <li  *ngIf="showOrderHistory" class="nav-item">
+          <a class="nav-link" [routerLink]="['/pages/order/view']"><i class="fas fa-file-invoice"></i> Order History</a>
+        </li>
       
       
         <li  *ngIf="showClient" class="nav-item" >
@@ -36,6 +40,10 @@
 
         <li  *ngIf="showReport" class="nav-item" >
           <a class="nav-link" [routerLink]="['/pages/report/admin']" ><i class="fas fa-chart-bar"></i> Reports</a>
+        </li>
+
+        <li  *ngIf="showReportGerente" class="nav-item" >
+          <a class="nav-link" [routerLink]="['/pages/report/gerente']" ><i class="fas fa-chart-bar"></i> Reports</a>
         </li>
 
         <li  *ngIf="showClient" class="nav-item" (click)="comment()" >
