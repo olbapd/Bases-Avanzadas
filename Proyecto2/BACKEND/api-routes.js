@@ -140,6 +140,8 @@ router.route('/admin/consulta2')
     .get(admin.getConsulta2);
 router.route('/admin/consulta3')
     .get(admin.getConsulta3);
+router.route('/admin/consulta4')
+    .get(admin.getConsulta4);
 // Export API routes
 
 //Translate Text

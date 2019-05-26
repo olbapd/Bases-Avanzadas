@@ -88,7 +88,7 @@ exports.getConsulta2 = async function (req, res) {
                 for (let i = 0; i < cantpedidos; i++) {
                     list.push(pedido[i].libros.length);
                 }
-                lista.push({"nombre":usuarios[e]._id,"rango":[Math.min(...list),Math.max(...list)]});
+                lista.push({"cliente_id":usuarios[e]._id,"rango":[Math.min(...list),Math.max(...list)]});
             });
             
         }
@@ -96,7 +96,7 @@ exports.getConsulta2 = async function (req, res) {
             res.json({
             status: true,
             data:lista
-        });}, 1000);
+        });}, 2000);
     });
 };
 
@@ -130,6 +130,26 @@ exports.getConsulta3 = async function (req, res) {
 
     });
 });
+};
+
+exports.getConsulta4 = async function (req, res) {
+    var lista = new Array();
+    Usuario.find({ 'tipoUsuario': 2 },async function (err, usuarios) {
+        var cantusuarios =  usuarios.length;
+        for (let e = 0; e < cantusuarios; e++) {
+            Pedido.find({ 'cliente': usuarios[e]._id }, async function (err, pedido) {
+                lista.push({"cliente_id":usuarios[e]._id,"cantidad":pedido.length}); 
+            });
+        }
+        
+        setTimeout(function(){ 
+            var top3 = lista.sort(function(a, b) { return a.cantidad < b.cantidad ? 1 : -1; }).slice(0, 3);
+            res.json({
+            status: true,
+            data:lista
+        });}, 2000);
+    });
+   
 };
 // Handle update libro info
 exports.updateEstadoLibro = function (req, res) {
