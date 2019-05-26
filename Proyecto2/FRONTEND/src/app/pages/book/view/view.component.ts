@@ -189,6 +189,7 @@ export class ViewComponent {
       inputPlaceholder: 'Select a language for description',
       inputValidator: (value) => {
         return new Promise((resolve) => {
+          
           resolve('You need to select oranges :)')
         })
       }

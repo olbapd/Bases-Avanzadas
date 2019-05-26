@@ -28,6 +28,8 @@ export class AdminComponent {
   results1b :any;
   results3:any;
   results4b :any;
+  showReport1a:any;
+  showReport1b:any;
 
   settings = {
     add: {
@@ -90,9 +92,37 @@ export class AdminComponent {
     };
     this.startDate="";
     this.endDate="";
+    this.results1a=[];
+    this.results1b=[];
+    this.showReport1a=false;
+    this.showReport1b=false;
 
-    this.results1a= this.reportService.testGetCategories();
-    this.results1b= this.reportService.testGetCategories();
+    this.reportService.report1()
+      .subscribe((result)=>{
+        if(result.status){
+          for (let i = 0; i < result.data.length; ++i) {
+            let temp={
+              name: result.data[i].nombre,
+              value: result.data[i].cantlibros,
+
+            }
+            let temp2={
+              name: result.data[i].nombre,
+              value: result.data[i].prom,
+
+            }
+            if(result.data[i].prom==null){
+              temp2.value=0;
+            }
+            
+            this.results1a.push(temp);
+            this.results1b.push(temp2);
+          }
+          this.showReport1a=true;
+          this.showReport1b=true;
+        }
+
+      })
     
     this.results3 = this.reportService.testGetBooks();
     this.results4b = this.reportService.testGetClients();
