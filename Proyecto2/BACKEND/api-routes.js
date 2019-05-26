@@ -63,6 +63,8 @@ router.route('/pedido/:pedido_id')
     .delete(pedido.delete);
 router.route('/pedido/libreria/:libreria_id')
     .get(pedido.getPedidoXlibreria);
+    router.route('/pedido/cliente/:cliente_id')
+    .get(pedido.getPedidoXcliente);
 
 router.route('/pedido/estado/:pedido_id')
     .put(pedido.updateEstado);
@@ -136,6 +138,8 @@ router.route('/admin/consulta1')
     .get(admin.getConsulta1);
 router.route('/admin/consulta2/:cliente_id')
     .get(admin.getConsulta2);
+router.route('/admin/consulta3')
+    .get(admin.getConsulta3);
 // Export API routes
 
 //Translate Text

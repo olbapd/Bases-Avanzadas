@@ -123,6 +123,23 @@ exports.view = function (req, res) {
     });
 };
 
+exports.getPedidoXcliente = function (req, res) {
+    Pedido.find({ 'cliente': req.params.cliente_id }, function (err, pedido) {
+
+        if (err) {
+            res.json({
+                error: true,
+                message: err,
+            });
+            return
+        }
+        res.json({
+            status: true,
+            data: pedido
+        });
+    });
+};
+
 exports.getPedidoXlibreria= function (req, res) {
     Pedido.find({ 'libreria': req.params.libreria_id }, function (err, estados) {
         if (err) {

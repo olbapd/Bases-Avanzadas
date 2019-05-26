@@ -101,6 +101,36 @@ exports.getConsulta2 = async function (req, res) {
         });
     });
 };
+
+exports.getConsulta3 = async function (req, res) {
+    var list = new Array();
+    Pedido.get(function (err, pedidos) {
+        var cantpedidos = pedidos.length;
+        Libro.get(function (err, libros) {
+            var cantlibros = libros.length;
+            for (var e = 0; e < cantlibros; e++) {
+                var cant = 0;
+                for (var i = 0; i < cantpedidos; i++) {
+                    var librosc = pedidos[i].libros.length;
+                        for (var u = 0; u < librosc; u++) {
+                            if(libros[e]._id==pedidos[i].libros[u]){
+                                cant = cant+1
+                            }
+                            else{continue}
+                        }
+                        
+                    }
+                    list.push({"nombre":libros[e].nombre,"cantidad":cant});
+        }
+
+        res.json({
+            status: true,
+            data:list
+        });
+
+    });
+});
+};
 // Handle update libro info
 exports.updateEstadoLibro = function (req, res) {
     Libro.findById(req.params.libro_id, function (err, libro) {
