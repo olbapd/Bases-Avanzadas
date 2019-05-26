@@ -5,8 +5,6 @@ import { Observable } from 'rxjs';
 import { Urls } from '../config/constants';
 import { GeneralResponse } from '../models/response';
 
-
-
 @Injectable()
 export class OrderService {
 	
@@ -16,7 +14,6 @@ export class OrderService {
 
 	public getOrders(code) : Observable<GeneralResponse>{
 	    const url = Urls.baseUrl+'pedido/libreria/'+code;
-	    console.log(code);
 	    return this.http.get<GeneralResponse>(url,this.headers);
 	}
 
@@ -24,4 +21,14 @@ export class OrderService {
 	    const url = Urls.baseUrl+'pedido/estado/'+code;
 	    return this.http.put<GeneralResponse>(url,body,this.headers);
 	}
+
+	public getOrdersByClient(id) : Observable<GeneralResponse>{
+	    const url = Urls.baseUrl+'pedido/cliente/'+id;
+	    return this.http.get<GeneralResponse>(url,this.headers);
+	}
+	public getAllOrders(): Observable<GeneralResponse>{
+	    const url = Urls.baseUrl+'pedidos';
+	    return this.http.get<GeneralResponse>(url,this.headers);
+	}
+
 }

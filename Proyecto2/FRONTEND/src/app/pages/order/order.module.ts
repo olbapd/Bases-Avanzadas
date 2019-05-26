@@ -7,8 +7,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderRoutingModule, routedComponents } from './order-routing.module';
 import { MaterialModule } from '../../app.module';
 import { FieldErrorDisplayComponent }  from './field-error-display/field-error-display.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+
 import { OrderService } from '../../services/order.service';
 import { AdminService } from '../../services/admin.service';
+import { CatalogService } from '../../services/catalog.service';
 
 @NgModule({
   imports: [
@@ -16,7 +19,8 @@ import { AdminService } from '../../services/admin.service';
     FormsModule,
     ReactiveFormsModule,
     OrderRoutingModule,
-    MaterialModule
+    MaterialModule,
+    Ng2SmartTableModule
   ],
   declarations: [
     ...routedComponents,
@@ -24,7 +28,8 @@ import { AdminService } from '../../services/admin.service';
   ],
   providers: [
     OrderService,
-    AdminService
+    AdminService,
+    CatalogService
   ],
 })
 export class OrderModule { }

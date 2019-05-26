@@ -39,7 +39,7 @@
 	</div>
 	<div class="col-lg-6">
 		<div class="card">
-			<div class="card-body">
+			<div class="card-body" *ngIf="showReport3">
 				<h5 class="card-title"> TOP 5 MOST PURCHASED BOOKS</h5>
 				<ngx-charts-bar-vertical
 		      [scheme]="colorScheme"
@@ -77,14 +77,14 @@
 						</mat-form-field>
 					</div>
 				</div>
-	    		<ng2-smart-table [settings]="settingReport4" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+	    		<ng2-smart-table [settings]="settingReport4" [source]="sourceOrders">
 	    		</ng2-smart-table>
 	  		</div>
 		</div>
 	</div>
 	<div class="col-lg-6">
 		<div class="card">
-			<div class="card-body">
+			<div class="card-body" *ngIf="showReport4b">
 				<h5 class="card-title"> TOP 3 CLIENTS WITH MOST ORDERS</h5>
 				<ngx-charts-bar-vertical
 		      [scheme]="colorScheme"

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
-import { BookService } from '../../../services/book.service';
 import { AdminService } from '../../../services/admin.service';
+import { OrderService } from '../../../services/order.service';
+import { CatalogService } from '../../../services/catalog.service';
 import { LocalDataSource } from 'ng2-smart-table';
 
 import Swal from 'sweetalert2';
@@ -29,12 +30,16 @@ export class ViewComponent {
         title: 'ISSN',
         type: 'string',
       },
-      name: {
-        title: 'Name',
+      date: {
+        title: 'Date',
         type: 'string',
       },
       category: {
-        title: 'Category',
+        title: 'Categories',
+        type: 'string',
+      },
+      delivered: {
+        title: 'Delivered',
         type: 'string',
       }
     },
@@ -45,37 +50,47 @@ export class ViewComponent {
   books:any;
   min:any;
   max:any;
-  constructor(private bookService:BookService,
-              private adminService:AdminService,
+  categories:any;
+  constructor(private adminService:AdminService,
+              private catalogService:CatalogService,
+              private orderService:OrderService,
               private router: Router) {
     this.books=[];
     this.min="";
     this.max="";
-    this.bookService.getAllBooks()
+    this.categories=[];
+    let user= JSON.parse( localStorage.getItem('user'));
+
+    this.catalogService.getCategories()
       .subscribe((result)=>{
         if(result.status){
-          for (let i = 0; i < result.data.length; ++i) {
-            if(result.data[i].foto==undefined || result.data[i].foto==""){
-              result.data[i].foto=this.defaultPhoto;
-            }
-            let temp={
-              photo: result.data[i].foto,
-              issn: result.data[i]._id,
-              name: result.data[i].nombre,
-              category: result.data[i].tema.nombre,
-              categoryId: result.data[i].tema._id,
-              price: result.data[i].precio,
-              description: result.data[i].descripcion,
-              sold: result.data[i].cantidadVendida,
-              available: result.data[i].cantidadDisponible,
-            }
-            this.source.append(temp);
-            this.books.push(temp);
-          }
+          this.categories = result.data;
+            this.orderService.getOrdersByClient(201500002)
+              .subscribe((result2)=>{
+                if(result2.status){
+                  for (let i = 0; i < result2.data.length; ++i) {
+                    let temp={
+                      issn: result2.data[i].libros,
+                      delivered: result2.data[i].estado,
+                      date: result2.data[i].fechaPedido,
+                      category: result2.data[i].tema, 
+                    }
+                    let cat="";                
+                    for (let j = 0; j < temp.category.length; ++j) {
+                      for (let k = 0; k < this.categories.length; ++k) {
+                        if(temp.category[j] == this.categories[k]._id){
+                          cat=cat+this.categories[k].nombre+" "
+                        }
+                      }
+                    }
+                    temp.category= cat;
+                    this.source.append(temp);
+                  }
+                }
+              })
         }
-      })
-
-    this.defaultPhoto="../../../../assets/book.png";
+      })   
+   this.defaultPhoto="../../../../assets/book.png";
     
   }
 
@@ -189,6 +204,7 @@ export class ViewComponent {
       inputPlaceholder: 'Select a language for description',
       inputValidator: (value) => {
         return new Promise((resolve) => {
+          
           resolve('You need to select oranges :)')
         })
       }

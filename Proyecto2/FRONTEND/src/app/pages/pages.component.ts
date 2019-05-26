@@ -18,7 +18,7 @@ export class PagesComponent {
 	showClientBook:any;
 	
 	constructor(private router: Router){
-		let user= JSON.parse( localStorage.getItem('user'));
+		let user= JSON.parse(localStorage.getItem('user'));
 		this.showAdmin =true;
 		this.showBook =true;
 		this.showPromo =true;
@@ -53,7 +53,6 @@ export class PagesComponent {
 			this.showClient=false;
 			this.showAllClient=true;
 		}
-		console.log(user.tipoUsuario);
 	}
 	comment(){
 		Swal({

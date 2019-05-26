@@ -6,8 +6,10 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { ReportRoutingModule, routedComponents } from './report-routing.module';
 import { ReportService } from '../../services/report.service';
-import { MaterialModule } from '../../app.module';
+import { OrderService }  from '../../services/order.service';
+import { CatalogService }  from '../../services/catalog.service';
 
+import { MaterialModule } from '../../app.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
@@ -24,7 +26,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ...routedComponents
   ],
   providers: [
-    ReportService
+    ReportService,
+    OrderService,
+    CatalogService
   ],
 })
 export class ReportModule { }

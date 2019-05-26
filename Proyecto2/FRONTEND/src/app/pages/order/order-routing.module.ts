@@ -5,6 +5,7 @@ import { OrderComponent } from './order.component';
 import { MainComponent } from './main/main.component';
 import { EditComponent } from './edit/edit.component';
 import { AgregarComponent } from './agregar/agregar.component';
+import { ViewComponent } from './view/view.component';
 
 const routes: Routes = [{
   path: '',
@@ -18,6 +19,9 @@ const routes: Routes = [{
       component: MainComponent,
     },
     {
+      path: 'view',
+      component: ViewComponent,
+    },{
       path: 'agregar',
       component: AgregarComponent,
     },{
@@ -42,5 +46,6 @@ export const routedComponents = [
   OrderComponent,
   EditComponent,
   MainComponent,
-  AgregarComponent
+  AgregarComponent,
+  ViewComponent
 ];
