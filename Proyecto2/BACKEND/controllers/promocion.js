@@ -94,6 +94,23 @@ exports.view = function (req, res) {
     });
 };
 
+exports.getpromoXlibreria = function (req, res) {
+    Promocion.find({ 'libreria': req.params.libreria_id }, function (err, promocion) {
+
+        if (err) {
+            res.json({
+                error: true,
+                message: err,
+            });
+            return
+        }
+        res.json({
+            status: true,
+            data: promocion
+        });
+    });
+};
+
 exports.delete = function (req, res) {
     Promocion.deleteOne({
         _id: req.params.promocion_id
