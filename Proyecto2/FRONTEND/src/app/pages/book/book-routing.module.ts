@@ -5,6 +5,7 @@ import { BookComponent } from './book.component';
 import { MainComponent } from './main/main.component';
 import { EditComponent } from './edit/edit.component';
 import { AgregarComponent } from './agregar/agregar.component';
+import { ViewComponent } from './view/view.component';
 
 const routes: Routes = [{
   path: '',
@@ -21,12 +22,15 @@ const routes: Routes = [{
       path: 'agregar',
       component: AgregarComponent,
     },{
+      path: 'view',
+      component: ViewComponent,
+    },{
       path: '',
-      redirectTo: 'agregar',
+      redirectTo: 'main',
       pathMatch: 'full',
     }, {
       path: '**',
-      redirectTo: 'agregar',
+      redirectTo: 'main',
       pathMatch: 'full',
     }    
   ],
@@ -42,5 +46,6 @@ export const routedComponents = [
   BookComponent,
   MainComponent,
   AgregarComponent,
-  EditComponent
+  EditComponent,
+  ViewComponent
 ];

@@ -7,10 +7,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookRoutingModule, routedComponents } from './book-routing.module';
 import { MaterialModule } from '../../app.module';
 import { FieldErrorDisplayComponent }  from './field-error-display/field-error-display.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { BookService } from '../../services/book.service';
 import { AdminService } from '../../services/admin.service';
 import { CatalogService } from '../../services/catalog.service';
+
 
 @NgModule({
   imports: [
@@ -18,7 +20,8 @@ import { CatalogService } from '../../services/catalog.service';
     FormsModule,
     ReactiveFormsModule,
     BookRoutingModule,
-    MaterialModule
+    MaterialModule,
+    Ng2SmartTableModule
   ],
   declarations: [
     ...routedComponents,

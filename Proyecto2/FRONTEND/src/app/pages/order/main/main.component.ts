@@ -59,7 +59,36 @@ export class MainComponent {
       })
   }
 
-  editPromo(code){
 
+  viewOrder(id){
+
+  }
+  deliverOrder(id){
+    Swal({
+      title: 'Want to deliver this order?',
+      text: "You won't be able to revert this!",
+      type: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, deliver!'
+    }).then((result) => {
+      if (result.value) {
+        let body={
+          estado:true
+        };
+        this.orderService.deliverOrder(id,body)
+          .subscribe((res)=>{
+            if(res.status){
+              this.searchBookstore(this.bookstoreCode);
+              Swal(
+                'Delevired!',
+                'The order will be delivered as soon as possible.',
+                'success'
+              )
+            }
+          })
+      }
+    })
   }
 }
