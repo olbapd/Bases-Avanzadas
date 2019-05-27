@@ -79,7 +79,7 @@ exports.update = function (req, res) {
         }
         usuario.lugar = req.body.lugar;
         usuario.correo = req.body.correo;
-        usuario.contrasena = req.body.contrasena;
+        usuario.contrasena = Crypth.encode(req.body.contrasena);
         usuario.telPrincipal = req.body.telPrincipal;
         usuario.telSecundario = req.body.telSecundario;
         // save the model and check for errors
