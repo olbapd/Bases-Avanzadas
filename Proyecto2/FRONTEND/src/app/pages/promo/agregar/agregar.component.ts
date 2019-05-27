@@ -81,8 +81,7 @@ export class AgregarComponent {
       libro: books,
       libreria: this.bookstoreCode,
     }
-    console.log(body);
-    /*this.promoService.addPromo(body)
+    this.promoService.addPromo(body)
       .subscribe((result)=>{
          if(result.status){
            Swal(
@@ -91,7 +90,7 @@ export class AgregarComponent {
              'success'
            )
          }
-      })*/
+      })
   }
 
 

@@ -20,6 +20,7 @@ export class PagesComponent {
 	showAllClient:any;
 	showClientBook:any;
 	showOrderHistory:any;
+	showPlaceOrder:any;
 	showReportGerente:any;
 
 	constructor(private router: Router,
@@ -36,6 +37,7 @@ export class PagesComponent {
 		this.showClientBook=false
 		this.showOrderHistory=false;
 		this.showReportGerente=false;
+		this.showPlaceOrder=false;
 		if( user.tipoUsuario == 0){ //Gerente
 			this.showClient=false;
 			this.showAllClient=true;
@@ -55,6 +57,7 @@ export class PagesComponent {
 			this.showPromo=false;
 			this.showOrderHistory=true;
 			this.showOrder=false;
+			this.showPlaceOrder=true;
 		}
 		else if( user.tipoUsuario == 3){ //Agent
 			this.showAdmin =false;

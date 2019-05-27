@@ -26,6 +26,10 @@
           <a class="nav-link" [routerLink]="['/pages/order/main']"><i class="fas fa-file-invoice"></i> Orders</a>
         </li>
 
+        <li  *ngIf="showPlaceOrder" class="nav-item">
+          <a class="nav-link" [routerLink]="['/pages/order/agregar']"><i class="fas fa-file-invoice"></i> Place Order</a>
+        </li>
+
         <li  *ngIf="showOrderHistory" class="nav-item">
           <a class="nav-link" [routerLink]="['/pages/order/view']"><i class="fas fa-file-invoice"></i> Order History</a>
         </li>
