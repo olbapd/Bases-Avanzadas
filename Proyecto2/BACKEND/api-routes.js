@@ -79,6 +79,8 @@ router.route('/promocion/:promocion_id')
     .get(promocion.view)
     .put(promocion.update)
     .delete(promocion.delete);
+router.route('/promocion/libreria/:libreria_id')
+    .get(promocion.getpromoXlibreria);
 
 // Import rating controller
 var rating = require('./controllers/rating');
