@@ -15,12 +15,6 @@ import Swal from 'sweetalert2';
 export class ViewComponent {
   settings = {
     actions: {
-      custom:[
-        {
-          name: 'viewDetail',
-          title: '<i class="fas fa-eye"></i>'
-        }
-      ],
       add: false,
       edit:false,
       delete:false
@@ -60,7 +54,6 @@ export class ViewComponent {
     this.max="";
     this.categories=[];
     let user= JSON.parse( localStorage.getItem('user'));
-    console.log(user);
     this.catalogService.getCategories()
       .subscribe((result)=>{
         if(result.status){
