@@ -36,6 +36,11 @@ export class CatalogService {
 	    return this.http.get<GeneralResponse>(url, this.headers);
 	}
 
+	public getTranslation(code,id) : Observable<GeneralResponse>{
+	    const url = Urls.baseUrl+"translate/"+id+"/"+code;
+	    return this.http.get<GeneralResponse>(url, this.headers);
+	}
+
 	public testGetCountries(){
 		return this.countries;
 	}

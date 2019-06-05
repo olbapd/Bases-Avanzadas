@@ -194,7 +194,17 @@ export class ViewComponent {
       inputPlaceholder: 'Select a language for description',
       inputValidator: (value) => {
         return new Promise((resolve) => {
-          resolve('You need to select oranges :)')
+          console.log(value);
+          this.catalogService.getTranslation(value,event.data.issn)
+            .subscribe((result)=>{
+              console.log(result);
+              if(result.status ){
+                if(result.translate!=undefined){
+                  resolve(result.translate);        
+                }
+                 resolve("Try again, connection error.");        
+              }
+            })
         })
       }
     })
