@@ -31,7 +31,7 @@ export class EditComponent {
       openHours: [null, Validators.required],
     });
 
-     let temp={
+     /*let temp={
       code: "JF0001",
       country: '5cd6354e3f03ab133a19257c',
       location: "Cartago-TEC",
@@ -39,9 +39,9 @@ export class EditComponent {
       number: "25744035",
       photo: "../../../../assets/bookstore.png",
       schedule: "L a V: 7:30am-5:00pm"
-    }
+    }*/
 
-    //let temp = JSON.parse(localStorage.getItem('Store'));
+    let temp = JSON.parse(localStorage.getItem('Store'));
     this.type.get('name').setValue(temp.name);
     this.type.get('phone').setValue(temp.number);
     this.type.get('address').setValue(temp.location);
