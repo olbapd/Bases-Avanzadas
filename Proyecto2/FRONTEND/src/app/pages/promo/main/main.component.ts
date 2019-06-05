@@ -23,6 +23,7 @@ export class MainComponent {
     this.bookstores=[];
     this.bookstoreCode="";
     this.showSearch=false;
+    this.promos=[];
     let user= JSON.parse( localStorage.getItem('user'));
     if(user.tipoUsuario==0){
       this.showSearch=true;
@@ -39,22 +40,31 @@ export class MainComponent {
             this.bookstores.push(temp);
           }
         }
-    })
-    this.promos=[
-      {
-        code: "ABCDEF",
-        name: "Pancho ",
-        description : "Descripcion Promocion",
-        percent: "10%",
-        begin: "01/01/19",
-        end: "02/02/19",
-        photo: '../../../../assets/bookstore.png'
+    });
 
-      },
-    ]
+    this.promoService.getPromo()
+      .subscribe((result)=>{
+        if(result.status){
+          let promosData = result.data
+          for (let i = 0; i < promosData.length; ++i) {
+            let temp=
+            {
+              code: promosData[i]._id,
+              name: promosData[i].nombre,
+              description : promosData[i].descripcion,
+              percent: promosData[i].porcenDescuento,
+              begin: promosData[i].fechaInicio,
+              end: promosData[i].fechaFin
+            }
+            this.promos.push(temp);
+          }
+        }
+      })
   }
   searchBookstore(code){
     this.bookstoreCode=code;
+    localStorage.setItem("StoreCode",JSON.stringify(this.bookstoreCode));
+
     //this.promos=[];
   }
 
