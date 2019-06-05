@@ -24,7 +24,12 @@ export class CatalogService {
       }
     ]
 
-	constructor(private http : HttpClient, private router : Router) {}
+	constructor(private http : HttpClient, private router : Router) {
+		const headerObject = {
+      'Content-Type':'application/json; charset=utf-8',
+    };
+    this.headers= {headers: new HttpHeaders(headerObject)};
+	}
 
 	public getCountries() : Observable<GeneralResponse>{
 	    const url = Urls.baseUrl+"paises"
@@ -43,5 +48,18 @@ export class CatalogService {
 	public addComment(body):Observable<GeneralResponse>{
 	    const url = Urls.baseUrl+"rating"
 	    return this.http.post<GeneralResponse>(url,body, this.headers);
+	}
+	public uploadPhoto(photo:File){
+		console.log(photo);
+	  const url =Urls.baseUrl+'storage/put';
+	  let photoFormData = new FormData();
+    photoFormData.append('fileUploaded', photo,photo.name)
+    console.log("Uploading file " + photo.name);
+    return this.http.post<any>(url, photoFormData);//, this.headers );
+  }
+
+	public downloadFile(hash : string){
+	  const url = Urls.baseUrl+"storage/pull/" + hash;
+	  return url;
 	}
 }

@@ -3,6 +3,7 @@ import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { BookService } from '../../../services/book.service';
 import { AdminService } from '../../../services/admin.service';
 import { LocalDataSource } from 'ng2-smart-table';
+import { CatalogService } from '../../../services/catalog.service';
 
 import Swal from 'sweetalert2';
 
@@ -47,6 +48,7 @@ export class ViewComponent {
   max:any;
   constructor(private bookService:BookService,
               private adminService:AdminService,
+              private catalogService:CatalogService,
               private router: Router) {
     this.books=[];
     this.min="";
@@ -58,6 +60,9 @@ export class ViewComponent {
             if(result.data[i].foto==undefined || result.data[i].foto==""){
               result.data[i].foto=this.defaultPhoto;
             }
+            else{
+                result.data[i].foto = this.catalogService.downloadFile(result.data[i].foto);
+              }
             let temp={
               photo: result.data[i].foto,
               issn: result.data[i]._id,

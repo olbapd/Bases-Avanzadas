@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { BookService } from '../../../services/book.service';
 import { AdminService } from '../../../services/admin.service';
+import { CatalogService } from '../../../services/catalog.service';
 
 import Swal from 'sweetalert2';
 
@@ -21,6 +22,7 @@ export class MainComponent {
   
   constructor(private bookService:BookService,
               private adminService:AdminService,
+              private catalogService:CatalogService,
               private router: Router) {
     this.bookstores=[];
     this.bookstoreCode="";
@@ -55,6 +57,9 @@ export class MainComponent {
             for (let i = 0; i < result.data.length; ++i) {
               if(result.data[i].foto==undefined || result.data[i].foto==""){
                 result.data[i].foto=this.defaultPhoto;
+              }
+              else{
+                result.data[i].foto = this.catalogService.downloadFile(result.data[i].foto);
               }
               let temp={
                 photo: result.data[i].foto,

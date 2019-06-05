@@ -8,96 +8,106 @@ import { BookService } from '../../../services/book.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'agregar',
-  styleUrls: ['./agregar.component.scss'],
-  templateUrl: './agregar.component.html',
+	selector: 'agregar',
+	styleUrls: ['./agregar.component.scss'],
+	templateUrl: './agregar.component.html',
 })
 
 
 export class AgregarComponent {
-  type : FormGroup;
-  validTextType: boolean = false;
-  validNumberType: boolean = false;
-  categories:any;
-  category:any;
-  bookstoreCode:any;
+	type : FormGroup;
+	validTextType: boolean = false;
+	validNumberType: boolean = false;
+	categories:any;
+	category:any;
+	bookstoreCode:any;
+	picture:any;
+	photoHash:any;
 
 
-  constructor(private formBuilder: FormBuilder,
-              private bookService: BookService,
-              private catalogService: CatalogService) {
-    this.type = this.formBuilder.group({
-      issn: [null, Validators.required],
-      name: [null, Validators.required],
-      category: [null, Validators.required],
-      price: [null, Validators.required],
-      description: [null, Validators.required],
-      amount: [null, Validators.required],
-      photo: [null, Validators.required],
+	constructor(private formBuilder: FormBuilder,
+							private bookService: BookService,
+							private catalogService: CatalogService) {
+		this.type = this.formBuilder.group({
+			issn: [null, Validators.required],
+			name: [null, Validators.required],
+			category: [null, Validators.required],
+			price: [null, Validators.required],
+			description: [null, Validators.required],
+			amount: [null, Validators.required],
+			photo: [null, Validators.required],
 
-      });
-    this.bookstoreCode = JSON.parse(localStorage.getItem('StoreCode'));
-     this.catalogService.getCategories()
-       .subscribe((result)=>{
-         if(result.status){
-           this.categories=result.data;
-         }
-       })
-      
-  }
-  validateAllFormFields(formGroup: FormGroup) {
-      Object.keys(formGroup.controls).forEach(field => {
-      const control = formGroup.get(field);
-      if (control instanceof FormControl) {
-        control.markAsTouched({ onlySelf: true });
-      }
-      else if (control instanceof FormGroup) {
-        this.validateAllFormFields(control);
-      }
-    });
-  }
-  isFieldValid(form: FormGroup, field: string) {
-    return !form.get(field).valid && form.get(field).touched;
-  }
-  textValidationType(e){
-    if (e) {
-      this.validTextType = true;
-    }
-    else{
-      this.validTextType = false;
-    }
-  }
-  numberValidationType(e){
-    if (e) {
-      this.validNumberType = true;
-    }else{
-      this.validNumberType = false;
-    }
-  }
+			});
+		this.bookstoreCode = JSON.parse(localStorage.getItem('StoreCode'));
+		 this.catalogService.getCategories()
+			 .subscribe((result)=>{
+				 if(result.status){
+					 this.categories=result.data;
+				 }
+			 })
+			
+	}
+	validateAllFormFields(formGroup: FormGroup) {
+			Object.keys(formGroup.controls).forEach(field => {
+			const control = formGroup.get(field);
+			if (control instanceof FormControl) {
+				control.markAsTouched({ onlySelf: true });
+			}
+			else if (control instanceof FormGroup) {
+				this.validateAllFormFields(control);
+			}
+		});
+	}
+	isFieldValid(form: FormGroup, field: string) {
+		return !form.get(field).valid && form.get(field).touched;
+	}
+	textValidationType(e){
+		if (e) {
+			this.validTextType = true;
+		}
+		else{
+			this.validTextType = false;
+		}
+	}
+	numberValidationType(e){
+		if (e) {
+			this.validNumberType = true;
+		}else{
+			this.validNumberType = false;
+		}
+	}
+	onPhotoChange(event){
+		this.picture = event.target.files[0];
+		this.catalogService.uploadPhoto(this.picture)
+			.subscribe((data)=>{
+				this.photoHash = (data && data.hash) ? data.hash : null;
+        console.log(this.photoHash);            
+			})
+	}
 
-  addNewBook(){
-    let body={
-      libro_id:this.type.value.issn,
-      nombre:this.type.value.name,
-      libreria_id:this.bookstoreCode,
-      tema_id:this.category,
-      descripcion:this.type.value.description,
-      foto:"",
-      precio:this.type.value.price,
-      cantidadVendida:0,
-      cantidadDisponible:this.type.value.amount,
-      estado:"bueno",
-    }
+	addNewBook(event){
 
-    this.bookService.addBook(body)
-      .subscribe((result)=>{
-        if(result.status){
-          Swal(
-            'Created Succesfully!',
-            '',
-            'success'
-          )
-        }
-      })
-  }
+		let body={
+			libro_id:this.type.value.issn,
+			nombre:this.type.value.name,
+			libreria_id:this.bookstoreCode,
+			tema_id:this.category,
+			descripcion:this.type.value.description,
+			foto:this.photoHash,
+			precio:this.type.value.price,
+			cantidadVendida:0,
+			cantidadDisponible:this.type.value.amount,
+			estado:"bueno",
+		}
+		this.bookService.addBook(body)
+			.subscribe((result)=>{
+				if(result.status){
+					Swal(
+						'Created Succesfully!',
+						'',
+						'success'
+					)
+				}
+			})
+	}
 }
