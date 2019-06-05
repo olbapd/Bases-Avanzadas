@@ -169,6 +169,6 @@ router.route('/sentiment')
 
 //Translate Text
 var translate = require('./controllers/translate');
-router.route('/translate/:fromLang/:toLang/:text')
+router.route('/translate/:libro_id/:toLang/')
     .get(translate.translateTo);
 module.exports = router;

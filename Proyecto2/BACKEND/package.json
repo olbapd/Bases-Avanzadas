@@ -23,6 +23,7 @@
     "express": "^4.16.4",
     "express-fileupload": "^1.1.4",
     "fs": "0.0.1-security",
+    "google-translate-api": "^2.3.0",
     "mongoose": "^5.5.5",
     "randomstring": "^1.1.5"
   }
