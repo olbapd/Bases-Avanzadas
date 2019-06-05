@@ -5,7 +5,7 @@ import { FormBuilder, AbstractControl,Validators, FormGroup } from '@angular/for
 import { CatalogService } from '../../../services/catalog.service';
 import { BookService } from '../../../services/book.service';
 import { PromoService } from '../../../services/promo.service';
-
+import { OrderService } from '../../../services/order.service';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'agregar',
@@ -23,6 +23,7 @@ export class AgregarComponent {
   constructor(private formBuilder: FormBuilder,
               private bookService: BookService,
               private catalogService: CatalogService,
+              private orderService: OrderService,
               private promoService: PromoService) {
     this.type = this.formBuilder.group({
       bookstore: [null, Validators.required],
@@ -68,8 +69,8 @@ export class AgregarComponent {
     let cat = this.type.value.categories.split(";");
     let books = this.type.value.books.split(";");
     let d = new Date();
-    let month = '-' + (d.getMonth() + 1);
-    let day = '-' + d.getDate();
+    let month = '-0' + (d.getMonth() + 1);
+    let day = '-0' + d.getDate();
     let year = d.getFullYear();
     let currentDate=year+month+day;
     
@@ -88,6 +89,7 @@ export class AgregarComponent {
       if(result.status){
         let precios=[];
         let promos = result.data
+        
         for (let i = 0; i < body.libros.length; ++i) {
           let temp =1
           let found=false
@@ -106,20 +108,42 @@ export class AgregarComponent {
               break
             }
           }
+          if(!found){
+            precios.push(temp);
+          }
         }
+
         console.log(precios);
+        this.bookService.getBooks(body.libreria)
+          .subscribe((result2)=>{
+            if(result2.status){
+              let total =0 ;
+              let libros = result2.data;
+              for (let i = 0; i < body.libros.length; ++i) {
+                for (let k = 0; k < libros.length; ++k) {
+                  if(libros[k]._id==body.libros[i]){
+                    total=total+ (libros[k].precio*precios[i]);
+                    console.log(total);
+                    break;
+                  }
+                }
+              }
+              body.montoTotal=total;
+              console.log(body);
+              this.orderService.addOrders(body)
+                .subscribe((result3)=>{
+                  if(result3.status){
+                    Swal(
+                      'Created Ordered!',
+                      '',
+                      'success'
+                    )
+                  }
+                });
+            }
+          })
       }
 
     })
-
-
-    /*this.bookService.getBooks(body.libreria)
-      .subscribe((result)=>{
-        if(result.status){
-          for (let i = 0; i < result.data.length; ++i) {
-            if(1==1)
-          }
-        }
-      })*/
   }
 }

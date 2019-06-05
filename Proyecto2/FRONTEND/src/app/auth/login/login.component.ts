@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/pages/book/main']);  
           }
           else if(user.tipoUsuario==2){ //cliente
-            this.router.navigate(['/pages/book/main']);  
+            this.router.navigate(['/pages/book/view']);  
           }
           else if(user.tipoUsuario==3){ //agente
             this.router.navigate(['/pages/order/main']);  

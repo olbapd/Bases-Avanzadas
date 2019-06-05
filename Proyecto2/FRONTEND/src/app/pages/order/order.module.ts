@@ -30,11 +30,11 @@ import { PromoService } from '../../services/promo.service';
     FieldErrorDisplayComponent
   ],
   providers: [
-    OrderService,
     AdminService,
     CatalogService,
     BookService,
-    PromoService
+    PromoService,
+    OrderService
   ],
 })
 export class OrderModule { }

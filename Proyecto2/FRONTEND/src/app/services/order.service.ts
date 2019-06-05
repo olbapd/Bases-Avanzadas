@@ -30,5 +30,9 @@ export class OrderService {
 	    const url = Urls.baseUrl+'pedidos';
 	    return this.http.get<GeneralResponse>(url,this.headers);
 	}
+	public addOrders(body): Observable<GeneralResponse>{
+	    const url = Urls.baseUrl+'pedidos';
+	    return this.http.post<GeneralResponse>(url,body,this.headers);
+	}
 
 }
