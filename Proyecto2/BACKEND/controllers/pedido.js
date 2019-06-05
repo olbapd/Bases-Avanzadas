@@ -1,5 +1,5 @@
 Pedido = require('../models/pedidos');
-
+Libro = require('../models/libro');
 
 
 // Handle create pedido
@@ -12,6 +12,34 @@ exports.new = function (req, res) {
     pedido.montoTotal = req.body.montoTotal;
     pedido.estado = req.body.estado;
     pedido.libreria = req.body.libreria;
+    var libross = req.body.libros;
+    var cantlibros = libross.length;
+    for (var e = 0; e < cantlibros; e++) {
+        Libro.findById(libross[e], function (err, libro) {
+            if (err) {
+                res.json({
+                    error: true,
+                    message: err,
+                });
+                return
+            }
+            var cantidadVendida = (libro.cantidadVendida)+1;
+            var cantidadDisponible = (libro.cantidadDisponible)-1;
+            libro.cantidadVendida = cantidadVendida;
+            libro.cantidadDisponible = cantidadDisponible;
+            // save the model and check for errors
+            libro.save(function (err) {
+                if (err) {
+                    res.json({
+                        error: true,
+                        message: err,
+                    });
+                    return
+                }
+                
+            });
+        });
+    }
 
     // save the contact and check for errors
     pedido.save(function (err) {
