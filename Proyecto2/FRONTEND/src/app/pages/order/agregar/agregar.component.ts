@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 import { FormBuilder, AbstractControl,Validators, FormGroup } from '@angular/forms';
 
+import { CatalogService } from '../../../services/catalog.service';
+import { BookService } from '../../../services/book.service';
+import { PromoService } from '../../../services/promo.service';
+
+import Swal from 'sweetalert2';
 @Component({
   selector: 'agregar',
   styleUrls: ['./agregar.component.scss'],
@@ -13,18 +18,21 @@ export class AgregarComponent {
   type : FormGroup;
   validTextType: boolean = false;
   validNumberType: boolean = false;
+  user:any;
 
-
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private bookService: BookService,
+              private catalogService: CatalogService,
+              private promoService: PromoService) {
     this.type = this.formBuilder.group({
-      code: [null, Validators.required],
-      name: [null, Validators.required],
-      country: [null, Validators.required],
-      phone: [null, Validators.required],
-      address: [null, Validators.required],
-      openHours: [null, Validators.required],
-      
+      bookstore: [null, Validators.required],
+      books: [null, Validators.required],
+      categories: [null, Validators.required],
       });
+    
+    this.user = JSON.parse(localStorage.getItem('user'));
+
+
   }
   validateAllFormFields(formGroup: FormGroup) {
       Object.keys(formGroup.controls).forEach(field => {
@@ -54,5 +62,64 @@ export class AgregarComponent {
     }else{
       this.validNumberType = false;
     }
+  }
+
+  addOrder(){
+    let cat = this.type.value.categories.split(";");
+    let books = this.type.value.books.split(";");
+    let d = new Date();
+    let month = '-' + (d.getMonth() + 1);
+    let day = '-' + d.getDate();
+    let year = d.getFullYear();
+    let currentDate=year+month+day;
+    
+    let body={
+      cliente:this.user._id,
+      tema:cat,
+      libros:books,
+      fechaPedido:currentDate,
+      montoTotal:0,
+      estado:false,
+      libreria:this.type.value.bookstore,
+    }
+
+    this.promoService.getPromo()
+    .subscribe((result)=>{
+      if(result.status){
+        let precios=[];
+        let promos = result.data
+        for (let i = 0; i < body.libros.length; ++i) {
+          let temp =1
+          let found=false
+          for (let j = 0; j < promos.length; ++j) {
+            if(promos[j].libreria == body.libreria){
+              for (let k = 0; k < promos[j].libro.length; ++k) {
+                 if(promos[j].libro[k] == body.libros[i]){
+                   temp=promos[j].porcenDescuento
+                   precios.push(temp)
+                   found=true;
+                   break
+                 }
+              }
+            }
+            if(found){
+              break
+            }
+          }
+        }
+        console.log(precios);
+      }
+
+    })
+
+
+    /*this.bookService.getBooks(body.libreria)
+      .subscribe((result)=>{
+        if(result.status){
+          for (let i = 0; i < result.data.length; ++i) {
+            if(1==1)
+          }
+        }
+      })*/
   }
 }

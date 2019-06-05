@@ -12,6 +12,9 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { OrderService } from '../../services/order.service';
 import { AdminService } from '../../services/admin.service';
 import { CatalogService } from '../../services/catalog.service';
+import { BookService } from '../../services/book.service';
+import { PromoService } from '../../services/promo.service';
+
 
 @NgModule({
   imports: [
@@ -29,7 +32,9 @@ import { CatalogService } from '../../services/catalog.service';
   providers: [
     OrderService,
     AdminService,
-    CatalogService
+    CatalogService,
+    BookService,
+    PromoService
   ],
 })
 export class OrderModule { }

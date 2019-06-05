@@ -38,11 +38,6 @@ export class RegisterComponent{
 
 
   addNewUser(){
-    
-    /*let bDate = this.type.value.date.getFullYear()+ "-" +
-                    (this.type.value.date.getMonth() + 1) + "-" +
-                    this.type.value.date.getDate() */
-                
 
     let body={
        cedula:this.type.value.idcard,

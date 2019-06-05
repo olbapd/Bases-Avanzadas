@@ -9,6 +9,7 @@ import { MaterialModule } from '../../app.module';
 import { FieldErrorDisplayComponent }  from './field-error-display/field-error-display.component';
 import { PromoService } from '../../services/promo.service';
 import { AdminService } from '../../services/admin.service';
+import { CatalogService } from '../../services/catalog.service';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { AdminService } from '../../services/admin.service';
   ],
   providers: [
     PromoService,
+    CatalogService,
     AdminService
   ],
 })

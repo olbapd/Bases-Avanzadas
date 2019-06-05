@@ -11,63 +11,36 @@
       <div class="card-body">
         <div class="row">
           <div class="col-sm-4">
-            <label>Name: </label>
+            <label>Bookstore: </label>
             <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'text')">
-              <input type="text" matInput id="name"
+              <input type="text" matInput id="bookstore"
               (ngModelChange)="textValidationType($event)"
-              formControlName="name">
-              <app-field-error-display [displayError]="isFieldValid(type, 'name')" errorMsg="Must add a name."></app-field-error-display>
+              formControlName="bookstore">
+              <app-field-error-display [displayError]="isFieldValid(type, 'bookstore')" errorMsg="Must add a bookstore."></app-field-error-display>
             </mat-form-field>
           </div>
           <div class="col-sm-4">
-            <label>Country: </label>
-            <mat-form-field>
-              <mat-select [(ngModel)]="country" [ngModelOptions]="{standalone: true}" placeholder="Coutnry" name="country">
-                <mat-option *ngFor="let country of countries" [value]="country.Id">
-                  {{ country.Name }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-4">
-            <label>Address: </label>
+            <label>Books: </label>
             <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'text')">
-              <input type="text" matInput id="address"
+              <input type="text" matInput id="books"
               (ngModelChange)="textValidationType($event)"
-              formControlName="address">
-              <app-field-error-display [displayError]="isFieldValid(type, 'address')" errorMsg="Must add a address."></app-field-error-display>
+              formControlName="books">
+              <app-field-error-display [displayError]="isFieldValid(type, 'books')" errorMsg="Must add a books."></app-field-error-display>
             </mat-form-field>
           </div>
           <div class="col-sm-4">
-            <label>Phone Number: </label>
-            <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validNumberType===true}" [ngClass]="displayFieldCss(type, 'number')">
-              <input type="number" matInput id="phone"
-              (ngModelChange)="textValidationType($event)"
-              formControlName="phone">
-              <app-field-error-display [displayError]="isFieldValid(type, 'phone')" errorMsg="Must add a phone."></app-field-error-display>
-            </mat-form-field>
-          </div>
-          <div class="col-sm-4">
-            <label>Open Hours: </label>
+            <label>Categories: </label>
             <mat-form-field class="example-full-width has-label" [ngClass]="{'has-success':validTextType===true}" [ngClass]="displayFieldCss(type, 'text')">
-              <input type="text" matInput id="openHours"
+              <input type="text" matInput id="categories"
               (ngModelChange)="textValidationType($event)"
-              formControlName="openHours">
-              <app-field-error-display [displayError]="isFieldValid(type, 'openHours')" errorMsg="Must add a openHours."></app-field-error-display>
+              formControlName="categories">
+              <app-field-error-display [displayError]="isFieldValid(type, 'categories')" errorMsg="Must add a categories."></app-field-error-display>
             </mat-form-field>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3 col-sm-3">
-            <legend>Photo</legend>
-            <input  accept="image/png, image/jpeg, image/jpg, image/PNG" type="file" name="photo" />
           </div>
         </div>
       </div>
       <div class="card-footer text-center">
-        <button mat-raised-button type="submit" class="btn btn-rose btn-fill" (click)="addNewVehicle()">Add Bookstore</button>
+        <button mat-raised-button type="submit" class="btn btn-rose btn-fill" (click)="addOrder()">Place Order</button>
       </div>
     </form>
   </div>
