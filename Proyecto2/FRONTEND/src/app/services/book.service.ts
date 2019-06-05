@@ -24,6 +24,11 @@ export class BookService {
 	    return this.http.get<GeneralResponse>(url, this.headers);
 	}
 
+	public getBookById(id):Observable<GeneralResponse>{
+		const url = Urls.baseUrl+ 'libro/'+id;
+	    return this.http.get<GeneralResponse>(url, this.headers);
+	}
+
 	public deleteBook(code):Observable<GeneralResponse>{
 		const url = Urls.baseUrl+'libro/'+code;
 		return this.http.delete<GeneralResponse>(url,this.headers);

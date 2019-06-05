@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { OrderService } from '../../../services/order.service';
 import { AdminService } from '../../../services/admin.service';
+import { BookService } from '../../../services/book.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -18,6 +19,7 @@ export class MainComponent {
   bookstores:any;
 
   constructor(private orderService:OrderService,
+              private bookService:BookService,
               private adminService:AdminService,) {
     this.bookstoreCode=JSON.parse(localStorage.getItem("StoreCode"));
     this.bookstores=[];
@@ -60,9 +62,25 @@ export class MainComponent {
   }
 
 
-  viewOrder(id){
-
+  viewOrder(books){
+    this.bookService.getBookById(books[0])
+      .subscribe((result)=>{
+        if(result.status){
+          let book = result.data[0];
+          let message= " Name: "+book.nombre+
+                  " Category: "+book.tema.nombre+
+                  " Price: "+ book.precio+
+                  " Sold: "+book.cantidadVendida+
+                  " Available: "+book.cantidadDisponible;
+          Swal({
+            title: book._id+"-"+book.nombre,
+            text: message,
+          })
+        }
+      })
   }
+
+
   deliverOrder(id){
     Swal({
       title: 'Want to deliver this order?',
