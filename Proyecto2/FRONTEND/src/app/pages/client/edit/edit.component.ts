@@ -29,8 +29,16 @@ export class EditComponent {
 
       });
     this.user= JSON.parse(localStorage.getItem('user'));
+    /*this.type.get('address').setValue(user.lugar);
+    this.type.get('phone').setValue(user.telPrincipal);
+    this.type.get('phone2').setValue(user.telSecundario);
+     this.type.get('email').setValue(user.correo);*/
     this.idCard=this.user._id;
+
+   
     console.log(this.user);
+    console.log(this.user.lugar)
+
   }
   validateAllFormFields(formGroup: FormGroup) {
       Object.keys(formGroup.controls).forEach(field => {

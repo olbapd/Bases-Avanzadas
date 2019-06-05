@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "bdmongo",
+  "private_key_id": "717c01cbc8e71e0e88d9bebae7e72e5108abf2c0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDR1McUSnz4Ehnc\nVyrjPSRhPJ67igQ1sZ8tXzSY68J4Gsu1rA4g39ZICRUbFOKxf1m142OD6D/QbqDA\njppKc882QYz8XXJDUIqEfyEDmkFfAKdH6jys2fKLdF+fqNOEfaID8j42t8BNsaHP\nI2Gb3x9MYfTWmau8mOFQ+LJFqQnyE9Of2p+jtR8Ifhom8VMF5X8nIPFBFMHnRVi8\nkAwHSrCgUIrXfyB+Ufo23H9hMIR8nKNnfOn3U07ypBQ6iSxBKwz0dC/0EwFgGDBK\neSZrW/l461DVj4Q9A6gBu/KSieEazua6E3IWfnu3sH7S9zTA22+nZabnyw5GD/fn\nkJGfUsdrAgMBAAECggEAGwvps1Bcpl8y7SdhNFQ7vbriHPtPypoAEgmdDn8JHJEb\no+mvEoa3qKZfDZQWGln3ds3+FFEZ9KRl3RwkgCdIVM6DPT5QTaPyjtySJVQ7S+Ma\nLNdhBci8DkSsVLietwu4l/igE06BH6KfYENHwB80+hQASq8ZJ2CvXlAILpl42jZ/\nQ6AABDgdtiD9LfNo3blR3cSWnCUR11zyk30u91M+m0E+MKehJfcN/h0VdZNn9Y/J\nA0G4ch8aPgqxMr57W8c8aiw6F2jE3H8ZMWH3VAtX2ok83GmrmiYad8DAMCNDCSAr\nfo9dSDuONKN8mqChv4oC2/+3F0M14vV/2IxGO8l5FQKBgQDs8pqR0dU3jw+S/7fY\n7Tu6QfmKN1aATXD30hWRvjoXjFO3QRRJTh5o8TBuF3++DiBRGuWNBt+7BRALhEEN\nOabUXpwXSpO0Xhv5tM+MZ3FFaVQ6+p3G0GWK/aC6VNfN7nl73Bo6yt7djCSYJlgH\nw9RHAZtbA8qB9X3CeG4sMKgJfwKBgQDitAALwKCN1ySyMBnjw+UabYbpbsJFpgyB\nRKxBNL0zfw8h3jcGeeGnocvmib5tJ5CfmwNZICo6qSrHMeegpn4jmhzhWgbv33wA\nv6kBGMqouwWUcvet4iYOp+mVCanq6qgpQAtQERB5kjahj4mC9T8167tDNX9x7eMN\ngY5ZP3YAFQKBgE3KaEyvYxzWbvqH0cf6Or2vo0lpWZDN2+TAqCwtE81fWKy1RP+8\nEefKJ2g9dsbixGFcPzjJpPI1e0sMpH6/CrJ2TTCoX028B9s3LVyfKWTsa6bhWKNJ\nD81N71K9QAxv2pp7bHEY4YpC1FDPZd9Gv46ATIzY9ccs3ZjXCPShFMnpAoGAWg8t\n0X1litOEFXF8Z3oj4nrOVJ+Wd7q+TwAr+f9shi+coFS5wU3b8g8ZhG0GBDDqiC05\niEd53zHi950AqlZZ1+TaQj/Ub6h1h4qcJf5mS994GQAPGrmzarET3wwmv1cXFMQH\neng89j66izYNZ8Prp40NKGbxSR46y9vC4/uM8f0CgYEAuJGx/ZwL+0p85/sds8s6\nyAEHggB2Z2jat5XKWzcPDa/Qivw/mS960lHBfbzJmYemCCccfeyKzMmT5rNfvbTk\nwgbF+vhDoI+dUmN6nPPMZ0m1Anx8tbro1sAZ3MRs0XCXpHlAtk8CZPjqrpfkJFv4\nRRcGm4PvVfXo18yLTPI+GsY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "bdmongo@bdmongo.iam.gserviceaccount.com",
+  "client_id": "109102534103230325514",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bdmongo%40bdmongo.iam.gserviceaccount.com"
+}
