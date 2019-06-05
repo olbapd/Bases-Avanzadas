@@ -25,6 +25,8 @@ export class RegisterComponent{
     this.type = this.fb.group({
       idcard: [null, Validators.required],
       name: [null, Validators.required],
+      apellido1:[null,Validators.required],
+      apellido2:[null,Validators.required],
       birthdate: [null, Validators.required],
       address: [null, Validators.required],
       phone: [null, Validators.required],
@@ -42,8 +44,8 @@ export class RegisterComponent{
     let body={
        cedula:this.type.value.idcard,
        nombre:this.type.value.name,
-       apellido1:this.type.value.name,
-       apellido2:this.type.value.name,
+       apellido1:this.type.value.apellido1,
+       apellido2:this.type.value.apellido2,
        fechaNacimiento:this.type.value.birthdate,
        tipoUsuario:2,
        lugar:this.type.value.address,
