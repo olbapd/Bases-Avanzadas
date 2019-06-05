@@ -60,12 +60,12 @@ export class ViewComponent {
     this.max="";
     this.categories=[];
     let user= JSON.parse( localStorage.getItem('user'));
-
+    console.log(user);
     this.catalogService.getCategories()
       .subscribe((result)=>{
         if(result.status){
           this.categories = result.data;
-            this.orderService.getOrdersByClient(201500002)
+            this.orderService.getOrdersByClient(user._id)
               .subscribe((result2)=>{
                 if(result2.status){
                   for (let i = 0; i < result2.data.length; ++i) {
