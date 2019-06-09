@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title: string = 'My first AGM project';
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+export class AppComponent implements AfterViewInit{
+  title = 'proyecto2';
+  
+  constructor(private elementRef: ElementRef){}
+  ngAfterViewInit(){
+        this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#5e5e5e';
+  }
 }
