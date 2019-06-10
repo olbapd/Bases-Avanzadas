@@ -2,7 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { ClientComponent } from './client/client.component';
 
 
 const routes: Routes = [
@@ -19,5 +18,6 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class PagesRoutingModule {
+
 }
 
