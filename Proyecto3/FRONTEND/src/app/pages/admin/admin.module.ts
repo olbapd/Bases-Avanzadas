@@ -11,7 +11,7 @@ import { AutocompleteComponent } from '../admin/manage_places/google-places.comp
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AutocompleteComponent,
+    AutocompleteComponent
   ],
   declarations: [
     ...routedComponents

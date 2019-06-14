@@ -2,13 +2,8 @@ import { Component, NgZone } from '@angular/core';
 
 @Component({
     selector: 'mplaces',
-    template: `
-      <input class="input"
-        type="text"
-        [(ngModel)]="autocompleteInput"
-        #addresstext style="padding: 12px 20px; border: 1px solid #ccc; width: 400px"
-        >
-    `,
+    styleUrls: ['./mplaces.component.css'],
+    templateUrl: './mplaces.component.html',
 })
 export class ManagePlacesComponent {
     address: Object;
