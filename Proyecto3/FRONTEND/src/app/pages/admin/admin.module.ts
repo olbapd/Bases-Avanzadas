@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin.component';
 import { AdminRoutingModule, routedComponents } from './admin-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AutocompleteComponent } from '../admin/manage_places/google-places.component';
 
 @NgModule({
   imports: [

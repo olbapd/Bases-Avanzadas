@@ -10,8 +10,10 @@ import Swal from 'sweetalert2';
 
 })
 export class PagesComponent {
+	user:any;
 
 	constructor(private router: Router) {
+		this.user=1;
 
 	}
 

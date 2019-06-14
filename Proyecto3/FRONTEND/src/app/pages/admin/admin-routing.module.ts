@@ -5,6 +5,8 @@ import { ManagePlacesComponent } from './manage_places/mplaces.component';
 import { MigrateComponent } from  './migrate_data/migrate.component';
 import { QueriesComponent } from  './queries/queries.component';
 
+import { AutocompleteComponent } from '../admin/manage_places/google-places.component';
+
 const routes: Routes = [{ path: '', component: AdminComponent, 
       children: [
         { path: 'mplaces', component: ManagePlacesComponent },
@@ -25,5 +27,7 @@ export const routedComponents = [
   QueriesComponent,
   ManagePlacesComponent,
   MigrateComponent,
-  AdminComponent
+  AdminComponent,
+  AutocompleteComponent
+  
 ];

@@ -1,38 +1,66 @@
-<div>
-  <nav class="navbar navbar-dark" style="background-color: #0b4980;">
-    <a class="navbar-brand" id="logo" href="admin_view/admin-dashboard">Administrador</a>
-    <button (click)="CerrarSesion()" type="button" class="btn
-      btn-outline-light" id="btnCerrarSesion">
-      CERRAR SESION
-    </button>
-  </nav>
+
+
+<div *ngIf="user==0">
+  <div>
+    <nav class="navbar navbar-dark" style="background-color: #0b4980;">
+      <a class="navbar-brand" id="logo" [routerLink]="['/pages/client']">Cliente</a>
+      <button (click)="CerrarSesion()" type="button" class="btn
+        btn-outline-light" id="btnCerrarSesion">
+        CERRAR SESION
+      </button>
+    </nav>
+  </div>
+
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/pages/client/history']">History</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/pages/client/order']">Order</a>
+      </li>
+
+    </ul>
+  </div>
 </div>
 
-<div class="card-header">
-  <ul class="nav nav-tabs card-header-tabs">
 
-    <li class="nav-item">
-      <a class="nav-link" [routerLink]="['/pages/client/history']">Cliente</a>
-    </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="admin_view/crud-sede" id="perfLink01">Adminsitrar
-        Sedes</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="admin_view/crud-employee"
-        id="cuentLink01">Administrar Empleados</a>
-    </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="admin_view/reporte" id="cuentLink01">Generar
-        Reportes</a>
-    </li>
+<div *ngIf="user==1">
+  <div>
+    <nav class="navbar navbar-dark" style="background-color: #0b4980;">
+      <a class="navbar-brand" id="logo" [routerLink]="['/pages/admin']">Administrador</a>
+      <button (click)="CerrarSesion()" type="button" class="btn
+        btn-outline-light" id="btnCerrarSesion">
+        CERRAR SESION
+      </button>
+    </nav>
+  </div>
 
-    <li class="nav-item">
-      <a class="nav-link" href="admin_view/cal-depreciation"
-        id="cuentLink01">Calcular Depreciaciones:</a>
-    </li>
-  </ul>
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/pages/admin/querie']">Consulta</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/pages/admin/mplaces']">Sitios</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/pages/admin/migrate']">Migrar Datos</a>
+      </li>
+
+
+    </ul>
+  </div>
 </div>
+
+
+
+
 <router-outlet></router-outlet>
