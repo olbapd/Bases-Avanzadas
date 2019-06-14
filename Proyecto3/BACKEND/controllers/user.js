@@ -35,7 +35,7 @@ exports.new = function (req, res) {
     user.pass = Crypth.encode(req.body.pass);
     user.typeUser = req.body.typeUser;
 
-    // save the contact and check for errors
+    // save the user and check for errors
     user.save(function (err) {
         if (err) {
             res.json({
