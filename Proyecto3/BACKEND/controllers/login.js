@@ -4,7 +4,7 @@ User = require('../models/user');
 Crypth = require('../sec/crypth');
 
 exports.view = function (req, res) {
-    User.find({ user: req.body.user }, function (err, user) {
+    User.find({ username: req.body.username }, function (err, user) {
         if (err) {
             res.json({
                 error:true,
