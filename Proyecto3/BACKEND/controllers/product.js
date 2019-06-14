@@ -55,7 +55,7 @@ exports.new = function (req, res) {
 };
 
 
-// Handle view product info
+// Handle view product info by ID
 exports.view = function (req, res) {
         Product.find({ '_id': req.params.product_id }, function (err, product) {
         	//TypeC.populate(company, { path: "typeC" }, function (err, company) {
@@ -76,6 +76,7 @@ exports.view = function (req, res) {
 };
 
 
+// Handle view product info by Company
 exports.getproductBYcompany = function (req, res) {
     Product.find({ 'company': req.params.company_id }, function (err, products) {
         if (err) {
