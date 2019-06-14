@@ -1,11 +1,12 @@
-// company Controller
+//Product Controller
 
-Company = require('../models/company');
-TypeC = require('../models/typecompany')
+
+Product = require('../models/product');
+
 
 // Handle index actions
 exports.index = function (req, res) {
-    Company.get(function (err, companies) {
+    Product.get(function (err, products) {
     	//TypeC.populate(companies, { path: "tipeC" }, function (err, companies) {
 
 	        if (err) {
@@ -17,7 +18,7 @@ exports.index = function (req, res) {
 	        }
 	        res.json({
 	            status: true,
-	            data: companies
+	            data: products
 	        });
     	});
 
@@ -26,26 +27,18 @@ exports.index = function (req, res) {
 
 
 
-// Handle create company actions
+// Handle create product actions
 exports.new = function (req, res) {
-    var company = new Company();
-    company._id = req.body.idCompany;
-    company.name = req.body.name;
-    company.description = req.body.description
-    company.typeC = req.body.typeC;
-    company.latitude = req.body.latitude;
-    company.longitude = req.body.longitude;
-    company.address = req.body.address;
-    company.roundsman = req.body.roundsman;
-    company.phone = req.body.phone;
-    company.website = req.body.website;
-    company.rating = req.body.rating;
-    company.schedule = req.body.schedule;
-    company.photo = req.body.photo;
+    var product = new Product();
+    product._id = req.body.idProduct;
+    product.name = req.body.name;
+    product.description = req.body.description
+    product.price = req.body.price;
+    product.photo = req.body.photo;
     
 
-    // save the company and check for errors
-    company.save(function (err) {
+    // save the product and check for errors
+    product.save(function (err) {
         if (err) {
             res.json({
                 error: true,
@@ -55,15 +48,15 @@ exports.new = function (req, res) {
         }
         res.json({
             status: true,
-            message:'New company created'
+            message:'New product created'
         });
     });
 };
 
 
-// Handle view company info
+// Handle view product info
 exports.view = function (req, res) {
-        Company.find({ '_id': req.params.company_id }, function (err, company) {
+        Product.find({ '_id': req.params.product_id }, function (err, product) {
         	//TypeC.populate(company, { path: "typeC" }, function (err, company) {
             if (err) {
                 res.json({
@@ -74,7 +67,7 @@ exports.view = function (req, res) {
             }
             res.json({
                 status: true,
-                data: company
+                data: product
             });
         });
 
@@ -82,9 +75,9 @@ exports.view = function (req, res) {
 };
 
 
-// Handle update company info
+// Handle update product info
 exports.update = function (req, res) {
-    Company.findById(req.params.company_id, function (err, company) {
+    Product.findById(req.params.product_id, function (err, product) {
         if (err) {
             res.json({
                 error: true,
@@ -92,17 +85,11 @@ exports.update = function (req, res) {
             });
             return
         }
-		    company.latitude = req.body.latitude;
-		    company.longitude = req.body.longitude;
-		    company.address = req.body.address;
-		    company.roundsman = req.body.roundsman;
-		    company.phone = req.body.phone;
-		    company.website = req.body.website;
-		    company.rating = req.body.rating;
-		    company.schedule = req.body.schedule;
-		    company.photo = req.body.photo;
+		    product.description = req.body.description
+    		product.price = req.body.price;
+    		product.photo = req.body.photo;
         // save the model and check for errors
-        company.save(function (err) {
+        product.save(function (err) {
             if (err) {
                 res.json({
                     status: true,
@@ -112,7 +99,7 @@ exports.update = function (req, res) {
             }
             res.json({
                 status: true,
-                message:'Company info updated'
+                message:'Product info updated'
             });
         });
     });
@@ -120,10 +107,10 @@ exports.update = function (req, res) {
 
 
 
-// Handle delete company
+// Handle delete product
 exports.delete = function (req, res) {
-    Company.deleteOne({
-        _id: req.params.company_id
+    Product.deleteOne({
+        _id: req.params.product_id
     }, function (err, company) {
         if (err) {
             res.json({
@@ -134,7 +121,7 @@ exports.delete = function (req, res) {
         }
         res.json({
             status: true,
-            message:'Company Deleted'
+            message:'Product Deleted'
         });
     });
 };

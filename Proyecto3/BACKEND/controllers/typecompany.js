@@ -25,7 +25,7 @@ exports.new = function (req, res) {
     var typecompany = new TypeCompany();
     typecompany.typeC= req.body.typeC;
 
-    // save the libro and check for errors
+    // save the type and check for errors
     typecompany.save(function (err) {
         if (err) {
             res.json({
