@@ -1,0 +1,226 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Proyecto3",
+		"_postman_id": "89d39117-cbdf-37b9-6c17-9f80f850ea02",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Compania",
+			"description": "",
+			"item": [
+				{
+					"name": "Todas las Companias",
+					"request": {
+						"url": "http://localhost:3000/api/company",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Compania",
+					"request": {
+						"url": "http://localhost:3000/api/company",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"idCompany\":\"C01\",\n\t\"name\":\"Pizza Hut\",\n\t\"description\":\"Cadena de pizzerías de ambiente familiar conocida por su variedad de pizzas al gusto del consumidor.\",\n\t\"typeC\":\"Restaurante\",\n\t\"latitude\":9.8647699,\n\t\"longitude\":-83.9144976,\n\t\"address\":\"10, Provincia de Cartago, Cartago\",\n\t\"roundsman\":10,\n\t\"phone\":\"2290 9595\",\n\t\"website\":\"pizzahutcr.com\",\n\t\"rating\":10,\n\t\"schedule\":\"Lunes a Viernes 12:00 m.d a 10>00 p.m.\",\n\t\"photo\":\"\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Compania",
+					"request": {
+						"url": "http://localhost:3000/api/company/C01",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"latitude\":9.8647699,\n\t\"longitude\":-83.9144976,\n\t\"address\":\"10, Provincia de Cartago, Cartago\",\n\t\"roundsman\":25,\n\t\"phone\":\"2290 9595\",\n\t\"website\":\"pizzahutcr.com\",\n\t\"rating\":10,\n\t\"schedule\":\"Lunes a Viernes 12:00 m.d a 10>00 p.m.\",\n\t\"photo\":\"\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Una Compania",
+					"request": {
+						"url": "http://localhost:3000/api/company/C01",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Compania",
+					"request": {
+						"url": "http://localhost:3000/api/company/C01",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"description": "",
+			"item": [
+				{
+					"name": "Crear Usuario",
+					"request": {
+						"url": "http://localhost:3000/api/user",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"idCard\":2015000004,\n\t\"name\":\"Allan Jose\",\n\t\"surname1\":\"Chacon\",\n\t\"surname2\":\"Lopez\",\n\t\"borndate\":\"1995-05-07\",\n\t\"email\":\"AChacon@gmail.com\",\n\t\"phone\":\"89852070\",\n\t\"username\":\"AllanC\",\n\t\"pass\":\"AllanC\",\n\t\"typeUser\":2\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Todos los Usuario",
+					"request": {
+						"url": "http://localhost:3000/api/user",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Info de un Usuario",
+					"request": {
+						"url": "http://localhost:3000/api/user/2015000001",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "ActualizarUsuario",
+					"request": {
+						"url": "http://localhost:3000/api/user/2015000004",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"AlChacon@gmail.com\",\n\t\"phone\":\"80878825\",\n\t\"pass\":\"AlChacon\"\n\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Usuario",
+					"request": {
+						"url": "http://localhost:3000/api/user/2015000004",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"url": "http://localhost:3000/api/login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"carballoP07\",\n\t\"pass\":\"123456\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TipoCompania",
+			"description": "",
+			"item": [
+				{
+					"name": "Tipos Compania",
+					"request": {
+						"url": "http://localhost:3000/api/typecompany",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Nuevo tipoCompania",
+					"request": {
+						"url": "http://localhost:3000/api/typecompany",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"typename\":\"Restaurant\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
