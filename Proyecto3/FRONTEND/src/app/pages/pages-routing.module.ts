@@ -8,6 +8,7 @@ const routes: Routes = [
   {  path: '', component: PagesComponent, children: 
     [ { path: 'client', loadChildren: './client/client.module#ClientModule', },
       { path: 'auth', loadChildren: '../auth/auth.module#AuthModule', },
+      { path: 'maps', loadChildren: './maps/agm.module#AgmModule', },
       { path: '**', redirectTo: 'client', pathMatch: 'full', },
       { path: '', redirectTo: 'client', pathMatch: 'full', }
     ],

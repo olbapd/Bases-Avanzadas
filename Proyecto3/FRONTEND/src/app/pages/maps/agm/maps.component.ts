@@ -4,7 +4,7 @@ import { Router, Params } from '@angular/router';
 @Component({
     selector: 'maps',
     templateUrl: './maps.component.html',
-    styleUrls: ['./maps.component.scss']
+    styleUrls: ['./maps.component.css']
 })
 
 export class MapComponent {
