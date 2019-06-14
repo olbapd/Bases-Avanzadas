@@ -4,11 +4,11 @@ import { FormBuilder, AbstractControl, Validators, FormGroup } from '@angular/fo
 import Swal from 'sweetalert2';
 
 @Component({
-    selector: 'move',
-    styleUrls: ['./move.component.css'],
-    templateUrl: './move.component.html',
+    selector: 'history',
+    styleUrls: ['./history.component.css'],
+    templateUrl: './history.component.html',
 })
-export class MoveComponent {
+export class HistoryComponent {
     type: FormGroup;
     validTextType: boolean = false;
     validNumberType: boolean = false;

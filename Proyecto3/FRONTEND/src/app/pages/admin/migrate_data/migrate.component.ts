@@ -4,11 +4,11 @@ import { FormBuilder, AbstractControl, Validators, FormGroup } from '@angular/fo
 import Swal from 'sweetalert2';
 
 @Component({
-    selector: 'register',
-    styleUrls: ['./register.component.scss'],
-    templateUrl: './register.component.html',
+    selector: 'migrate',
+    styleUrls: ['./migrate.component.css'],
+    templateUrl: './migrate.component.html',
 })
-export class RegisterComponent {
+export class MigrateComponent {
     type: FormGroup;
     validTextType: boolean = false;
     validNumberType: boolean = false;

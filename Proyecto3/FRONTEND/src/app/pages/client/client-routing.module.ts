@@ -2,15 +2,18 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ClientComponent } from './client.component';
-import { MoveComponent } from './moveData/move.component';
-import { RegisterComponent } from  './registerUser/register.component';
+import { RegisterComponent } from './registerUser/register.component';
+import { OrderComponent } from './order/order.component';
+import { HistoryComponent } from './history/history.component';
 
-const routes: Routes = [{ path: '', component: ClientComponent, 
-      children: [
-        { path: 'move', component: MoveComponent },
-        { path: 'register', component: RegisterComponent },
-        {path: '', redirectTo: 'move', pathMatch: 'full',},
-        {path: '**', redirectTo: 'move', pathMatch: 'full',}
+const routes: Routes = [{
+  path: '', component: ClientComponent,
+  children: [
+    { path: 'register', component: RegisterComponent },
+    { path: 'order', component: OrderComponent },
+    { path: 'history', component: HistoryComponent },
+    { path: '', redirectTo: 'order', pathMatch: 'full', },
+    { path: '**', redirectTo: 'order', pathMatch: 'full', }
   ],
 }];
 
@@ -21,7 +24,9 @@ const routes: Routes = [{ path: '', component: ClientComponent,
 export class ClientRoutingModule { }
 
 export const routedComponents = [
-  MoveComponent,
   RegisterComponent,
-  ClientComponent
+  ClientComponent,
+  HistoryComponent,
+  OrderComponent
+
 ];
