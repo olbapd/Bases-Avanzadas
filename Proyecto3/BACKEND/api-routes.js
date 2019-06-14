@@ -59,6 +59,8 @@ router.route('/product/:product_id')
     .get(productController.view)
     .put(productController.update)
     .delete(productController.delete);
+router.route('/productBYcompany/:company_id')
+    .get(productController.getproductBYcompany);
 
 
 // Export API routes
