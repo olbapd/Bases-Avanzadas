@@ -44,7 +44,7 @@ exports.new = function (req, res) {
     company.photo = req.body.photo;
     
 
-    // save the contact and check for errors
+    // save the company and check for errors
     company.save(function (err) {
         if (err) {
             res.json({
