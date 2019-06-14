@@ -35,6 +35,7 @@ exports.new = function (req, res) {
     product.description = req.body.description
     product.price = req.body.price;
     product.photo = req.body.photo;
+    product.company = req.body.idCompany
     
 
     // save the product and check for errors
@@ -72,6 +73,24 @@ exports.view = function (req, res) {
         });
 
 	//});
+};
+
+
+exports.getproductBYcompany = function (req, res) {
+    Product.find({ 'company': req.params.company_id }, function (err, products) {
+        if (err) {
+            res.json({
+            error: true,
+            message: err,
+        	});
+            return
+        }
+        res.json({
+            status: true,
+            data: products
+        });
+    });
+        
 };
 
 
