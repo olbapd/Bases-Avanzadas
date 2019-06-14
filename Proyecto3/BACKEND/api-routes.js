@@ -42,22 +42,13 @@ router.route('/typecompany')
     .get(typecompanyController.index)
     .post(typecompanyController.new);
 
-/*
-//Import 
-var tipocliente = require('./controllers/tipoUsuario');
-// tipocliente routes
-router.route('/tiposUsuario')
-    .get(tipocliente.index)
-    .post(tipocliente.new);
-router.route('/tipoUsuario/:tipoUsuario_id')
-    .get(tipocliente.view)
-    .delete(tipocliente.delete);
-// Import auth controller
-var auth = require('./controllers/auth');
-//aut route
+
+// Import login controller
+var login = require('./controllers/login');
+//login route
 router.route('/login')
-    .post(auth.view);
-*/
+    .post(login.view);
+
 
 // Export API routes
 module.exports = router;
