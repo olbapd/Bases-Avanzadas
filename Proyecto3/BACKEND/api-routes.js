@@ -50,6 +50,17 @@ router.route('/login')
     .post(login.view);
 
 
+var productController = require('./controllers/product');
+// company routes
+router.route('/product')
+    .get(productController.index)
+    .post(productController.new);
+router.route('/product/:product_id')
+    .get(productController.view)
+    .put(productController.update)
+    .delete(productController.delete);
+
+
 // Export API routes
 module.exports = router;
 
