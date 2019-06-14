@@ -20,6 +20,10 @@ var productSchema = mongoose.Schema({
     photo:{
         type: String,
         required: false
+    },
+    company:{
+    	type: String,
+    	required: true
     }
 },{ _id: false });
 // Export Product model
