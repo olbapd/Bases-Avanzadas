@@ -1,6 +1,6 @@
 // order Controller
 
-Order = require('../models/order');
+let Order = require('../models/order');
 
 // Handle index actions
 exports.index = function (req, res) {

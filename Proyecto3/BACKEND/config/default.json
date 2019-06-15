@@ -1,0 +1,9 @@
+{
+	"api" : {
+	  "port" : 3000
+	},
+	"atlas" : {
+		"url" : "mongodb+srv://Proyecto3:BDAp3@bda-eiqv0.mongodb.net/test?retryWrites=true&w=majority",
+		"dbName" : "Proyecto3"
+	}
+}
