@@ -10,7 +10,6 @@ const routes: Routes = [
       [{ path: 'client', loadChildren: './client/client.module#ClientModule', },
       { path: 'admin', loadChildren: './admin/admin.module#AdminModule', },
       { path: 'auth', loadChildren: '../auth/auth.module#AuthModule', },
-      { path: 'maps', loadChildren: './maps/agm.module#AgmModule', },
       { path: '**', redirectTo: 'admin', pathMatch: 'full', },
       { path: '', redirectTo: 'admin', pathMatch: 'full', }
       ],
