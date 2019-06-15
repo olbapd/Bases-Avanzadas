@@ -4,6 +4,8 @@ import { AdminComponent } from './admin.component';
 import { AdminRoutingModule, routedComponents } from './admin-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AgmCoreModule} from '@agm/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 import { AdminService } from '../../services/admin.service';
 @NgModule({
@@ -12,6 +14,7 @@ import { AdminService } from '../../services/admin.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey:'AIzaSyCM39bNGEKQwoI78bzmcmNIfUmYzuGRJ00',
       libraries: ['places']

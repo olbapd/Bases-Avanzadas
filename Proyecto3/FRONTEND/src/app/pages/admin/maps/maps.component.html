@@ -58,7 +58,43 @@
         </div>
       </div>
     </div>
-   
+    <div class="col-md-8">
+
+      <table d ="table_company" name="table_company" class="table table-striped">
+        <thead>
+          <tr class="table-primary">
+            <th scope="col">IdCompany</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone</th>
+            <th scope="col">WebSite</th>
+            <th scope="col">rating</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let company of companies">
+            <th scope="row">{{ company.id }}</th>
+            <td>{{ company.name }}</td>
+            <td>{{ company.description}}</td>
+            <td>{{ company.address}}</td>
+            <td>{{ company.phone}}</td>
+            <td>{{ company.webSite}}</td>
+            <td>{{ company.rating}}</td>
+            <td>
+              <button (click)=deleteCompany(company.id) type="button"
+              class="btn btn-info">Delete</button> </td>
+          </tr>
+
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+        </ngb-pagination>
+    </div>
+
+    </div>
 
 
 

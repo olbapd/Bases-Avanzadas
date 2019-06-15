@@ -50,4 +50,8 @@ export class AdminService {
 		const url = Urls.baseUrl+ "product"
 	    return this.http.post<GeneralResponse>(url,body, this.headers);
 	}
+	public deleteCompany(param):Observable<GeneralResponse>{
+		const url = Urls.baseUrl+"company/"+param;
+	    return	this.http.delete<GeneralResponse>(url,this.headers);
+	}
 }
