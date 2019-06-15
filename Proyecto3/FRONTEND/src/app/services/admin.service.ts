@@ -32,17 +32,21 @@ export class AdminService {
 	    return this.http.post<GeneralResponse>(url,body, this.headers);
 	    
 	}
-	public login(email, password) : Observable<GeneralResponse>{
-		let body = {
-			usuario:email,
-			contrasena: password
-		}
-	    const url = Urls.baseUrl+ "login"
-	    return this.http.post<GeneralResponse>(url,body, this.headers);
+	public getCompany() : Observable<GeneralResponse>{
+		
+	    const url = Urls.baseUrl+ "company"
+	    return this.http.get<GeneralResponse>(url, this.headers);
 	}
 
-	public register(body) : Observable<GeneralResponse>{
-	    const url = Urls.baseUrl+'usuarios';
+	public InsertProduct(id,name,description,value,company,photo) : Observable<GeneralResponse>{
+	    let body = {
+			idProduct:id,
+			name:name,
+			description:description,
+			price:value,
+			photo:""
+		}
+		const url = Urls.baseUrl+ "product"
 	    return this.http.post<GeneralResponse>(url,body, this.headers);
 	}
 }
