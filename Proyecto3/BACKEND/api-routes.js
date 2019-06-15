@@ -42,6 +42,16 @@ router.route('/typecompany')
     .get(typecompanyController.index)
     .post(typecompanyController.new);
 
+//Import usertype controller
+ var usertypeController = require('./controllers/usertype');
+// tipocliente routes
+router.route('/usertype')
+    .get(usertypeController.index)
+    .post(usertypeController.new);
+router.route('/usertype/:usertype_id')
+    .get(usertypeController.view)
+    .delete(usertypeController.delete);
+
 
 // Import login controller
 var login = require('./controllers/login');
