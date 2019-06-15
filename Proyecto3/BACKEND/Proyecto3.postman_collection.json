@@ -399,6 +399,65 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "TipoUsuario",
+			"description": "",
+			"item": [
+				{
+					"name": "Todos los TipoUsuario",
+					"request": {
+						"url": "http://localhost:3000/api/usertype",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Nuevo TipoUsuario",
+					"request": {
+						"url": "http://localhost:3000/api/usertype",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":2,\n\t\"name\":\"Client\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar TipoUsuario",
+					"request": {
+						"url": "http://localhost:3000/api/usertype/3",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "TipoUsuario por Id",
+					"request": {
+						"url": "http://localhost:3000/api/usertype/2",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
