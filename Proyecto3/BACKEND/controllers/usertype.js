@@ -1,7 +1,7 @@
 //userType Controller
 
 UserType = require('../models/usertype');
-
+User = require('../models/user');
 
 // Handle view usertype
 exports.index = function (req, res) {
@@ -77,4 +77,22 @@ exports.delete = function (req, res) {
             message:"UserType deleted"
         });
     });
+};
+
+
+exports.getuserBYusertype = function (req, res) {
+        User.find({ 'typeUser': req.params.usertype_id }, function (err, user) {
+            if (err) {
+                res.json({
+                    error: true,
+                    message: err,
+                });
+                return
+            }
+            res.json({
+                status: true,
+                data: user
+            });
+        });
+
 };
