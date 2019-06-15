@@ -6,7 +6,6 @@ TypeC = require('../models/typecompany')
 // Handle index actions
 exports.index = function (req, res) {
     Company.get(function (err, companies) {
-    	//TypeC.populate(companies, { path: "tipeC" }, function (err, companies) {
 
 	        if (err) {
 	            res.json({
@@ -20,8 +19,6 @@ exports.index = function (req, res) {
 	            data: companies
 	        });
     	});
-
-    //});
 };
 
 
@@ -64,7 +61,6 @@ exports.new = function (req, res) {
 // Handle view company info
 exports.view = function (req, res) {
         Company.find({ '_id': req.params.company_id }, function (err, company) {
-        	//TypeC.populate(company, { path: "typeC" }, function (err, company) {
             if (err) {
                 res.json({
                     error: true,
@@ -78,7 +74,6 @@ exports.view = function (req, res) {
             });
         });
 
-	//});
 };
 
 
