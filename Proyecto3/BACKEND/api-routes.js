@@ -88,6 +88,19 @@ router.route('/orderBYuser/:user_id')
 router.route('/orderstate/:order_id')
     .put(orderController.updateState);
 
+
+
+var list = require('./controllers/list');
+// company routes
+router.route('/list')
+    .get(list.index)
+    .post(list.newlist);
+router.route('/list/:list_id')
+    .get(list.view)
+    .delete(list.deletelist);
+router.route('/listBYuser/:user_id')
+    .get(list.getlistBYuser);
+
 // Export API routes
 module.exports = router;
 
