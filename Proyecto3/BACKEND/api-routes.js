@@ -69,18 +69,12 @@ var orderController = require('./controllers/order');
 router.route('/order')
     .get(orderController.index)
     .post(orderController.new);
-/*router.route('/pedido/:pedido_id')
-    .get(pedido.view)
-    .put(pedido.update)
-    .delete(pedido.delete);
-router.route('/pedido/libreria/:libreria_id')
-    .get(pedido.getPedidoXlibreria);
-    router.route('/pedido/cliente/:cliente_id')
-    .get(pedido.getPedidoXcliente);
-
-router.route('/pedido/estado/:pedido_id')
-    .put(pedido.updateEstado);
-*/
+router.route('/order/:order_id')
+    .get(orderController.view)
+router.route('/orderBYuser/:user_id')
+    .get(orderController.getorderBYuser);
+router.route('/orderstate/:order_id')
+    .put(orderController.updateState);
 
 // Export API routes
 module.exports = router;
