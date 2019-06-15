@@ -36,7 +36,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"idCompany\":\"C01\",\n\t\"name\":\"Pizza Hut\",\n\t\"description\":\"Cadena de pizzerías de ambiente familiar conocida por su variedad de pizzas al gusto del consumidor.\",\n\t\"typeC\":\"Restaurante\",\n\t\"latitude\":9.8647699,\n\t\"longitude\":-83.9144976,\n\t\"address\":\"10, Provincia de Cartago, Cartago\",\n\t\"roundsman\":10,\n\t\"phone\":\"2290 9595\",\n\t\"website\":\"pizzahutcr.com\",\n\t\"rating\":10,\n\t\"schedule\":\"Lunes a Viernes 12:00 m.d a 10>00 p.m.\",\n\t\"photo\":\"\"\n}"
+							"raw": "{\n\t\"idCompany\":\"C03\",\n\t\"name\":\"Walmart\",\n\t\"description\":\"Cadena de supermercadas mas barata de costa rica.\",\n\t\"typeC\":\"Supermercado\",\n\t\"latitude\":9.86005236,\n\t\"longitude\":-82.0044976,\n\t\"address\":\"10, Provincia de Cartago, Cartago\",\n\t\"roundsman\":80,\n\t\"phone\":\"2022 9595\",\n\t\"website\":\"walmartcr.com\",\n\t\"rating\":10,\n\t\"schedule\":\"Lunes a Viernes 12:00 m.d a 10>00 p.m.\",\n\t\"photo\":\"\"\n}"
 						},
 						"description": ""
 					},
@@ -315,6 +315,85 @@
 						"method": "GET",
 						"header": [],
 						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedidos",
+			"description": "",
+			"item": [
+				{
+					"name": "Todos los Pedidos",
+					"request": {
+						"url": "http://localhost:3000/api/order",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Nuevo Pedido",
+					"request": {
+						"url": "http://localhost:3000/api/order",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user\":\"MDiaz\",\n\t\"products\":[\"P01\",\"P02\"],\n\t\"amount\":[1,1],\n\t\"price\":[12000,11000],\n\t\"date\":\"2019-06-15\",\n\t\"state\":\"Registrado\",\n\t\"observation\":\"La pizza de jamon debe de tener queso extra\",\n\t\"totalcash\":23000,\n\t\"total\":2\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Pedido por Id",
+					"request": {
+						"url": "http://localhost:3000/api/order/5d046d5e4c638d1fe0e7c88f",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Pedidos por Usuario",
+					"request": {
+						"url": "http://localhost:3000/api/orderBYuser/MDiaz",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "cambiar Estado",
+					"request": {
+						"url": "http://localhost:3000/api/orderstate/5d046d5e4c638d1fe0e7c88f",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"state\":\"En ruta\"\n}"
+						},
 						"description": ""
 					},
 					"response": []
