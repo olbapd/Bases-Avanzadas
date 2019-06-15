@@ -63,6 +63,25 @@ router.route('/productBYcompany/:company_id')
     .get(productController.getproductBYcompany);
 
 
+// Import order controller
+var orderController = require('./controllers/order');
+// pedido routes
+router.route('/order')
+    .get(orderController.index)
+    .post(orderController.new);
+/*router.route('/pedido/:pedido_id')
+    .get(pedido.view)
+    .put(pedido.update)
+    .delete(pedido.delete);
+router.route('/pedido/libreria/:libreria_id')
+    .get(pedido.getPedidoXlibreria);
+    router.route('/pedido/cliente/:cliente_id')
+    .get(pedido.getPedidoXcliente);
+
+router.route('/pedido/estado/:pedido_id')
+    .put(pedido.updateEstado);
+*/
+
 // Export API routes
 module.exports = router;
 
