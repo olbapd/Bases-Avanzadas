@@ -14,7 +14,7 @@ var companySchema = mongoose.Schema({
         required: true
     },
     typeC:{
-        type: String,
+        type: [String],
         required: true
     },
     latitude:{
