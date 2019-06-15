@@ -22,22 +22,15 @@ export class SedeComponent implements OnInit {
     canton;
     distrito;
     empleado;
-
     type = 0;
     categoria;
     page = 1;
     pageSize = 4;
     sedess: sede[]=[];
-   /*  collectionSize = this.sedess.length;
-    activo: asset;
-    sede: sede; */
-
     
     constructor(private modalService: NgbModal, public restApi: RestApiService,
         private router: Router, private dialog: MatDialog) { }
         ngOnInit() { 
-            /* this.EstadoDropdown();
-            this.ProvinciaDropdown(); */
             this.Rsede();
         }
     
@@ -82,52 +75,5 @@ export class SedeComponent implements OnInit {
             this.restApi.setSede(Nombre,Ubicacion,IdDistrito,IdEstado);
 
         }
-    
-        /* EstadoDropdown(){
-            let optionestado;
-            let dropdown = document.getElementById('estadoSede-Dropdown');
-             this.restApi.getEstados().subscribe((res)=>{
-               const myObjStr = JSON.stringify(res)
-               const json = JSON.parse(myObjStr);
-              var count = Object.keys(json.data).length;
-              for (var _i = 0; _i < count; _i++) {
-                optionestado = document.createElement('option');
-                optionestado.text = json.data[_i].Nombre;
-                optionestado.value = json.data[_i].IdEstado;
-                dropdown.append(optionestado);
-             } 
-          });;
-        }
-    
-        DistritoDropdown(){
-            let optionestado;
-            let dropdown = document.getElementById('distrito-Dropdown');
-             this.restApi.getDistritos().subscribe((res)=>{
-               const myObjStr = JSON.stringify(res)
-               const json = JSON.parse(myObjStr);
-              var count = Object.keys(json.data).length;
-              for (var _i = 0; _i < count; _i++) {
-                optionestado = document.createElement('option');
-                optionestado.text = json.data[_i].Nombre;
-                optionestado.value = json.data[_i].IdEstado;
-                dropdown.append(optionestado);
-             } 
-          });;
-        }
-    
-         ProvinciaDropdown(){
-            let optionestado;
-            let dropdown = document.getElementById('provincia-Dropdown');
-             this.restApi.getProvincia().subscribe((res)=>{
-               const myObjStr = JSON.stringify(res)
-               const json = JSON.parse(myObjStr);
-              var count = Object.keys(json.data).length;
-              for (var _i = 0; _i < count; _i++) {
-                optionestado = document.createElement('option');
-                optionestado.text = json.data[_i].Nombre;
-                optionestado.value = json.data[_i].IdProvincia;
-                dropdown.append(optionestado);
-             } 
-          });;
-        } */
     }
+  

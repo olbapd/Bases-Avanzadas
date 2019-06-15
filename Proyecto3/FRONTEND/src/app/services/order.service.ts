@@ -6,7 +6,7 @@ import { Urls } from '../config/constants';
 import { GeneralResponse } from '../models/response';
 
 @Injectable()
-export class AuthService {
+export class OrderService {
 	
 	headers : {headers : HttpHeaders}
 	

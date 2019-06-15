@@ -14,6 +14,8 @@ export class HistoryComponent {
     validNumberType: boolean = false;
     countries: any;
     country: any;
+    page = 1;
+    pageSize = 4;
 
     constructor(private formBuilder: FormBuilder) {
 
