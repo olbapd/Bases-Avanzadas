@@ -50,10 +50,10 @@ exports.new = function (req, res) {
     });
 };
 
-/*
-// Handle update vehiculo info
-exports.update = function (req, res) {
-    Pedido.findById(req.params.pedido_id, function (err, pedidos) {
+
+// Handle chenge state of order
+exports.updateState = function (req, res) {
+    Order.findById(req.params.order_id, function (err, order) {
         if (err) {
             res.json({
                 error: true,
@@ -61,13 +61,10 @@ exports.update = function (req, res) {
             });
             return
         }
-        pedidos.libros = req.body.libros;
-        pedidos.fechaPedido = req.body.fechaPedido;
-        pedidos.montoTotal = req.body.montoTotal;
-        pedidos.estado = req.body.estado;
+        order.state = req.body.state;
 
         // save the model and check for errors
-        pedidos.save(function (err) {
+        order.save(function (err) {
             if (err) {
                 res.json({
                     error: true,
@@ -76,34 +73,8 @@ exports.update = function (req, res) {
                 return
             }
             res.json({
-                status: true
-            });
-        });
-    });
-};
-
-exports.updateEstado = function (req, res) {
-    Pedido.findById(req.params.pedido_id, function (err, pedidos) {
-        if (err) {
-            res.json({
-                error: true,
-                message: err,
-            });
-            return
-        }
-        pedidos.estado = req.body.estado;
-
-        // save the model and check for errors
-        pedidos.save(function (err) {
-            if (err) {
-                res.json({
-                    error: true,
-                    message: err,
-                });
-                return
-            }
-            res.json({
-                status: true
+                status: true,
+                message:"State Changed"
             });
         });
     });
@@ -111,9 +82,9 @@ exports.updateEstado = function (req, res) {
 
 
 
-// Handle view vehicule info by id
+// Handle oder by id
 exports.view = function (req, res) {
-    Pedido.find({ '_id': req.params.pedido_id }, function (err, pedido) {
+    Order.find({ '_id': req.params.order_id }, function (err, order) {
 
         if (err) {
             res.json({
@@ -124,13 +95,14 @@ exports.view = function (req, res) {
         }
         res.json({
             status: true,
-            data: pedido
+            data: order
         });
     });
 };
 
-exports.getPedidoXcliente = function (req, res) {
-    Pedido.find({ 'cliente': req.params.cliente_id }, function (err, pedido) {
+// Handle oder by user
+exports.getorderBYuser = function (req, res) {
+    Order.find({ 'user': req.params.user_id }, function (err, orders) {
 
         if (err) {
             res.json({
@@ -141,40 +113,9 @@ exports.getPedidoXcliente = function (req, res) {
         }
         res.json({
             status: true,
-            data: pedido
+            data: orders
         });
     });
 };
 
-exports.getPedidoXlibreria= function (req, res) {
-    Pedido.find({ 'libreria': req.params.libreria_id }, function (err, estados) {
-        if (err) {
-            res.json({
-                status: "error",
-                message: err,
-            });
-            return
-        }
-        res.json({
-            status: "success",
-            data: estados
-        });
-    });
-};
 
-exports.delete = function (req, res) {
-    Pedido.deleteOne({
-        _id: req.params.pedido_id
-    }, function (err, pedidos) {
-        if (err) {
-            res.json({
-                error: true,
-                message: err,
-            });
-            return
-        }
-        res.json({
-            status: true,
-        });
-    });
-};*/
