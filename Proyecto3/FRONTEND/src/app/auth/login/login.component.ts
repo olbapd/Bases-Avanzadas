@@ -28,20 +28,22 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    console.log("Hello");
     let username = this.loginForm.value.email;
     let password = this.loginForm.value.password;
     this.authService.login(username, password)
       .subscribe((result) => {
+        console.log(result);
         if (result.error) {
           console.log(result.message);
         }
         if (result.status) {
           let user = result.data[0];
           localStorage.setItem('user', JSON.stringify(user));
-          if (user.tipoUsuario == 0) { //gerente
+          if (user.typeUser == 0) { //gerente
             this.router.navigate(['/pages/client']);
           }
-          else if (user.tipoUsuario == 1) { //admin
+          else if (user.typeUser == 1) { //admin
             this.router.navigate(['/pages/admin']);
           }
         }
