@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {AgmCoreModule} from '@agm/core';
+import { HttpClientModule } from '@angular/common/http'; 
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import {AgmCoreModule} from '@agm/core';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule ,
     AppRoutingModule,
     AgmCoreModule.forRoot({
       apiKey:'AIzaSyD9ZgAqbqfcy27LYpISyuIOZOpe0tMa4Fo'
