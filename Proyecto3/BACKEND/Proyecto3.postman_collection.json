@@ -469,6 +469,85 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Lista de Interes",
+			"description": "",
+			"item": [
+				{
+					"name": "Todas las Listas",
+					"request": {
+						"url": "http://localhost:3000/api/list",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Nueva Lista",
+					"request": {
+						"url": "http://localhost:3000/api/list",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"idList\":\"L01\",\n\t\"user\":\"MDiaz\",\n\t\"origen\":\"C01\",\n\t\"placelist\":[\"C02\",\"C03\"],\n\t\"distance\":[100,200]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Lista",
+					"request": {
+						"url": "http://localhost:3000/api/list/L01",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user\":\"MDiaz\",\n\t\"products\":[\"P01\",\"P02\"],\n\t\"amount\":[1,1],\n\t\"price\":[12000,11000],\n\t\"date\":\"2019-06-15\",\n\t\"state\":\"Registrado\",\n\t\"observation\":\"La pizza de jamon debe de tener queso extra\",\n\t\"totalcash\":23000,\n\t\"total\":2\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Lista",
+					"request": {
+						"url": "http://localhost:3000/api/list/L01",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Lista por Usuario",
+					"request": {
+						"url": "http://localhost:3000/api/listBYuser/MDiaz",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
