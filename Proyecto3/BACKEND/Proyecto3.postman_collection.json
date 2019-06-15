@@ -221,6 +221,105 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Productos",
+			"description": "",
+			"item": [
+				{
+					"name": "Todos los productos",
+					"request": {
+						"url": "http://localhost:3000/api/product",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"idProduct\":\"P01\",\n\t\"name\":\"Pizza\",\n\t\"description\":\"Pizza con jamon.\",\n\t\"price\":12000,\n\t\"photo\":\"\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Nuevo productos",
+					"request": {
+						"url": "http://localhost:3000/api/product",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"idProduct\":\"P01\",\n\t\"name\":\"Pizza\",\n\t\"description\":\"Pizza con jamon.\",\n\t\"price\":12000,\n\t\"photo\":\"\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Producto",
+					"request": {
+						"url": "http://localhost:3000/api/product/P01",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"description\":\"Pizza de jamon\",\n\t\"price\":10000,\n\t\"photo\":\"\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Un producto",
+					"request": {
+						"url": "http://localhost:3000/api/product/P01",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar producto",
+					"request": {
+						"url": "http://localhost:3000/api/product/P01",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Producto por Compania",
+					"request": {
+						"url": "http://localhost:3000/api/product/C01",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
