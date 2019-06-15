@@ -456,6 +456,17 @@
 						"description": ""
 					},
 					"response": []
+				},
+				{
+					"name": "Usuario por TipoUsuario",
+					"request": {
+						"url": "http://localhost:3000/api/userBYusertype/1",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
 				}
 			]
 		}
