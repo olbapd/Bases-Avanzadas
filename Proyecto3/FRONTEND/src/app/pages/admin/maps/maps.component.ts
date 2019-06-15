@@ -20,6 +20,10 @@ export class MapComponent {
     rating: number;
     schedule: string;
     photo: any;
+    isPopupOpened = false;
+    page = 1;
+    pageSize = 4;
+    collectionSize = 5;
     private geoCoder;
    
     @ViewChild('search')

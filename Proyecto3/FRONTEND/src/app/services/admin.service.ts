@@ -44,7 +44,8 @@ export class AdminService {
 			name:name,
 			description:description,
 			price:value,
-			photo:""
+			photo:"",
+			idCompany:company
 		}
 		const url = Urls.baseUrl+ "product"
 	    return this.http.post<GeneralResponse>(url,body, this.headers);
