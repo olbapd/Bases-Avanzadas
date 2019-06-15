@@ -22,9 +22,10 @@ export class AuthService {
 	}
 	public login(email, password) : Observable<GeneralResponse>{
 		let body = {
-			usuario:email,
-			contrasena: password
+			username:email,
+			pass: password
 		}
+		console.log(body);
 	    const url = Urls.baseUrl+ "login"
 	    return this.http.post<GeneralResponse>(url,body, this.headers);
 	}

@@ -63,6 +63,19 @@ router.route('/productBYcompany/:company_id')
     .get(productController.getproductBYcompany);
 
 
+// Import order controller
+var orderController = require('./controllers/order');
+// pedido routes
+router.route('/order')
+    .get(orderController.index)
+    .post(orderController.new);
+router.route('/order/:order_id')
+    .get(orderController.view)
+router.route('/orderBYuser/:user_id')
+    .get(orderController.getorderBYuser);
+router.route('/orderstate/:order_id')
+    .put(orderController.updateState);
+
 // Export API routes
 module.exports = router;
 
