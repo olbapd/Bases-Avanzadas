@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"Proyecto3.companies"},{"v":2,"unique":true,"key":{"name":1},"name":"name_1","ns":"Proyecto3.companies","background":true},{"v":2,"unique":true,"key":{"phone":1},"name":"phone_1","ns":"Proyecto3.companies","background":true}],"uuid":"643dbe764d174e63b2dc24891d869b87"}
