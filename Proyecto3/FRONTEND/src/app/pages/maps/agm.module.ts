@@ -5,6 +5,7 @@ import { AgmRoutingModule, routedComponents } from './agm-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AgmCoreModule} from '@agm/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AdminService } from '../../services/admin.service';
 @NgModule({
   imports: [
     AgmRoutingModule,
@@ -19,7 +20,7 @@ import { BrowserModule } from '@angular/platform-browser';
   declarations: [
     ...routedComponents
   ],
-  providers: []
+  providers: [AdminService]
 })
 export class AgmModule {
 }

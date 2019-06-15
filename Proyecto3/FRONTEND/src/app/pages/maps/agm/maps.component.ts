@@ -1,6 +1,7 @@
 
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { MapsAPILoader, MouseEvent } from '@agm/core';
+import { AdminService } from '../../../services/admin.service';
 @Component({
     selector: 'maps',
     templateUrl: './maps.component.html',
@@ -27,8 +28,8 @@ export class MapComponent {
    
     constructor(
       private mapsAPILoader: MapsAPILoader,
-      private ngZone: NgZone
-    ) { }
+      private ngZone: NgZone,
+      private adminService: AdminService) { }
    
    
     ngOnInit() {
@@ -121,11 +122,14 @@ export class MapComponent {
       });
     }
 
-    searchByltlg(lt,lg){
-      //this.latitude=lt;
-      //this.longitude=lg;
-      console.log("dsd:"+" "+lt);
-
+    save(id,name,description,employees){
+      this.adminService.InsertCompany(id,name,description,this.tipo,this.latitude,this.longitude,this.address
+        ,employees,this.phone,this.website,this.rating,this.schedule,this.photo).subscribe((result) => {
+        console.log(result);
+        if (result.error) {
+          console.log(result.message);
+        }
+      });
     }
    
   }

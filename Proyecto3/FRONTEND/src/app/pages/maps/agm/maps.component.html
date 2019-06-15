@@ -40,7 +40,7 @@
     <input type="text" class="form-control" #repartidores placeholder="# Employees" type="text">
   </div>
 
-  <button type="button" class="btn btn-info">Save</button>
+  <button (click)=save(id.value,name.value,description.value,repartidores.value) type="button" class="btn btn-info">Save</button>
 
 
 
