@@ -1,10 +1,47 @@
-<agm-map
-    [latitude]="latitude"
-    [longitude]="longitude"
-    [zoom]="zoom">
-    <agm-marker
-        [latitude]="latitude"
-        [longitude]="longitude">
-    </agm-marker>
+<div class="container">
+  <div class="form-group">
+    <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()"
+      placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Latitude" type="text" #search2>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Longitude" type="text" #search3>
+  </div>
+  <div>
+    <button (click)=getAddress(search2.value,search3.value) type="button" class="btn btn-info">Search</button>
 
-</agm-map>
+  </div>
+  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+    <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
+      (dragEnd)="markerDragEnd($event)"></agm-marker>
+  </agm-map>
+
+  <h5>Address: {{address}}</h5>
+  <div>Latitude: {{latitude}}</div>
+  <div>Longitude: {{longitude}}</div>
+  <div>Type: {{tipo}}</div>
+  <div>Phone: {{phone}}</div>
+  <div>WebSite: {{website}}</div>
+  <div>Rating: {{rating}}</div>
+  <div>Schedule: {{schedule}}</div>
+  <div>Photo: {{photo}}</div>
+  <div class="form-group">
+    <input type="text" class="form-control" #id placeholder="Id" type="text">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" #name placeholder="Name" type="text">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" #description placeholder="Description" type="text">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" #repartidores placeholder="# Employees" type="text">
+  </div>
+
+  <button type="button" class="btn btn-info">Save</button>
+
+
+
+</div>

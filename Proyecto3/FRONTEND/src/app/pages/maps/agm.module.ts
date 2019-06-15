@@ -12,7 +12,8 @@ import { BrowserModule } from '@angular/platform-browser';
     FormsModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
-      apiKey:'AIzaSyD9ZgAqbqfcy27LYpISyuIOZOpe0tMa4Fo'
+      apiKey:'AIzaSyCM39bNGEKQwoI78bzmcmNIfUmYzuGRJ00',
+      libraries: ['places']
     })
   ],
   declarations: [
