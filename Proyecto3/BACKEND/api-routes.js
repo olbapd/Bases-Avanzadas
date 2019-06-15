@@ -51,6 +51,8 @@ router.route('/usertype')
 router.route('/usertype/:usertype_id')
     .get(usertypeController.view)
     .delete(usertypeController.delete);
+router.route('/userBYusertype/:usertype_id')
+    .get(usertypeController.getuserBYusertype);
 
 
 // Import login controller
