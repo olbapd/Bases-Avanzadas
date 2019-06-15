@@ -1,18 +1,10 @@
+// company Controller
 
-'use strict';
+Company = require('../models/company');
+TypeC = require('../models/typecompany')
 
-let Company = require('../models/company');
-let TypeC = require('../models/typecompany')
-
-let expose={
-    index : undefined,
-    create : undefined,
-    view : undefined,
-    update : undefined,
-    deleteCompany : undefined,
-}
 // Handle index actions
-expose.index = (req, res)=> {
+exports.index = function (req, res) {
     Company.get(function (err, companies) {
 
 	        if (err) {
@@ -32,7 +24,7 @@ expose.index = (req, res)=> {
 
 
 // Handle create company actions
-expose.create = (req, res)=> {
+exports.new = function (req, res) {
     var company = new Company();
     company._id = req.body.idCompany;
     company.name = req.body.name;
@@ -67,7 +59,7 @@ expose.create = (req, res)=> {
 
 
 // Handle view company info
-expose.view = (req, res)=> {
+exports.view = function (req, res) {
         Company.find({ '_id': req.params.company_id }, function (err, company) {
             if (err) {
                 res.json({
@@ -86,7 +78,7 @@ expose.view = (req, res)=> {
 
 
 // Handle update company info
-expose.update = (req, res)=> {
+exports.update = function (req, res) {
     Company.findById(req.params.company_id, function (err, company) {
         if (err) {
             res.json({
@@ -124,7 +116,7 @@ expose.update = (req, res)=> {
 
 
 // Handle delete company
-expose.deleteCompany = (req, res)=> {
+exports.delete = function (req, res) {
     Company.deleteOne({
         _id: req.params.company_id
     }, function (err, company) {
@@ -141,5 +133,3 @@ expose.deleteCompany = (req, res)=> {
         });
     });
 };
-
-module.exports= expose;

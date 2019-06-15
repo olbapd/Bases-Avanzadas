@@ -1,7 +1,7 @@
 //Product Controller
 
 
-let Product = require('../models/product');
+Product = require('../models/product');
 
 
 // Handle index actions

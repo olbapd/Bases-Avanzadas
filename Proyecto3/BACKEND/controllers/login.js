@@ -1,7 +1,7 @@
 //login
 
-let User = require('../models/user');
-let Crypth = require('../../sec/crypth');
+User = require('../models/user');
+Crypth = require('../sec/crypth');
 
 exports.view = function (req, res) {
     User.find({ username: req.body.username }, function (err, user) {

@@ -1,7 +1,7 @@
 //user Controller
 
-let User = require('../models/user');
-let Crypth = require('../../sec/crypth');
+User = require('../models/user');
+Crypth = require('../sec/crypth');
 
 // Handle index actions
 exports.index = function (req, res) {

@@ -260,7 +260,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"idProduct\":\"P01\",\n\t\"name\":\"Pizza\",\n\t\"description\":\"Pizza con jamon.\",\n\t\"price\":12000,\n\t\"photo\":\"\"\n}"
+							"raw": "{\n\t \"_id\": \"P01\",\n     \"name\": \"Pizza\",\n     \"description\": \"Pizza con jamon.\",\n     \"price\": 12000,\n     \"photo\": \"\",\n     \"company\": \"C01\"\n}"
 						},
 						"description": ""
 					},

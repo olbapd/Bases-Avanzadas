@@ -1,7 +1,7 @@
 //userType Controller
 
-let UserType = require('../models/usertype');
-let User = require('../models/user');
+UserType = require('../models/usertype');
+User = require('../models/user');
 
 // Handle view usertype
 exports.index = function (req, res) {
