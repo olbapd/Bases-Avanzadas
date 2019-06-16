@@ -1,8 +1,8 @@
 import { Component,OnInit } from '@angular/core';
 import { FormGroupDirective, NgForm } from '@angular/forms';
 import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from '@angular/forms';
-import {company} from '../../../interfaces/company';
-import { AdminService } from '../../../services/admin.service';;
+import {companyP} from '../../../interfaces/companyproduct';
+import { AdminService } from '../../../services/admin.service';
 
 @Component({
     selector: 'products',
@@ -12,7 +12,11 @@ import { AdminService } from '../../../services/admin.service';;
 export class ProductsComponent implements OnInit{
     form: FormGroup;
     submitted = false;
-    company: company[];
+    companiess: companyP[]=[];
+    page = 1;
+    pageSize = 4;
+    collectionSize: number = 0;
+    searchText;
 
     constructor(private formBuilder: FormBuilder,
         private adminService: AdminService) {
@@ -31,6 +35,33 @@ export class ProductsComponent implements OnInit{
 
         });
         this.company_DropDown();
+        this.Product();
+    }
+    get companies(): companyP[] { //BIND TABLE
+        return this.companiess
+          .map((companiess, i) => ({ id: i + 1, ...companiess }))
+          .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+      }
+      Product() {
+        this.adminService.getProduct().subscribe((res) => {
+          const myObjStr = JSON.stringify(res)
+          const json = JSON.parse(myObjStr);
+          var count = Object.keys(json.data).length;
+          this.collectionSize = count;
+          for (var _i = 0; _i < count; _i++) {
+            this.companiess.push({
+              "id": json.data[_i].company,
+              "idproduct": json.data[_i]._id,
+              "name": json.data[_i].name,
+              "value": json.data[_i].price,
+            });
+          }
+        });
+      }
+      deleteCompany(id) {
+        const companyy = this.companiess.findIndex(c => c.id === id);
+        this.adminService.deleteProduct(id).subscribe((res) => {});
+        this.companiess.splice(companyy, 1);
     }
     onSubmit() {
         this.submitted = true;

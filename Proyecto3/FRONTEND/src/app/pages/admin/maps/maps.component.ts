@@ -11,6 +11,7 @@ import { company } from '../../../interfaces/company';
 
 export class MapComponent {
   title: string = 'AGM project';
+  editField: string;
   latitude: number;
   longitude: number;
   zoom: number;
@@ -72,7 +73,7 @@ export class MapComponent {
           //console.log("PHOTOS:"+" "+JSON.stringify(place.photos));
           //let img_load = document.getElementById('imgUP');
           //img_load.setAttribute('src', place.photos);
-          this.zoom = 12;
+          this.zoom = 17;
         });
       });
     });
@@ -82,6 +83,10 @@ export class MapComponent {
     return this.companiess
       .map((companiess, i) => ({ id: i + 1, ...companiess }))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
+  
+  changeValue(id: number, property: string, event: any) {
+    this.editField = event.target.textContent;
   }
   Company() {
     this.adminService.getCompany().subscribe((res) => {
@@ -97,7 +102,7 @@ export class MapComponent {
           "address": json.data[_i].address,
           "phone": json.data[_i].phone,
           "webSite": json.data[_i].website,
-          "rating": json.data[_i].rating
+          "rating": json.data[_i].rating,
 
         });
       }
@@ -115,7 +120,7 @@ export class MapComponent {
       navigator.geolocation.getCurrentPosition((position) => {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
-        this.zoom = 8;
+        this.zoom = 17;
         this.getAddress(this.latitude, this.longitude);
       });
     }
@@ -136,7 +141,7 @@ export class MapComponent {
       console.log(status);
       if (status === 'OK') {
         if (results[0]) {
-          this.zoom = 12;
+          this.zoom = 17;
           this.address = results[0].formatted_address;
           this.latitude = latitude;
           this.longitude = longitude;
