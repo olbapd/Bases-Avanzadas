@@ -101,6 +101,10 @@ router.route('/list/:list_id')
 router.route('/listBYuser/:user_id')
     .get(list.getlistBYuser);
 
+
+var storage = require('./controllers/storage');
+router.use('/storage', storage);
+
 // Export API routes
 module.exports = router;
 
