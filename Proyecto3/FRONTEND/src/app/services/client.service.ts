@@ -12,18 +12,33 @@ export class ClientService {
 	
 	constructor(private http : HttpClient, private router : Router) {}
 
-	
-	public register(body) : Observable<any[]>{
-	    const url = "http://localhost:3000/api/vehiculo/update"
-	    return this.http.post<any[]>(url,body, this.headers);
+	public pedidosHistory(email, password) : Observable<GeneralResponse>{
+		let body = {
+			username:email,
+			pass: password
+		}
+		console.log(body);
+	    const url = Urls.baseUrl+ "login"
+	    return this.http.post<GeneralResponse>(url,body, this.headers);
 	}
 
-	public editClient(client,code):Observable<GeneralResponse>{
-		const url = Urls.baseUrl+'usuario/'+code;
-	    return this.http.put<GeneralResponse>(url,client, this.headers);
-	}
-	public getClients():Observable<GeneralResponse>{
-		const url = Urls.baseUrl+'usuarios';
-	    return this.http.get<GeneralResponse>(url, this.headers);
+	public register(idCard,name,surname1,surname2,borndate,email,phone,username,pass,typeUser) : Observable<GeneralResponse>{
+		
+		console.log("ENTRE A REGISTRO ");
+		let body = {
+			idCard:idCard,
+			name: name,
+			surname1:surname1,
+			surname2:surname2,
+			borndate:borndate,
+			email:email,
+			phone:phone,
+			username:username,
+			pass:pass,
+			typeUser:typeUser
+		}
+		console.log(body);
+	    const url = Urls.baseUrl+'user';
+	    return this.http.post<GeneralResponse>(url,body, this.headers);
 	}
 }

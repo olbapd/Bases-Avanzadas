@@ -11,7 +11,7 @@ export class HistoryService {
 	headers: { headers: HttpHeaders }
 
 	constructor(private http: HttpClient, private router: Router) { }
-	public getBooks(user): Observable<GeneralResponse> {
+	public getPedidos(user): Observable<GeneralResponse> {
 		const url = Urls.baseUrl + 'orderBYuser/' + user;
 		return this.http.get<GeneralResponse>(url, this.headers);
 	}
