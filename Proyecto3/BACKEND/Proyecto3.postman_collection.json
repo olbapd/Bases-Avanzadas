@@ -548,6 +548,33 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Files",
+			"description": "",
+			"item": [
+				{
+					"name": "Subir Foto",
+					"request": {
+						"url": "http://localhost:3000/api/storage/put",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileUploaded",
+									"value": "",
+									"description": "",
+									"type": "file"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

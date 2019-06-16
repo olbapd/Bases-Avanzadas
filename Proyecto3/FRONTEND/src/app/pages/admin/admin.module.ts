@@ -5,6 +5,8 @@ import { AdminRoutingModule, routedComponents } from './admin-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AgmCoreModule} from '@agm/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 
 import { AdminService } from '../../services/admin.service';
@@ -12,6 +14,7 @@ import { AdminService } from '../../services/admin.service';
   imports: [
     AdminRoutingModule,
     CommonModule,
+    Ng2SearchPipeModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),

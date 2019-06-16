@@ -37,6 +37,11 @@ export class AdminService {
 	    const url = Urls.baseUrl+ "company"
 	    return this.http.get<GeneralResponse>(url, this.headers);
 	}
+	public getProduct() : Observable<GeneralResponse>{
+		
+	    const url = Urls.baseUrl+ "product"
+	    return this.http.get<GeneralResponse>(url, this.headers);
+	}
 
 	public InsertProduct(id,name,description,value,company,photo) : Observable<GeneralResponse>{
 	    let body = {
@@ -52,6 +57,10 @@ export class AdminService {
 	}
 	public deleteCompany(param):Observable<GeneralResponse>{
 		const url = Urls.baseUrl+"company/"+param;
+	    return	this.http.delete<GeneralResponse>(url,this.headers);
+	}
+	public deleteProduct(param):Observable<GeneralResponse>{
+		const url = Urls.baseUrl+"product/"+param;
 	    return	this.http.delete<GeneralResponse>(url,this.headers);
 	}
 }
