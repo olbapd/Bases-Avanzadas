@@ -31,6 +31,8 @@ export class AuthService {
 	}
 
 	public register(idCard,name,surname1,surname2,borndate,email,phone,username,pass,typeUser) : Observable<GeneralResponse>{
+		
+		console.log("ENTRE A REGISTRO ");
 		let body = {
 			idCard:idCard,
 			name: name,

@@ -19,12 +19,15 @@ export class RegisterComponent {
         private authService: AuthService) {
 
         this.type = this.formBuilder.group({
-            code: [null, Validators.required],
+            idcard: [null, Validators.required],
             name: [null, Validators.required],
-            country: [null, Validators.required],
+            surname1: [null, Validators.required],
+            surname2: [null, Validators.required],
+            borndate: [null, Validators.required],
+            email: [null, Validators.required],
             phone: [null, Validators.required],
-            address: [null, Validators.required],
-            openHours: [null, Validators.required],
+            pass: [null, Validators.required],
+            username: [null, Validators.required]
 
         });
     }
@@ -34,12 +37,19 @@ export class RegisterComponent {
         let name = this.type.value.name;
         let surname1 = this.type.value.surname1;
         let surname2 = this.type.value.surname2;
-        let borndate = this.type.value.birthdate;
+        let borndate = this.type.value.borndate;
         let email = this.type.value.email;
         let phone = this.type.value.phone;
-        let pass = this.type.value.password;
-        let username = this.type.value.user;
+        let pass = this.type.value.pass;
+        let username = this.type.value.username;
         let typeUser = 0;
+
+        console.log(idCard);
+        console.log(name);
+        console.log(surname1);
+        console.log(surname2);
+        console.log(borndate);
+        console.log(email);
 
         this.authService.register(idCard, name, surname1, surname2, borndate, email, phone, pass, username, typeUser)
             .subscribe((result) => {

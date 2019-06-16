@@ -11,8 +11,9 @@
                         <!--Aqui Se Pondría la Imagen-->
                         <div style="margin-top: 20px">
 
-                                    <img src="assets/images/avatar.png" id="img" alt="Avatar" class="avatar">
-                                  </div>
+                            <img src="assets/images/avatar.png" id="img"
+                                alt="Avatar" class="avatar">
+                        </div>
                         <div class="row text-center">
                             <div class="col-md-6">
                                 <h6 class="card-subtitle mb-2 text-muted"
@@ -26,7 +27,9 @@
                                         f.ProductId.errors }" />
                                     <div *ngIf="submitted && f.ProductId.errors"
                                         class="invalid-feedback">
-                                        <div *ngIf="f.ProductId.errors.required">ProductId Required</div>
+                                        <div
+                                            *ngIf="f.ProductId.errors.required">ProductId
+                                            Required</div>
                                     </div>
                                 </div>
 
@@ -41,8 +44,9 @@
                                     <div *ngIf="submitted && f.Name.errors"
                                         class="invalid-feedback">
                                         <div
-                                            *ngIf="f.Name.errors.required">Name Required
-                                            </div>
+                                            *ngIf="f.Name.errors.required">Name
+                                            Required
+                                        </div>
                                     </div>
                                 </div>
 
@@ -54,7 +58,8 @@
                                         formControlName="Description"
                                         [ngClass]="{ 'is-invalid': submitted &&
                                         f.Description.errors }" />
-                                    <div *ngIf="submitted && f.Description.errors"
+                                    <div *ngIf="submitted &&
+                                        f.Description.errors"
                                         class="invalid-feedback">
                                         <div
                                             *ngIf="f.Description.errors.required">Description
@@ -80,7 +85,7 @@
                             </div>
 
                             <div class="col-md-6">
-                            
+
                                 <h6 class="card-subtitle mb-2 text-muted"
                                     style="margin-top: 20px">Company</h6>
                                 <div class="form-group">
