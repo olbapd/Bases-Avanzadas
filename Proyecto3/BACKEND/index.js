@@ -1,5 +1,5 @@
 // Import express
-let express = require('express')//,upload = require('express-fileupload');
+let express = require('express'),upload = require('express-fileupload');
 // Import Body parser
 let bodyParser = require('body-parser');
                  cors = require('cors');
@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit:50
 app.disable('etag'); // Avoid 304 requests
 app.use(cors()); // Enable request from any server -> npm install cors
 app.options('*', cors()) // include before other routes
-//app.use(upload()); // Move to req.files any uploaded file
+app.use(upload()); // Move to req.files any uploaded file
 // Import routes
 let apiRoutes = require("./api-routes")
 // Configure bodyparser to handle post requests
