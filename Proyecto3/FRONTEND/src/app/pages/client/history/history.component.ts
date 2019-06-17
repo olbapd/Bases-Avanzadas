@@ -18,9 +18,7 @@ export class HistoryComponent {
     country: any;
     page = 1;
     pageSize = 4;
-
-
-
+    source: LocalDataSource = new LocalDataSource();
     settings = {
         delete: {
             confirmDelete: true,
@@ -36,18 +34,39 @@ export class HistoryComponent {
             confirmSave: true,
         },
         columns: {
-            id: {
-                title: 'ID',
+            products: {
+                title: 'Productos',
+                type: 'string',
             },
-            name: {
-                title: 'Full Name',
+            amount: {
+                title: 'Cantidad',
+                type: 'number',
             },
-            username: {
-                title: 'User Name',
+            price: {
+                title: 'Precio',
+                type: 'number',
             },
-            email: {
-                title: 'Email',
+            observation: {
+                title: 'Observacion',
+                type: 'string',
             },
+            totalcash: {
+                title: 'Precio Total',
+                type: 'number',
+            },
+            state: {
+                title: 'Total',
+                type: 'string',
+            },
+            date: {
+                title: 'Fecha',
+                type: 'string',
+            },
+            total: {
+                title: 'Total',
+                type: 'number',
+            },
+
         },
     };
 
@@ -76,6 +95,7 @@ export class HistoryComponent {
         }
     ];
 
+    pedidos: any;
     constructor(private formBuilder: FormBuilder,
         private historyService: HistoryService) {
 
@@ -88,8 +108,35 @@ export class HistoryComponent {
             openHours: [null, Validators.required],
 
         });
-    }
 
+        this.pedidos = [];
+
+        this.historyService.getPedidos("MDiaz").subscribe((result) => {
+            if (result.status) {
+                for (let i = 0; i < result.data.length; ++i) {
+                    let cantidad=result.data[i].total;
+                    for (let j = 0; j < cantidad+1; ++j) {
+                        let temp = {
+                            products: result.data[i].products[j],
+                            amount: result.data[i].amount[j],
+                            price: result.data[i].price[j],
+                            date: result.data[i].date,
+                            state: result.data[i].state,
+                            totalcash: result.data[i].totalcash,
+                            observation: result.data[i].observation,
+                            total: result.data[i].total
+                        }
+                        this.source.append(temp);
+                        console.log("TEMP:");
+                        console.log(temp);
+
+                    }
+
+                }
+            }
+        })
+
+    }
 
 
     addNewUser() {

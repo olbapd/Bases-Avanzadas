@@ -12,6 +12,7 @@ export class HistoryService {
 
 	constructor(private http: HttpClient, private router: Router) { }
 	public getPedidos(user): Observable<GeneralResponse> {
+		console.log(user);
 		const url = Urls.baseUrl + 'orderBYuser/' + user;
 		return this.http.get<GeneralResponse>(url, this.headers);
 	}
