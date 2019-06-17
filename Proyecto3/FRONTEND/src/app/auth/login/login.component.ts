@@ -39,11 +39,12 @@ export class LoginComponent implements OnInit {
         }
         if (result.status) {
           let user = result.data[0];
+          console.log(user.typeUser)
           localStorage.setItem('user', JSON.stringify(user));
           if (user.typeUser == 0) { //gerente
-            this.router.navigate(['/pages/client']);
+            this.router.navigate(['/pages/admin']);
           }
-          else if (user.typeUser == 1) { //admin
+          else if (user.typeUser == 2) { //admin
             this.router.navigate(['/pages/admin']);
           }
         }

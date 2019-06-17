@@ -10,11 +10,10 @@ import Swal from 'sweetalert2';
 
 })
 export class PagesComponent {
-	user:any;
-
+	user:any
 	constructor(private router: Router) {
-		this.user=1;
-
+		let user1=JSON.parse(localStorage.getItem('user'));
+		this.user=user1.typeUser;
 	}
 
 	logout() {

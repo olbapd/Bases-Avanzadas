@@ -55,7 +55,7 @@ export class HistoryComponent {
                 type: 'number',
             },
             state: {
-                title: 'Total',
+                title: 'Estado',
                 type: 'string',
             },
             date: {
@@ -69,32 +69,7 @@ export class HistoryComponent {
 
         },
     };
-
-
-    data = [
-        {
-            id: 1,
-            name: "Leanne Graham",
-            username: "Bret",
-            email: "Sincere@april.biz"
-        },
-        {
-            id: 2,
-            name: "Ervin Howell",
-            username: "Antonette",
-            email: "Shanna@melissa.tv"
-        },
-
-        // ... list of items
-
-        {
-            id: 11,
-            name: "Nicholas DuBuque",
-            username: "Nicholas.Stanton",
-            email: "Rey.Padberg@rosamond.biz"
-        }
-    ];
-
+    user:any;
     pedidos: any;
     constructor(private formBuilder: FormBuilder,
         private historyService: HistoryService) {
@@ -109,13 +84,16 @@ export class HistoryComponent {
 
         });
 
+        let user1=JSON.parse(localStorage.getItem('user'));
+		this.user=user1.username;
+
         this.pedidos = [];
 
-        this.historyService.getPedidos("MDiaz").subscribe((result) => {
+        this.historyService.getPedidos(this.user).subscribe((result) => {
             if (result.status) {
                 for (let i = 0; i < result.data.length; ++i) {
                     let cantidad=result.data[i].total;
-                    for (let j = 0; j < cantidad+1; ++j) {
+                    for (let j = 0; j < cantidad; ++j) {
                         let temp = {
                             products: result.data[i].products[j],
                             amount: result.data[i].amount[j],

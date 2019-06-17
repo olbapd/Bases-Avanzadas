@@ -4,8 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [  
   { path: 'auth', loadChildren: './auth/auth.module#AuthModule' },
   { path: 'pages', loadChildren: './pages/pages.module#PagesModule' },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
-  { path: '**', redirectTo: 'pages' }
+  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  { path: '**', redirectTo: 'auth' }
 ];
 
 @NgModule({

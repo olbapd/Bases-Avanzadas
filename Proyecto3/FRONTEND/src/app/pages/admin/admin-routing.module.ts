@@ -13,8 +13,8 @@ const routes: Routes = [{ path: '', component: AdminComponent,
         { path: 'products', component: ProductsComponent },
         { path: 'migrate', component: MigrateComponent },
         { path: 'querie', component: QueriesComponent },
-        {path: '', redirectTo: 'querie', pathMatch: 'full',},
-        {path: '**', redirectTo: 'querie', pathMatch: 'full',}
+        {path: '', redirectTo: 'maps', pathMatch: 'full',},
+        {path: '**', redirectTo: 'maps', pathMatch: 'full',}
   ],
 }];
 

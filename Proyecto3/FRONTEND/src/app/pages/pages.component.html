@@ -1,4 +1,4 @@
-<div *ngIf="user==0">
+<div *ngIf="user==1">
   <div>
     <nav class="navbar navbar-dark" style="background-color: #0b4980;">
       <a class="navbar-brand" id="logo" [routerLink]="['/pages/client']">Cliente</a>
@@ -27,7 +27,7 @@
 
 
 
-<div *ngIf="user==1">
+<div *ngIf="user==0">
   <div>
     <nav class="navbar navbar-dark" style="background-color: #0b4980;">
       <a class="navbar-brand" id="logo" [routerLink]="['/pages/admin']">Administrador</a>
@@ -41,10 +41,6 @@
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
 
-      <!--<li class="nav-item">
-        <a class="nav-link" [routerLink]="['/pages/admin/querie']">Consulta</a>
-      </li>-->
-
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/pages/admin/maps']">Agregar Sitios de Partida</a>
       </li>
@@ -52,11 +48,6 @@
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/pages/admin/products']">Agregar Productos</a>
       </li>
-
-     <!-- <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/pages/admin/migrate']">Migrar Datos</a>
-      </li>-->
-
 
     </ul>
   </div>
