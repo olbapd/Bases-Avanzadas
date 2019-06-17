@@ -18,11 +18,64 @@ export class HistoryComponent {
     country: any;
     page = 1;
     pageSize = 4;
-    source: LocalDataSource = new LocalDataSource();
-    defaultPhoto: any;
-    books: any;
-    min: any;
-    max: any;
+
+
+
+    settings = {
+        delete: {
+            confirmDelete: true,
+
+            deleteButtonContent: 'Delete data',
+            saveButtonContent: 'save',
+            cancelButtonContent: 'cancel'
+        },
+        add: {
+            confirmCreate: true,
+        },
+        edit: {
+            confirmSave: true,
+        },
+        columns: {
+            id: {
+                title: 'ID',
+            },
+            name: {
+                title: 'Full Name',
+            },
+            username: {
+                title: 'User Name',
+            },
+            email: {
+                title: 'Email',
+            },
+        },
+    };
+
+
+    data = [
+        {
+            id: 1,
+            name: "Leanne Graham",
+            username: "Bret",
+            email: "Sincere@april.biz"
+        },
+        {
+            id: 2,
+            name: "Ervin Howell",
+            username: "Antonette",
+            email: "Shanna@melissa.tv"
+        },
+
+        // ... list of items
+
+        {
+            id: 11,
+            name: "Nicholas DuBuque",
+            username: "Nicholas.Stanton",
+            email: "Rey.Padberg@rosamond.biz"
+        }
+    ];
+
     constructor(private formBuilder: FormBuilder,
         private historyService: HistoryService) {
 
@@ -35,38 +88,8 @@ export class HistoryComponent {
             openHours: [null, Validators.required],
 
         });
-
-/*
-        this.books = [];
-        this.min = "";
-        this.max = "";
-        this.bookService.getAllBooks()
-            .subscribe((result) => {
-                if (result.status) {
-                    for (let i = 0; i < result.data.length; ++i) {
-                        if (result.data[i].foto == undefined || result.data[i].foto == "") {
-                            result.data[i].foto = this.defaultPhoto;
-                        }
-                        let temp = {
-                            photo: result.data[i].foto,
-                            issn: result.data[i]._id,
-                            name: result.data[i].nombre,
-                            category: result.data[i].tema.nombre,
-                            categoryId: result.data[i].tema._id,
-                            price: result.data[i].precio,
-                            description: result.data[i].descripcion,
-                            sold: result.data[i].cantidadVendida,
-                            available: result.data[i].cantidadDisponible,
-                        }
-                        this.source.append(temp);
-                        this.books.push(temp);
-                    }
-                }
-            })
-
-        this.defaultPhoto = "../../../../assets/book.png"; */
-
     }
+
 
 
     addNewUser() {
@@ -100,6 +123,27 @@ export class HistoryComponent {
             })
     }
 
+
+    onDeleteConfirm(event) {
+        console.log("Delete Event In Console")
+        console.log(event);
+        if (window.confirm('Are you sure you want to delete?')) {
+            event.confirm.resolve();
+        } else {
+            event.confirm.reject();
+        }
+    }
+
+    onCreateConfirm(event) {
+        console.log("Create Event In Console")
+        console.log(event);
+
+    }
+
+    onSaveConfirm(event) {
+        console.log("Edit Event In Console")
+        console.log(event);
+    }
 
 
 }
