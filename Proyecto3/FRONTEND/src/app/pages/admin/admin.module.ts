@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AgmCoreModule} from '@agm/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FotoService } from '../../services/foto.service';
 
 
 
@@ -26,7 +27,7 @@ import { AdminService } from '../../services/admin.service';
   declarations: [
     ...routedComponents
   ],
-  providers: [AdminService]
+  providers: [AdminService,FotoService]
 })
 export class AdminModule {
 }

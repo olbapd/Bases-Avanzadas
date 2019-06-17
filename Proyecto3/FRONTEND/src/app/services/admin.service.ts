@@ -49,7 +49,7 @@ export class AdminService {
 			name:name,
 			description:description,
 			price:value,
-			photo:"",
+			photo:photo,
 			idCompany:company
 		}
 		const url = Urls.baseUrl+ "product"
