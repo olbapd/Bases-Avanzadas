@@ -3,6 +3,7 @@ import { FormGroupDirective, NgForm } from '@angular/forms';
 import { FormBuilder, FormGroup, AbstractControl, Validators, FormControl } from '@angular/forms';
 import {companyP} from '../../../interfaces/companyproduct';
 import { AdminService } from '../../../services/admin.service';
+import { FotoService } from '../../../services/foto.service';
 
 @Component({
     selector: 'products',
@@ -17,9 +18,11 @@ export class ProductsComponent implements OnInit{
     pageSize = 4;
     collectionSize: number = 0;
     searchText;
+    photo: any;
 
     constructor(private formBuilder: FormBuilder,
-        private adminService: AdminService) {
+        private adminService: AdminService,
+        private fotoService: FotoService) {
 
         
     }
@@ -80,9 +83,16 @@ export class ProductsComponent implements OnInit{
         }
         else {
             btn.setAttribute('class', 'btn btn-success');
-            this.adminService.InsertProduct(ProductId,Name,Description,Value,Company,Photo).subscribe((res) => {
-                console.log(res);
-            });
+            this.fotoService.uploadFile(this.photo)
+                .subscribe((data) => {
+                    let photoHash = (data && data.hash) ? data.hash : null;
+                    console.log(photoHash);
+                    this.adminService.InsertProduct(ProductId,Name,Description,Value,Company,photoHash).subscribe((res) => {
+                        console.log(res);
+                    });
+                    
+                });
+            
         }
     }
     company_DropDown() {
@@ -99,5 +109,17 @@ export class ProductsComponent implements OnInit{
                 dropdowndep.append(option);
             }
         });
+    }
+    onPhotoChange(event) {
+        this.photo = event.target.files[0];
+        this.fotoService.uploadFile(this.photo)
+        .subscribe((data) => {
+            let photoHash = (data && data.hash) ? data.hash : null;
+            console.log(photoHash);
+            let img_load = document.getElementById('img');
+           let photo_load = this.fotoService.downloadFile(photoHash);
+            img_load.setAttribute('src',photo_load);
+            
+                });
     }
 }
